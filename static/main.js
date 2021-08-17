@@ -274,22 +274,9 @@ let cookieconsent = (function () {
 
   function injectScript(cookieKey, injectCode) {
     if (typeof injectCode !== "undefined") {
-      let pseudo = document.createElement("div"),
-        script;
-      pseudo.innerHTML = injectCode;
-      for (let child in pseudo.children) {
-        let node = pseudo.children[child];
-        if (node.tagName === "SCRIPT") {
-          script = document.createElement("script");
-          script.textContent = node.textContent;
-          for (let a = 0; a < node.attributes.length; a++) {
-            let attribute = node.attributes[a];
-            script.setAttribute(attribute.name, attribute.value);
-          }
-          node = script;
-          document.body.appendChild(node);
-        }
-      }
+      const node = document.createElement("script");
+      document.body.appendChild(node);
+      node.innerHTML = injectCode;
       injectedScripts.push(cookieKey);
     }
   }
