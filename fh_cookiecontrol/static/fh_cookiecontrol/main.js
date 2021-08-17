@@ -1,7 +1,5 @@
 /**
  * cookie consent banner, panel and revoke button rendering
- * - IE 11 compatible
- * - no dependencies
  */
 ;(function () {
   let cookieName = "ccp",
