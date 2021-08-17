@@ -3,7 +3,7 @@
  * - IE 11 compatible
  * - no dependencies
  */
-let cookieconsent = (function () {
+(function () {
   let cookieName = "ccp",
     mainElement = document.getElementById("ccp"),
     settings = JSON.parse(document.getElementById("ccp-data").textContent),

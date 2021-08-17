@@ -1,0 +1,10 @@
+{
+  "name": "fh-cookiecontrol",
+  "version": "0.0.1",
+  "description": "fh-cookiecontrol frontend build",
+  "main": "fh_cookiecontrol/static/fh_cookiecontrol/main.js",
+  "repository": "git@github.com:feinheit/fh-cookiecontrol.git",
+  "author": "York Schickl <ys@feinheit.ch>",
+  "license": "BSD-3",
+  "private": true
+}
