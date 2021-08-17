@@ -2,9 +2,25 @@
   "name": "fh-cookiecontrol",
   "version": "0.0.1",
   "description": "fh-cookiecontrol frontend build",
-  "main": "fh_cookiecontrol/static/fh_cookiecontrol/main.js",
   "repository": "git@github.com:feinheit/fh-cookiecontrol.git",
   "author": "York Schickl <ys@feinheit.ch>",
   "license": "BSD-3",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@webpack-cli/generators": "^2.3.0",
+    "babel-loader": "^8.2.2",
+    "prettier": "^2.3.2"
+  },
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production"
+  },
+  "prettier": {
+    "semi": false
+  }
 }
