@@ -1,12 +1,7 @@
 from django.contrib import admin
 from translated_fields import TranslatedFieldAdmin
 
-from feincms3_cookiecontrol.models import PanelSetup, CookieCategory, CookieScript
-
-
-@admin.register(PanelSetup)
-class PanelSetup(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ("__str__",)
+from feincms3_cookiecontrol.models import CookieCategory, CookieScript
 
 
 @admin.register(CookieCategory)

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-from feincms3.plugins.richtext import RichText as RichTextField
+from feincms3.inline_ckeditor import InlineCKEditorField
 from translated_fields import TranslatedField
 
 
@@ -11,7 +11,7 @@ class CookiePanelMixin(models.Model):
         _("panel heading"), max_length=200, default="", blank=True
     )
 
-    panel_content = RichTextField(_("panel content"), blank=True)
+    panel_content = InlineCKEditorField(_("panel content"), blank=True)
     panel_button_save = models.CharField(
         _("panel button save"), max_length=200, default="", blank=True
     )
@@ -25,7 +25,7 @@ class CookiePanelMixin(models.Model):
         _("banner heading"), max_length=200, default="", blank=True
     )
 
-    banner_content = RichTextField(_("banner content"), blank=True)
+    banner_content = InlineCKEditorField(_("banner content"), blank=True)
     banner_button_panel = models.CharField(
         _("banner button panel"),
         max_length=200,
@@ -50,7 +50,6 @@ class CookiePanelMixin(models.Model):
     legal_page = models.ForeignKey(
         "pages.Page",
         verbose_name=_("legal page"),
-        default="1",
         on_delete=models.CASCADE,
         blank=True,
         help_text=_("choose page which enables users to revoke cookie settings"),
@@ -79,24 +78,39 @@ class CookiePanelMixin(models.Model):
         cfg.update(kwargs)
         return (_("Cookie control"), cfg)
 
-    def serialize(self):
-        return {
-            "panel": {
-                "heading": self.panel_heading,
-                "content": mark_safe(self.panel_content),
-                "buttonSave": self.panel_button_save,
-                "buttonCancel": self.panel_button_cancel,
-            },
-            "banner": {
-                "heading": self.banner_heading,
-                "content": mark_safe(self.banner_content),
-                "buttonAccept": self.banner_button_accept,
-                "buttonPanel": self.banner_button_panel,
-            },
-            "revoke": {
-                "buttonPanel": self.revoke_button_panel,
-            },
-        }
+    def cookiecontrol_dict(self):
+        panel = dict(
+            (k, v)
+            for k, v in [
+                ("heading", self.panel_heading),
+                ("content", mark_safe(self.panel_content)),
+                ("buttonSave", self.panel_button_save),
+                ("buttonCancel", self.panel_button_cancel),
+            ]
+            if v
+        )
+        banner = dict(
+            (k, v)
+            for k, v in [
+                ("heading", self.banner_heading),
+                ("content", mark_safe(self.banner_content)),
+                ("buttonAccept", self.banner_button_accept),
+                ("buttonPanel", self.banner_button_panel),
+            ]
+            if v
+        )
+        revoke = dict((k, v) for k, v in [("buttonPanel", self.revoke_button_panel)] if v)
+        legal_page = self.legal_page.id if self.legal_page else None
+        return dict(
+            (k, v)
+            for k, v in [
+                ("panel", panel),
+                ("banner", banner),
+                ("revoke", revoke),
+                ("legalPage", legal_page),
+            ]
+            if v
+        )
 
 
 class CookieCategory(models.Model):
@@ -104,7 +118,7 @@ class CookieCategory(models.Model):
     title = TranslatedField(
         models.CharField(_("title"), max_length=200, default="", blank=True)
     )
-    description = TranslatedField(RichTextField(_("description"), blank=True))
+    description = TranslatedField(InlineCKEditorField(_("description"), blank=True))
     preselect = models.BooleanField(default=False)
     disabled = models.BooleanField(default=False)
     ordering = models.IntegerField(_("ordering"), default=0)
@@ -119,13 +133,11 @@ class CookieCategory(models.Model):
 
     def serialize(self):
         return {
-            self.name: {
-                "title": self.title,
-                "description": mark_safe(self.description),
-                "preselected": self.preselect,
-                "disabled": self.disabled,
-                "cookies": [o.name for o in CookieScript.objects.filter(category=self)],
-            }
+            "title": self.title,
+            "description": mark_safe(self.description),
+            "preselected": self.preselect,
+            "disabled": self.disabled,
+            "cookies": [o.name for o in CookieScript.objects.filter(category=self)],
         }
 
 
@@ -154,8 +166,6 @@ class CookieScript(models.Model):
 
     def serialize(self):
         return {
-            self.name: {
-                "inject_if": mark_safe(self.inject_if),
-                "inject_else": mark_safe(self.inject_else),
-            }
+            "inject_if": mark_safe(self.inject_if),
+            "inject_else": mark_safe(self.inject_else),
         }

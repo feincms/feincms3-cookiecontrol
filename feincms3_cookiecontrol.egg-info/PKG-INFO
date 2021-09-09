@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: feincms3-cookiecontrol
+Version: 0.0.1
+Summary: Cookie Control Panel for GDPR compliant feincms3 websites
+Home-page: https://github.com/feinheit/fh-cookiecontrol/
+Author: York Schickl
+Author-email: ys@feinheit.ch
+License: BSD-3-License
+Platform: OS Independent
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Requires-Python: >=3.6
+Description-Content-Type: text/md
+Provides-Extra: tests
+License-File: LICENSE
+
+# FeinCMS Cookie Control Panel
+
+## Features
+
+### Banner
+
+### Panel
+
+### Revoke Button
+
+### Backend Setup
+
+## Configuration
+
+- Add to settings.py
+- include templatetag
+
+
+
+
+## Software design
+
+### Mixin für feincms3 Pages
+
+The following values may be defined on a feincms3 page and are inherited by descendants:
+
+class CoookieControlMixin(models.Model):
+    Panel heading
+    Panel content
+    Banner content
+    legal_page = ForeignKey("self")
+
+    class Meta:
+        abstract = True
+
+### Definition of cookie categories and scripts
+
+Cookie groups and scripts are defined in the CMS, exactly as it is done now.
+

@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-09 14:06+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: feincms3_cookiecontrol/models.py:11
+msgid "panel heading"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:14
+msgid "panel content"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:16
+msgid "panel button save"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:20
+msgid "panel button cancel"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:25
+msgid "banner heading"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:28
+msgid "banner content"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:30
+msgid "banner button panel"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:34
+msgid "i.e. cookie settings panel button text"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:38
+msgid "banner button accept"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:42
+msgid "i.e. accept all cookies button text"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:47
+msgid "revoke button"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:52
+msgid "legal page"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:56
+msgid "choose page which enables users to revoke cookie settings"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:80
+msgid "Cookie control"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:103 feincms3_cookiecontrol/models.py:135
+msgid "technical name"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:105
+msgid "title"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:107
+msgid "description"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:110
+msgid "ordering"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:114
+msgid "cookie category"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:115
+msgid "cookie categories"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:141
+msgid "inject if"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:141
+msgid "inject if cookie group is accepted"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:144
+msgid "inject else"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:144
+msgid "inject if cookie group is denied"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:149
+msgid "cookie script"
+msgstr ""
+
+#: feincms3_cookiecontrol/models.py:150
+msgid "cookie scripts"
+msgstr ""
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:14
+msgid "Your Cookie Settings Protect Your Privacy"
+msgstr "Réglez vos cookies pour protéger votre vie privée"
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:15
+msgid "Panel content"
+msgstr ""
+"Nous utilisons deux types de cookies pour optimiser l’expérience des "
+"utilisateurs sur notre site Web. Vous trouverez ci-dessous une description "
+"de chaque type de cookie. Vous pouvez décider quels cookies autoriser et "
+"refuser. Vous trouverez plus d'informations sur notre utilisation des "
+"cookies et la protection de vos données dans notre politique de "
+"confidentialité. Vous pouvez aussi accéder à vos paramètres à tout moment "
+"sur la page des mentions légales."
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:16
+msgid "Save settings"
+msgstr "Sauvegarder les paramètres"
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:17
+msgid "Cancel"
+msgstr "Annuler"
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:20
+msgid "Cookies on Our Website"
+msgstr "Cookies sur notre page Web"
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:21
+msgid "Banner content"
+msgstr ""
+"Nous utilisons des cookies pour optimiser l’expérience des utilisateurs sur "
+"notre site Web. Cliquez sur «Modifier les paramètres» pour obtenir une "
+"description des différents types de cookies et pour décider quels cookies "
+"vous souhaitez autoriser et refuser. Lisez notre politique de "
+"confidentialité pour en savoir plus sur notre utilisation de cookies et la "
+"protection de vos données."
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:22
+msgid "Accept all"
+msgstr "Tout accepter"
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:23
+msgid "Modify settings"
+msgstr "Modifier les paramètres"
+
+#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:26
+msgid "Modify/revoke cookie settings"
+msgstr "Modifier les paramètres des cookies"
