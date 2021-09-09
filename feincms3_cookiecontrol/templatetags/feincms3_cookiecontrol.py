@@ -1,32 +1,41 @@
 from functools import reduce
 
 from django import template
+from django.conf import settings
 from django.core.cache import cache
 from django.utils.translation import get_language
 
-from fh_cookiecontrol.models import PanelSetup, TrackingCategory, TrackingScript
+from feincms3_cookiecontrol.models import TrackingCategory, TrackingScript
 
 
 register = template.Library()
 
 
-@register.inclusion_tag("panel.html")
+COOKIECONTROL_PANEL_DEFAULTS = {
+    "panel_heading": _("..."),
+    "panel_content": _("...")
+}
+
+
+@register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def ccp_panel(page):
     CACHE_KEY = f"ccp_settings_{get_language()}"
 
-    settings = cache.get(CACHE_KEY)
-    if not settings:
-        settings = {
+    panel = cache.get(CACHE_KEY)
+    if not panel:
+        panel = COOKIECONTROL_PANEL_DEFAULTS.copy()
+        panel.update()
+        panel = {
             "settings": {
-                **ld2d(PanelSetup.objects.all()),
+                **COOKIECONTROL_PANEL_DEFAULTS,
+                **getattr(settings, "COOKIECONTROL_PANEL_DEFAULTS", {}),
                 "groups": ld2d(TrackingCategory.objects.all()),
                 "cookies": ld2d(TrackingScript.objects.all()),
             },
         }
         cache.set(CACHE_KEY, settings)
 
-    setup = PanelSetup.objects.select_related("legal_page").first()
-    legal_page = setup.legal_page if setup else None
+    legal_page = panel.legal_page if panel else None
 
     """
     only show revoke button on legal_page and its translations
@@ -37,5 +46,5 @@ def ccp_panel(page):
     return settings
 
 
-def ld2d(ld):
-    return reduce(lambda x, y: {**x, **y}, [item.serializable for item in ld], {})
+def ld2d(queryset):
+    return reduce(lambda x, y: {**x, **y}, [item.serialize() for item in queryset], {})

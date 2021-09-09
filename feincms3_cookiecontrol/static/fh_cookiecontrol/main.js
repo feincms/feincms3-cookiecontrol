@@ -2,9 +2,11 @@
  * cookie consent banner, panel and revoke button rendering
  */
 ;(function () {
-  let cookieName = "ccp",
-    mainElement = document.getElementById("ccp"),
-    settings = JSON.parse(document.getElementById("ccp-data").textContent),
+  let cookieName = "feincms3-cookiecontrol",
+    mainElement = document.getElementById("feincms3-cookiecontrol"),
+    settings = JSON.parse(
+      document.getElementById("feincms3-cookiecontrol-data").textContent
+    ),
     banner = null,
     panel = null,
     revoke = null,
