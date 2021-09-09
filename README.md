@@ -3,6 +3,7 @@
 
 - Install (until further packaging) `venv/bin/pip install --editable git+ssh://git@github.com/feinheit/fh-cookiecontrol.git#egg=feincms3-cookiecontrol`
 - Add "feincms3_cookiecontrol" to settings.py
+- Add CookieControlMixin to your page model
 - Makemigrations
 - Configure cookie scripts, cookie categories and page settings to override default panel configurations (e.g. on the root page)
 - include templatetag:
