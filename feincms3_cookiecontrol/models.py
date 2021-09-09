@@ -124,12 +124,12 @@ class CookieCategory(models.Model):
                 "description": mark_safe(self.description),
                 "preselected": self.preselect,
                 "disabled": self.disabled,
-                "cookies": [o.name for o in CookieSkript.objects.filter(category=self)],
+                "cookies": [o.name for o in CookieScript.objects.filter(category=self)],
             }
         }
 
 
-class CookieSkript(models.Model):
+class CookieScript(models.Model):
     category = models.ForeignKey(CookieCategory, on_delete=models.CASCADE)
     name = models.CharField(
         _("technical name"),

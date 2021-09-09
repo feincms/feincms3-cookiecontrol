@@ -1,7 +1,7 @@
 from django.contrib import admin
 from translated_fields import TranslatedFieldAdmin
 
-from fh_cookiecontrol.models import PanelSetup, CookieCategory, CookieScript
+from feincms3_cookiecontrol.models import PanelSetup, CookieCategory, CookieScript
 
 
 @admin.register(PanelSetup)

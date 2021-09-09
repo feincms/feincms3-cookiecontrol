@@ -7,4 +7,8 @@ from .models import Model
 
 
 class CookieControlTest(test.TestCase):
-    pass
+    def test_panel_setup_defaults_provided(self):
+        pass
+
+    def test_correct_setup_for_active_language(self):
+        pass

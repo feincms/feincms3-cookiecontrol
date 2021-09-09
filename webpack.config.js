@@ -1,7 +1,7 @@
 const path = require("path")
 
 const isProduction = process.env.NODE_ENV == "production"
-const staticPath = "fh_cookiecontrol/static/fh_cookiecontrol/"
+const staticPath = "feincms3_cookiecontrol/static/feincms3_cookiecontrol/"
 
 const config = {
   entry: `./${staticPath}main.js`,

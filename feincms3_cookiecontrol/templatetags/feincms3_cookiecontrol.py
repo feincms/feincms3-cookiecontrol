@@ -5,35 +5,30 @@ from django.conf import settings
 from django.core.cache import cache
 from django.utils.translation import get_language
 
-from feincms3_cookiecontrol.models import TrackingCategory, TrackingScript
+from feincms3_cookiecontrol.models import CookieCategory, CookieScript
 
 
 register = template.Library()
 
 
-COOKIECONTROL_PANEL_DEFAULTS = {
-    "panel_heading": _("..."),
-    "panel_content": _("...")
-}
+COOKIECONTROL_PANEL_DEFAULTS = {"panel_heading": _("..."), "panel_content": _("...")}
 
 
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def ccp_panel(page):
-    CACHE_KEY = f"ccp_settings_{get_language()}"
+    CACHE_KEY = f"feincms3_cookiecontrol_settings_{get_language()}"
 
     panel = cache.get(CACHE_KEY)
     if not panel:
         panel = COOKIECONTROL_PANEL_DEFAULTS.copy()
         panel.update()
         panel = {
-            "settings": {
-                **COOKIECONTROL_PANEL_DEFAULTS,
-                **getattr(settings, "COOKIECONTROL_PANEL_DEFAULTS", {}),
-                "groups": ld2d(TrackingCategory.objects.all()),
-                "cookies": ld2d(TrackingScript.objects.all()),
-            },
+            **COOKIECONTROL_PANEL_DEFAULTS,
+            **getattr(settings, "COOKIECONTROL_PANEL_DEFAULTS", {}),
+            "groups": [t.serialize() for t in CookieCategory.objects.all()],
+            "cookies": [t.serialize() for t in CookieScript.objects.all()],
         }
-        cache.set(CACHE_KEY, settings)
+        cache.set(CACHE_KEY, panel)
 
     legal_page = panel.legal_page if panel else None
 
@@ -41,10 +36,6 @@ def ccp_panel(page):
     only show revoke button on legal_page and its translations
     """
     if legal_page and not (page == legal_page or page in legal_page.translations()):
-        settings["settings"].pop("revoke")
+        panel.pop("revoke")
 
-    return settings
-
-
-def ld2d(queryset):
-    return reduce(lambda x, y: {**x, **y}, [item.serialize() for item in queryset], {})
+    return panel
