@@ -1,22 +1,22 @@
-# FeinCMS Cookie Control Panel
+# FeinCMS3 Cookie Control Panel
+## Integration
 
-## Features
+- Install (until further packaging) `venv/bin/pip install --editable git+ssh://git@github.com/feinheit/fh-cookiecontrol.git#egg=feincms3-cookiecontrol`
+- Add "feincms3_cookiecontrol" to settings.py
+- Makemigrations
+- Configure cookie scripts, cookie categories and page settings to override default panel configurations (e.g. on the root page)
+- include templatetag:
 
-### Banner
+```html
+<!-- e.g. base.html --> 
+{% load feincms3 feincms3_cookiecontrol %}
 
-### Panel
-
-### Revoke Button
-
-### Backend Setup
-
-## Configuration
-
-- Add to settings.py
-- include templatetag
-
-
-
+<body>
+    ...
+    {% feincms3_cookiecontrol_panel page %}
+    ...
+</body>
+```
 
 ## Software design
 
