@@ -51,7 +51,7 @@ class CookiePanelMixin(models.Model):
         "pages.Page",
         verbose_name=_("legal page"),
         on_delete=models.CASCADE,
-        blank=True,
+        null=True,
         help_text=_("choose page which enables users to revoke cookie settings"),
     )
 
@@ -79,37 +79,31 @@ class CookiePanelMixin(models.Model):
         return (_("Cookie control"), cfg)
 
     def cookiecontrol_dict(self):
-        panel = dict(
-            (k, v)
-            for k, v in [
+        panel = get_dict_from_config_list(
+            [
                 ("heading", self.panel_heading),
                 ("content", mark_safe(self.panel_content)),
                 ("buttonSave", self.panel_button_save),
                 ("buttonCancel", self.panel_button_cancel),
             ]
-            if v
         )
-        banner = dict(
-            (k, v)
-            for k, v in [
+        banner = get_dict_from_config_list(
+            [
                 ("heading", self.banner_heading),
                 ("content", mark_safe(self.banner_content)),
                 ("buttonAccept", self.banner_button_accept),
                 ("buttonPanel", self.banner_button_panel),
             ]
-            if v
         )
-        revoke = dict((k, v) for k, v in [("buttonPanel", self.revoke_button_panel)] if v)
+        revoke = get_dict_from_config_list([("buttonPanel", self.revoke_button_panel)])
         legal_page = self.legal_page.id if self.legal_page else None
-        return dict(
-            (k, v)
-            for k, v in [
+        return get_dict_from_config_list(
+            [
                 ("panel", panel),
                 ("banner", banner),
                 ("revoke", revoke),
                 ("legalPage", legal_page),
             ]
-            if v
         )
 
 
@@ -169,3 +163,7 @@ class CookieScript(models.Model):
             "inject_if": mark_safe(self.inject_if),
             "inject_else": mark_safe(self.inject_else),
         }
+
+
+def get_dict_from_config_list(config_list):
+    return dict((k, v) for k, v in config_list if v)
