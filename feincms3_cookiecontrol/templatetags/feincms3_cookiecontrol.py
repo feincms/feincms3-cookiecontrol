@@ -27,6 +27,8 @@ COOKIECONTROL_PANEL_DEFAULTS = {
     "legalPage": None,
 }
 
+DEFAULT_PANEL_CACHE_TIMEOUT = 60 * 60 * 24
+
 
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def feincms3_cookiecontrol_panel(page):
@@ -51,7 +53,7 @@ def feincms3_cookiecontrol_panel(page):
                 **p.cookiecontrol_dict() if hasattr(p, "cookiecontrol_dict") else None
             )
 
-        cache.set(CACHE_KEY, panel)
+        cache.set(CACHE_KEY, panel, timeout=DEFAULT_PANEL_CACHE_TIMEOUT)
 
     """
     only show revoke button on legal_page
