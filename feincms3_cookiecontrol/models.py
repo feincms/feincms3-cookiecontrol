@@ -52,6 +52,7 @@ class CookiePanelMixin(models.Model):
         verbose_name=_("legal page"),
         on_delete=models.CASCADE,
         null=True,
+        blank=True,
         help_text=_("choose page which enables users to revoke cookie settings"),
     )
 
