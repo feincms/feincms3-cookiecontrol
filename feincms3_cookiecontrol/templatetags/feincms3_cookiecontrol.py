@@ -39,7 +39,10 @@ def feincms3_cookiecontrol_panel(page):
     if not panel:
         panel = {
             **COOKIECONTROL_PANEL_DEFAULTS,
-            "categories": {t.name: t.serialize() for t in CookieCategory.objects.all()},
+            "categories": {
+                t.name: t.serialize()
+                for t in CookieCategory.objects.prefetch_related("cookiescript_set")
+            },
             "cookies": {t.name: t.serialize() for t in CookieScript.objects.all()},
         }
         cache.set(CACHE_KEY, panel, timeout=CACHE_TIMEOUT)

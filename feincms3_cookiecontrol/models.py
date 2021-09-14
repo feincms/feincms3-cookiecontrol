@@ -29,7 +29,8 @@ class CookieCategory(models.Model):
             "description": mark_safe(self.description),
             "preselected": self.preselect,
             "disabled": self.disabled,
-            "cookies": [o.name for o in CookieScript.objects.filter(category=self)],
+            # XXX why not serialize?
+            "cookies": [o.name for o in self.cookiescript_set.all()],
         }
 
 
