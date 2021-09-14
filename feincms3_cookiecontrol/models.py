@@ -145,10 +145,10 @@ class CookieScript(models.Model):
         unique=True,
     )
     inject_if = models.TextField(
-        _("inject if"), blank=True, help_text=_("inject if cookie group is accepted")
+        _("inject if"), blank=True, help_text=_("inject if cookie category is accepted")
     )
     inject_else = models.TextField(
-        _("inject else"), blank=True, help_text=_("inject if cookie group is denied")
+        _("inject else"), blank=True, help_text=_("inject if cookie category is denied")
     )
 
     class Meta:

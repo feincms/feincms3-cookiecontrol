@@ -10,7 +10,7 @@
 - include templatetag:
 
 ```html
-<!-- e.g. base.html --> 
+<!-- e.g. base.html -->
 {% load feincms3_cookiecontrol %}
 
 <body>
@@ -37,4 +37,4 @@ class CoookieControlMixin(models.Model):
 
 ### Definition of cookie categories and scripts
 
-Cookie groups and scripts are defined in the CMS, exactly as it is done now.
+Cookie categories and scripts are defined in the CMS, exactly as it is done now.

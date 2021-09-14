@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
                     "inject_if",
                     models.TextField(
                         blank=True,
-                        help_text="inject if cookie group is accepted",
+                        help_text="inject if cookie category is accepted",
                         verbose_name="inject if",
                     ),
                 ),
@@ -102,7 +102,7 @@ class Migration(migrations.Migration):
                     "inject_else",
                     models.TextField(
                         blank=True,
-                        help_text="inject if cookie group is denied",
+                        help_text="inject if cookie category is denied",
                         verbose_name="inject else",
                     ),
                 ),
