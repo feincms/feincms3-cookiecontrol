@@ -210,7 +210,10 @@
 
   function setCookie(consented) {
     let cookie =
-      cookieName + "=" + consented.join(",") + ";max-age=31536000;path=/"
+      cookieName +
+      "=" +
+      consented.join(",") +
+      ";max-age=31536000;path=/;SameSite=Strict"
     document.cookie = cookie
   }
 
