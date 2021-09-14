@@ -17,14 +17,16 @@ class CookieControlTest(test.TestCase):
             {% feincms3_cookiecontrol_panel page %}
             """
         )
-        html = t.render(
-            Context(
-                {
-                    "page": types.SimpleNamespace(id=-1),
-                }
+
+        with self.assertNumQueries(1):  # No categories, no scripts to prefetch
+            html = t.render(
+                Context(
+                    {
+                        "page": types.SimpleNamespace(id=-1),
+                    }
+                )
             )
-        )
-        # print(html)
+            # print(html)
 
         self.assertIn('id="feincms3-cookiecontrol-data"', html)
 

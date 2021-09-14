@@ -1,8 +1,10 @@
+from itertools import chain
+
 from django import template
 from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 
-from feincms3_cookiecontrol.models import CookieCategory, CookieScript
+from feincms3_cookiecontrol.models import CookieCategory
 
 
 register = template.Library()
@@ -37,13 +39,16 @@ def feincms3_cookiecontrol_panel(page):
 
     panel = cache.get(CACHE_KEY)
     if not panel:
+        categories = CookieCategory.objects.prefetch_related("cookiescript_set")
         panel = {
             **COOKIECONTROL_PANEL_DEFAULTS,
-            "categories": {
+            "categories": {t.name: t.serialize() for t in categories},
+            "cookies": {
                 t.name: t.serialize()
-                for t in CookieCategory.objects.prefetch_related("cookiescript_set")
+                for t in chain.from_iterable(
+                    category.cookiescript_set.all() for category in categories
+                )
             },
-            "cookies": {t.name: t.serialize() for t in CookieScript.objects.all()},
         }
         cache.set(CACHE_KEY, panel, timeout=CACHE_TIMEOUT)
 
