@@ -1,4 +1,4 @@
 {% load static %}
-<script async defer type="text/javascript" src="{% static 'feincms3_cookiecontrol/main.min.js' %}"></script>
-{{ panel | json_script:"feincms3-cookiecontrol-data" }}
+<script async src="{% static 'feincms3_cookiecontrol/main.min.js' %}"></script>
+{{ panel|json_script:"feincms3-cookiecontrol-data" }}
 <div id="feincms3-cookiecontrol"></div>
