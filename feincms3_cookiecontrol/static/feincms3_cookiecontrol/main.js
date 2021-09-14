@@ -1,6 +1,7 @@
 /**
  * cookie consent banner, panel and revoke button rendering
  */
+// eslint-disable-next-line no-extra-semi
 ;(function () {
   let cookieName = "feincms3-cookiecontrol",
     mainElement = document.getElementById("feincms3-cookiecontrol"),
@@ -127,43 +128,43 @@
       addElement("div", "inner", settings.panel, outerWrap)
 
       let form = document.createElement("form")
-      for (let groupId in settings.groups) {
-        let groupWrap = addElement("div", "group")
+      for (let categoryId in settings.categories) {
+        let categoryWrap = addElement("div", "category")
         let inputLabel = addElement("label")
 
-        let groupInput = document.createElement("input")
-        groupInput.name = groupId
-        groupInput.id = "ccp-group-" + groupId
-        groupInput.type = "checkbox"
-        inputLabel.htmlFor = groupInput.id
+        let categoryInput = document.createElement("input")
+        categoryInput.name = categoryId
+        categoryInput.id = "ccp-category-" + categoryId
+        categoryInput.type = "checkbox"
+        inputLabel.htmlFor = categoryInput.id
 
         if (
-          settings.groups[groupId].preselected == 1 ||
-          consentedGroups().indexOf(groupId) >= 0
+          settings.categories[categoryId].preselected == 1 ||
+          consentedCategories().indexOf(categoryId) >= 0
         ) {
-          groupInput.checked = true
+          categoryInput.checked = true
         }
 
-        if (settings.groups[groupId].disabled == 1) {
-          groupInput.disabled = true
+        if (settings.categories[categoryId].disabled == 1) {
+          categoryInput.disabled = true
         }
 
-        checkboxes.push(groupInput)
-        groupWrap.appendChild(groupInput)
+        checkboxes.push(categoryInput)
+        categoryWrap.appendChild(categoryInput)
         addElement(
           "div",
           "label-title",
-          settings.groups[groupId].title,
+          settings.categories[categoryId].title,
           inputLabel
         )
         addElement(
           "div",
           "label-description",
-          settings.groups[groupId].description,
+          settings.categories[categoryId].description,
           inputLabel
         )
-        groupWrap.appendChild(inputLabel)
-        form.appendChild(groupWrap)
+        categoryWrap.appendChild(inputLabel)
+        form.appendChild(categoryWrap)
       }
       outerWrap.appendChild(form)
 
@@ -201,15 +202,18 @@
 
   function acceptAll() {
     let consented = []
-    for (let groupId in settings.groups) {
-      consented.push(groupId)
+    for (let categoryId in settings.categories) {
+      consented.push(categoryId)
     }
     setCookie(consented)
   }
 
   function setCookie(consented) {
     let cookie =
-      cookieName + "=" + consented.join(",") + ";max-age=31536000;path=/"
+      cookieName +
+      "=" +
+      consented.join(",") +
+      ";max-age=31536000;path=/;SameSite=Strict"
     document.cookie = cookie
   }
 
@@ -231,7 +235,7 @@
     return cookie
   }
 
-  function consentedGroups() {
+  function consentedCategories() {
     let cookie = getCookie()
     return cookie ? cookie.split(",") : []
   }
@@ -282,12 +286,12 @@
   }
 
   function injectNewScripts() {
-    let consenteds = consentedGroups()
-    for (let cookieGroup in settings.groups) {
-      for (let cookie in settings.groups[cookieGroup].cookies) {
-        let cookieKey = settings.groups[cookieGroup].cookies[cookie]
+    let consenteds = consentedCategories()
+    for (let cookieCategory in settings.categories) {
+      for (let cookie in settings.categories[cookieCategory].cookies) {
+        let cookieKey = settings.categories[cookieCategory].cookies[cookie]
         if (injectedScripts.indexOf(cookieKey) === -1) {
-          if (consenteds.indexOf(cookieGroup) === -1) {
+          if (consenteds.indexOf(cookieCategory) === -1) {
             injectScript(cookieKey, settings.cookies[cookieKey].inject_else)
           } else {
             injectScript(cookieKey, settings.cookies[cookieKey].inject_if)
