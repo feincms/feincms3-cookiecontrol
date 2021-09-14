@@ -109,7 +109,7 @@ class CookiePanelMixin(models.Model):
 
 
 class CookieCategory(models.Model):
-    name = models.CharField(_("technical name"), max_length=200, unique=True)
+    name = models.SlugField(_("technical name"), unique=True)
     title = TranslatedField(
         models.CharField(_("title"), max_length=200, default="", blank=True)
     )

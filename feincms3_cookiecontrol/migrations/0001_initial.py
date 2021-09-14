@@ -25,9 +25,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(
-                        max_length=200, unique=True, verbose_name="technical name"
-                    ),
+                    models.SlugField(unique=True, verbose_name="technical name"),
                 ),
                 (
                     "title_de",
