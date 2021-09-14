@@ -10,6 +10,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.staticfiles",
     "django.contrib.messages",
+    "feincms3_cookiecontrol",
     "testapp",
 ]
 
@@ -51,3 +52,5 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+MIGRATION_MODULES = {"feincms3_cookiecontrol": "testapp.migrate.f3cc"}
