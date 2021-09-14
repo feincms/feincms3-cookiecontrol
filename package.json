@@ -1,8 +1,8 @@
 {
-  "name": "fh-cookiecontrol",
+  "name": "feincms3-cookiecontrol",
   "version": "0.0.1",
-  "description": "fh-cookiecontrol frontend build",
-  "repository": "git@github.com:feinheit/fh-cookiecontrol.git",
+  "description": "feincms3-cookiecontrol frontend build",
+  "repository": "git@github.com:feinheit/feincms3-cookiecontrol.git",
   "author": "York Schickl <ys@feinheit.ch>",
   "license": "BSD-3",
   "private": true,
