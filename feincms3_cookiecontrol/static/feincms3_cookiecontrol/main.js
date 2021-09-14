@@ -1,6 +1,7 @@
 /**
  * cookie consent banner, panel and revoke button rendering
  */
+// eslint-disable-next-line no-extra-semi
 ;(function () {
   let cookieName = "feincms3-cookiecontrol",
     mainElement = document.getElementById("feincms3-cookiecontrol"),
