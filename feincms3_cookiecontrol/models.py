@@ -5,111 +5,8 @@ from feincms3.inline_ckeditor import InlineCKEditorField
 from translated_fields import TranslatedField
 
 
-class CookiePanelMixin(models.Model):
-    # Panel
-    panel_heading = models.CharField(
-        _("panel heading"), max_length=200, default="", blank=True
-    )
-
-    panel_content = InlineCKEditorField(_("panel content"), blank=True)
-    panel_button_save = models.CharField(
-        _("panel button save"), max_length=200, default="", blank=True
-    )
-
-    panel_button_cancel = models.CharField(
-        _("panel button cancel"), max_length=200, default="", blank=True
-    )
-
-    # Banner
-    banner_heading = models.CharField(
-        _("banner heading"), max_length=200, default="", blank=True
-    )
-
-    banner_content = InlineCKEditorField(_("banner content"), blank=True)
-    banner_button_panel = models.CharField(
-        _("banner button panel"),
-        max_length=200,
-        default="",
-        blank=True,
-        help_text=_("i.e. cookie settings panel button text"),
-    )
-
-    banner_button_accept = models.CharField(
-        _("banner button accept"),
-        max_length=200,
-        default="",
-        blank=True,
-        help_text=_("i.e. accept all cookies button text"),
-    )
-
-    # Revoke
-    revoke_button_panel = models.CharField(
-        _("revoke button"), max_length=200, default="", blank=True
-    )
-
-    legal_page = models.ForeignKey(
-        "pages.Page",
-        verbose_name=_("legal page"),
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        help_text=_("choose page which enables users to revoke cookie settings"),
-    )
-
-    class Meta:
-        abstract = True
-
-    @classmethod
-    def admin_fieldset(cls, **kwargs):
-        cfg = {
-            "fields": (
-                "panel_heading",
-                "panel_content",
-                "panel_button_save",
-                "panel_button_cancel",
-                "banner_heading",
-                "banner_content",
-                "banner_button_accept",
-                "banner_button_panel",
-                "revoke_button_panel",
-                "legal_page",
-            ),
-            "classes": ("tabbed",),
-        }
-        cfg.update(kwargs)
-        return (_("Cookie control"), cfg)
-
-    def cookiecontrol_dict(self):
-        panel = get_dict_from_config_list(
-            [
-                ("heading", self.panel_heading),
-                ("content", mark_safe(self.panel_content)),
-                ("buttonSave", self.panel_button_save),
-                ("buttonCancel", self.panel_button_cancel),
-            ]
-        )
-        banner = get_dict_from_config_list(
-            [
-                ("heading", self.banner_heading),
-                ("content", mark_safe(self.banner_content)),
-                ("buttonAccept", self.banner_button_accept),
-                ("buttonPanel", self.banner_button_panel),
-            ]
-        )
-        revoke = get_dict_from_config_list([("buttonPanel", self.revoke_button_panel)])
-        legal_page = self.legal_page.id if self.legal_page else None
-        return get_dict_from_config_list(
-            [
-                ("panel", panel),
-                ("banner", banner),
-                ("revoke", revoke),
-                ("legalPage", legal_page),
-            ]
-        )
-
-
 class CookieCategory(models.Model):
-    name = models.CharField(_("technical name"), max_length=200, unique=True)
+    name = models.SlugField(_("technical name"), unique=True)
     title = TranslatedField(
         models.CharField(_("title"), max_length=200, default="", blank=True)
     )
@@ -132,18 +29,14 @@ class CookieCategory(models.Model):
             "description": mark_safe(self.description),
             "preselected": self.preselect,
             "disabled": self.disabled,
-            "cookies": [o.name for o in CookieScript.objects.filter(category=self)],
+            # XXX why not serialize?
+            "cookies": [o.name for o in self.cookiescript_set.all()],
         }
 
 
 class CookieScript(models.Model):
     category = models.ForeignKey(CookieCategory, on_delete=models.CASCADE)
-    name = models.CharField(
-        _("technical name"),
-        max_length=200,
-        blank=True,
-        unique=True,
-    )
+    name = models.SlugField(_("technical name"), unique=True)
     inject_if = models.TextField(
         _("inject if"), blank=True, help_text=_("inject if cookie category is accepted")
     )

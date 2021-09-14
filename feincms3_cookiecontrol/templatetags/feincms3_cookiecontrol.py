@@ -1,8 +1,10 @@
+from itertools import chain
+
 from django import template
 from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 
-from feincms3_cookiecontrol.models import CookieCategory, CookieScript
+from feincms3_cookiecontrol.models import CookieCategory
 
 
 register = template.Library()
@@ -27,7 +29,7 @@ COOKIECONTROL_PANEL_DEFAULTS = {
     "legalPage": None,
 }
 
-DEFAULT_PANEL_CACHE_TIMEOUT = 60 * 60 * 24
+CACHE_TIMEOUT = 60 * 60 * 24
 
 
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
@@ -37,19 +39,18 @@ def feincms3_cookiecontrol_panel(page):
 
     panel = cache.get(CACHE_KEY)
     if not panel:
+        categories = CookieCategory.objects.prefetch_related("cookiescript_set")
         panel = {
             **COOKIECONTROL_PANEL_DEFAULTS,
-            "categories": {t.name: t.serialize() for t in CookieCategory.objects.all()},
-            "cookies": {t.name: t.serialize() for t in CookieScript.objects.all()},
+            "categories": {t.name: t.serialize() for t in categories},
+            "cookies": {
+                t.name: t.serialize()
+                for t in chain.from_iterable(
+                    category.cookiescript_set.all() for category in categories
+                )
+            },
         }
-
-        # inherit configuration from page ancestors
-        for p in [page] + list(page.ancestors().reverse()):
-            panel.update(
-                **p.cookiecontrol_dict() if hasattr(p, "cookiecontrol_dict") else None
-            )
-
-        cache.set(CACHE_KEY, panel, timeout=DEFAULT_PANEL_CACHE_TIMEOUT)
+        cache.set(CACHE_KEY, panel, timeout=CACHE_TIMEOUT)
 
     """
     only show revoke button on legal_page
