@@ -213,12 +213,12 @@
       cookieName +
       "=" +
       consented.join(",") +
-      ";max-age=31536000;path=/;SameSite=Strict"
+      ";max-age=31536000;path=/;sameSite=Strict"
     document.cookie = cookie
   }
 
   function revokeCookie() {
-    let cookie = cookieName + "=;max-age=-1;path=/"
+    let cookie = cookieName + "=;max-age=-1;path=/;sameSite=Strict"
     document.cookie = cookie
   }
 
