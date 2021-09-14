@@ -96,7 +96,11 @@ class CookiePanelMixin(models.Model):
                 ("buttonPanel", self.banner_button_panel),
             ]
         )
-        revoke = get_dict_from_config_list([("buttonPanel", self.revoke_button_panel)])
+        revoke = get_dict_from_config_list(
+            [
+                ("buttonPanel", self.revoke_button_panel),
+            ]
+        )
         legal_page = self.legal_page.id if self.legal_page else None
         return get_dict_from_config_list(
             [
