@@ -167,4 +167,4 @@ class CookieScript(models.Model):
 
 
 def get_dict_from_config_list(config_list):
-    return dict((k, v) for k, v in config_list if v)
+    return {key: value for key, value in config_list if value}

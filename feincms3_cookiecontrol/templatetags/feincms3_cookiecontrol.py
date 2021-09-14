@@ -39,12 +39,8 @@ def feincms3_cookiecontrol_panel(page):
     if not panel:
         panel = {
             **COOKIECONTROL_PANEL_DEFAULTS,
-            "categories": dict(
-                (t.name, t.serialize()) for t in CookieCategory.objects.all()
-            ),
-            "cookies": dict(
-                (t.name, t.serialize()) for t in CookieScript.objects.all()
-            ),
+            "categories": {t.name: t.serialize() for t in CookieCategory.objects.all()},
+            "cookies": {t.name: t.serialize() for t in CookieScript.objects.all()},
         }
 
         # inherit configuration from page ancestors
