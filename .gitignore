@@ -2,6 +2,7 @@
 *.pyc
 *~
 .*.sw*
+*.egg-info
 .DS_Store
 /build
 /data.db
