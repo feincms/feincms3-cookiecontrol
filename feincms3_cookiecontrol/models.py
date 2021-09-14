@@ -25,7 +25,7 @@ class CookieCategory(models.Model):
 
     def serialize(self):
         return {
-            "title": self.title,
+            "title": self.title or self.name,
             "description": mark_safe(self.description),
             "preselected": self.preselect,
             "disabled": self.disabled,
