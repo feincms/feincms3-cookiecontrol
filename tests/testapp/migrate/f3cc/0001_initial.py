@@ -68,12 +68,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(
-                        blank=True,
-                        max_length=200,
-                        unique=True,
-                        verbose_name="technical name",
-                    ),
+                    models.SlugField(unique=True, verbose_name="technical name"),
                 ),
                 (
                     "inject_if",

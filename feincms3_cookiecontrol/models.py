@@ -36,12 +36,7 @@ class CookieCategory(models.Model):
 
 class CookieScript(models.Model):
     category = models.ForeignKey(CookieCategory, on_delete=models.CASCADE)
-    name = models.CharField(
-        _("technical name"),
-        max_length=200,
-        blank=True,
-        unique=True,
-    )
+    name = models.SlugField(_("technical name"), unique=True)
     inject_if = models.TextField(
         _("inject if"), blank=True, help_text=_("inject if cookie category is accepted")
     )
