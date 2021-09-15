@@ -134,7 +134,7 @@
 
         let categoryInput = document.createElement("input")
         categoryInput.name = categoryId
-        categoryInput.id = "ccp-category-" + categoryId
+        categoryInput.id = "f3cc-category-" + categoryId
         categoryInput.type = "checkbox"
         inputLabel.htmlFor = categoryInput.id
 
