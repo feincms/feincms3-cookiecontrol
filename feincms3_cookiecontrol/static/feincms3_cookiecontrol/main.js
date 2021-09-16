@@ -3,7 +3,7 @@
  */
 // eslint-disable-next-line no-extra-semi
 ;(function () {
-  let cookieName = "feincms3-cookiecontrol",
+  let cookieName = "f3cc",
     mainElement = document.getElementById("feincms3-cookiecontrol"),
     settings = JSON.parse(
       document.getElementById("feincms3-cookiecontrol-data").textContent
