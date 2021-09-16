@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
-    "prettier": "prettier --write 'feincms3_cookiecontrol/static/feincms3_cookiecontrol/*js'",
+    "prettier": "prettier --write 'feincms3_cookiecontrol/static/feincms3_cookiecontrol/*.{js,css}'",
     "eslint": "eslint 'feincms3_cookiecontrol/**/*.js'"
   },
   "eslintIgnore": [

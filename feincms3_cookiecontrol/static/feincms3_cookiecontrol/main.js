@@ -3,7 +3,7 @@
  */
 // eslint-disable-next-line no-extra-semi
 ;(function () {
-  let cookieName = "feincms3-cookiecontrol",
+  let cookieName = "f3cc",
     mainElement = document.getElementById("feincms3-cookiecontrol"),
     settings = JSON.parse(
       document.getElementById("feincms3-cookiecontrol-data").textContent
@@ -36,10 +36,10 @@
     }
     if (html) {
       if (typeof html.heading !== "undefined") {
-        addElement("div", "title", html.heading, el)
+        addElement("div", "f3cc-title", html.heading, el)
       }
       if (typeof html.content !== "undefined") {
-        addElement("div", "description", html.content, el)
+        addElement("div", "f3cc-description", html.content, el)
       }
       if (
         typeof html.heading === "undefined" &&
@@ -68,10 +68,10 @@
     }
 
     if (settings.banner) {
-      banner = addElement("div", "ccp-banner")
+      banner = addElement("div", "f3cc f3cc-banner")
       let outerWrap = addElement("div", "outer")
-      addElement("div", "inner", settings.banner, outerWrap)
-      let buttonWrap = addElement("div", "wrap")
+      addElement("div", "f3cc-description", settings.banner, outerWrap)
+      let buttonWrap = addElement("div", "f3cc-buttons")
       addElement(
         "a",
         "btn btn-panel",
@@ -99,10 +99,10 @@
     }
 
     if (settings.revoke) {
-      revoke = addElement("div", "ccp-revoke")
+      revoke = addElement("div", "f3cc-revoke")
       let outerWrap = addElement("div", "outer")
       addElement("div", "inner", "", outerWrap)
-      let buttonWrap = addElement("div", "wrap")
+      let buttonWrap = addElement("div", "f3cc-buttons")
       addElement(
         "a",
         "btn btn-revoke",
@@ -123,18 +123,18 @@
     }
 
     if (settings.panel) {
-      panel = addElement("div", "ccp-panel")
+      panel = addElement("div", "f3cc f3cc-panel")
       let outerWrap = addElement("div", "outer")
       addElement("div", "inner", settings.panel, outerWrap)
 
       let form = document.createElement("form")
       for (let categoryId in settings.categories) {
-        let categoryWrap = addElement("div", "category")
+        let categoryWrap = addElement("div", "f3cc-category")
         let inputLabel = addElement("label")
 
         let categoryInput = document.createElement("input")
         categoryInput.name = categoryId
-        categoryInput.id = "ccp-category-" + categoryId
+        categoryInput.id = "f3cc-category-" + categoryId
         categoryInput.type = "checkbox"
         inputLabel.htmlFor = categoryInput.id
 
@@ -153,13 +153,13 @@
         categoryWrap.appendChild(categoryInput)
         addElement(
           "div",
-          "label-title",
+          "f3cc-title",
           settings.categories[categoryId].title,
           inputLabel
         )
         addElement(
           "div",
-          "label-description",
+          "f3cc-description",
           settings.categories[categoryId].description,
           inputLabel
         )
@@ -168,7 +168,7 @@
       }
       outerWrap.appendChild(form)
 
-      let buttonWrap = addElement("div", "wrap")
+      let buttonWrap = addElement("div", "f3cc-buttons")
       addElement(
         "a",
         "btn btn-cancel",
@@ -303,6 +303,13 @@
 
   function init() {
     injectNewScripts()
+
+    document.body.addEventListener("click", function(e) {
+      const btn = e.target.closest("[data-open-f3cc-panel]")
+      if (btn) {
+        onPanelClick(e)
+      }
+    })
 
     if (!getCookie()) {
       renderBanner()

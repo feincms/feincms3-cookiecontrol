@@ -1,0 +1,178 @@
+:root {
+  --f3cc-background-color: #e9e9e6;
+  --f3cc-accent-color: #ffce00;
+}
+
+.f3cc {
+  font-size: 1rem;
+}
+
+.f3cc-banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--f3cc-background-color);
+  z-index: 2000;
+  line-height: 1.25;
+  padding: 1rem;
+}
+
+.f3cc-panel {
+  background: rgba(0, 0, 0, 0.66);
+  position: fixed;
+  min-height: 100vh;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow: scroll;
+}
+
+.f3cc .outer {
+  display: flex;
+  gap: 1rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  width: 80%;
+}
+
+@media screen and (max-width: 960px) {
+  .f3cc-banner .outer {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.f3cc .inner {
+  text-align: left;
+}
+
+.f3cc-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .f3cc-buttons {
+    flex-direction: column;
+  }
+}
+
+.f3cc-revoke .btn-revoke {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.f3cc p {
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.f3cc a {
+  border-bottom: none;
+}
+
+.f3cc p > a {
+  border-bottom: 2px solid var(--f3cc-accent-color);
+}
+
+.f3cc p > a:hover {
+  color: #000;
+  opacity: 0.7;
+}
+
+#feincms3-cookiecontrol .btn {
+  display: inline-block;
+  background: var(--f3cc-accent-color);
+  padding: 0.8rem;
+  white-space: nowrap;
+}
+
+#feincms3-cookiecontrol .btn:hover {
+  opacity: 0.7;
+  color: $black;
+}
+
+#feincms3-cookiecontrol .btn-panel,
+#feincms3-cookiecontrol .btn-cancel {
+  background: #fff;
+}
+
+#feincms3-cookiecontrol .f3cc-panel .outer {
+  background: var(--f3cc-background-color);
+  flex-direction: column;
+  position: absolute;
+}
+
+#feincms3-cookiecontrol .f3cc-panel .outer > * {
+  width: 85%;
+  margin: 1rem auto;
+}
+
+@media screen and (min-width: 600px) {
+  #feincms3-cookiecontrol .f3cc-panel .outer {
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+#feincms3-cookiecontrol .f3cc-panel .outer form label {
+  position: relative;
+}
+
+#feincms3-cookiecontrol .f3cc-panel .outer form .group {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.f3cc-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+}
+
+.f3cc-category {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.f3cc-category label {
+  padding: 0;
+  margin: 0;
+  font-size: 0.875em;
+}
+
+.f3cc input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+  left: -2000em;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  width: 0;
+}
+
+.f3cc label::before {
+  content: " ";
+  position: absolute;
+  top: 8px;
+  margin-left: -32px;
+  background: #333;
+  width: 20px;
+  height: 20px;
+}
+
+.f3cc input:checked + label::after {
+  content: " ";
+  position: absolute;
+  top: 12px;
+  margin-left: -28px;
+  background: var(--f3cc-accent-color);
+  width: 12px;
+  height: 12px;
+}
