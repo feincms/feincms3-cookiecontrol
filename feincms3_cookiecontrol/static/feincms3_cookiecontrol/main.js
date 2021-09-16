@@ -304,6 +304,13 @@
   function init() {
     injectNewScripts()
 
+    document.body.addEventListener("click", function(e) {
+      const btn = e.target.closest("[data-open-f3cc-panel]")
+      if (btn) {
+        onPanelClick(e)
+      }
+    })
+
     if (!getCookie()) {
       renderBanner()
     } else {
