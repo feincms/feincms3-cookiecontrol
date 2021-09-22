@@ -40,7 +40,7 @@ def feincms3_cookiecontrol_panel(page):
     panel = cache.get(CACHE_KEY)
     if not panel:
         setup = COOKIECONTROL_PANEL_DEFAULTS
-        setup.update(getattr(settings, "COOKIECONTROL", None))
+        setup.update(getattr(settings, "COOKIECONTROL", {}))
         categories = CookieCategory.objects.prefetch_related("cookiescript_set")
         panel = {
             **setup,
