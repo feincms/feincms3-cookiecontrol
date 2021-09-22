@@ -1,8 +1,9 @@
 from itertools import chain
 
 from django import template
+from django.conf import settings
 from django.core.cache import cache
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language, gettext_lazy as _
 
 from feincms3_cookiecontrol.models import CookieCategory
 
@@ -34,14 +35,15 @@ CACHE_TIMEOUT = 60 * 60 * 24
 
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def feincms3_cookiecontrol_panel(page):
-    # cache is page specific bc of ancestor configuration
-    CACHE_KEY = f"feincms3_cookiecontrol_settings_{page.id}"
+    CACHE_KEY = f"feincms3_cookiecontrol_settings_{get_language()}"
 
     panel = cache.get(CACHE_KEY)
     if not panel:
+        setup = COOKIECONTROL_PANEL_DEFAULTS
+        setup.update(getattr(settings, "COOKIECONTROL", None))
         categories = CookieCategory.objects.prefetch_related("cookiescript_set")
         panel = {
-            **COOKIECONTROL_PANEL_DEFAULTS,
+            **setup,
             "categories": {t.name: t.serialize() for t in categories},
             "cookies": {
                 t.name: t.serialize()
@@ -52,12 +54,10 @@ def feincms3_cookiecontrol_panel(page):
         }
         cache.set(CACHE_KEY, panel, timeout=CACHE_TIMEOUT)
 
-    """
-    only show revoke button on legal_page
-    """
-    if panel["legalPage"] and not (page.id == panel["legalPage"]):
+    # only show revoke button on legal_page
+    if panel["legalPage"] and not (
+        panel["legalPage"] in [p.id for p in page.translations()]
+    ):
         panel.pop("revoke")
-
-    panel.pop("legalPage")
 
     return {"panel": panel}
