@@ -6,7 +6,7 @@
 - Add ``"feincms3_cookiecontrol"`` to settings.py
 - Define ``MIGRATION_MODULES = {"feincms3_cookiecontrol": "..."}`` and run
   ``./manage.py makemigrations feincms3_cookiecontrol``.
-- Configure cookie scripts, cookie categories and page settings to override
+- Configure cookie scripts, cookie categories and app settings to override
   default panel configurations
 - Include template tag:
 
