@@ -141,7 +141,7 @@
 
 .f3cc-category {
   margin-bottom: 1rem;
-  padding-left: 2rem;
+  padding-left: 4rem;
 }
 
 .f3cc-category label {
@@ -170,16 +170,16 @@
   display: block;
   border-radius: 1.5rem;
   position: absolute;
-  top: 0.3125rem;
-  left: -3.375;
+  top: 1.1125rem;
+  left: -5.375rem;
   margin-left: 0;
 }
 
 .f3cc-category label::after {
   content: "";
   position: absolute;
-  top: 0.5625rem;
-  left: -3.125rem;
+  top: 1.3625rem;
+  left: -5.125rem;
   width: 1rem;
   height: 1rem;
   background-color: var(--f3cc-background-light-color);
