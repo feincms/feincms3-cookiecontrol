@@ -96,6 +96,7 @@
   background: var(--f3cc-accent-color);
   padding: 0.8rem;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 #f3cc .btn:hover {
