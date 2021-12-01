@@ -129,8 +129,8 @@
 
       let form = document.createElement("form")
       for (let categoryId in settings.categories) {
-        let categoryWrap = addElement("div", "f3cc-category")
         let inputLabel = addElement("label")
+        inputLabel.className = "f3cc-category"
 
         let categoryInput = document.createElement("input")
         categoryInput.name = categoryId
@@ -150,7 +150,6 @@
         }
 
         checkboxes.push(categoryInput)
-        categoryWrap.appendChild(categoryInput)
         addElement(
           "div",
           "f3cc-title",
@@ -163,8 +162,8 @@
           settings.categories[categoryId].description,
           inputLabel
         )
-        categoryWrap.appendChild(inputLabel)
-        form.appendChild(categoryWrap)
+        form.appendChild(categoryInput)
+        form.appendChild(inputLabel)
       }
       outerWrap.appendChild(form)
 
