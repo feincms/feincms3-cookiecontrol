@@ -39,10 +39,14 @@
   width: 80%;
 }
 
-@media screen and (max-width: 60em) {
+@media screen and (max-width: 60rem) {
   .f3cc-banner .outer {
     width: 100%;
     flex-direction: column;
+  }
+
+  .f3cc .outer {
+    width: auto;
   }
 }
 
@@ -151,8 +155,8 @@
 .f3cc-category {
   position: relative;
   display: block;
-  padding: 0 0 0 5rem;
-  margin: 0 0 1rem 0;
+  padding: 0 0 0 4.5rem;
+  margin: 0 0 2rem 0;
   font-size: 0.875em;
 }
 
