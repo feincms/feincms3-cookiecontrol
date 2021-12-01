@@ -152,19 +152,20 @@
   top: 0;
 }
 
-.f3cc-category {
+label.f3cc-category {
   position: relative;
   display: block;
   padding: 0 0 0 4.5rem;
   margin: 0 0 2rem 0;
   font-size: 0.875em;
+  line-height: 1;
 }
 
-.f3cc-category::before {
+label.f3cc-category::before {
   content: " ";
   cursor: pointer;
   width: 3rem;
-  height: 1.5rem;
+  height: 1.4rem;
   background-color: var(--f3cc-background-inactive-color);
   transition: background-color 0.3s;
   display: block;
@@ -175,7 +176,7 @@
   margin-left: 0;
 }
 
-.f3cc-category::after {
+label.f3cc-category::after {
   content: "";
   position: absolute;
   top: 6px;
@@ -188,20 +189,20 @@
   transition: 0.3s;
 }
 
-input[type="checkbox"]:checked + .f3cc-category::before {
+input[type="checkbox"]:checked + label.f3cc-category::before {
   background-color: var(--f3cc-accent-color);
 }
 
-input[type="checkbox"]:checked:disabled + .f3cc-category::before {
+input[type="checkbox"]:checked:disabled + label.f3cc-category::before {
   cursor: not-allowed;
   filter: brightness(0.7);
 }
 
-input[type="checkbox"]:checked:disabled + .f3cc-category::after {
+input[type="checkbox"]:checked:disabled + label.f3cc-category::after {
   cursor: not-allowed;
   filter: brightness(0.8);
 }
 
-input[type="checkbox"]:checked + .f3cc-category::after {
+input[type="checkbox"]:checked + label.f3cc-category::after {
   transform: translateX(1.5rem);
 }
