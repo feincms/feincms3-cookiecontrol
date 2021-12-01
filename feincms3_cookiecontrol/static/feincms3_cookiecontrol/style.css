@@ -164,12 +164,12 @@ label.f3cc-category {
 label.f3cc-category::before {
   content: " ";
   cursor: pointer;
-  width: 3rem;
-  height: 1.4rem;
+  width: 48px;
+  height: 24px;
   background-color: var(--f3cc-background-inactive-color);
   transition: background-color 0.3s;
   display: block;
-  border-radius: 1.5rem;
+  border-radius: 24px;
   position: absolute;
   top: 2px;
   left: 0;
@@ -181,10 +181,10 @@ label.f3cc-category::after {
   position: absolute;
   top: 6px;
   left: 4px;
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
   background-color: var(--f3cc-background-light-color);
-  border-radius: 1rem;
+  border-radius: 16px;
   transform: translateX(0);
   transition: 0.3s;
 }
@@ -204,5 +204,5 @@ input[type="checkbox"]:checked:disabled + label.f3cc-category::after {
 }
 
 input[type="checkbox"]:checked + label.f3cc-category::after {
-  transform: translateX(1.5rem);
+  transform: translateX(24px);
 }
