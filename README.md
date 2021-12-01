@@ -20,3 +20,7 @@
     ...
 </body>
 ```
+
+- Override CSS variables in a ``.f3cc { ... }`` block. (You probably cannot use
+  ``:root`` for this because your CSS may get overwritten by
+  feincms3-cookiecontrol's CSS.)
