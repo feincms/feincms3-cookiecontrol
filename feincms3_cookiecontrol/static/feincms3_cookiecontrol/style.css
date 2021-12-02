@@ -157,9 +157,12 @@ label.f3cc-category {
   position: relative;
   display: block;
   padding: 0 0 0 4.5rem;
-  margin: 0 0 2rem 0;
   font-size: 0.875em;
   line-height: 1;
+}
+
+label.f3cc-category ~ label.f3cc-category {
+  margin-top: 2rem;
 }
 
 label.f3cc-category::before {
