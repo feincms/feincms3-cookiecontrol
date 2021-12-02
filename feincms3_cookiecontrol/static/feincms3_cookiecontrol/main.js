@@ -115,6 +115,8 @@
   }
 
   function renderPanel() {
+    disableScrolling(true)
+
     if (panel != null) {
       panel.style.display = ""
       return
@@ -127,8 +129,9 @@
 
       let form = document.createElement("form")
       for (let categoryId in settings.categories) {
+        let categoryWrap = addElement("div")
+        categoryWrap.className = "f3cc-category"
         let inputLabel = addElement("label")
-        inputLabel.className = "f3cc-category"
 
         let categoryInput = document.createElement("input")
         categoryInput.name = categoryId
@@ -160,8 +163,9 @@
           settings.categories[categoryId].description,
           inputLabel
         )
-        form.appendChild(categoryInput)
-        form.appendChild(inputLabel)
+
+        categoryWrap.append(categoryInput, inputLabel)
+        form.append(categoryWrap)
       }
       outerWrap.appendChild(form)
 
@@ -241,11 +245,25 @@
     if (el != null) el.style.display = "none"
   }
 
+  function disableScrolling(disable) {
+    if (disable) {
+      // When the modal is shown, we want a fixed body
+      document.body.style.top = `-${window.scrollY}px`
+      document.body.style.position = "fixed"
+    } else {
+      const scrollY = document.body.style.top
+      document.body.style.position = ""
+      document.body.style.top = ""
+      window.scrollTo(0, parseInt(scrollY || "0") * -1)
+    }
+  }
+
   function onSaveClick(e) {
     e.preventDefault()
     saveSelections()
     hide(banner)
     hide(panel)
+    disableScrolling(false)
     renderRevoke()
     injectNewScripts()
   }
@@ -255,6 +273,7 @@
     acceptAll()
     hide(banner)
     hide(panel)
+    disableScrolling(false)
     renderRevoke()
     injectNewScripts()
   }
@@ -262,6 +281,7 @@
   function onCancelClick(e) {
     e.preventDefault()
     hide(panel)
+    disableScrolling(false)
     init()
   }
 

@@ -128,15 +128,6 @@
   }
 }
 
-#f3cc .f3cc-panel .outer form label {
-  position: relative;
-}
-
-#f3cc .f3cc-panel .outer form .group {
-  display: flex;
-  margin-top: 1rem;
-}
-
 #f3cc .f3cc-title {
   font-size: 1.5em;
   font-weight: bold;
@@ -152,7 +143,7 @@
   top: 0;
 }
 
-#f3cc label.f3cc-category {
+#f3cc .f3cc-category {
   position: relative;
   display: block;
   padding: 0 0 0 4.5rem;
@@ -160,11 +151,11 @@
   line-height: 1;
 }
 
-#f3cc label.f3cc-category ~ label.f3cc-category {
+#f3cc .f3cc-category ~ .f3cc-category {
   margin-top: 2rem;
 }
 
-#f3cc label.f3cc-category::before {
+#f3cc .f3cc-category label::before {
   content: " ";
   cursor: pointer;
   width: 48px;
@@ -179,7 +170,7 @@
   margin-left: 0;
 }
 
-#f3cc label.f3cc-category::after {
+#f3cc .f3cc-category label::after {
   content: "";
   position: absolute;
   top: 6px;
@@ -192,20 +183,20 @@
   transition: 0.3s;
 }
 
-#f3cc input[type="checkbox"]:checked + label.f3cc-category::before {
+#f3cc .f3cc-category input[type="checkbox"]:checked + label::before {
   background-color: var(--f3cc-accent-color);
 }
 
-#f3cc input[type="checkbox"]:checked:disabled + label.f3cc-category::before {
+#f3cc .f3cc-category input[type="checkbox"]:checked:disabled + label::before {
   cursor: not-allowed;
   filter: brightness(0.7);
 }
 
-#f3cc input[type="checkbox"]:checked:disabled + label.f3cc-category::after {
+#f3cc .f3cc-category input[type="checkbox"]:checked:disabled + label::after {
   cursor: not-allowed;
   filter: brightness(0.8);
 }
 
-#f3cc input[type="checkbox"]:checked + label.f3cc-category::after {
+#f3cc .f3cc-category input[type="checkbox"]:checked + label::after {
   transform: translateX(24px);
 }
