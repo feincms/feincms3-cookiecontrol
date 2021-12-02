@@ -2,15 +2,19 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from feincms3.inline_ckeditor import InlineCKEditorField
-from translated_fields import TranslatedField
+from translated_fields import TranslatedField, fallback_to_default
 
 
 class CookieCategory(models.Model):
     name = models.SlugField(_("technical name"), unique=True)
     title = TranslatedField(
-        models.CharField(_("title"), max_length=200, default="", blank=True)
+        models.CharField(_("title"), max_length=200, default="", blank=True),
+        attrgetter=fallback_to_default,
     )
-    description = TranslatedField(InlineCKEditorField(_("description"), blank=True))
+    description = TranslatedField(
+        InlineCKEditorField(_("description"), blank=True),
+        attrgetter=fallback_to_default,
+    )
     preselect = models.BooleanField(default=False)
     disabled = models.BooleanField(default=False)
     ordering = models.IntegerField(_("ordering"), default=0)
