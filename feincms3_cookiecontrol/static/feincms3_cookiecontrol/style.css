@@ -6,11 +6,11 @@
   --f3cc-foreground-color: #000000;
 }
 
-.f3cc {
+#f3cc {
   font-size: 1rem;
 }
 
-.f3cc-banner {
+#f3cc .f3cc-banner {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -20,7 +20,7 @@
   padding: 1rem;
 }
 
-.f3cc-panel {
+#f3cc .f3cc-panel {
   background: rgba(0, 0, 0, 0.66);
   position: fixed;
   min-height: 100vh;
@@ -31,7 +31,7 @@
   overflow: scroll;
 }
 
-.f3cc .outer {
+#f3cc .outer {
   display: flex;
   gap: 1rem;
   max-width: 70rem;
@@ -40,21 +40,21 @@
 }
 
 @media screen and (max-width: 60rem) {
-  .f3cc-banner .outer {
+  #f3cc .f3cc-banner .outer {
     width: 100%;
     flex-direction: column;
   }
 
-  .f3cc .outer {
+  #f3cc .outer {
     width: auto;
   }
 }
 
-.f3cc .inner {
+#f3cc .inner {
   text-align: left;
 }
 
-.f3cc-buttons {
+#f3cc .f3cc-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -62,66 +62,65 @@
 }
 
 @media screen and (max-width: 25em) {
-  .f3cc-buttons {
+  #f3cc .f3cc-buttons {
     flex-direction: column;
   }
 }
 
-.f3cc-revoke .btn-revoke {
+#f3cc .f3cc-revoke .btn-revoke {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
 }
 
-.f3cc p {
+#f3cc p {
   margin-bottom: 0;
   line-height: 1.5;
 }
 
-.f3cc a {
+#f3cc a {
   border-bottom: none;
 }
 
-.f3cc p > a {
+#f3cc p > a {
   border-bottom: 0.125rem solid var(--f3cc-accent-color);
 }
 
-.f3cc p > a:hover {
+#f3cc p > a:hover {
   color: var(--f3cc-foreground-color);
   opacity: 0.7;
 }
 
-#feincms3-cookiecontrol .btn {
+#f3cc .btn {
   display: inline-block;
   background: var(--f3cc-accent-color);
   padding: 0.8rem;
   white-space: nowrap;
-  text-decoration: none;
 }
 
-#feincms3-cookiecontrol .btn:hover {
+#f3cc .btn:hover {
   opacity: 0.7;
   color: var(--f3cc-foreground-color);
 }
 
-#feincms3-cookiecontrol .btn-panel,
-#feincms3-cookiecontrol .btn-cancel {
+#f3cc .btn-panel,
+#f3cc .btn-cancel {
   background-color: var(--f3cc-background-light-color);
 }
 
-#feincms3-cookiecontrol .f3cc-panel .outer {
+#f3cc .f3cc-panel .outer {
   background: var(--f3cc-background-color);
   flex-direction: column;
   position: absolute;
 }
 
-#feincms3-cookiecontrol .f3cc-panel .outer > * {
+#f3cc .f3cc-panel .outer > * {
   width: 85%;
   margin: 1rem auto;
 }
 
 @media screen and (min-width: 37.5em) {
-  #feincms3-cookiecontrol .f3cc-panel .outer {
+  #f3cc .f3cc-panel .outer {
     top: 50%;
     left: 50%;
     margin-right: -50%;
@@ -129,22 +128,22 @@
   }
 }
 
-#feincms3-cookiecontrol .f3cc-panel .outer form label {
+#f3cc .f3cc-panel .outer form label {
   position: relative;
 }
 
-#feincms3-cookiecontrol .f3cc-panel .outer form .group {
+#f3cc .f3cc-panel .outer form .group {
   display: flex;
   margin-top: 1rem;
 }
 
-.f3cc-title {
+#f3cc .f3cc-title {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 0.25em;
 }
 
-.f3cc input[type="checkbox"] {
+#f3cc input[type="checkbox"] {
   position: absolute;
   width: 1em;
   height: 1em;
@@ -153,7 +152,7 @@
   top: 0;
 }
 
-label.f3cc-category {
+#f3cc label.f3cc-category {
   position: relative;
   display: block;
   padding: 0 0 0 4.5rem;
@@ -161,11 +160,11 @@ label.f3cc-category {
   line-height: 1;
 }
 
-label.f3cc-category ~ label.f3cc-category {
+#f3cc label.f3cc-category ~ label.f3cc-category {
   margin-top: 2rem;
 }
 
-label.f3cc-category::before {
+#f3cc label.f3cc-category::before {
   content: " ";
   cursor: pointer;
   width: 48px;
@@ -180,7 +179,7 @@ label.f3cc-category::before {
   margin-left: 0;
 }
 
-label.f3cc-category::after {
+#f3cc label.f3cc-category::after {
   content: "";
   position: absolute;
   top: 6px;
@@ -193,20 +192,20 @@ label.f3cc-category::after {
   transition: 0.3s;
 }
 
-input[type="checkbox"]:checked + label.f3cc-category::before {
+#f3cc input[type="checkbox"]:checked + label.f3cc-category::before {
   background-color: var(--f3cc-accent-color);
 }
 
-input[type="checkbox"]:checked:disabled + label.f3cc-category::before {
+#f3cc input[type="checkbox"]:checked:disabled + label.f3cc-category::before {
   cursor: not-allowed;
   filter: brightness(0.7);
 }
 
-input[type="checkbox"]:checked:disabled + label.f3cc-category::after {
+#f3cc input[type="checkbox"]:checked:disabled + label.f3cc-category::after {
   cursor: not-allowed;
   filter: brightness(0.8);
 }
 
-input[type="checkbox"]:checked + label.f3cc-category::after {
+#f3cc input[type="checkbox"]:checked + label.f3cc-category::after {
   transform: translateX(24px);
 }

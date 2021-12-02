@@ -28,7 +28,7 @@ class CookieControlTest(test.TestCase):
             )
             # print(html)
 
-        self.assertIn('id="feincms3-cookiecontrol-data"', html)
+        self.assertIn('id="f3cc-data"', html)
 
     def test_correct_setup_for_active_language(self):
         pass

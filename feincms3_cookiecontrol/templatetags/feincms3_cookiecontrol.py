@@ -55,8 +55,10 @@ def feincms3_cookiecontrol_panel(page):
         cache.set(CACHE_KEY, panel, timeout=CACHE_TIMEOUT)
 
     # only show revoke button on legal_page
-    if panel["legalPage"] and hasattr(page, "translations") and not (
-        panel["legalPage"] in [p.id for p in page.translations()]
+    if (
+        panel["legalPage"]
+        and hasattr(page, "translations")
+        and not (panel["legalPage"] in [p.id for p in page.translations()])
     ):
         panel.pop("revoke")
 
