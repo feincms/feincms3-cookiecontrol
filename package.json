@@ -7,23 +7,18 @@
   "license": "BSD-3",
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "@webpack-cli/generators": "^2.3.0",
-    "babel-loader": "^8.2.2",
+    "esbuild": "^0.14.2",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.3.2",
-    "webpack": "^5.50.0",
-    "webpack-cli": "^4.8.0"
+    "prettier": "^2.3.2"
   },
   "scripts": {
-    "build": "webpack --mode=production --node-env=production",
+    "build": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name]",
     "prettier": "prettier --write 'feincms3_cookiecontrol/static/feincms3_cookiecontrol/*.{js,css}'",
     "eslint": "eslint 'feincms3_cookiecontrol/**/*.js'"
   },
   "eslintIgnore": [
-    "**/*.min.js"
+    "**/out/*.js"
   ],
   "prettier": {
     "semi": false
