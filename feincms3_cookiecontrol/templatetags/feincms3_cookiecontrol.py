@@ -1,5 +1,3 @@
-from itertools import chain
-
 from django import template
 from django.conf import settings
 from django.core.cache import cache
@@ -40,12 +38,6 @@ def panel_data():
     return {
         **setup,
         "categories": {t.name: t.serialize() for t in categories},
-        "cookies": {
-            t.name: t.serialize()
-            for t in chain.from_iterable(
-                category.cookiescript_set.all() for category in categories
-            )
-        },
     }
 
 

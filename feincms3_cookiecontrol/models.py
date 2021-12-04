@@ -34,8 +34,7 @@ class CookieCategory(models.Model):
             "description": mark_safe(self.description),
             "preselected": self.preselect,
             "disabled": self.disabled,
-            # XXX why not serialize?
-            "cookies": [o.name for o in self.cookiescript_set.all()],
+            "cookies": [o.serialize() for o in self.cookiescript_set.all()],
         }
 
 
@@ -76,6 +75,7 @@ class CookieScript(models.Model):
 
     def serialize(self):
         return {
+            "name": self.name,
             "inject_if": mark_safe(self.inject_if),
             "inject_else": mark_safe(self.inject_else),
         }

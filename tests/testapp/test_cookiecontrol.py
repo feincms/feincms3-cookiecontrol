@@ -117,7 +117,7 @@ class CookieControlTest(test.TestCase):
         panel = panel_data()
         self.assertEqual(
             set(panel.keys()),
-            {"panel", "banner", "revoke", "legalPage", "categories", "cookies"},
+            {"panel", "banner", "revoke", "legalPage", "categories"},
         )
         self.assertEqual(
             panel["categories"],
@@ -127,16 +127,13 @@ class CookieControlTest(test.TestCase):
                     "description": "",
                     "preselected": False,
                     "disabled": False,
-                    "cookies": ["script-name"],
-                }
-            },
-        )
-        self.assertEqual(
-            panel["cookies"],
-            {
-                "script-name": {
-                    "inject_if": "inject-if",
-                    "inject_else": "inject-else",
+                    "cookies": [
+                        {
+                            "name": "script-name",
+                            "inject_if": "inject-if",
+                            "inject_else": "inject-else",
+                        },
+                    ],
                 }
             },
         )
