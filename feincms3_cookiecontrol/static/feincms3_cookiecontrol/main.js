@@ -10,7 +10,7 @@
     panel = null,
     revoke = null,
     checkboxes = [],
-    injectedScripts = []
+    injectedScripts = {}
 
   /**
    * Recursive createElement wrapper for rendering panel, banner and revoke views
@@ -293,12 +293,47 @@
     renderPanel()
   }
 
+  /* Thanks, https://stackoverflow.com/a/20584396 */
+  function nodeScriptReplace(node) {
+    if (nodeScriptIs(node) === true) {
+      node.parentNode.replaceChild(nodeScriptClone(node), node)
+    } else {
+      var i = -1,
+        children = node.childNodes
+      while (++i < children.length) {
+        nodeScriptReplace(children[i])
+      }
+    }
+
+    return node
+  }
+  function nodeScriptClone(node) {
+    var script = document.createElement("script")
+    script.text = node.innerHTML
+
+    var i = -1,
+      attrs = node.attributes,
+      attr
+    while (++i < attrs.length) {
+      script.setAttribute((attr = attrs[i]).name, attr.value)
+    }
+    return script
+  }
+
+  function nodeScriptIs(node) {
+    return node.tagName === "SCRIPT"
+  }
+
   function injectScript(cookieKey, injectCode) {
     if (typeof injectCode !== "undefined") {
-      const node = document.createElement("script")
-      document.body.appendChild(node)
+      let node = injectedScripts[cookieKey]
+      if (!node) {
+        injectedScripts[cookieKey] = node = document.createElement("div")
+        node.dataset.f3cc = cookieKey
+        document.body.appendChild(node)
+      }
       node.innerHTML = injectCode
-      injectedScripts.push(cookieKey)
+      nodeScriptReplace(node)
     }
   }
 
@@ -307,12 +342,10 @@
     for (let cookieCategory in settings.categories) {
       for (let cookie in settings.categories[cookieCategory].cookies) {
         let cookieKey = settings.categories[cookieCategory].cookies[cookie]
-        if (injectedScripts.indexOf(cookieKey) === -1) {
-          if (consenteds.indexOf(cookieCategory) === -1) {
-            injectScript(cookieKey, settings.cookies[cookieKey].inject_else)
-          } else {
-            injectScript(cookieKey, settings.cookies[cookieKey].inject_if)
-          }
+        if (consenteds.indexOf(cookieCategory) === -1) {
+          injectScript(cookieKey, settings.cookies[cookieKey].inject_else)
+        } else {
+          injectScript(cookieKey, settings.cookies[cookieKey].inject_if)
         }
       }
     }

@@ -1,6 +1,7 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from feincms3.inline_ckeditor import InlineCKEditorField
 from translated_fields import TranslatedField, fallback_to_default
 
@@ -55,6 +56,23 @@ class CookieScript(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        super().clean()
+
+        msg = gettext(
+            "This doesn't look right."
+            " Please start with a HTML tag (e.g. <script>, <div>)."
+        )
+        errors = {}
+
+        if (stripped := self.inject_if.strip()) and stripped[0] != "<":
+            errors["inject_if"] = msg
+        if (stripped := self.inject_else.strip()) and stripped[0] != "<":
+            errors["inject_else"] = msg
+
+        if errors:
+            raise ValidationError(errors)
 
     def serialize(self):
         return {
