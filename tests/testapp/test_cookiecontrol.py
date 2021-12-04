@@ -127,3 +127,7 @@ class CookieControlTest(test.TestCase):
             script.serialize(),
             {"inject_else": "inject-else", "inject_if": "inject-if"},
         )
+
+    def test_str(self):
+        self.assertEqual(str(CookieCategory(name="test")), "test")
+        self.assertEqual(str(CookieScript(name="test")), "test")
