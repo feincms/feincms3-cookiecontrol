@@ -22,7 +22,16 @@ class CookieControlTest(test.TestCase):
             """
         )
 
-        with self.assertNumQueries(1):  # No categories, no scripts to prefetch
+        CookieScript.objects.create(
+            category=CookieCategory.objects.create(name="category1"),
+            name="script1",
+        )
+        CookieScript.objects.create(
+            category=CookieCategory.objects.create(name="category2"),
+            name="script2",
+        )
+
+        with self.assertNumQueries(2):  # One query for categories, one for all scripts
             html = t.render(
                 Context(
                     {
@@ -33,6 +42,16 @@ class CookieControlTest(test.TestCase):
             # print(html)
 
         self.assertIn('id="f3cc-data"', html)
+
+        with self.assertNumQueries(0):  # Cached
+            html = t.render(
+                Context(
+                    {
+                        "page": types.SimpleNamespace(id=-1),
+                    }
+                )
+            )
+            # print(html)
 
     def test_correct_setup_for_active_language(self):
         pass
