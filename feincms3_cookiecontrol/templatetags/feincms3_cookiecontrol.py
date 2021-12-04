@@ -33,25 +33,29 @@ COOKIECONTROL_PANEL_DEFAULTS = {
 CACHE_TIMEOUT = 60 * 60 * 24
 
 
+def panel_data():
+    setup = COOKIECONTROL_PANEL_DEFAULTS
+    setup.update(getattr(settings, "COOKIECONTROL", {}))
+    categories = CookieCategory.objects.prefetch_related("cookiescript_set")
+    return {
+        **setup,
+        "categories": {t.name: t.serialize() for t in categories},
+        "cookies": {
+            t.name: t.serialize()
+            for t in chain.from_iterable(
+                category.cookiescript_set.all() for category in categories
+            )
+        },
+    }
+
+
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def feincms3_cookiecontrol_panel(page):
     CACHE_KEY = f"feincms3_cookiecontrol_settings_{get_language()}"
 
     panel = cache.get(CACHE_KEY)
     if not panel:
-        setup = COOKIECONTROL_PANEL_DEFAULTS
-        setup.update(getattr(settings, "COOKIECONTROL", {}))
-        categories = CookieCategory.objects.prefetch_related("cookiescript_set")
-        panel = {
-            **setup,
-            "categories": {t.name: t.serialize() for t in categories},
-            "cookies": {
-                t.name: t.serialize()
-                for t in chain.from_iterable(
-                    category.cookiescript_set.all() for category in categories
-                )
-            },
-        }
+        panel = panel_data()
         cache.set(CACHE_KEY, panel, timeout=CACHE_TIMEOUT)
 
     # only show revoke button on legal_page

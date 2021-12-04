@@ -7,6 +7,7 @@ from django.test.utils import override_settings
 
 from feincms3_cookiecontrol.checks import check_settings
 from feincms3_cookiecontrol.models import CookieCategory, CookieScript
+from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import panel_data
 
 
 # from .models import Model
@@ -106,26 +107,38 @@ class CookieControlTest(test.TestCase):
 
     def test_serialize(self):
         category = CookieCategory.objects.create()
-        script = CookieScript.objects.create(
+        CookieScript.objects.create(
             category=category,
             name="script-name",
             inject_if="inject-if",
             inject_else="inject-else",
         )
 
+        panel = panel_data()
         self.assertEqual(
-            category.serialize(),
+            set(panel.keys()),
+            {"panel", "banner", "revoke", "legalPage", "categories", "cookies"},
+        )
+        self.assertEqual(
+            panel["categories"],
             {
-                "title": "",
-                "description": "",
-                "preselected": False,
-                "disabled": False,
-                "cookies": ["script-name"],
+                "": {
+                    "title": "",
+                    "description": "",
+                    "preselected": False,
+                    "disabled": False,
+                    "cookies": ["script-name"],
+                }
             },
         )
         self.assertEqual(
-            script.serialize(),
-            {"inject_else": "inject-else", "inject_if": "inject-if"},
+            panel["cookies"],
+            {
+                "script-name": {
+                    "inject_if": "inject-if",
+                    "inject_else": "inject-else",
+                }
+            },
         )
 
     def test_str(self):
