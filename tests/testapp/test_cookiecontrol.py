@@ -84,3 +84,27 @@ class CookieControlTest(test.TestCase):
                 " (e.g. <script>, <div>)."
             ],
         )
+
+    def test_serialize(self):
+        category = CookieCategory.objects.create()
+        script = CookieScript.objects.create(
+            category=category,
+            name="script-name",
+            inject_if="inject-if",
+            inject_else="inject-else",
+        )
+
+        self.assertEqual(
+            category.serialize(),
+            {
+                "title": "",
+                "description": "",
+                "preselected": False,
+                "disabled": False,
+                "cookies": ["script-name"],
+            },
+        )
+        self.assertEqual(
+            script.serialize(),
+            {"inject_else": "inject-else", "inject_if": "inject-if"},
+        )
