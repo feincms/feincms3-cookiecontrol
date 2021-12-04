@@ -1,5 +1,14 @@
 # Change log
 
+## 0.1 (Unreleased)
+
+- Added unittests for everything in the backend.
+- Verified that the amount of SQL queries executed is as expected.
+- Changed the JSON structure to keep categories and cookies in a single object.
+- Namespaced translations using a gettext context.
+- Added clobbering of the panel cache when updating categories or scripts.
+
+
 ## 0.0.10 (2021-12-04)
 
 - **BACKWARDS INCOMPATIBLE:** Changed ``inject_if`` and ``inject_else`` to

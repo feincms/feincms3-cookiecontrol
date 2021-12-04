@@ -25,6 +25,7 @@ from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
 class CookieControlTest(test.TestCase):
     def setUp(self):
         activate("en")
+        clobber_panel_data()
 
     def test_panel_setup_defaults_provided(self):
         t = Template(
@@ -155,8 +156,6 @@ class CookieControlTest(test.TestCase):
 
     @override_settings(COOKIECONTROL={"legalPage": 42})
     def test_revoke(self):
-        clobber_panel_data()
-
         class DummyPage:
             def __init__(self, ids):
                 self.ids = ids
