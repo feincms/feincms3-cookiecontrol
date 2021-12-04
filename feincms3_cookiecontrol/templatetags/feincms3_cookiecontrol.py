@@ -3,7 +3,7 @@ from itertools import chain
 from django import template
 from django.conf import settings
 from django.core.cache import cache
-from django.utils.translation import get_language, gettext_lazy as _
+from django.utils.translation import get_language, pgettext_lazy
 
 from feincms3_cookiecontrol.models import CookieCategory
 
@@ -13,19 +13,19 @@ register = template.Library()
 
 COOKIECONTROL_PANEL_DEFAULTS = {
     "panel": {
-        "heading": _("Your Cookie Settings Protect Your Privacy"),
-        "content": _("Panel content"),
-        "buttonSave": _("Save settings"),
-        "buttonCancel": _("Cancel"),
+        "heading": pgettext_lazy("f3cc", "Your Cookie Settings Protect Your Privacy"),
+        "content": pgettext_lazy("f3cc", "Panel content"),
+        "buttonSave": pgettext_lazy("f3cc", "Save settings"),
+        "buttonCancel": pgettext_lazy("f3cc", "Cancel"),
     },
     "banner": {
-        "heading": _("Cookies on Our Website"),
-        "content": _("Banner content"),
-        "buttonAccept": _("Accept all"),
-        "buttonPanel": _("Modify settings"),
+        "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
+        "content": pgettext_lazy("f3cc", "Banner content"),
+        "buttonAccept": pgettext_lazy("f3cc", "Accept all"),
+        "buttonPanel": pgettext_lazy("f3cc", "Modify settings"),
     },
     "revoke": {
-        "buttonPanel": _("Modify/revoke cookie settings"),
+        "buttonPanel": pgettext_lazy("f3cc", "Modify/revoke cookie settings"),
     },
     "legalPage": None,
 }

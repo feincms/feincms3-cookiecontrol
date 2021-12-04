@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-09 14:06+0200\n"
+"POT-Creation-Date: 2021-12-04 20:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,115 +18,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: feincms3_cookiecontrol/models.py:11
-msgid "panel heading"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:14
-msgid "panel content"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:16
-msgid "panel button save"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:20
-msgid "panel button cancel"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:25
-msgid "banner heading"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:28
-msgid "banner content"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:30
-msgid "banner button panel"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:34
-msgid "i.e. cookie settings panel button text"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:38
-msgid "banner button accept"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:42
-msgid "i.e. accept all cookies button text"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:47
-msgid "revoke button"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:52
-msgid "legal page"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:56
-msgid "choose page which enables users to revoke cookie settings"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:80
-msgid "Cookie control"
-msgstr ""
-
-#: feincms3_cookiecontrol/models.py:103 feincms3_cookiecontrol/models.py:135
+#: models.py:10 models.py:44
 msgid "technical name"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:105
+#: models.py:12
 msgid "title"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:107
+#: models.py:16
 msgid "description"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:110
+#: models.py:21
 msgid "ordering"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:114
+#: models.py:25
 msgid "cookie category"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:115
+#: models.py:26
 msgid "cookie categories"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:141
+#: models.py:46
 msgid "inject if"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:141
-msgid "inject if cookie group is accepted"
+#: models.py:46
+msgid "inject if cookie category is accepted"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:144
+#: models.py:49
 msgid "inject else"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:144
-msgid "inject if cookie group is denied"
+#: models.py:49
+msgid "inject if cookie category is denied"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:149
+#: models.py:54
 msgid "cookie script"
 msgstr ""
 
-#: feincms3_cookiecontrol/models.py:150
+#: models.py:55
 msgid "cookie scripts"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:14
+#: models.py:64
+msgid ""
+"This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+msgstr ""
+
+#: templates/feincms3_cookiecontrol/manage-cookies-button.html:2
+msgid "Modify/revoke cookie settings"
+msgstr ""
+
+#: templatetags/feincms3_cookiecontrol.py:16
+msgctxt "f3cc"
 msgid "Your Cookie Settings Protect Your Privacy"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:15
+#: templatetags/feincms3_cookiecontrol.py:17
+msgctxt "f3cc"
 msgid "Panel content"
 msgstr ""
 "We use two types of cookies to enhance the use experience on our website. "
@@ -135,19 +90,23 @@ msgstr ""
 "cookies and protect your data in our privacy policy. You can also access "
 "your settings at any time on our legal information page."
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:16
+#: templatetags/feincms3_cookiecontrol.py:18
+msgctxt "f3cc"
 msgid "Save settings"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:17
+#: templatetags/feincms3_cookiecontrol.py:19
+msgctxt "f3cc"
 msgid "Cancel"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:20
+#: templatetags/feincms3_cookiecontrol.py:22
+msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:21
+#: templatetags/feincms3_cookiecontrol.py:23
+msgctxt "f3cc"
 msgid "Banner content"
 msgstr ""
 "We use cookies to enhance the user experience on our website. Click on "
@@ -155,14 +114,17 @@ msgstr ""
 "to decide which cookies you want to allow or not. Read our privacy policy to "
 "find out more about how we use cookies and protect your data."
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:22
+#: templatetags/feincms3_cookiecontrol.py:24
+msgctxt "f3cc"
 msgid "Accept all"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:23
+#: templatetags/feincms3_cookiecontrol.py:25
+msgctxt "f3cc"
 msgid "Modify settings"
 msgstr ""
 
-#: feincms3_cookiecontrol/templatetags/feincms3_cookiecontrol.py:26
+#: templatetags/feincms3_cookiecontrol.py:28
+msgctxt "f3cc"
 msgid "Modify/revoke cookie settings"
 msgstr ""
