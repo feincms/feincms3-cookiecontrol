@@ -58,7 +58,7 @@ def feincms3_cookiecontrol_panel(page):
     if (
         panel["legalPage"]
         and hasattr(page, "translations")
-        and not (panel["legalPage"] in [p.id for p in page.translations()])
+        and panel["legalPage"] not in {p.id for p in page.translations()}
     ):
         panel.pop("revoke")
 
