@@ -48,11 +48,17 @@ class CookieControlTest(test.TestCase):
     def test_erroneous_scripts(self):
         category = CookieCategory.objects.create()
 
-        # No exception
+        # No exceptions
         CookieScript(
             category=category,
             name="script-name",
             inject_if="",
+            inject_else="",
+        ).full_clean()
+        CookieScript(
+            category=category,
+            name="script-name",
+            inject_if=" <script>bla</script>",
             inject_else="",
         ).full_clean()
 
