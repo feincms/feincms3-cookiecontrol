@@ -135,7 +135,7 @@
 
         let categoryInput = document.createElement("input")
         categoryInput.name = categoryId
-        categoryInput.id = "f3cc-category-" + categoryId
+        categoryInput.id = `f3cc-category-${categoryId}`
         categoryInput.type = "checkbox"
         inputLabel.htmlFor = categoryInput.id
 
@@ -210,16 +210,14 @@
   }
 
   function setCookie(consented) {
-    let cookie =
-      cookieName +
-      "=" +
-      consented.join(",") +
-      ";max-age=31536000;path=/;sameSite=Strict"
+    let cookie = `${cookieName}=${consented.join(
+      ","
+    )};max-age=31536000;path=/;sameSite=Strict`
     document.cookie = cookie
   }
 
   function revokeCookie() {
-    let cookie = cookieName + "=;max-age=-1;path=/;sameSite=Strict"
+    let cookie = `${cookieName}=;max-age=-1;path=/;sameSite=Strict`
     document.cookie = cookie
   }
 
@@ -254,7 +252,7 @@
       const scrollY = document.body.style.top
       document.body.style.position = ""
       document.body.style.top = ""
-      window.scrollTo(0, parseInt(scrollY || "0") * -1)
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1)
     }
   }
 
@@ -298,7 +296,7 @@
     if (nodeScriptIs(node) === true) {
       node.parentNode.replaceChild(nodeScriptClone(node), node)
     } else {
-      var i = -1,
+      let i = -1,
         children = node.childNodes
       while (++i < children.length) {
         nodeScriptReplace(children[i])
@@ -308,10 +306,10 @@
     return node
   }
   function nodeScriptClone(node) {
-    var script = document.createElement("script")
+    let script = document.createElement("script")
     script.text = node.innerHTML
 
-    var i = -1,
+    let i = -1,
       attrs = node.attributes,
       attr
     while (++i < attrs.length) {
@@ -339,9 +337,11 @@
 
   function injectNewScripts() {
     let consenteds = consentedCategories()
-    for (let cookieCategory of settings.categories) {
-      const key = consenteds.includes(cookieCategory) ? "inject_if" : "inject_else"
-      for (let cookie of settings.cookieCategory[cookieCategory].cookies) {
+    for (let cookieCategory in settings.categories) {
+      const key = consenteds.includes(cookieCategory)
+        ? "inject_if"
+        : "inject_else"
+      for (let cookie of settings.categories[cookieCategory].cookies) {
         injectScript(cookie.name, cookie[key])
       }
     }
@@ -350,7 +350,7 @@
   function init() {
     injectNewScripts()
 
-    document.body.addEventListener("click", function (e) {
+    document.body.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-open-f3cc-panel]")
       if (btn) {
         onPanelClick(e)
