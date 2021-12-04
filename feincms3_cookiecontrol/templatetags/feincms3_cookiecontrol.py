@@ -11,11 +11,13 @@ def feincms3_cookiecontrol_panel(page):
     panel = panel_data()
 
     # only show revoke button on legal_page
-    if (
-        panel["legalPage"]
-        and hasattr(page, "translations")
-        and panel["legalPage"] not in {p.id for p in page.translations()}
-    ):
-        panel.pop("revoke")
+    if not panel["legalPage"]:
+        return {"panel": panel}
 
+    if hasattr(page, "translations") and panel["legalPage"] in {
+        p.id for p in page.translations()
+    }:
+        return {"panel": panel}
+
+    panel.pop("revoke")
     return {"panel": panel}

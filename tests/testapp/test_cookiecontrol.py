@@ -7,8 +7,15 @@ from django.test.utils import override_settings
 from django.utils.translation import activate
 
 from feincms3_cookiecontrol.checks import check_settings
-from feincms3_cookiecontrol.models import CookieCategory, CookieScript
-from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import panel_data
+from feincms3_cookiecontrol.models import (
+    CookieCategory,
+    CookieScript,
+    clobber_panel_data,
+)
+from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
+    feincms3_cookiecontrol_panel,
+    panel_data,
+)
 
 
 # from .models import Model
@@ -145,3 +152,20 @@ class CookieControlTest(test.TestCase):
     def test_str(self):
         self.assertEqual(str(CookieCategory(name="test")), "test")
         self.assertEqual(str(CookieScript(name="test")), "test")
+
+    @override_settings(COOKIECONTROL={"legalPage": 42})
+    def test_revoke(self):
+        clobber_panel_data()
+
+        class DummyPage:
+            def __init__(self, ids):
+                self.ids = ids
+
+            def translations(self):
+                return [types.SimpleNamespace(id=id) for id in self.ids]
+
+        result = feincms3_cookiecontrol_panel(DummyPage([1]))
+        self.assertNotIn("revoke", result["panel"])
+
+        result = feincms3_cookiecontrol_panel(DummyPage([42]))
+        self.assertIn("revoke", result["panel"])
