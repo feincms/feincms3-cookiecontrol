@@ -79,7 +79,3 @@ class CookieScript(models.Model):
             "inject_if": mark_safe(self.inject_if),
             "inject_else": mark_safe(self.inject_else),
         }
-
-
-def get_dict_from_config_list(config_list):
-    return {key: value for key, value in config_list if value}
