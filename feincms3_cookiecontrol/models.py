@@ -1,9 +1,61 @@
+from django.conf import settings
+from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import signals
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import (
+    get_language,
+    gettext,
+    gettext_lazy as _,
+    pgettext_lazy,
+)
 from feincms3.inline_ckeditor import InlineCKEditorField
 from translated_fields import TranslatedField, fallback_to_default
+
+
+COOKIECONTROL_PANEL_DEFAULTS = {
+    "panel": {
+        "heading": pgettext_lazy("f3cc", "Your Cookie Settings Protect Your Privacy"),
+        "content": pgettext_lazy("f3cc", "Panel content"),
+        "buttonSave": pgettext_lazy("f3cc", "Save settings"),
+        "buttonCancel": pgettext_lazy("f3cc", "Cancel"),
+    },
+    "banner": {
+        "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
+        "content": pgettext_lazy("f3cc", "Banner content"),
+        "buttonAccept": pgettext_lazy("f3cc", "Accept all"),
+        "buttonPanel": pgettext_lazy("f3cc", "Modify settings"),
+    },
+    "revoke": {
+        "buttonPanel": pgettext_lazy("f3cc", "Modify/revoke cookie settings"),
+    },
+    "legalPage": None,
+}
+COOKIECONTROL_CACHE_TIMEOUT = 300
+
+
+def clobber_panel_data(**kwargs):
+    for code, name in settings.LANGUAGES:
+        cache.delete(f"feincms3_cookiecontrol_settings_{code}")
+
+
+def panel_data():
+    CACHE_KEY = f"feincms3_cookiecontrol_settings_{get_language()}"
+
+    panel = cache.get(CACHE_KEY)
+    if not panel:
+        panel = {
+            **COOKIECONTROL_PANEL_DEFAULTS,
+            **getattr(settings, "COOKIECONTROL", {}),
+            "categories": {
+                t.name: t.serialize()
+                for t in CookieCategory.objects.prefetch_related("cookiescript_set")
+            },
+        }
+        cache.set(CACHE_KEY, panel, timeout=COOKIECONTROL_CACHE_TIMEOUT)
+
+    return panel
 
 
 class CookieCategory(models.Model):
@@ -79,3 +131,9 @@ class CookieScript(models.Model):
             "inject_if": mark_safe(self.inject_if),
             "inject_else": mark_safe(self.inject_else),
         }
+
+
+signals.post_save.connect(clobber_panel_data, sender=CookieCategory)
+signals.post_save.connect(clobber_panel_data, sender=CookieScript)
+signals.post_delete.connect(clobber_panel_data, sender=CookieCategory)
+signals.post_delete.connect(clobber_panel_data, sender=CookieScript)

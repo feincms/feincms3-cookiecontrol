@@ -4,6 +4,7 @@ from django import test
 from django.core.exceptions import ValidationError
 from django.template import Context, Template
 from django.test.utils import override_settings
+from django.utils.translation import activate
 
 from feincms3_cookiecontrol.checks import check_settings
 from feincms3_cookiecontrol.models import CookieCategory, CookieScript
@@ -15,6 +16,9 @@ from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import panel_dat
 
 
 class CookieControlTest(test.TestCase):
+    def setUp(self):
+        activate("en")
+
     def test_panel_setup_defaults_provided(self):
         t = Template(
             """
