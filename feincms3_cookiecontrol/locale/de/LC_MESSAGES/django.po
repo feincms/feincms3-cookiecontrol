@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-04 20:27+0100\n"
+"POT-Creation-Date: 2021-12-06 09:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,69 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:10 models.py:44
-msgid "technical name"
-msgstr ""
-
-#: models.py:12
-msgid "title"
-msgstr ""
-
-#: models.py:16
-msgid "description"
-msgstr ""
-
-#: models.py:21
-msgid "ordering"
-msgstr ""
-
-#: models.py:25
-msgid "cookie category"
-msgstr ""
-
-#: models.py:26
-msgid "cookie categories"
-msgstr ""
-
-#: models.py:46
-msgid "inject if"
-msgstr ""
-
-#: models.py:46
-msgid "inject if cookie category is accepted"
-msgstr ""
-
-#: models.py:49
-msgid "inject else"
-msgstr ""
-
-#: models.py:49
-msgid "inject if cookie category is denied"
-msgstr ""
-
-#: models.py:54
-msgid "cookie script"
-msgstr ""
-
-#: models.py:55
-msgid "cookie scripts"
-msgstr ""
-
-#: models.py:64
-msgid ""
-"This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
-msgstr ""
-
-#: templates/feincms3_cookiecontrol/manage-cookies-button.html:2
-msgid "Modify/revoke cookie settings"
-msgstr "Cookie Einstellungen anpassen"
-
-#: templatetags/feincms3_cookiecontrol.py:16
+#: models.py:19
 msgctxt "f3cc"
 msgid "Your Cookie Settings Protect Your Privacy"
 msgstr "Ihre Cookie-Einstellungen zum Schutz Ihrer Privatsphäre"
 
-#: templatetags/feincms3_cookiecontrol.py:17
+#: models.py:20
 msgctxt "f3cc"
 msgid "Panel content"
 msgstr ""
@@ -92,22 +35,22 @@ msgstr ""
 "Impressum unserer Website haben Sie auch später jederzeit Zugriff auf Ihre "
 "Einstellungen."
 
-#: templatetags/feincms3_cookiecontrol.py:18
+#: models.py:21
 msgctxt "f3cc"
 msgid "Save settings"
 msgstr "Einstellungen speichern"
 
-#: templatetags/feincms3_cookiecontrol.py:19
+#: models.py:22
 msgctxt "f3cc"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: templatetags/feincms3_cookiecontrol.py:22
+#: models.py:25
 msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr "Cookies auf unserer Website"
 
-#: templatetags/feincms3_cookiecontrol.py:23
+#: models.py:26
 msgctxt "f3cc"
 msgid "Banner content"
 msgstr ""
@@ -118,17 +61,80 @@ msgstr ""
 "finden Sie weitere Informationen darüber, wie wir Cookies einsetzen und Ihre "
 "Daten schützen."
 
-#: templatetags/feincms3_cookiecontrol.py:24
+#: models.py:27
 msgctxt "f3cc"
 msgid "Accept all"
 msgstr "Alle akzeptieren"
 
-#: templatetags/feincms3_cookiecontrol.py:25
+#: models.py:28
 msgctxt "f3cc"
 msgid "Modify settings"
 msgstr "Einstellungen anpassen"
 
-#: templatetags/feincms3_cookiecontrol.py:28
+#: models.py:31 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
 msgctxt "f3cc"
-msgid "Modify/revoke cookie settings"
-msgstr "Cookie Einstellungen anpassen"
+msgid "Modify cookie settings"
+msgstr "Cookie-Einstellungen anpassen"
+
+#: models.py:62 models.py:95
+msgid "technical name"
+msgstr "Technischer Name"
+
+#: models.py:64
+msgid "title"
+msgstr "Titel"
+
+#: models.py:68
+msgid "description"
+msgstr "Beschreibung"
+
+#: models.py:71
+msgid "preselected"
+msgstr "vorausgewählt"
+
+#: models.py:72
+msgid "disabled"
+msgstr "gesperrt"
+
+#: models.py:73
+msgid "ordering"
+msgstr "Sortierung"
+
+#: models.py:77
+msgid "cookie category"
+msgstr "Cookie-Kategorie"
+
+#: models.py:78
+msgid "cookie categories"
+msgstr "Cookie-Kategorien"
+
+#: models.py:97
+msgid "inject if"
+msgstr "falls angenommen"
+
+#: models.py:97
+msgid "HTML code to inject if cookie category is accepted."
+msgstr "HTML-Code, falls Cookie-Kategorie akzeptiert wird."
+
+#: models.py:100
+msgid "inject else"
+msgstr "falls abgelehnt"
+
+#: models.py:100
+msgid "HTML code to inject if cookie category is rejected."
+msgstr "HTML-Code, falls Cookie-Kategorie abgelehnt wird."
+
+#: models.py:105
+msgid "cookie script"
+msgstr "Cookie-Skript"
+
+#: models.py:106
+msgid "cookie scripts"
+msgstr "Cookie-Skripte"
+
+#: models.py:115
+msgid ""
+"This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+msgstr ""
+"Das sieht nicht korrekt aus. Bitte beginne mit einem HTML-Tag (zB <script>, "
+"<div>)."

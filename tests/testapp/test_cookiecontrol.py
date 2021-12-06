@@ -129,7 +129,7 @@ class CookieControlTest(test.TestCase):
         panel = panel_data()
         self.assertEqual(
             set(panel.keys()),
-            {"panel", "banner", "revoke", "legalPage", "categories"},
+            {"panel", "banner", "modify", "legalPage", "categories"},
         )
         self.assertEqual(
             panel["categories"],
@@ -155,7 +155,7 @@ class CookieControlTest(test.TestCase):
         self.assertEqual(str(CookieScript(name="test")), "test")
 
     @override_settings(COOKIECONTROL={"legalPage": 42})
-    def test_revoke(self):
+    def test_modify(self):
         class DummyPage:
             def __init__(self, ids):
                 self.ids = ids
@@ -164,7 +164,7 @@ class CookieControlTest(test.TestCase):
                 return [types.SimpleNamespace(id=id) for id in self.ids]
 
         result = feincms3_cookiecontrol_panel(DummyPage([1]))
-        self.assertNotIn("revoke", result["panel"])
+        self.assertNotIn("modify", result["panel"])
 
         result = feincms3_cookiecontrol_panel(DummyPage([42]))
-        self.assertIn("revoke", result["panel"])
+        self.assertIn("modify", result["panel"])

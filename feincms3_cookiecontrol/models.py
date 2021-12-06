@@ -27,8 +27,8 @@ COOKIECONTROL_PANEL_DEFAULTS = {
         "buttonAccept": pgettext_lazy("f3cc", "Accept all"),
         "buttonPanel": pgettext_lazy("f3cc", "Modify settings"),
     },
-    "revoke": {
-        "buttonPanel": pgettext_lazy("f3cc", "Modify/revoke cookie settings"),
+    "modify": {
+        "buttonPanel": pgettext_lazy("f3cc", "Modify cookie settings"),
     },
     "legalPage": None,
 }
@@ -68,8 +68,8 @@ class CookieCategory(models.Model):
         InlineCKEditorField(_("description"), blank=True),
         attrgetter=fallback_to_default,
     )
-    preselect = models.BooleanField(default=False)
-    disabled = models.BooleanField(default=False)
+    preselect = models.BooleanField(_("preselected"), default=False)
+    disabled = models.BooleanField(_("disabled"), default=False)
     ordering = models.IntegerField(_("ordering"), default=0)
 
     class Meta:
@@ -94,10 +94,14 @@ class CookieScript(models.Model):
     category = models.ForeignKey(CookieCategory, on_delete=models.CASCADE)
     name = models.SlugField(_("technical name"), unique=True)
     inject_if = models.TextField(
-        _("inject if"), blank=True, help_text=_("inject if cookie category is accepted")
+        _("inject if"),
+        blank=True,
+        help_text=_("HTML code to inject if cookie category is accepted."),
     )
     inject_else = models.TextField(
-        _("inject else"), blank=True, help_text=_("inject if cookie category is denied")
+        _("inject else"),
+        blank=True,
+        help_text=_("HTML code to inject if cookie category is rejected."),
     )
 
     class Meta:

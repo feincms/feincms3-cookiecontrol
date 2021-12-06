@@ -1,5 +1,5 @@
 /**
- * cookie consent banner, panel and revoke button rendering
+ * cookie consent banner, panel and modify button rendering
  */
 // eslint-disable-next-line no-extra-semi
 ;(function () {
@@ -8,12 +8,12 @@
     settings = JSON.parse(document.getElementById("f3cc-data").textContent),
     banner = null,
     panel = null,
-    revoke = null,
+    modify = null,
     checkboxes = [],
     injectedScripts = {}
 
   /**
-   * Recursive createElement wrapper for rendering panel, banner and revoke views
+   * Recursive createElement wrapper for rendering panel, banner and modify views
    *
    * @param {String} tag
    * @param {String} className
@@ -90,27 +90,27 @@
     }
   }
 
-  function renderRevoke() {
-    if (revoke != null) {
-      revoke.style.display = ""
+  function renderModify() {
+    if (modify != null) {
+      modify.style.display = ""
       return
     }
 
-    if (settings.revoke) {
-      revoke = addElement("div", "f3cc-revoke")
+    if (settings.modify) {
+      modify = addElement("div", "f3cc-modify")
       let outerWrap = addElement("div", "outer")
       addElement("div", "inner", "", outerWrap)
       let buttonWrap = addElement("div", "f3cc-buttons")
       addElement(
         "a",
-        "btn btn-revoke",
-        settings.revoke.buttonPanel,
+        "btn btn-modify",
+        settings.modify.buttonPanel,
         buttonWrap,
         onPanelClick
       )
       outerWrap.appendChild(buttonWrap)
-      revoke.appendChild(outerWrap)
-      mainElement.appendChild(revoke)
+      modify.appendChild(outerWrap)
+      mainElement.appendChild(modify)
     }
   }
 
@@ -216,11 +216,6 @@
     document.cookie = cookie
   }
 
-  function revokeCookie() {
-    let cookie = `${cookieName}=;max-age=-1;path=/;sameSite=Strict`
-    document.cookie = cookie
-  }
-
   function getCookie() {
     let cookies = document.cookie.split(";")
     let cookie = false
@@ -262,7 +257,7 @@
     hide(banner)
     hide(panel)
     disableScrolling(false)
-    renderRevoke()
+    renderModify()
     injectNewScripts()
   }
 
@@ -272,7 +267,7 @@
     hide(banner)
     hide(panel)
     disableScrolling(false)
-    renderRevoke()
+    renderModify()
     injectNewScripts()
   }
 
@@ -286,8 +281,7 @@
   function onPanelClick(e) {
     e.preventDefault()
     hide(banner)
-    hide(revoke)
-    revokeCookie()
+    hide(modify)
     renderPanel()
   }
 
@@ -360,7 +354,7 @@
     if (!getCookie()) {
       renderBanner()
     } else {
-      renderRevoke()
+      renderModify()
     }
   }
 

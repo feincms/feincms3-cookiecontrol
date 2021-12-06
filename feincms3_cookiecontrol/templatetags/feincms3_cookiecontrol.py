@@ -10,7 +10,7 @@ register = template.Library()
 def feincms3_cookiecontrol_panel(page):
     panel = panel_data()
 
-    # only show revoke button on legal_page
+    # only show modify button on legal_page
     if not panel["legalPage"]:
         return {"panel": panel}
 
@@ -19,5 +19,5 @@ def feincms3_cookiecontrol_panel(page):
     }:
         return {"panel": panel}
 
-    panel.pop("revoke")
+    panel.pop("modify")
     return {"panel": panel}
