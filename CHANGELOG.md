@@ -7,6 +7,7 @@
 - Changed the JSON structure to keep categories and cookies in a single object.
 - Namespaced translations using a gettext context.
 - Added clobbering of the panel cache when updating categories or scripts.
+- Switched from Webpack to esbuild for the bundled CSS and JavaScript.
 
 
 ## 0.0.10 (2021-12-04)
