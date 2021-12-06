@@ -8,6 +8,12 @@
 - Namespaced translations using a gettext context.
 - Added clobbering of the panel cache when updating categories or scripts.
 - Switched from Webpack to esbuild for the bundled CSS and JavaScript.
+- Started using pre-commit.
+- Changed the panel to no longer allow revoking all consent but only modify it
+  -- the former wasn't technically possible anyway because of essential
+  cookies such as the CSRF cookie which is used on most sites.
+- Added a dependency on django-admin-ordering so that categories can be
+  reordered using drag-drop.
 
 ## 0.0.10 (2021-12-04)
 
