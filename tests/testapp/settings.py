@@ -10,6 +10,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.staticfiles",
     "django.contrib.messages",
+    "admin_ordering",
     "feincms3_cookiecontrol",
     "testapp",
 ]

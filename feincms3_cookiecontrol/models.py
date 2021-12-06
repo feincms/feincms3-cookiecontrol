@@ -1,3 +1,4 @@
+from admin_ordering.models import OrderableModel
 from django.conf import settings
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
@@ -58,7 +59,7 @@ def panel_data():
     return panel
 
 
-class CookieCategory(models.Model):
+class CookieCategory(OrderableModel):
     name = models.SlugField(_("technical name"), unique=True)
     title = TranslatedField(
         models.CharField(_("title"), max_length=200, default="", blank=True),
@@ -70,10 +71,8 @@ class CookieCategory(models.Model):
     )
     preselect = models.BooleanField(_("preselected"), default=False)
     disabled = models.BooleanField(_("disabled"), default=False)
-    ordering = models.IntegerField(_("ordering"), default=0)
 
-    class Meta:
-        ordering = ("ordering",)
+    class Meta(OrderableModel.Meta):
         verbose_name = _("cookie category")
         verbose_name_plural = _("cookie categories")
 
