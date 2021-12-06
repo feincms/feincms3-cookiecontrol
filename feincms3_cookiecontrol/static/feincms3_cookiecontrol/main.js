@@ -140,13 +140,13 @@
         inputLabel.htmlFor = categoryInput.id
 
         if (
-          settings.categories[categoryId].preselected == 1 ||
+          settings.categories[categoryId].preselected ||
           consentedCategories().indexOf(categoryId) >= 0
         ) {
           categoryInput.checked = true
         }
 
-        if (settings.categories[categoryId].disabled == 1) {
+        if (settings.categories[categoryId].disabled) {
           categoryInput.disabled = true
         }
 
