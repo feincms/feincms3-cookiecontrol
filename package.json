@@ -10,7 +10,8 @@
     "esbuild": "^0.14.2"
   },
   "scripts": {
-    "build": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name]"
+    "build": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name]",
+    "watch": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name] --watch"
   },
   "eslintIgnore": [
     "**/build.*"
