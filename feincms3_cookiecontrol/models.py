@@ -60,6 +60,11 @@ def panel_data():
 
 
 class CookieCategory(OrderableModel):
+    class Acceptance(models.TextChoices):
+        OPTIONAL = "optional", _("optional")
+        RECOMMENDED = "recommended", _("recommended")
+        MANDATORY = "mandatory", _("mandatory")
+
     name = models.SlugField(_("technical name"), unique=True)
     title = TranslatedField(
         models.CharField(_("title"), max_length=200, default="", blank=True),
@@ -69,8 +74,12 @@ class CookieCategory(OrderableModel):
         InlineCKEditorField(_("description"), blank=True),
         attrgetter=fallback_to_default,
     )
-    preselect = models.BooleanField(_("preselected"), default=False)
-    disabled = models.BooleanField(_("disabled"), default=False)
+    acceptance = models.CharField(
+        _("acceptance"),
+        max_length=20,
+        choices=Acceptance.choices,
+        default=Acceptance.OPTIONAL,
+    )
 
     class Meta(OrderableModel.Meta):
         verbose_name = _("cookie category")
@@ -80,11 +89,12 @@ class CookieCategory(OrderableModel):
         return self.name
 
     def serialize(self):
+        acc = self.Acceptance
         return {
             "title": self.title or self.name,
             "description": mark_safe(self.description),
-            "preselected": self.preselect,
-            "disabled": self.disabled,
+            "preselected": self.acceptance in {acc.RECOMMENDED, acc.MANDATORY},
+            "disabled": self.acceptance == acc.MANDATORY,
             "cookies": [o.serialize() for o in self.cookiescript_set.all()],
         }
 

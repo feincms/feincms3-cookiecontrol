@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 09:59+0100\n"
+"POT-Creation-Date: 2021-12-06 21:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:19
+#: models.py:20
 msgctxt "f3cc"
 msgid "Your Cookie Settings Protect Your Privacy"
 msgstr "Le tue impostazioni dei cookie a protezione della tua privacy"
 
-#: models.py:20
+#: models.py:21
 msgctxt "f3cc"
 msgid "Panel content"
 msgstr ""
@@ -34,22 +34,22 @@ msgstr ""
 "tuoi dati. Attraverso il colophon del nostro sito web puoi accedere in ogni "
 "momento alle tue impostazioni."
 
-#: models.py:21
+#: models.py:22
 msgctxt "f3cc"
 msgid "Save settings"
 msgstr "Salva le impostazioni"
 
-#: models.py:22
+#: models.py:23
 msgctxt "f3cc"
 msgid "Cancel"
 msgstr "Esci"
 
-#: models.py:25
+#: models.py:26
 msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr "Cookie sul nostro sito web"
 
-#: models.py:26
+#: models.py:27
 msgctxt "f3cc"
 msgid "Banner content"
 msgstr ""
@@ -59,78 +59,82 @@ msgstr ""
 "nostre direttive sulla protezione dei dati trovi informazioni su come usiamo "
 "i cookie e sulla protezione dei tuoi dati."
 
-#: models.py:27
+#: models.py:28
 msgctxt "f3cc"
 msgid "Accept all"
 msgstr "Accetta tutti"
 
-#: models.py:28
+#: models.py:29
 msgctxt "f3cc"
 msgid "Modify settings"
 msgstr "Regola le impostazioni"
 
-#: models.py:31 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
+#: models.py:32 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
 msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr "Regola le impostazioni dei cookie"
 
-#: models.py:62 models.py:95
+#: models.py:64
+msgid "optional"
+msgstr ""
+
+#: models.py:65
+msgid "recommended"
+msgstr ""
+
+#: models.py:66
+msgid "mandatory"
+msgstr ""
+
+#: models.py:68 models.py:104
 msgid "technical name"
 msgstr ""
 
-#: models.py:64
+#: models.py:70
 msgid "title"
 msgstr ""
 
-#: models.py:68
+#: models.py:74
 msgid "description"
 msgstr ""
 
-#: models.py:71
-msgid "preselected"
+#: models.py:78
+msgid "acceptance"
 msgstr ""
 
-#: models.py:72
-msgid "disabled"
-msgstr ""
-
-#: models.py:73
-msgid "ordering"
-msgstr ""
-
-#: models.py:77
+#: models.py:85
 msgid "cookie category"
 msgstr ""
 
-#: models.py:78
+#: models.py:86
 msgid "cookie categories"
 msgstr ""
 
-#: models.py:97
+#: models.py:106
 msgid "inject if"
 msgstr ""
 
-#: models.py:97
+#: models.py:108
 msgid "HTML code to inject if cookie category is accepted."
 msgstr ""
 
-#: models.py:100
+#: models.py:111
 msgid "inject else"
 msgstr ""
 
-#: models.py:100
+#: models.py:113
 msgid "HTML code to inject if cookie category is rejected."
 msgstr ""
 
-#: models.py:105
+#: models.py:118
 msgid "cookie script"
 msgstr ""
 
-#: models.py:106
+#: models.py:119
 msgid "cookie scripts"
 msgstr ""
 
-#: models.py:115
+#: models.py:128
 msgid ""
 "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
 msgstr ""

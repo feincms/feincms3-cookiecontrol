@@ -7,8 +7,9 @@ from feincms3_cookiecontrol.models import CookieCategory, CookieScript
 
 @admin.register(CookieCategory)
 class CookieCategoryAdmin(OrderableAdmin, TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ["title", "ordering"]
+    list_display = ["name", "title", "acceptance", "ordering"]
     list_editable = ["ordering"]
+    radio_fields = {"acceptance": admin.HORIZONTAL}
     search_fields = ["name"]
 
 

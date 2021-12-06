@@ -14,6 +14,9 @@
   cookies such as the CSRF cookie which is used on most sites.
 - Added a dependency on django-admin-ordering so that categories can be
   reordered using drag-drop.
+- Merged the two checkboxes `preselect` and `disabled` into a single
+  `acceptance` choice field. The former allowed the nonsensical
+  `preselect=false,disabled=true` configuration.
 
 ## 0.0.10 (2021-12-04)
 
