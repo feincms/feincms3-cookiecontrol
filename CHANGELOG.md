@@ -17,6 +17,7 @@
 - Merged the two checkboxes `preselect` and `disabled` into a single
   `acceptance` choice field. The former allowed the nonsensical
   `preselect=false,disabled=true` configuration.
+- Disallowed entering `<noscript>` tags.
 
 ## 0.0.10 (2021-12-04)
 

@@ -117,6 +117,23 @@ class CookieControlTest(test.TestCase):
             ],
         )
 
+        with self.assertRaises(ValidationError) as cm:
+            CookieScript(
+                category=category,
+                name="script-name",
+                inject_if="<script>...</script><noscript>Please JS</noscript>",
+                inject_else="<script>...</script><noscript>Please JS</noscript>",
+            ).full_clean()
+
+        self.assertEqual(
+            [m.message for m in cm.exception.error_dict["inject_if"]],
+            ["Entering <noscript> tags doesn't make sense."],
+        )
+        self.assertEqual(
+            [m.message for m in cm.exception.error_dict["inject_else"]],
+            ["Entering <noscript> tags doesn't make sense."],
+        )
+
     def test_serialize(self):
         category = CookieCategory.objects.create()
         CookieScript.objects.create(
