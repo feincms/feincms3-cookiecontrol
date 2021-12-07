@@ -1,6 +1,6 @@
 # Change log
 
-## 0.1 (Unreleased)
+## 0.1 (2021-12-07)
 
 - Added unittests for everything in the backend.
 - Verified that the amount of SQL queries executed is as expected.
