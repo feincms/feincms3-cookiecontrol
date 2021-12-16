@@ -3,6 +3,7 @@
 ## 0.1.1 (2021-12-16)
 
 - Added a `z-index` to the modify button.
+- Raised the minimum version of django-admin-ordering to 0.14.2.
 
 ## 0.1 (2021-12-07)
 
