@@ -69,6 +69,7 @@
 
 #f3cc .f3cc-modify .btn-modify {
   position: fixed;
+  z-index: 2000;
   bottom: 1rem;
   right: 1rem;
 }
