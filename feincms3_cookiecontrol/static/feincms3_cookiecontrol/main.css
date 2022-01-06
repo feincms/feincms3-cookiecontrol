@@ -95,6 +95,7 @@
 #f3cc .btn {
   display: inline-block;
   background: var(--f3cc-accent-color);
+  color: var(--f3cc-foreground-color-color);
   padding: 0.8rem;
   white-space: nowrap;
   text-decoration: none;
