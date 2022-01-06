@@ -1,5 +1,9 @@
 # Change log
 
+## 0.1.2 (2022-01-06)
+
+- Specified buttons' foreground color, not just their background color.
+
 ## 0.1.1 (2021-12-16)
 
 - Added a `z-index` to the modify button.
