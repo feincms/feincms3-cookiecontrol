@@ -84,14 +84,6 @@ body.f3cc-overlay {
   line-height: 1.5;
 }
 
-#f3cc a {
-  border-bottom: none;
-}
-
-#f3cc p > a {
-  border-bottom: 0.125rem solid var(--f3cc-accent-color);
-}
-
 #f3cc p > a:hover {
   color: var(--f3cc-foreground-color);
   opacity: 0.7;

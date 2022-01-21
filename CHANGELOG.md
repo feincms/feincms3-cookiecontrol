@@ -5,6 +5,7 @@
 - Used a CSS class instead of hardcoding values in the CSS to set body styles
   when the panel is open, specified the body width.
 - Dropped the react config from pre-commit and ESLint.
+- Dropped the strange bottom border from links.
 
 ## 0.1.2 (2022-01-06)
 
