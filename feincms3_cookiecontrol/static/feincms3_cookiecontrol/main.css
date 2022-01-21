@@ -6,6 +6,11 @@
   --f3cc-foreground-color: #000000;
 }
 
+body.f3cc-overlay {
+  position: fixed;
+  width: 100%;
+}
+
 #f3cc {
   font-size: 1rem;
 }

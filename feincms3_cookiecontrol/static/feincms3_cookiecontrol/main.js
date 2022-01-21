@@ -242,11 +242,11 @@
     if (disable) {
       // When the modal is shown, we want a fixed body
       document.body.style.top = `-${window.scrollY}px`
-      document.body.style.position = "fixed"
+      document.body.classList.add("f3cc-overlay")
     } else {
       const scrollY = document.body.style.top
-      document.body.style.position = ""
       document.body.style.top = ""
+      document.body.classList.remove("f3cc-overlay")
       window.scrollTo(0, parseInt(scrollY || "0", 10) * -1)
     }
   }

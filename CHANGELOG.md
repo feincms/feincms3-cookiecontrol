@@ -1,5 +1,10 @@
 # Change log
 
+## 0.1.3 (2022-01-21)
+
+- Used a CSS class instead of hardcoding values in the CSS to set body styles
+  when the panel is open, specified the body width.
+
 ## 0.1.2 (2022-01-06)
 
 - Specified buttons' foreground color, not just their background color.
