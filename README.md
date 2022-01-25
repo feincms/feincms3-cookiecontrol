@@ -22,3 +22,5 @@
 - Override CSS variables in a `.f3cc { ... }` block. (You probably cannot use
   `:root` for this because your CSS may get overwritten by
   feincms3-cookiecontrol's CSS.)
+- Run `./manage.py loaddata f3cc-categories --ignorenonexistent` to create
+  an essential and an analytics cookie category, if this suits you.

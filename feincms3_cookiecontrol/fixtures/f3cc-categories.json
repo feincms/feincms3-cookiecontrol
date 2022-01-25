@@ -1,0 +1,36 @@
+[
+  {
+    "model": "feincms3_cookiecontrol.cookiecategory",
+    "pk": 1,
+    "fields": {
+      "ordering": 10,
+      "name": "essential",
+      "title_en": "Essential Cookies",
+      "title_de": "Essentiell",
+      "title_fr": "Cookies essentiels",
+      "title_it": "Essenziale",
+      "description_en": "<p>We need these cookies for the basic functions of our website such as the displayed language, your location (IP address) and your preferred cookie settings. These function-related cookies are therefore essential and cannot be deactivated.</p>",
+      "description_de": "<p>Diese Cookies ben\u00f6tigen wir f\u00fcr die grundlegenden Funktionen unserer Website. Dazu z\u00e4hlen die Sprache, in der Ihnen die Website angezeigt wird, Ihr Standort (IP-Adresse) und Ihre pr\u00e4ferierten Cookie-Einstellungen. Diese funktionsbezogenen Cookies sind also essenziell und k\u00f6nnen nicht deaktiviert werden.</p>",
+      "description_fr": "<p>Nous avons besoin de ces cookies pour les fonctions de base de notre site Web telles que la langue affich\u00e9e, votre emplacement (adresse IP) et vos pr\u00e9f\u00e9rences pour les param\u00e8tres de cookies. Les cookies li\u00e9s \u00e0 ces fonctions sont donc essentiels et ne peuvent pas \u00eatre d\u00e9sactiv\u00e9s.</p>",
+      "description_it": "<p>Questi cookie ci servono per il funzionamento di base del nostro sito web. Oltre ad essi vi sono la lingua in cui il sito ti appare, la tua posizione (indirizzo IP) e i cookie delle tue impostazioni preferite. Questi cookie legati al funzionamento sono essenziali e non possono essere disattivati.</p>",
+      "acceptance": "mandatory"
+    }
+  },
+  {
+    "model": "feincms3_cookiecontrol.cookiecategory",
+    "pk": 2,
+    "fields": {
+      "ordering": 20,
+      "name": "analytics",
+      "title_en": "Analytics Cookies",
+      "title_de": "Analyse Cookies",
+      "title_fr": "Cookies analytiques",
+      "title_it": "Analisi cookie",
+      "description_en": "<p>These cookies allow us to analyze and improve the behaviour of users on our website. We use this information to offer you a user experience that is tailored to your needs.</p>",
+      "description_de": "<p>Diese Cookies erlauben es uns, das Verhalten der Nutzerinnen und Nutzer auf unserer Website zu analysieren und zu verbessern. Wir nutzen diese Informationen, um Ihnen ein Nutzererlebnis zu bieten, das auf Ihre Bed\u00fcrfnisse abgestimmt ist.</p>",
+      "description_fr": "<p>Ces cookies nous permettent d'analyser et d'am\u00e9liorer le comportement des utilisatrices et utilisateurs sur notre site Web. Nous utilisons ces informations pour vous offrir une exp\u00e9rience utilisateur adapt\u00e9e \u00e0 vos besoins.</p>",
+      "description_it": "<p>Tali cookie ci permettono di analizzare il comportamento degli utenti sul nostro sito e di apportare miglioramenti. Utilizziamo queste informazioni per offrirti una fruizione rispondente alle tue esigenze.</p>",
+      "acceptance": "optional"
+    }
+  }
+]
