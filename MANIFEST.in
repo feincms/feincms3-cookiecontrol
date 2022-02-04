@@ -1,6 +1,7 @@
 include LICENSE
 include README.md
 include MANIFEST.in
+recursive-include feincms3_cookiecontrol/fixtures *
 recursive-include feincms3_cookiecontrol/locale *
 recursive-include feincms3_cookiecontrol/static *
 recursive-include feincms3_cookiecontrol/templates *.html
