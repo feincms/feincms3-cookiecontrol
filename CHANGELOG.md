@@ -1,5 +1,10 @@
 # Change log
 
+## 0.1.4 (2022-02-05)
+
+- Added a fixture containing two categories, `essential` and `analytics` with
+  default texts for english, german, french and italian.
+
 ## 0.1.3 (2022-01-21)
 
 - Used a CSS class instead of hardcoding values in the CSS to set body styles
