@@ -1,5 +1,9 @@
 # Change log
 
+## 0.1.5 (2022-02-15)
+
+- Fix some dimensions to compensate non-standard root font-sizes.
+
 ## 0.1.4 (2022-02-05)
 
 - Added a fixture containing two categories, `essential` and `analytics` with
