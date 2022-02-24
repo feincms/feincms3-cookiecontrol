@@ -213,6 +213,9 @@
     let cookie = `${cookieName}=${consented.join(
       ","
     )};max-age=31536000;path=/;sameSite=Strict`
+    if (settings.domain) {
+      cookie += `;domain=${settings.domain}`
+    }
     document.cookie = cookie
   }
 

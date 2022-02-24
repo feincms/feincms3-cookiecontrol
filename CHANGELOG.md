@@ -1,5 +1,9 @@
 # Change log
 
+## Unreleased
+
+- Added support for setting subdomain cookies using `COOKIECONTROL = {"domain": "example.com"}`
+
 ## 0.1.5 (2022-02-15)
 
 - Fix some dimensions to compensate non-standard root font-sizes.

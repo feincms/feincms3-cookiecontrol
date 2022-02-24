@@ -32,6 +32,7 @@ COOKIECONTROL_PANEL_DEFAULTS = {
         "buttonPanel": pgettext_lazy("f3cc", "Modify cookie settings"),
     },
     "legalPage": None,
+    "domain": None,
 }
 COOKIECONTROL_CACHE_TIMEOUT = 300
 
