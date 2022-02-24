@@ -146,7 +146,7 @@ class CookieControlTest(test.TestCase):
         panel = panel_data()
         self.assertEqual(
             set(panel.keys()),
-            {"panel", "banner", "modify", "legalPage", "categories"},
+            {"panel", "banner", "modify", "legalPage", "categories", "domain"},
         )
         self.assertEqual(
             panel["categories"],
