@@ -1,3 +1,5 @@
+import warnings
+
 from django import template
 
 from feincms3_cookiecontrol.models import panel_data
@@ -8,6 +10,12 @@ register = template.Library()
 
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def feincms3_cookiecontrol_panel(page):
+    warnings.warn(
+        "The feincms3_cookiecontrol_panel template tag is deprecated. Use"
+        " feincms3_cookiecontrol instead.",
+        DeprecationWarning,
+    )
+
     panel = panel_data()
 
     # only show modify button on legal_page

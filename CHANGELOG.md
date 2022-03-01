@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Deprecated the `feincms3_cookiecontrol_panel` template tag.
+
 ## 0.1.6 (2022-03.01)
 
 - Added support for setting subdomain cookies using `COOKIECONTROL = {"domain": "example.com"}`

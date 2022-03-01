@@ -13,6 +13,7 @@ from feincms3_cookiecontrol.models import (
     clobber_panel_data,
 )
 from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
+    feincms3_cookiecontrol,
     feincms3_cookiecontrol_panel,
     panel_data,
 )
@@ -184,4 +185,11 @@ class CookieControlTest(test.TestCase):
         self.assertNotIn("modify", result["panel"])
 
         result = feincms3_cookiecontrol_panel(DummyPage([42]))
+        self.assertIn("modify", result["panel"])
+
+    def test_feincms3_cookiecontrol(self):
+        result = feincms3_cookiecontrol(modify_button=False)
+        self.assertNotIn("modify", result["panel"])
+
+        result = feincms3_cookiecontrol(modify_button=True)
         self.assertIn("modify", result["panel"])
