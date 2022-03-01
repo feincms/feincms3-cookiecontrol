@@ -21,3 +21,11 @@ def feincms3_cookiecontrol_panel(page):
 
     panel.pop("modify")
     return {"panel": panel}
+
+
+@register.inclusion_tag("feincms3_cookiecontrol/panel.html")
+def feincms3_cookiecontrol(*, modify_button=True):
+    panel = panel_data()
+    if not modify_button:
+        panel.pop("modify")
+    return {"panel": panel}

@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Added support for setting subdomain cookies using `COOKIECONTROL = {"domain": "example.com"}`
+- Added a new `{% feincms3_cookiecontrol modify_button=True %}` templatetag
+  which allows directly controlling whether the modify button is shown or not.
 
 ## 0.1.5 (2022-02-15)
 

@@ -15,7 +15,7 @@
 {% load feincms3_cookiecontrol %}
 
 <body>
-  ... {% feincms3_cookiecontrol_panel page %} ...
+  ... {% feincms3_cookiecontrol %} ...
 </body>
 ```
 
@@ -24,3 +24,6 @@
   an essential and an analytics cookie category, if this suits you.
 - Optionally add a `COOKIECONTROL = {...}` setting if you want to override
   individual settings.
+- Optionally include `{% feincms3_cookiecontrol modify_button=False %}` on
+  pages where you do not want to show the modify button if some cookies have
+  already been accepted.
