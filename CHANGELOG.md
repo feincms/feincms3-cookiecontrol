@@ -2,9 +2,14 @@
 
 ## Unreleased
 
-- Deprecated the `feincms3_cookiecontrol_panel` template tag.
+## 0.2 (2022-03-02)
 
-## 0.1.6 (2022-03.01)
+- Deprecated the `feincms3_cookiecontrol_panel` template tag.
+- Changed the `{% feincms3_cookiecontrol modify_button=True %}` to `{% feincms3_cookiecontrol hide_modify_button=False %}`. This makes the default
+  case of only hiding the modify button under certain circumstances more
+  straightforward.
+
+## 0.1.6 (2022-03-01)
 
 - Added support for setting subdomain cookies using `COOKIECONTROL = {"domain": "example.com"}`
 - Added a new `{% feincms3_cookiecontrol modify_button=True %}` templatetag
