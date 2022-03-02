@@ -188,8 +188,8 @@ class CookieControlTest(test.TestCase):
         self.assertIn("modify", result["panel"])
 
     def test_feincms3_cookiecontrol(self):
-        result = feincms3_cookiecontrol(modify_button=False)
+        result = feincms3_cookiecontrol(hide_modify_button=True)
         self.assertNotIn("modify", result["panel"])
 
-        result = feincms3_cookiecontrol(modify_button=True)
+        result = feincms3_cookiecontrol(hide_modify_button=False)
         self.assertIn("modify", result["panel"])
