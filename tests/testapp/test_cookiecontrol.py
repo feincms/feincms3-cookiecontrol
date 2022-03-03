@@ -118,3 +118,12 @@ class CookieControlTest(test.TestCase):
 
         result = feincms3_cookiecontrol(hide_modify_button=False)
         self.assertIn("buttonModify", result["data"])
+
+    def test_view(self):
+        response = self.client.get("/inject-f3cc.js")
+        self.assertContains(response, "window.f3ccData")
+        self.assertContains(response, "document.createElement")
+        self.assertEqual(response["content-type"], "text/javascript; charset=UTF-8")
+        # print(response)
+        # print(response.content.decode("utf-8"))
+        # open("test.js", "w").write(response.content.decode("utf-8"))

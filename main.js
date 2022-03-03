@@ -7,7 +7,9 @@ import "./main.css"
 // eslint-disable-next-line no-extra-semi
 ;(function () {
   const cookieName = "f3cc",
-    settings = JSON.parse(document.getElementById("f3cc-data").textContent),
+    settings =
+      window.f3ccData ||
+      JSON.parse(document.getElementById("f3cc-data").textContent),
     injectedScripts = {}
   let mainElement, banner, modify
 
