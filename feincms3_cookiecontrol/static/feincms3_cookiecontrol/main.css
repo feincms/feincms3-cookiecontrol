@@ -112,6 +112,7 @@ body.f3cc-overlay {
   background: var(--f3cc-background-color);
   flex-direction: column;
   position: absolute;
+  padding-bottom: 4rem; /* Do not hide content below location bars (100vh problem) */
 }
 
 #f3cc .f3cc-panel .outer > * {
