@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.1 (2022-03-09)
+
+- Fixed a problem with our use of `100vh` by adding some padding as a temporary
+  (ha!) workaround.
+
 ## 0.2 (2022-03-02)
 
 - Deprecated the `feincms3_cookiecontrol_panel` template tag.
