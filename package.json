@@ -7,7 +7,7 @@
   "license": "BSD-3",
   "private": true,
   "devDependencies": {
-    "esbuild": "^0.14.18"
+    "esbuild": "^0.14.42"
   },
   "scripts": {
     "build": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name]",
