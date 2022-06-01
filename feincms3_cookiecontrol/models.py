@@ -107,11 +107,6 @@ class CookieScript(models.Model):
         blank=True,
         help_text=_("HTML code to inject if cookie category is accepted."),
     )
-    inject_else = models.TextField(
-        _("inject else"),
-        blank=True,
-        help_text=_("HTML code to inject if cookie category is rejected."),
-    )
 
     class Meta:
         ordering = ("name",)
@@ -132,14 +127,10 @@ class CookieScript(models.Model):
 
         if (stripped := self.inject_if.strip()) and stripped[0] != "<":
             errors["inject_if"] = msg
-        if (stripped := self.inject_else.strip()) and stripped[0] != "<":
-            errors["inject_else"] = msg
 
         msg = gettext("Entering <noscript> tags doesn't make sense.")
         if "<noscript" in self.inject_if:
             errors["inject_if"] = msg
-        if "<noscript" in self.inject_else:
-            errors["inject_else"] = msg
 
         if errors:
             raise ValidationError(errors)
@@ -148,7 +139,6 @@ class CookieScript(models.Model):
         return {
             "name": self.name,
             "inject_if": mark_safe(self.inject_if),
-            "inject_else": mark_safe(self.inject_else),
         }
 
 

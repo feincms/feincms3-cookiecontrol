@@ -86,13 +86,11 @@ class CookieControlTest(test.TestCase):
             category=category,
             name="script-name",
             inject_if="",
-            inject_else="",
         ).full_clean()
         CookieScript(
             category=category,
             name="script-name",
             inject_if=" <script>bla</script>",
-            inject_else="",
         ).full_clean()
 
         with self.assertRaises(ValidationError) as cm:
@@ -100,18 +98,10 @@ class CookieControlTest(test.TestCase):
                 category=category,
                 name="script-name",
                 inject_if="function(){}",
-                inject_else="function(){}",
             ).full_clean()
 
         self.assertEqual(
             [m.message for m in cm.exception.error_dict["inject_if"]],
-            [
-                "This doesn't look right. Please start with a HTML tag"
-                " (e.g. <script>, <div>)."
-            ],
-        )
-        self.assertEqual(
-            [m.message for m in cm.exception.error_dict["inject_else"]],
             [
                 "This doesn't look right. Please start with a HTML tag"
                 " (e.g. <script>, <div>)."
@@ -123,15 +113,10 @@ class CookieControlTest(test.TestCase):
                 category=category,
                 name="script-name",
                 inject_if="<script>...</script><noscript>Please JS</noscript>",
-                inject_else="<script>...</script><noscript>Please JS</noscript>",
             ).full_clean()
 
         self.assertEqual(
             [m.message for m in cm.exception.error_dict["inject_if"]],
-            ["Entering <noscript> tags doesn't make sense."],
-        )
-        self.assertEqual(
-            [m.message for m in cm.exception.error_dict["inject_else"]],
             ["Entering <noscript> tags doesn't make sense."],
         )
 
@@ -141,7 +126,6 @@ class CookieControlTest(test.TestCase):
             category=category,
             name="script-name",
             inject_if="inject-if",
-            inject_else="inject-else",
         )
 
         panel = panel_data()
@@ -161,7 +145,6 @@ class CookieControlTest(test.TestCase):
                         {
                             "name": "script-name",
                             "inject_if": "inject-if",
-                            "inject_else": "inject-else",
                         },
                     ],
                 }

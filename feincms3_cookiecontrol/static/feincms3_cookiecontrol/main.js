@@ -335,11 +335,10 @@
   function injectNewScripts() {
     let consenteds = consentedCategories()
     for (let cookieCategory in settings.categories) {
-      const key = consenteds.includes(cookieCategory)
-        ? "inject_if"
-        : "inject_else"
-      for (let cookie of settings.categories[cookieCategory].cookies) {
-        injectScript(cookie.name, cookie[key])
+      if (consenteds.includes(cookieCategory)) {
+        for (let cookie of settings.categories[cookieCategory].cookies) {
+          injectScript(cookie.name, cookie.inject_if)
+        }
       }
     }
   }

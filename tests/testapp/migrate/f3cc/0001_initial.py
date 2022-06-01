@@ -90,14 +90,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "inject_else",
-                    models.TextField(
-                        blank=True,
-                        help_text="HTML code to inject if cookie category is rejected.",
-                        verbose_name="inject else",
-                    ),
-                ),
-                (
                     "category",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,

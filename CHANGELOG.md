@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Added Django 4.1a1 to the CI matrix.
+- Removed recommended cookies in preparation of the simplification of the panel to only allow required and optional cookies, nothing else.
+- Removed the `inject_else` field because it was always unused and nothing should be injected if users do not consent.
 
 ## 0.2.1 (2022-03-09)
 
