@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added Django 4.1a1 to the CI matrix.
+
 ## 0.2.1 (2022-03-09)
 
 - Fixed a problem with our use of `100vh` by adding some padding as a temporary
