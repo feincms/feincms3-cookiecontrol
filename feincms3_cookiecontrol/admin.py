@@ -1,23 +1,11 @@
-from admin_ordering.admin import OrderableAdmin
 from django.contrib import admin
-from translated_fields import TranslatedFieldAdmin
 
-from feincms3_cookiecontrol.models import CookieCategory, CookieScript
+from feincms3_cookiecontrol import models
 
 
-@admin.register(CookieCategory)
-class CookieCategoryAdmin(OrderableAdmin, TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ["name", "title", "acceptance", "ordering"]
-    list_editable = ["ordering"]
+@admin.register(models.CookieScript)
+class CookieScriptAdmin(admin.ModelAdmin):
+    list_display = ["name", "acceptance"]
+    list_filter = ["acceptance"]
     radio_fields = {"acceptance": admin.HORIZONTAL}
     search_fields = ["name"]
-
-
-@admin.register(CookieScript)
-class CookieScriptAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = (
-        "__str__",
-        "category",
-    )
-    search_fields = ("name",)
-    list_filter = ("category",)

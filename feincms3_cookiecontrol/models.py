@@ -1,4 +1,3 @@
-from admin_ordering.models import OrderableModel
 from django.conf import settings
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
@@ -11,8 +10,6 @@ from django.utils.translation import (
     gettext_lazy as _,
     pgettext_lazy,
 )
-from feincms3.inline_ckeditor import InlineCKEditorField
-from translated_fields import TranslatedField, fallback_to_default
 
 
 COOKIECONTROL_PANEL_DEFAULTS = {
@@ -50,62 +47,29 @@ def panel_data():
         panel = {
             **COOKIECONTROL_PANEL_DEFAULTS,
             **getattr(settings, "COOKIECONTROL", {}),
-            "categories": {
-                t.name: t.serialize()
-                for t in CookieCategory.objects.prefetch_related("cookiescript_set")
-            },
+            "cookies": [script.serialize() for script in CookieScript.objects.all()],
         }
         cache.set(CACHE_KEY, panel, timeout=COOKIECONTROL_CACHE_TIMEOUT)
 
     return panel
 
 
-class CookieCategory(OrderableModel):
+class CookieScript(models.Model):
     class Acceptance(models.TextChoices):
         OPTIONAL = "optional", _("optional")
         MANDATORY = "mandatory", _("mandatory")
 
     name = models.SlugField(_("technical name"), unique=True)
-    title = TranslatedField(
-        models.CharField(_("title"), max_length=200, default="", blank=True),
-        attrgetter=fallback_to_default,
-    )
-    description = TranslatedField(
-        InlineCKEditorField(_("description"), blank=True),
-        attrgetter=fallback_to_default,
-    )
     acceptance = models.CharField(
         _("acceptance"),
         max_length=20,
         choices=Acceptance.choices,
         default=Acceptance.OPTIONAL,
     )
-
-    class Meta(OrderableModel.Meta):
-        verbose_name = _("cookie category")
-        verbose_name_plural = _("cookie categories")
-
-    def __str__(self):
-        return self.name
-
-    def serialize(self):
-        acc = self.Acceptance
-        return {
-            "title": self.title or self.name,
-            "description": mark_safe(self.description),
-            "preselected": self.acceptance == acc.MANDATORY,
-            "disabled": self.acceptance == acc.MANDATORY,
-            "cookies": [o.serialize() for o in self.cookiescript_set.all()],
-        }
-
-
-class CookieScript(models.Model):
-    category = models.ForeignKey(CookieCategory, on_delete=models.CASCADE)
-    name = models.SlugField(_("technical name"), unique=True)
     inject_if = models.TextField(
         _("inject if"),
         blank=True,
-        help_text=_("HTML code to inject if cookie category is accepted."),
+        help_text=_("HTML code to inject if cookies are accepted."),
     )
 
     class Meta:
@@ -138,11 +102,10 @@ class CookieScript(models.Model):
     def serialize(self):
         return {
             "name": self.name,
+            "acceptance": self.acceptance,
             "inject_if": mark_safe(self.inject_if),
         }
 
 
-signals.post_save.connect(clobber_panel_data, sender=CookieCategory)
 signals.post_save.connect(clobber_panel_data, sender=CookieScript)
-signals.post_delete.connect(clobber_panel_data, sender=CookieCategory)
 signals.post_delete.connect(clobber_panel_data, sender=CookieScript)

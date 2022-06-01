@@ -7,11 +7,7 @@ from django.test.utils import override_settings
 from django.utils.translation import activate
 
 from feincms3_cookiecontrol.checks import check_settings
-from feincms3_cookiecontrol.models import (
-    CookieCategory,
-    CookieScript,
-    clobber_panel_data,
-)
+from feincms3_cookiecontrol.models import CookieScript, clobber_panel_data
 from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
     feincms3_cookiecontrol,
     feincms3_cookiecontrol_panel,
@@ -37,15 +33,15 @@ class CookieControlTest(test.TestCase):
         )
 
         CookieScript.objects.create(
-            category=CookieCategory.objects.create(name="category1"),
             name="script1",
+            acceptance=CookieScript.Acceptance.OPTIONAL,
         )
         CookieScript.objects.create(
-            category=CookieCategory.objects.create(name="category2"),
             name="script2",
+            acceptance=CookieScript.Acceptance.OPTIONAL,
         )
 
-        with self.assertNumQueries(2):  # One query for categories, one for all scripts
+        with self.assertNumQueries(1):  # One query for all scripts
             html = t.render(
                 Context(
                     {
@@ -79,24 +75,22 @@ class CookieControlTest(test.TestCase):
         )
 
     def test_erroneous_scripts(self):
-        category = CookieCategory.objects.create()
-
         # No exceptions
         CookieScript(
-            category=category,
             name="script-name",
+            acceptance=CookieScript.Acceptance.OPTIONAL,
             inject_if="",
         ).full_clean()
         CookieScript(
-            category=category,
             name="script-name",
+            acceptance=CookieScript.Acceptance.OPTIONAL,
             inject_if=" <script>bla</script>",
         ).full_clean()
 
         with self.assertRaises(ValidationError) as cm:
             CookieScript(
-                category=category,
                 name="script-name",
+                acceptance=CookieScript.Acceptance.OPTIONAL,
                 inject_if="function(){}",
             ).full_clean()
 
@@ -110,8 +104,8 @@ class CookieControlTest(test.TestCase):
 
         with self.assertRaises(ValidationError) as cm:
             CookieScript(
-                category=category,
                 name="script-name",
+                acceptance=CookieScript.Acceptance.OPTIONAL,
                 inject_if="<script>...</script><noscript>Please JS</noscript>",
             ).full_clean()
 
@@ -121,38 +115,29 @@ class CookieControlTest(test.TestCase):
         )
 
     def test_serialize(self):
-        category = CookieCategory.objects.create()
         CookieScript.objects.create(
-            category=category,
             name="script-name",
+            acceptance=CookieScript.Acceptance.OPTIONAL,
             inject_if="inject-if",
         )
 
         panel = panel_data()
         self.assertEqual(
             set(panel.keys()),
-            {"panel", "banner", "modify", "legalPage", "categories", "domain"},
+            {"panel", "banner", "modify", "legalPage", "cookies", "domain"},
         )
         self.assertEqual(
-            panel["categories"],
-            {
-                "": {
-                    "title": "",
-                    "description": "",
-                    "preselected": False,
-                    "disabled": False,
-                    "cookies": [
-                        {
-                            "name": "script-name",
-                            "inject_if": "inject-if",
-                        },
-                    ],
-                }
-            },
+            panel["cookies"],
+            [
+                {
+                    "name": "script-name",
+                    "acceptance": "optional",
+                    "inject_if": "inject-if",
+                },
+            ],
         )
 
     def test_str(self):
-        self.assertEqual(str(CookieCategory(name="test")), "test")
         self.assertEqual(str(CookieScript(name="test")), "test")
 
     @override_settings(COOKIECONTROL={"legalPage": 42})
