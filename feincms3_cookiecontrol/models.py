@@ -63,7 +63,6 @@ def panel_data():
 class CookieCategory(OrderableModel):
     class Acceptance(models.TextChoices):
         OPTIONAL = "optional", _("optional")
-        RECOMMENDED = "recommended", _("recommended")
         MANDATORY = "mandatory", _("mandatory")
 
     name = models.SlugField(_("technical name"), unique=True)
@@ -94,7 +93,7 @@ class CookieCategory(OrderableModel):
         return {
             "title": self.title or self.name,
             "description": mark_safe(self.description),
-            "preselected": self.acceptance in {acc.RECOMMENDED, acc.MANDATORY},
+            "preselected": self.acceptance == acc.MANDATORY,
             "disabled": self.acceptance == acc.MANDATORY,
             "cookies": [o.serialize() for o in self.cookiescript_set.all()],
         }

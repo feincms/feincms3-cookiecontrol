@@ -53,7 +53,6 @@ class Migration(migrations.Migration):
                     models.CharField(
                         choices=[
                             ("optional", "optional"),
-                            ("recommended", "recommended"),
                             ("mandatory", "mandatory"),
                         ],
                         default="optional",
