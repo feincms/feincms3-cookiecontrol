@@ -7,11 +7,11 @@ from django.test.utils import override_settings
 from django.utils.translation import activate
 
 from feincms3_cookiecontrol.checks import check_settings
-from feincms3_cookiecontrol.models import CookieScript, clobber_panel_data
+from feincms3_cookiecontrol.models import CookieScript, clobber_cookiecontrol_data
 from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
+    cookiecontrol_data,
     feincms3_cookiecontrol,
     feincms3_cookiecontrol_panel,
-    panel_data,
 )
 
 
@@ -22,7 +22,7 @@ from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
 class CookieControlTest(test.TestCase):
     def setUp(self):
         activate("en")
-        clobber_panel_data()
+        clobber_cookiecontrol_data()
 
     def test_panel_setup_defaults_provided(self):
         t = Template(
@@ -121,13 +121,13 @@ class CookieControlTest(test.TestCase):
             inject_if="inject-if",
         )
 
-        panel = panel_data()
+        data = cookiecontrol_data()
         self.assertEqual(
-            set(panel.keys()),
-            {"panel", "banner", "modify", "legalPage", "cookies", "domain"},
+            set(data.keys()),
+            {"banner", "modify", "legalPage", "cookies", "domain"},
         )
         self.assertEqual(
-            panel["cookies"],
+            data["cookies"],
             [
                 {
                     "name": "script-name",

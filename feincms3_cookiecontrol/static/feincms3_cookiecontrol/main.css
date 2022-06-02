@@ -6,11 +6,6 @@
   --f3cc-foreground-color: #000000;
 }
 
-body.f3cc-overlay {
-  position: fixed;
-  width: 100%;
-}
-
 #f3cc {
   font-size: 1rem;
 }
@@ -23,17 +18,6 @@ body.f3cc-overlay {
   z-index: 2000;
   line-height: 1.25;
   padding: 1rem;
-}
-
-#f3cc .f3cc-panel {
-  background: rgba(0, 0, 0, 0.66);
-  position: fixed;
-  min-height: 100vh;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  right: 0;
-  overflow: scroll;
 }
 
 #f3cc .outer {
@@ -103,101 +87,8 @@ body.f3cc-overlay {
   color: var(--f3cc-foreground-color);
 }
 
-#f3cc .btn-panel,
-#f3cc .btn-cancel {
-  background-color: var(--f3cc-background-light-color);
-}
-
-#f3cc .f3cc-panel .outer {
-  background: var(--f3cc-background-color);
-  flex-direction: column;
-  position: absolute;
-  padding-bottom: 4rem; /* Do not hide content below location bars (100vh problem) */
-}
-
-#f3cc .f3cc-panel .outer > * {
-  width: 85%;
-  margin: 1rem auto;
-}
-
-@media screen and (min-width: 37.5em) {
-  #f3cc .f3cc-panel .outer {
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
 #f3cc .f3cc-title {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 0.25em;
-}
-
-#f3cc input[type="checkbox"] {
-  position: absolute;
-  width: 1em;
-  height: 1em;
-  opacity: 0;
-  left: 0;
-  top: 0;
-}
-
-#f3cc .f3cc-category {
-  position: relative;
-  display: block;
-  padding: 0 0 0 4.5em;
-  font-size: 0.875em;
-  line-height: 1;
-}
-
-#f3cc .f3cc-category ~ .f3cc-category {
-  margin-top: 2rem;
-}
-
-#f3cc .f3cc-category label::before {
-  content: " ";
-  cursor: pointer;
-  width: 48px;
-  height: 24px;
-  background-color: var(--f3cc-background-inactive-color);
-  transition: background-color 0.3s;
-  display: block;
-  border-radius: 24px;
-  position: absolute;
-  top: 2px;
-  left: 0;
-  margin-left: 0;
-}
-
-#f3cc .f3cc-category label::after {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 4px;
-  width: 16px;
-  height: 16px;
-  background-color: var(--f3cc-background-light-color);
-  border-radius: 16px;
-  transform: translateX(0);
-  transition: 0.3s;
-}
-
-#f3cc .f3cc-category input[type="checkbox"]:checked + label::before {
-  background-color: var(--f3cc-accent-color);
-}
-
-#f3cc .f3cc-category input[type="checkbox"]:checked:disabled + label::before {
-  cursor: not-allowed;
-  filter: brightness(0.7);
-}
-
-#f3cc .f3cc-category input[type="checkbox"]:checked:disabled + label::after {
-  cursor: not-allowed;
-  filter: brightness(0.8);
-}
-
-#f3cc .f3cc-category input[type="checkbox"]:checked + label::after {
-  transform: translateX(24px);
 }

@@ -2,7 +2,7 @@ import warnings
 
 from django import template
 
-from feincms3_cookiecontrol.models import panel_data
+from feincms3_cookiecontrol.models import cookiecontrol_data
 
 
 register = template.Library()
@@ -16,7 +16,7 @@ def feincms3_cookiecontrol_panel(page):
         DeprecationWarning,
     )
 
-    panel = panel_data()
+    panel = cookiecontrol_data()
 
     # only show modify button on legal_page
     if not panel["legalPage"]:
@@ -33,7 +33,7 @@ def feincms3_cookiecontrol_panel(page):
 
 @register.inclusion_tag("feincms3_cookiecontrol/panel.html")
 def feincms3_cookiecontrol(*, hide_modify_button=False):
-    panel = panel_data()
+    panel = cookiecontrol_data()
     if hide_modify_button:
         panel.pop("modify")
     return {"panel": panel}

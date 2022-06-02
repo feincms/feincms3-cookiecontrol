@@ -13,12 +13,6 @@ from django.utils.translation import (
 
 
 COOKIECONTROL_PANEL_DEFAULTS = {
-    "panel": {
-        "heading": pgettext_lazy("f3cc", "Your Cookie Settings Protect Your Privacy"),
-        "content": pgettext_lazy("f3cc", "Panel content"),
-        "buttonSave": pgettext_lazy("f3cc", "Save settings"),
-        "buttonCancel": pgettext_lazy("f3cc", "Cancel"),
-    },
     "banner": {
         "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
         "content": pgettext_lazy("f3cc", "Banner content"),
@@ -34,12 +28,12 @@ COOKIECONTROL_PANEL_DEFAULTS = {
 COOKIECONTROL_CACHE_TIMEOUT = 300
 
 
-def clobber_panel_data(**kwargs):
+def clobber_cookiecontrol_data(**kwargs):
     for code, name in settings.LANGUAGES:
         cache.delete(f"feincms3_cookiecontrol_settings_{code}")
 
 
-def panel_data():
+def cookiecontrol_data():
     CACHE_KEY = f"feincms3_cookiecontrol_settings_{get_language()}"
 
     panel = cache.get(CACHE_KEY)
@@ -107,5 +101,5 @@ class CookieScript(models.Model):
         }
 
 
-signals.post_save.connect(clobber_panel_data, sender=CookieScript)
-signals.post_delete.connect(clobber_panel_data, sender=CookieScript)
+signals.post_save.connect(clobber_cookiecontrol_data, sender=CookieScript)
+signals.post_delete.connect(clobber_cookiecontrol_data, sender=CookieScript)
