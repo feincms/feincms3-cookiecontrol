@@ -8,7 +8,6 @@
     settings = JSON.parse(document.getElementById("f3cc-data").textContent),
     banner = null,
     modify = null,
-    checkboxes = [],
     injectedScripts = {}
 
   /**
@@ -114,27 +113,15 @@
   }
 
   function acceptAll() {
-    let consented = []
-    for (let cookie in settings.cookies) {
-      consented.push(cookie.name)
-    }
-    setCookie(consented)
+    setCookie("accepted")
   }
 
   function rejectAll() {
-    let consented = []
-    for (let cookie in settings.cookies) {
-      if (cookie.acceptance === "optional") {
-        consented.push(cookie.name)
-      }
-    }
-    setCookie(consented)
+    setCookie("rejected")
   }
 
-  function setCookie(consented) {
-    let cookie = `${cookieName}=${consented.join(
-      ","
-    )};max-age=31536000;path=/;sameSite=Strict`
+  function setCookie(value) {
+    let cookie = `${cookieName}=${value};max-age=31536000;path=/;sameSite=Strict`
     if (settings.domain) {
       cookie += `;domain=${settings.domain}`
     }
@@ -142,21 +129,15 @@
   }
 
   function getCookie() {
-    let cookies = document.cookie.split(";")
-    let cookie = false
-    if (typeof cookies !== "undefined") {
-      cookies.forEach((docCookie) => {
-        if (docCookie.split("=")[0].trim() == cookieName) {
-          cookie = docCookie.split("=")[1]
-        }
-      })
+    const re = new RegExp(`\\b${cookieName}=(.+?)\\b`)
+    const matches = document.cookie.match(re)
+    if (matches && matches.length) {
+      return matches[1]
     }
-    return cookie
   }
 
-  function consentedCategories() {
-    let cookie = getCookie()
-    return cookie ? cookie.split(",") : []
+  function getConsent() {
+    return getCookie() === "accepted"
   }
 
   function hide(el) {
@@ -223,12 +204,9 @@
   }
 
   function injectNewScripts() {
-    let consenteds = consentedCategories()
-    for (let cookieCategory in settings.categories) {
-      if (consenteds.includes(cookieCategory)) {
-        for (let cookie of settings.categories[cookieCategory].cookies) {
-          injectScript(cookie.name, cookie.inject_if)
-        }
+    if (getConsent()) {
+      for (let cookie of settings.cookies) {
+        injectScript(cookie.name, cookie.inject_if)
       }
     }
   }

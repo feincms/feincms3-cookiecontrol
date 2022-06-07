@@ -16,8 +16,8 @@ COOKIECONTROL_PANEL_DEFAULTS = {
     "banner": {
         "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
         "content": pgettext_lazy("f3cc", "Banner content"),
-        "buttonAccept": pgettext_lazy("f3cc", "Accept all"),
-        "buttonPanel": pgettext_lazy("f3cc", "Modify settings"),
+        "buttonAccept": pgettext_lazy("f3cc", "Accept all cookies"),
+        "buttonReject": pgettext_lazy("f3cc", "Refuse non-essential cookies"),
     },
     "modify": {
         "buttonPanel": pgettext_lazy("f3cc", "Modify cookie settings"),
