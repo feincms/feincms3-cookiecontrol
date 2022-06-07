@@ -104,7 +104,10 @@
         "btn btn-modify",
         settings.modify.buttonPanel,
         buttonWrap,
-        renderBanner
+        (event) => {
+          event.preventDefault()
+          renderBanner()
+        }
       )
       outerWrap.appendChild(buttonWrap)
       modify.appendChild(outerWrap)
@@ -173,6 +176,7 @@
 
     return node
   }
+
   function nodeScriptClone(node) {
     let script = document.createElement("script")
     script.text = node.innerHTML
