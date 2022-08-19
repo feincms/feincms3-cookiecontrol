@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.9.0 (2022-08-19)
+
 - Completely reworked the panel into a banner-only solution with only two
   buttons, "accept all" and "reject all". The deprecated `{% feincms3_cookiecontrol_panel %}` template tag has been removed. The database
   model has been recreated from scratch. If you want to keep the old script
