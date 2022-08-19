@@ -29,16 +29,16 @@ def clobber_cookiecontrol_data(**kwargs):
 
 
 def cookiecontrol_data():
-    CACHE_KEY = f"feincms3_cookiecontrol_settings_{get_language()}"
+    cache_key = f"feincms3_cookiecontrol_settings_{get_language()}"
 
-    panel = cache.get(CACHE_KEY)
+    panel = cache.get(cache_key)
     if not panel:
         panel = {
             **COOKIECONTROL_DEFAULTS,
             **getattr(settings, "COOKIECONTROL", {}),
             "cookies": [script.serialize() for script in Script.objects.all()],
         }
-        cache.set(CACHE_KEY, panel, timeout=COOKIECONTROL_CACHE_TIMEOUT)
+        cache.set(cache_key, panel, timeout=COOKIECONTROL_CACHE_TIMEOUT)
 
     return panel
 

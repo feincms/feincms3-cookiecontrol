@@ -35,7 +35,7 @@
           className: "f3cc-container",
           children: [
             crel("div", {
-              className: "f3cc-description",
+              className: "f3cc-content",
               children: [
                 crel("div", {
                   className: "f3cc-title",
