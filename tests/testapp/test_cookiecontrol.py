@@ -1,5 +1,3 @@
-import types
-
 from django import test
 from django.core.exceptions import ValidationError
 from django.template import Context, Template
@@ -22,12 +20,7 @@ class CookieControlTest(test.TestCase):
         clobber_cookiecontrol_data()
 
     def test_panel_setup_defaults_provided(self):
-        t = Template(
-            """
-            {% load feincms3_cookiecontrol %}
-            {% feincms3_cookiecontrol %}
-            """
-        )
+        t = Template("{% load feincms3_cookiecontrol %}{% feincms3_cookiecontrol %}")
 
         Script.objects.create(
             name="script1",
@@ -37,25 +30,13 @@ class CookieControlTest(test.TestCase):
         )
 
         with self.assertNumQueries(1):  # One query for all scripts
-            html = t.render(
-                Context(
-                    {
-                        "page": types.SimpleNamespace(id=-1),
-                    }
-                )
-            )
+            html = t.render(Context({}))
             # print(html)
 
         self.assertIn('id="f3cc-data"', html)
 
         with self.assertNumQueries(0):  # Cached
-            html = t.render(
-                Context(
-                    {
-                        "page": types.SimpleNamespace(id=-1),
-                    }
-                )
-            )
+            html = t.render(Context({}))
             # print(html)
 
     def test_correct_setup_for_active_language(self):
