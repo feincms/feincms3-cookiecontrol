@@ -49,19 +49,9 @@ def cookiecontrol_data():
 
 
 class CookieScript(models.Model):
-    class Acceptance(models.TextChoices):
-        OPTIONAL = "optional", _("optional")
-        MANDATORY = "mandatory", _("mandatory")
-
     name = models.SlugField(_("technical name"), unique=True)
-    acceptance = models.CharField(
-        _("acceptance"),
-        max_length=20,
-        choices=Acceptance.choices,
-        default=Acceptance.OPTIONAL,
-    )
     inject_if = models.TextField(
-        _("inject if"),
+        _("inject if consented"),
         blank=True,
         help_text=_("HTML code to inject if cookies are accepted."),
     )
@@ -96,8 +86,7 @@ class CookieScript(models.Model):
     def serialize(self):
         return {
             "name": self.name,
-            "acceptance": self.acceptance,
-            "inject_if": mark_safe(self.inject_if),
+            "script": mark_safe(self.inject_if),
         }
 
 

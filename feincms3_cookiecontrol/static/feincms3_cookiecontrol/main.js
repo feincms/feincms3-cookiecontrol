@@ -10,51 +10,16 @@
     modify = null,
     injectedScripts = {}
 
-  /**
-   * Recursive createElement wrapper for rendering banner and modify views
-   *
-   * @param {String} tag
-   * @param {String} className
-   * @param {String} html
-   * @param {HTMLElement} parent
-   * @param {Function} onClick
-   */
-  function addElement(
-    tag,
-    className = null,
-    html = null,
-    parent = null,
-    onClick = null
-  ) {
-    let el = document.createElement(tag)
-    if (tag == "a") {
-      el.setAttribute("href", "")
-    }
-    if (html) {
-      if (typeof html.heading !== "undefined") {
-        addElement("div", "f3cc-title", html.heading, el)
-      }
-      if (typeof html.content !== "undefined") {
-        addElement("div", "f3cc-description", html.content, el)
-      }
-      if (
-        typeof html.heading === "undefined" &&
-        typeof html.content === "undefined"
-      ) {
-        el.innerHTML = html
+  function crel(tagName, attributes = null) {
+    const dom = document.createElement(tagName)
+    if (attributes) {
+      for (let [name, value] of Object.entries(attributes)) {
+        if (name.startsWith("data-")) dom.setAttribute(name, value)
+        else if (name === "children") dom.append(...value)
+        else dom[name] = value
       }
     }
-    if (className) {
-      el.className = className
-    }
-    if (onClick) {
-      el.addEventListener("click", onClick)
-    }
-    if (parent) {
-      parent.appendChild(el)
-    } else {
-      return el
-    }
+    return dom
   }
 
   function renderBanner() {
@@ -64,27 +29,46 @@
     }
 
     if (settings.banner) {
-      banner = addElement("div", "f3cc f3cc-banner")
-      let outerWrap = addElement("div", "outer")
-      addElement("div", "f3cc-description", settings.banner, outerWrap)
-      let buttonWrap = addElement("div", "f3cc-buttons")
-      addElement(
-        "a",
-        "btn btn-reject",
-        settings.banner.buttonReject,
-        buttonWrap,
-        onRejectAllClick
-      )
-      addElement(
-        "a",
-        "btn btn-accept",
-        settings.banner.buttonAccept,
-        buttonWrap,
-        onAcceptAllClick
-      )
-      outerWrap.appendChild(buttonWrap)
-      banner.appendChild(outerWrap)
-      mainElement.appendChild(banner)
+      banner = crel("div", {
+        className: "f3cc f3cc-banner",
+        children: [
+          crel("div", {
+            className: "f3cc-container",
+            children: [
+              crel("div", {
+                className: "f3cc-description",
+                children: [
+                  crel("div", {
+                    className: "f3cc-title",
+                    textContent: settings.banner.heading,
+                  }),
+                  crel("div", {
+                    className: "f3cc-description",
+                    textContent: settings.banner.content,
+                  }),
+                ],
+              }),
+              crel("div", {
+                className: "f3cc-buttons",
+                children: [
+                  crel("a", {
+                    className: "btn btn-accept",
+                    textContent: settings.banner.buttonAccept,
+                    onclick: onAcceptClick,
+                  }),
+                  crel("a", {
+                    className: "btn btn-reject",
+                    textContent: settings.banner.buttonReject,
+                    onclick: onRejectClick,
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      })
+
+      mainElement.append(banner)
     }
   }
 
@@ -95,32 +79,32 @@
     }
 
     if (settings.modify) {
-      modify = addElement("div", "f3cc-modify")
-      let outerWrap = addElement("div", "outer")
-      addElement("div", "inner", "", outerWrap)
-      let buttonWrap = addElement("div", "f3cc-buttons")
-      addElement(
-        "a",
-        "btn btn-modify",
-        settings.modify.buttonPanel,
-        buttonWrap,
-        (event) => {
-          event.preventDefault()
-          renderBanner()
-        }
-      )
-      outerWrap.appendChild(buttonWrap)
-      modify.appendChild(outerWrap)
-      mainElement.appendChild(modify)
+      modify = crel("div", {
+        className: "f3cc-modify",
+        children: [
+          crel("div", {
+            className: "outer",
+            children: [
+              crel("div", {
+                className: "f3cc-buttons",
+                children: [
+                  crel("a", {
+                    className: "btn btn-modify",
+                    textContent: settings.modify.buttonPanel,
+                    onclick: (e) => {
+                      e.preventDefault()
+                      hide(modify)
+                      renderBanner()
+                    },
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      })
+      mainElement.append(modify)
     }
-  }
-
-  function acceptAll() {
-    setCookie("accepted")
-  }
-
-  function rejectAll() {
-    setCookie("rejected")
   }
 
   function setCookie(value) {
@@ -147,22 +131,59 @@
     if (el != null) el.style.display = "none"
   }
 
-  function onAcceptAllClick(e) {
+  function onAcceptClick(e) {
     e.preventDefault()
-    acceptAll()
+    setCookie("accepted")
     hide(banner)
     renderModify()
-    injectNewScripts()
+    injectScripts()
   }
 
-  function onRejectAllClick(e) {
+  function onRejectClick(e) {
     e.preventDefault()
-    rejectAll()
+    setCookie("rejected")
     hide(banner)
     renderModify()
   }
 
-  /* Thanks, https://stackoverflow.com/a/20584396 */
+  function injectScripts() {
+    for (let cookie of settings.cookies) {
+      let node = injectedScripts[cookie.name]
+      if (!node) {
+        injectedScripts[cookie.name] = node = document.createElement("div")
+        node.dataset.f3cc = cookie.name
+        document.body.append(node)
+      }
+      node.innerHTML = cookie.script
+      nodeScriptReplace(node)
+    }
+  }
+
+  function init() {
+    if (getConsent()) {
+      injectScripts()
+    }
+
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-open-f3cc-banner]")
+      if (btn) {
+        renderBanner()
+      }
+    })
+
+    if (!getCookie()) {
+      renderBanner()
+    } else {
+      renderModify()
+    }
+  }
+
+  init()
+
+  /*
+  The following functions allow executing scripts added via innerHTML
+  Thanks, https://stackoverflow.com/a/20584396
+  */
   function nodeScriptReplace(node) {
     if (nodeScriptIs(node) === true) {
       node.parentNode.replaceChild(nodeScriptClone(node), node)
@@ -193,44 +214,4 @@
   function nodeScriptIs(node) {
     return node.tagName === "SCRIPT"
   }
-
-  function injectScript(cookieKey, injectCode) {
-    if (typeof injectCode !== "undefined") {
-      let node = injectedScripts[cookieKey]
-      if (!node) {
-        injectedScripts[cookieKey] = node = document.createElement("div")
-        node.dataset.f3cc = cookieKey
-        document.body.appendChild(node)
-      }
-      node.innerHTML = injectCode
-      nodeScriptReplace(node)
-    }
-  }
-
-  function injectNewScripts() {
-    if (getConsent()) {
-      for (let cookie of settings.cookies) {
-        injectScript(cookie.name, cookie.inject_if)
-      }
-    }
-  }
-
-  function init() {
-    injectNewScripts()
-
-    document.body.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-open-f3cc-banner]")
-      if (btn) {
-        renderBanner()
-      }
-    })
-
-    if (!getCookie()) {
-      renderBanner()
-    } else {
-      renderModify()
-    }
-  }
-
-  init()
 })()
