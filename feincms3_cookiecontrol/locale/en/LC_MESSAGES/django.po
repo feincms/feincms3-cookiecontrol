@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-19 17:33+0200\n"
+"POT-Creation-Date: 2022-08-19 20:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,52 +18,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:17
+#: models.py:16
 msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr ""
 
-#: models.py:18
+#: models.py:17
 msgctxt "f3cc"
 msgid "Banner content"
 msgstr "We use cookies to enhance the user experience on our website. Click on \"Modify settings\" for a description of the different types of cookies and to decide which cookies you want to allow or not. Read our privacy policy to find out more about how we use cookies and protect your data."
 
-#: models.py:19
+#: models.py:18
 msgctxt "f3cc"
 msgid "Accept all cookies"
 msgstr ""
 
-#: models.py:20
+#: models.py:19
 msgctxt "f3cc"
 msgid "Refuse non-essential cookies"
 msgstr ""
 
-#: models.py:23 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
+#: models.py:20
 msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr ""
 
-#: models.py:52
+#: models.py:23
+msgctxt "f3cc"
+msgid "Privacy policy"
+msgstr ""
+
+#: models.py:49
 msgid "technical name"
 msgstr ""
 
-#: models.py:54 models.py:61
+#: models.py:51 models.py:58
 msgid "script"
 msgstr ""
 
-#: models.py:56
+#: models.py:53
 msgid "HTML code to inject if cookies are accepted."
 msgstr ""
 
-#: models.py:62
+#: models.py:59
 msgid "scripts"
 msgstr ""
 
-#: models.py:71
+#: models.py:68
 msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
 msgstr ""
 
-#: models.py:78
+#: models.py:75
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
 

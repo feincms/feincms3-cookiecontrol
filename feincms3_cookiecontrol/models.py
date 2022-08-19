@@ -20,7 +20,7 @@ COOKIECONTROL_DEFAULTS = {
     "buttonModify": pgettext_lazy("f3cc", "Modify cookie settings"),
     "domain": None,
     "privacyPolicyURL": None,
-    "privacyPolicyTitle": pgettext_lazy("f3cc", "Data protection guidelines"),
+    "privacyPolicyTitle": pgettext_lazy("f3cc", "Privacy policy"),
 }
 COOKIECONTROL_CACHE_TIMEOUT = 300
 

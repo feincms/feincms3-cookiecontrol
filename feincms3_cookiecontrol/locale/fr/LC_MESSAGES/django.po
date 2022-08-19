@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-19 17:33+0200\n"
+"POT-Creation-Date: 2022-08-19 20:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:17
+#: models.py:16
 msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr "Cookies sur notre page Web"
 
-#: models.py:18
+#: models.py:17
 msgctxt "f3cc"
 msgid "Banner content"
 msgstr "Nous utilisons des cookies pour optimiser l’expérience des utilisateurs sur notre site Web. Cliquez sur «Modifier les paramètres» pour obtenir une description des différents types de cookies et pour décider quels cookies vous souhaitez autoriser et refuser. Lisez notre politique de confidentialité pour en savoir plus sur notre utilisation de cookies et la protection de vos données."
 
-#: models.py:19
+#: models.py:18
 #, fuzzy
 #| msgctxt "f3cc"
 #| msgid "Accept all"
@@ -36,37 +36,42 @@ msgctxt "f3cc"
 msgid "Accept all cookies"
 msgstr "Tout accepter"
 
-#: models.py:20
+#: models.py:19
 msgctxt "f3cc"
 msgid "Refuse non-essential cookies"
 msgstr ""
 
-#: models.py:23 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
+#: models.py:20
 msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr "Modifier les paramètres des cookies"
 
-#: models.py:52
+#: models.py:23
+msgctxt "f3cc"
+msgid "Privacy policy"
+msgstr ""
+
+#: models.py:49
 msgid "technical name"
 msgstr ""
 
-#: models.py:54 models.py:61
+#: models.py:51 models.py:58
 msgid "script"
 msgstr ""
 
-#: models.py:56
+#: models.py:53
 msgid "HTML code to inject if cookies are accepted."
 msgstr ""
 
-#: models.py:62
+#: models.py:59
 msgid "scripts"
 msgstr ""
 
-#: models.py:71
+#: models.py:68
 msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
 msgstr ""
 
-#: models.py:78
+#: models.py:75
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
 
