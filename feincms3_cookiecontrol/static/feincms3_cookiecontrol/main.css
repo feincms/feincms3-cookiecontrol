@@ -16,7 +16,7 @@
   background: var(--f3cc-background-color);
   z-index: 2000;
   line-height: 1.25;
-  padding: 1rem;
+  padding: 1rem 1rem 1.25rem;
 }
 
 #f3cc .f3cc-container {
@@ -28,14 +28,25 @@
 }
 
 @media screen and (max-width: 60rem) {
-  #f3cc .f3cc-banner .f3cc-container {
+  #f3cc .f3cc-container {
     width: 100%;
     flex-direction: column;
   }
+}
 
-  #f3cc .f3cc-container {
-    width: auto;
-  }
+#f3cc .f3cc-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+}
+
+#f3cc .f3cc-description a {
+  text-decoration: underline;
+}
+
+#f3cc .f3cc-description a:hover {
+  color: var(--f3cc-foreground-color);
+  opacity: 0.7;
 }
 
 #f3cc .f3cc-buttons {
@@ -46,17 +57,7 @@
   align-items: stretch;
 }
 
-#f3cc p {
-  margin-bottom: 0;
-  line-height: 1.5;
-}
-
-#f3cc p > a:hover {
-  color: var(--f3cc-foreground-color);
-  opacity: 0.7;
-}
-
-#f3cc .btn {
+#f3cc .f3cc-button {
   display: inline-block;
   background: var(--f3cc-button-background);
   color: var(--f3cc-foreground-color);
@@ -64,26 +65,21 @@
   white-space: nowrap;
   text-decoration: none;
   text-align: center;
+  cursor: pointer;
 }
 
-#f3cc .btn:hover {
+#f3cc .f3cc-button:hover {
   opacity: 0.7;
   color: var(--f3cc-foreground-color);
 }
 
-#f3cc .btn-accept {
+#f3cc .f3cc-button.accept {
   background: var(--f3cc-accept-background);
 }
 
-#f3cc .btn-modify {
+#f3cc .f3cc-button.modify {
   position: fixed;
   z-index: 2000;
   bottom: 1rem;
   right: 1rem;
-}
-
-#f3cc .f3cc-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 0.25em;
 }

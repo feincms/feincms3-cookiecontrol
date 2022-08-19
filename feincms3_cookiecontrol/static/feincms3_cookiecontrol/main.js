@@ -51,12 +51,12 @@
               className: "f3cc-buttons",
               children: [
                 crel("a", {
-                  className: "btn btn-accept",
+                  className: "f3cc-button accept",
                   textContent: settings.buttonAccept,
                   onclick: onAcceptClick,
                 }),
                 crel("a", {
-                  className: "btn btn-reject",
+                  className: "f3cc-button reject",
                   textContent: settings.buttonReject,
                   onclick: onRejectClick,
                 }),
@@ -87,7 +87,7 @@
                 className: "f3cc-buttons",
                 children: [
                   crel("a", {
-                    className: "btn btn-modify",
+                    className: "f3cc-button modify",
                     textContent: settings.buttonModify,
                     onclick: (e) => {
                       e.preventDefault()
