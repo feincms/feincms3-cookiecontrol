@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.SlugField(unique=True, verbose_name="technical name")),
                 (
-                    "inject_if",
+                    "script",
                     models.TextField(
                         blank=True,
                         help_text="HTML code to inject if cookies are accepted.",

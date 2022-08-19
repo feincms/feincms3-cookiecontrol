@@ -6,7 +6,6 @@ from django.template import Context, Template
 from django.test.utils import override_settings
 from django.utils.translation import activate
 
-from feincms3_cookiecontrol.checks import check_settings
 from feincms3_cookiecontrol.models import CookieScript, clobber_cookiecontrol_data
 from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
     cookiecontrol_data,
@@ -34,11 +33,9 @@ class CookieControlTest(test.TestCase):
 
         CookieScript.objects.create(
             name="script1",
-            acceptance=CookieScript.Acceptance.OPTIONAL,
         )
         CookieScript.objects.create(
             name="script2",
-            acceptance=CookieScript.Acceptance.OPTIONAL,
         )
 
         with self.assertNumQueries(1):  # One query for all scripts
@@ -66,36 +63,25 @@ class CookieControlTest(test.TestCase):
     def test_correct_setup_for_active_language(self):
         pass
 
-    @override_settings(MIGRATION_MODULES={})
-    def test_missing_migration_modules(self):
-        errors = check_settings(None)
-        self.assertEqual(
-            [error.id for error in errors],
-            ["feincms3_cookiecontrol.E001"],
-        )
-
     def test_erroneous_scripts(self):
         # No exceptions
         CookieScript(
             name="script-name",
-            acceptance=CookieScript.Acceptance.OPTIONAL,
-            inject_if="",
+            script="",
         ).full_clean()
         CookieScript(
             name="script-name",
-            acceptance=CookieScript.Acceptance.OPTIONAL,
-            inject_if=" <script>bla</script>",
+            script=" <script>bla</script>",
         ).full_clean()
 
         with self.assertRaises(ValidationError) as cm:
             CookieScript(
                 name="script-name",
-                acceptance=CookieScript.Acceptance.OPTIONAL,
-                inject_if="function(){}",
+                script="function(){}",
             ).full_clean()
 
         self.assertEqual(
-            [m.message for m in cm.exception.error_dict["inject_if"]],
+            [m.message for m in cm.exception.error_dict["script"]],
             [
                 "This doesn't look right. Please start with a HTML tag"
                 " (e.g. <script>, <div>)."
@@ -105,20 +91,18 @@ class CookieControlTest(test.TestCase):
         with self.assertRaises(ValidationError) as cm:
             CookieScript(
                 name="script-name",
-                acceptance=CookieScript.Acceptance.OPTIONAL,
-                inject_if="<script>...</script><noscript>Please JS</noscript>",
+                script="<script>...</script><noscript>Please JS</noscript>",
             ).full_clean()
 
         self.assertEqual(
-            [m.message for m in cm.exception.error_dict["inject_if"]],
+            [m.message for m in cm.exception.error_dict["script"]],
             ["Entering <noscript> tags doesn't make sense."],
         )
 
     def test_serialize(self):
         CookieScript.objects.create(
             name="script-name",
-            acceptance=CookieScript.Acceptance.OPTIONAL,
-            inject_if="inject-if",
+            script="inject-if",
         )
 
         data = cookiecontrol_data()
@@ -131,8 +115,7 @@ class CookieControlTest(test.TestCase):
             [
                 {
                     "name": "script-name",
-                    "acceptance": "optional",
-                    "inject_if": "inject-if",
+                    "script": "inject-if",
                 },
             ],
         )

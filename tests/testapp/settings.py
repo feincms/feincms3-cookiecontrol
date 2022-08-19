@@ -52,5 +52,3 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-MIGRATION_MODULES = {"feincms3_cookiecontrol": "testapp.migrate.f3cc"}

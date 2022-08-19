@@ -50,7 +50,7 @@ def cookiecontrol_data():
 
 class CookieScript(models.Model):
     name = models.SlugField(_("technical name"), unique=True)
-    inject_if = models.TextField(
+    script = models.TextField(
         _("inject if consented"),
         blank=True,
         help_text=_("HTML code to inject if cookies are accepted."),
@@ -73,12 +73,12 @@ class CookieScript(models.Model):
         )
         errors = {}
 
-        if (stripped := self.inject_if.strip()) and stripped[0] != "<":
-            errors["inject_if"] = msg
+        if (stripped := self.script.strip()) and stripped[0] != "<":
+            errors["script"] = msg
 
         msg = gettext("Entering <noscript> tags doesn't make sense.")
-        if "<noscript" in self.inject_if:
-            errors["inject_if"] = msg
+        if "<noscript" in self.script:
+            errors["script"] = msg
 
         if errors:
             raise ValidationError(errors)
@@ -86,7 +86,7 @@ class CookieScript(models.Model):
     def serialize(self):
         return {
             "name": self.name,
-            "script": mark_safe(self.inject_if),
+            "script": mark_safe(self.script),
         }
 
 
