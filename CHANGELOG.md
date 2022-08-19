@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Started showing the banner again when encountering unknown cookie values.
+
 ## 0.9.0 (2022-08-19)
 
 - Completely reworked the panel into a banner-only solution with only two
