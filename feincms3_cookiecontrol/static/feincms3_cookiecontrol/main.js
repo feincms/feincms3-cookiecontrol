@@ -133,8 +133,12 @@
     }
   }
 
+  function isKnownCookieValue() {
+    return ["all", "essential"].includes(getConsent())
+  }
+
   function getConsent() {
-    return getCookie() === "accepted"
+    return getCookie() === "all"
   }
 
   function hide(el) {
@@ -143,7 +147,7 @@
 
   function onAcceptClick(e) {
     e.preventDefault()
-    setCookie("accepted")
+    setCookie("all")
     hide(banner)
     renderModify()
     injectScripts()
@@ -151,7 +155,7 @@
 
   function onRejectClick(e) {
     e.preventDefault()
-    setCookie("rejected")
+    setCookie("essential")
     hide(banner)
     renderModify()
   }
@@ -174,7 +178,7 @@
       injectScripts()
     }
 
-    if (!getCookie()) {
+    if (!isKnownCookieValue()) {
       renderBanner()
     } else {
       renderModify()
