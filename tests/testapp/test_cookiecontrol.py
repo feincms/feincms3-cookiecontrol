@@ -19,7 +19,7 @@ class CookieControlTest(test.TestCase):
         activate("en")
         clobber_cookiecontrol_data()
 
-    def test_panel_setup_defaults_provided(self):
+    def test_setup_defaults_provided(self):
         t = Template("{% load feincms3_cookiecontrol %}{% feincms3_cookiecontrol %}")
 
         Script.objects.create(
@@ -95,6 +95,8 @@ class CookieControlTest(test.TestCase):
                 "buttonModify",
                 "cookies",
                 "domain",
+                "privacyPolicyURL",
+                "privacyPolicyTitle",
             },
         )
         self.assertEqual(
@@ -112,7 +114,7 @@ class CookieControlTest(test.TestCase):
 
     def test_feincms3_cookiecontrol_tag(self):
         result = feincms3_cookiecontrol(hide_modify_button=True)
-        self.assertNotIn("buttonModify", result["panel"])
+        self.assertNotIn("buttonModify", result["data"])
 
         result = feincms3_cookiecontrol(hide_modify_button=False)
-        self.assertIn("buttonModify", result["panel"])
+        self.assertIn("buttonModify", result["data"])

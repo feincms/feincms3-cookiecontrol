@@ -19,6 +19,8 @@ COOKIECONTROL_DEFAULTS = {
     "buttonReject": pgettext_lazy("f3cc", "Refuse non-essential cookies"),
     "buttonModify": pgettext_lazy("f3cc", "Modify cookie settings"),
     "domain": None,
+    "privacyPolicyURL": None,
+    "privacyPolicyTitle": pgettext_lazy("f3cc", "Data protection guidelines"),
 }
 COOKIECONTROL_CACHE_TIMEOUT = 300
 
@@ -31,16 +33,16 @@ def clobber_cookiecontrol_data(**kwargs):
 def cookiecontrol_data():
     cache_key = f"feincms3_cookiecontrol_settings_{get_language()}"
 
-    panel = cache.get(cache_key)
-    if not panel:
-        panel = {
+    data = cache.get(cache_key)
+    if not data:
+        data = {
             **COOKIECONTROL_DEFAULTS,
             **getattr(settings, "COOKIECONTROL", {}),
             "cookies": [script.serialize() for script in Script.objects.all()],
         }
-        cache.set(cache_key, panel, timeout=COOKIECONTROL_CACHE_TIMEOUT)
+        cache.set(cache_key, data, timeout=COOKIECONTROL_CACHE_TIMEOUT)
 
-    return panel
+    return data
 
 
 class Script(models.Model):

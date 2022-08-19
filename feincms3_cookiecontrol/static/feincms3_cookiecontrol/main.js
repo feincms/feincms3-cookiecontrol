@@ -28,6 +28,38 @@
       return
     }
 
+    const content = [
+      crel("div", {
+        className: "f3cc-title",
+        textContent: settings.heading,
+      }),
+      crel("div", {
+        className: "f3cc-description",
+        textContent: settings.description,
+      }),
+    ]
+    if (settings.privacyPolicyURL) {
+      content[1].append(
+        crel("br"),
+        crel("a", {
+          textContent: settings.privacyPolicyTitle,
+          href: settings.privacyPolicyURL,
+        })
+      )
+    }
+    const buttons = [
+      crel("a", {
+        className: "f3cc-button accept",
+        textContent: settings.buttonAccept,
+        onclick: onAcceptClick,
+      }),
+      crel("a", {
+        className: "f3cc-button reject",
+        textContent: settings.buttonReject,
+        onclick: onRejectClick,
+      }),
+    ]
+
     banner = crel("div", {
       className: "f3cc f3cc-banner",
       children: [
@@ -36,31 +68,11 @@
           children: [
             crel("div", {
               className: "f3cc-content",
-              children: [
-                crel("div", {
-                  className: "f3cc-title",
-                  textContent: settings.heading,
-                }),
-                crel("div", {
-                  className: "f3cc-description",
-                  textContent: settings.description,
-                }),
-              ],
+              children: content,
             }),
             crel("div", {
               className: "f3cc-buttons",
-              children: [
-                crel("a", {
-                  className: "f3cc-button accept",
-                  textContent: settings.buttonAccept,
-                  onclick: onAcceptClick,
-                }),
-                crel("a", {
-                  className: "f3cc-button reject",
-                  textContent: settings.buttonReject,
-                  onclick: onRejectClick,
-                }),
-              ],
+              children: buttons,
             }),
           ],
         }),
