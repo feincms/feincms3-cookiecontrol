@@ -162,13 +162,6 @@
       injectScripts()
     }
 
-    document.body.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-open-f3cc-banner]")
-      if (btn) {
-        renderBanner()
-      }
-    })
-
     if (!getCookie()) {
       renderBanner()
     } else {
