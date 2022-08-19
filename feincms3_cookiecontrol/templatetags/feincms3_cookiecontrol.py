@@ -27,7 +27,7 @@ def feincms3_cookiecontrol_panel(page):
     }:
         return {"panel": panel}
 
-    panel.pop("modify")
+    panel.pop("buttonModify")
     return {"panel": panel}
 
 

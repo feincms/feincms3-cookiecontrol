@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="CookieScript",
+            name="Script",
             fields=[
                 (
                     "id",
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
             options={
                 "verbose_name": "cookie script",
                 "verbose_name_plural": "cookie scripts",
-                "ordering": ("name",),
+                "ordering": ["name"],
             },
         ),
     ]

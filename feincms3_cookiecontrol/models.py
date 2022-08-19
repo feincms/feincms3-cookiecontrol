@@ -12,16 +12,12 @@ from django.utils.translation import (
 )
 
 
-COOKIECONTROL_PANEL_DEFAULTS = {
-    "banner": {
-        "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
-        "content": pgettext_lazy("f3cc", "Banner content"),
-        "buttonAccept": pgettext_lazy("f3cc", "Accept all cookies"),
-        "buttonReject": pgettext_lazy("f3cc", "Refuse non-essential cookies"),
-    },
-    "modify": {
-        "buttonPanel": pgettext_lazy("f3cc", "Modify cookie settings"),
-    },
+COOKIECONTROL_DEFAULTS = {
+    "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
+    "description": pgettext_lazy("f3cc", "Banner content"),
+    "buttonAccept": pgettext_lazy("f3cc", "Accept all cookies"),
+    "buttonReject": pgettext_lazy("f3cc", "Refuse non-essential cookies"),
+    "buttonModify": pgettext_lazy("f3cc", "Modify cookie settings"),
     "legalPage": None,
     "domain": None,
 }
@@ -39,16 +35,16 @@ def cookiecontrol_data():
     panel = cache.get(CACHE_KEY)
     if not panel:
         panel = {
-            **COOKIECONTROL_PANEL_DEFAULTS,
+            **COOKIECONTROL_DEFAULTS,
             **getattr(settings, "COOKIECONTROL", {}),
-            "cookies": [script.serialize() for script in CookieScript.objects.all()],
+            "cookies": [script.serialize() for script in Script.objects.all()],
         }
         cache.set(CACHE_KEY, panel, timeout=COOKIECONTROL_CACHE_TIMEOUT)
 
     return panel
 
 
-class CookieScript(models.Model):
+class Script(models.Model):
     name = models.SlugField(_("technical name"), unique=True)
     script = models.TextField(
         _("script"),
@@ -57,9 +53,9 @@ class CookieScript(models.Model):
     )
 
     class Meta:
-        ordering = ("name",)
-        verbose_name = _("cookie script")
-        verbose_name_plural = _("cookie scripts")
+        ordering = ["name"]
+        verbose_name = _("script")
+        verbose_name_plural = _("scripts")
 
     def __str__(self):
         return self.name
@@ -68,8 +64,7 @@ class CookieScript(models.Model):
         super().clean()
 
         msg = gettext(
-            "This doesn't look right."
-            " Please start with a HTML tag (e.g. <script>, <div>)."
+            "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
         )
         errors = {}
 
@@ -90,5 +85,5 @@ class CookieScript(models.Model):
         }
 
 
-signals.post_save.connect(clobber_cookiecontrol_data, sender=CookieScript)
-signals.post_delete.connect(clobber_cookiecontrol_data, sender=CookieScript)
+signals.post_save.connect(clobber_cookiecontrol_data, sender=Script)
+signals.post_delete.connect(clobber_cookiecontrol_data, sender=Script)

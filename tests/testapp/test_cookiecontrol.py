@@ -6,7 +6,7 @@ from django.template import Context, Template
 from django.test.utils import override_settings
 from django.utils.translation import activate
 
-from feincms3_cookiecontrol.models import CookieScript, clobber_cookiecontrol_data
+from feincms3_cookiecontrol.models import Script, clobber_cookiecontrol_data
 from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
     cookiecontrol_data,
     feincms3_cookiecontrol,
@@ -31,10 +31,10 @@ class CookieControlTest(test.TestCase):
             """
         )
 
-        CookieScript.objects.create(
+        Script.objects.create(
             name="script1",
         )
-        CookieScript.objects.create(
+        Script.objects.create(
             name="script2",
         )
 
@@ -65,17 +65,17 @@ class CookieControlTest(test.TestCase):
 
     def test_erroneous_scripts(self):
         # No exceptions
-        CookieScript(
+        Script(
             name="script-name",
             script="",
         ).full_clean()
-        CookieScript(
+        Script(
             name="script-name",
             script=" <script>bla</script>",
         ).full_clean()
 
         with self.assertRaises(ValidationError) as cm:
-            CookieScript(
+            Script(
                 name="script-name",
                 script="function(){}",
             ).full_clean()
@@ -89,7 +89,7 @@ class CookieControlTest(test.TestCase):
         )
 
         with self.assertRaises(ValidationError) as cm:
-            CookieScript(
+            Script(
                 name="script-name",
                 script="<script>...</script><noscript>Please JS</noscript>",
             ).full_clean()
@@ -100,7 +100,7 @@ class CookieControlTest(test.TestCase):
         )
 
     def test_serialize(self):
-        CookieScript.objects.create(
+        Script.objects.create(
             name="script-name",
             script="inject-if",
         )
@@ -121,7 +121,7 @@ class CookieControlTest(test.TestCase):
         )
 
     def test_str(self):
-        self.assertEqual(str(CookieScript(name="test")), "test")
+        self.assertEqual(str(Script(name="test")), "test")
 
     @override_settings(COOKIECONTROL={"legalPage": 42})
     def test_modify(self):

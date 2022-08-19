@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 21:09+0100\n"
+"POT-Creation-Date: 2022-08-19 17:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,121 +18,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:20
-msgctxt "f3cc"
-msgid "Your Cookie Settings Protect Your Privacy"
-msgstr ""
-
-#: models.py:21
-msgctxt "f3cc"
-msgid "Panel content"
-msgstr ""
-"We use two types of cookies to enhance the use experience on our website. "
-"Below is a description of both cookie types. You can decide which cookies "
-"you want to allow or not. You can find more information on how we use "
-"cookies and protect your data in our privacy policy. You can also access "
-"your settings at any time on our legal information page."
-
-#: models.py:22
-msgctxt "f3cc"
-msgid "Save settings"
-msgstr ""
-
-#: models.py:23
-msgctxt "f3cc"
-msgid "Cancel"
-msgstr ""
-
-#: models.py:26
+#: models.py:17
 msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr ""
 
-#: models.py:27
+#: models.py:18
 msgctxt "f3cc"
 msgid "Banner content"
-msgstr ""
-"We use cookies to enhance the user experience on our website. Click on "
-"\"Modify settings\" for a description of the different types of cookies and "
-"to decide which cookies you want to allow or not. Read our privacy policy to "
-"find out more about how we use cookies and protect your data."
+msgstr "We use cookies to enhance the user experience on our website. Click on \"Modify settings\" for a description of the different types of cookies and to decide which cookies you want to allow or not. Read our privacy policy to find out more about how we use cookies and protect your data."
 
-#: models.py:28
+#: models.py:19
 msgctxt "f3cc"
-msgid "Accept all"
+msgid "Accept all cookies"
 msgstr ""
 
-#: models.py:29
+#: models.py:20
 msgctxt "f3cc"
-msgid "Modify settings"
+msgid "Refuse non-essential cookies"
 msgstr ""
 
-#: models.py:32 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
+#: models.py:23 templates/feincms3_cookiecontrol/manage-cookies-button.html:2
 msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr ""
 
-#: models.py:64
-msgid "optional"
-msgstr ""
-
-#: models.py:65
-msgid "recommended"
-msgstr ""
-
-#: models.py:66
-msgid "mandatory"
-msgstr ""
-
-#: models.py:68 models.py:104
+#: models.py:52
 msgid "technical name"
 msgstr ""
 
-#: models.py:70
-msgid "title"
+#: models.py:54 models.py:61
+msgid "script"
 msgstr ""
 
-#: models.py:74
-msgid "description"
+#: models.py:56
+msgid "HTML code to inject if cookies are accepted."
+msgstr ""
+
+#: models.py:62
+msgid "scripts"
+msgstr ""
+
+#: models.py:71
+msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
 msgstr ""
 
 #: models.py:78
-msgid "acceptance"
+msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
 
-#: models.py:85
-msgid "cookie category"
-msgstr ""
-
-#: models.py:86
-msgid "cookie categories"
-msgstr ""
-
-#: models.py:106
-msgid "inject if"
-msgstr ""
-
-#: models.py:108
-msgid "HTML code to inject if cookie category is accepted."
-msgstr ""
-
-#: models.py:111
-msgid "inject else"
-msgstr ""
-
-#: models.py:113
-msgid "HTML code to inject if cookie category is rejected."
-msgstr ""
-
-#: models.py:118
-msgid "cookie script"
-msgstr ""
-
-#: models.py:119
-msgid "cookie scripts"
-msgstr ""
-
-#: models.py:128
-msgid ""
-"This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
-msgstr ""
+#~ msgctxt "f3cc"
+#~ msgid "Panel content"
+#~ msgstr "We use two types of cookies to enhance the use experience on our website. Below is a description of both cookie types. You can decide which cookies you want to allow or not. You can find more information on how we use cookies and protect your data in our privacy policy. You can also access your settings at any time on our legal information page."

@@ -28,48 +28,46 @@
       return
     }
 
-    if (settings.banner) {
-      banner = crel("div", {
-        className: "f3cc f3cc-banner",
-        children: [
-          crel("div", {
-            className: "f3cc-container",
-            children: [
-              crel("div", {
-                className: "f3cc-description",
-                children: [
-                  crel("div", {
-                    className: "f3cc-title",
-                    textContent: settings.banner.heading,
-                  }),
-                  crel("div", {
-                    className: "f3cc-description",
-                    textContent: settings.banner.content,
-                  }),
-                ],
-              }),
-              crel("div", {
-                className: "f3cc-buttons",
-                children: [
-                  crel("a", {
-                    className: "btn btn-accept",
-                    textContent: settings.banner.buttonAccept,
-                    onclick: onAcceptClick,
-                  }),
-                  crel("a", {
-                    className: "btn btn-reject",
-                    textContent: settings.banner.buttonReject,
-                    onclick: onRejectClick,
-                  }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      })
+    banner = crel("div", {
+      className: "f3cc f3cc-banner",
+      children: [
+        crel("div", {
+          className: "f3cc-container",
+          children: [
+            crel("div", {
+              className: "f3cc-description",
+              children: [
+                crel("div", {
+                  className: "f3cc-title",
+                  textContent: settings.heading,
+                }),
+                crel("div", {
+                  className: "f3cc-description",
+                  textContent: settings.description,
+                }),
+              ],
+            }),
+            crel("div", {
+              className: "f3cc-buttons",
+              children: [
+                crel("a", {
+                  className: "btn btn-accept",
+                  textContent: settings.buttonAccept,
+                  onclick: onAcceptClick,
+                }),
+                crel("a", {
+                  className: "btn btn-reject",
+                  textContent: settings.buttonReject,
+                  onclick: onRejectClick,
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    })
 
-      mainElement.append(banner)
-    }
+    mainElement.append(banner)
   }
 
   function renderModify() {
@@ -78,7 +76,7 @@
       return
     }
 
-    if (settings.modify) {
+    if (settings.buttonModify) {
       modify = crel("div", {
         className: "f3cc-modify",
         children: [
@@ -90,7 +88,7 @@
                 children: [
                   crel("a", {
                     className: "btn btn-modify",
-                    textContent: settings.modify.buttonPanel,
+                    textContent: settings.buttonModify,
                     onclick: (e) => {
                       e.preventDefault()
                       hide(modify)
