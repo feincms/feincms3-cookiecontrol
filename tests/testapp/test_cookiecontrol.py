@@ -108,7 +108,16 @@ class CookieControlTest(test.TestCase):
         data = cookiecontrol_data()
         self.assertEqual(
             set(data.keys()),
-            {"banner", "modify", "legalPage", "cookies", "domain"},
+            {
+                "heading",
+                "description",
+                "buttonAccept",
+                "buttonReject",
+                "buttonModify",
+                "legalPage",
+                "cookies",
+                "domain",
+            },
         )
         self.assertEqual(
             data["cookies"],
@@ -133,14 +142,14 @@ class CookieControlTest(test.TestCase):
                 return [types.SimpleNamespace(id=id) for id in self.ids]
 
         result = feincms3_cookiecontrol_panel(DummyPage([1]))
-        self.assertNotIn("modify", result["panel"])
+        self.assertNotIn("buttonModify", result["panel"])
 
         result = feincms3_cookiecontrol_panel(DummyPage([42]))
-        self.assertIn("modify", result["panel"])
+        self.assertIn("buttonModify", result["panel"])
 
     def test_feincms3_cookiecontrol(self):
         result = feincms3_cookiecontrol(hide_modify_button=True)
-        self.assertNotIn("modify", result["panel"])
+        self.assertNotIn("buttonModify", result["panel"])
 
         result = feincms3_cookiecontrol(hide_modify_button=False)
-        self.assertIn("modify", result["panel"])
+        self.assertIn("buttonModify", result["panel"])

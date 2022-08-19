@@ -35,5 +35,5 @@ def feincms3_cookiecontrol_panel(page):
 def feincms3_cookiecontrol(*, hide_modify_button=False):
     panel = cookiecontrol_data()
     if hide_modify_button:
-        panel.pop("modify")
+        panel.pop("buttonModify")
     return {"panel": panel}
