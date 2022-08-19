@@ -2,9 +2,22 @@
 
 ## Unreleased
 
-- Added Django 4.1a1 to the CI matrix.
-- Removed recommended cookies in preparation of the simplification of the panel to only allow required and optional cookies, nothing else.
-- Removed the `inject_else` field because it was always unused and nothing should be injected if users do not consent.
+- Completely reworked the panel into a banner-only solution with only two
+  buttons, "accept all" and "reject all". The deprecated `{% feincms3_cookiecontrol_panel %}` template tag has been removed. The database
+  model has been recreated from scratch. If you want to keep the old script
+  configuration you can copy paste the following SQL into the SQL console
+  (after removing `feincms3_cookiecontrol` from `MIGRATION_MODULES` if it's
+  still in there and running migrations of course!):
+
+      insert into feincms3_cookiecontrol_script (name, script) select name, inject_if from feincms3_cookiecontrol_cookiescript;
+      drop table feincms3_cookiecontrol_cookiescript cascade ;
+      drop table feincms3_cookiecontrol_cookiecategory cascade ;
+
+- Added Django 4.1 to the CI matrix.
+- Removed recommended cookies in preparation of the simplification of the panel
+  to only allow required and optional cookies, nothing else.
+- Removed the `inject_else` field because it was always unused and nothing
+  should be injected if users do not consent.
 
 ## 0.2.1 (2022-03-09)
 
