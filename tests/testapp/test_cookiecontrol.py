@@ -25,7 +25,7 @@ class CookieControlTest(test.TestCase):
         t = Template(
             """
             {% load feincms3_cookiecontrol %}
-            {% feincms3_cookiecontrol_panel page %}
+            {% feincms3_cookiecontrol %}
             """
         )
 
