@@ -110,7 +110,7 @@ class CookieControlTest(test.TestCase):
     def test_str(self):
         self.assertEqual(str(Script(name="test")), "test")
 
-    def test_feincms3_cookiecontrol(self):
+    def test_feincms3_cookiecontrol_tag(self):
         result = feincms3_cookiecontrol(hide_modify_button=True)
         self.assertNotIn("buttonModify", result["panel"])
 
