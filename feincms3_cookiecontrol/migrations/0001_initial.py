@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                     models.TextField(
                         blank=True,
                         help_text="HTML code to inject if cookies are accepted.",
-                        verbose_name="inject if consented",
+                        verbose_name="script",
                     ),
                 ),
             ],

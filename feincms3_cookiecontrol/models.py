@@ -51,7 +51,7 @@ def cookiecontrol_data():
 class CookieScript(models.Model):
     name = models.SlugField(_("technical name"), unique=True)
     script = models.TextField(
-        _("inject if consented"),
+        _("script"),
         blank=True,
         help_text=_("HTML code to inject if cookies are accepted."),
     )
