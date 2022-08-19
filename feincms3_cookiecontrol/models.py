@@ -18,7 +18,6 @@ COOKIECONTROL_DEFAULTS = {
     "buttonAccept": pgettext_lazy("f3cc", "Accept all cookies"),
     "buttonReject": pgettext_lazy("f3cc", "Refuse non-essential cookies"),
     "buttonModify": pgettext_lazy("f3cc", "Modify cookie settings"),
-    "legalPage": None,
     "domain": None,
 }
 COOKIECONTROL_CACHE_TIMEOUT = 300

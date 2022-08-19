@@ -3,14 +3,12 @@ import types
 from django import test
 from django.core.exceptions import ValidationError
 from django.template import Context, Template
-from django.test.utils import override_settings
 from django.utils.translation import activate
 
 from feincms3_cookiecontrol.models import Script, clobber_cookiecontrol_data
 from feincms3_cookiecontrol.templatetags.feincms3_cookiecontrol import (
     cookiecontrol_data,
     feincms3_cookiecontrol,
-    feincms3_cookiecontrol_panel,
 )
 
 
@@ -114,7 +112,6 @@ class CookieControlTest(test.TestCase):
                 "buttonAccept",
                 "buttonReject",
                 "buttonModify",
-                "legalPage",
                 "cookies",
                 "domain",
             },
@@ -131,21 +128,6 @@ class CookieControlTest(test.TestCase):
 
     def test_str(self):
         self.assertEqual(str(Script(name="test")), "test")
-
-    @override_settings(COOKIECONTROL={"legalPage": 42})
-    def test_modify(self):
-        class DummyPage:
-            def __init__(self, ids):
-                self.ids = ids
-
-            def translations(self):
-                return [types.SimpleNamespace(id=id) for id in self.ids]
-
-        result = feincms3_cookiecontrol_panel(DummyPage([1]))
-        self.assertNotIn("buttonModify", result["panel"])
-
-        result = feincms3_cookiecontrol_panel(DummyPage([42]))
-        self.assertIn("buttonModify", result["panel"])
 
     def test_feincms3_cookiecontrol(self):
         result = feincms3_cookiecontrol(hide_modify_button=True)
