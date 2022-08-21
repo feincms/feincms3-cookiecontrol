@@ -124,6 +124,12 @@ class CookieControlTest(test.TestCase):
         self.assertContains(response, "window.f3ccData")
         self.assertContains(response, "document.createElement")
         self.assertEqual(response["content-type"], "text/javascript; charset=UTF-8")
+        self.assertContains(response, '"privacyPolicyURL":null')
         # print(response)
         # print(response.content.decode("utf-8"))
         # open("test.js", "w").write(response.content.decode("utf-8"))
+
+        response = self.client.get("/inject-f3cc-with-ppu.js")
+        # print(response)
+        # print(response.content.decode("utf-8"))
+        self.assertContains(response, '"privacyPolicyURL":"http://testserver/privacy/"')

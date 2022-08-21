@@ -19,16 +19,19 @@ def read_staticfile(filename):
 
 
 @cache_page(COOKIECONTROL_CACHE_TIMEOUT)
-def inject(request):
-    data = json.dumps(
-        cookiecontrol_data(),
+def inject(request, *, privacy_policy_url=None):
+    data = cookiecontrol_data()
+    if privacy_policy_url:
+        data["privacyPolicyURL"] = request.build_absolute_uri(privacy_policy_url)
+    serialized = json.dumps(
+        data,
         cls=DjangoJSONEncoder,
         ensure_ascii=False,
         separators=(",", ":"),
     )
     content = f"""\
 (function(){{\
-window.f3ccData={data};\
+window.f3ccData={serialized};\
 {read_staticfile('build.js')}\
 }})()\
 """
