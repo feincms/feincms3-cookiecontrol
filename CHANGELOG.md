@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Started showing the banner again when encountering unknown cookie values.
+- Included the required CSS in the JavaScript file.
+- Moved the root `#f3cc` div creation into the JavaScript code.
 
 ## 0.9.0 (2022-08-19)
 
