@@ -137,7 +137,7 @@ import "./main.css"
   }
 
   function isKnownCookieValue() {
-    return ["all", "essential"].includes(getConsent())
+    return ["all", "essential"].includes(getCookie())
   }
 
   function getConsent() {
