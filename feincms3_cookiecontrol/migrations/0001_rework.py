@@ -33,8 +33,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "cookie script",
-                "verbose_name_plural": "cookie scripts",
+                "verbose_name": "script",
+                "verbose_name_plural": "scripts",
                 "ordering": ["name"],
             },
         ),
