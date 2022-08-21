@@ -26,7 +26,7 @@ import "./main.css"
   }
 
   function renderBanner() {
-    if (banner != null) {
+    if (banner) {
       banner.style.display = ""
       return
     }
@@ -86,7 +86,7 @@ import "./main.css"
   }
 
   function renderModify() {
-    if (modify != null) {
+    if (modify) {
       modify.style.display = ""
       return
     }
@@ -145,7 +145,7 @@ import "./main.css"
   }
 
   function hide(el) {
-    if (el != null) el.style.display = "none"
+    if (el) el.style.display = "none"
   }
 
   function onAcceptClick(e) {
