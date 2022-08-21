@@ -25,7 +25,7 @@ import "./main.css"
 
   function renderBanner() {
     if (banner) {
-      banner.style.display = ""
+      show(banner)
       return
     }
 
@@ -70,7 +70,7 @@ import "./main.css"
 
   function renderModify() {
     if (modify) {
-      modify.style.display = ""
+      show(modify)
       return
     }
 
@@ -110,6 +110,10 @@ import "./main.css"
 
   function getConsent() {
     return getCookie() === "all"
+  }
+
+  function show(el) {
+    el.style.display = ""
   }
 
   function hide(el) {
