@@ -6,12 +6,10 @@ import "./main.css"
 
 // eslint-disable-next-line no-extra-semi
 ;(function () {
-  let cookieName = "f3cc",
-    mainElement,
+  const cookieName = "f3cc",
     settings = JSON.parse(document.getElementById("f3cc-data").textContent),
-    banner,
-    modify,
     injectedScripts = {}
+  let mainElement, banner, modify
 
   function crel(tagName, attributes = null, children = []) {
     const dom = document.createElement(tagName)
@@ -182,7 +180,7 @@ import "./main.css"
   }
 
   function nodeScriptClone(node) {
-    let script = document.createElement("script")
+    const script = document.createElement("script")
     script.text = node.innerHTML
 
     let i = -1,
