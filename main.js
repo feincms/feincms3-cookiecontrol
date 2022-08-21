@@ -74,7 +74,12 @@ import "./main.css"
       return
     }
 
-    if (settings.buttonModify) {
+    const ppu = settings.privacyPolicyURL
+    const loc = window.location
+    if (
+      settings.buttonModify &&
+      (!ppu || ppu == `${loc.protocol}//${loc.host}${loc.pathname}`)
+    ) {
       modify = crel("a", {
         className: "f3cc-button modify",
         textContent: settings.buttonModify,
