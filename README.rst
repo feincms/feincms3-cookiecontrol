@@ -174,3 +174,38 @@ Now you can use this additional variable in the template:
 The frontend code will automatically add a link to the privacy policy to the
 banner's content and will only show the modify button if the current location
 matches the privacy policy's URL.
+
+
+Using the panel from a different site
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The panel can be integrated into another site by following these steps.
+
+Set the domain for the cookie so that the cookie is available on subdomains (be
+sure to check the relevant guides to understand what the problems may be when
+doing this and what restrictions you have to honor):
+
+.. code-block:: code-python
+
+   COOKIECONTROL = {"domain": "example.com"}
+
+Add the view and optionally provide the privacy policy URL:
+
+.. code-block:: code-python
+
+    from feincms3_cookiecontrol.views import inject
+
+    urlpatterns = [
+        # Base case
+        path("f3cc-inject.js", inject),
+
+        # With the privacy policy URL; reverse_lazy or
+        django.utils.functional.lazy() may be of use here.
+        path("f3cc-inject.js", inject, {"privacy_policy_url": ...}),
+    ]
+
+Embed the script:
+
+.. code-block:: html
+
+    <script async src="https://example.com/f3cc-inject.js"></script>
