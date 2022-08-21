@@ -2,11 +2,175 @@
 feincms3-cookiecontrol
 ======================
 
-Documentation is available as a part of `feincms3
-<https://feincms3.readthedocs.io/>`__'s documentation.
-
-The guide is here: `Cookie control
-<https://feincms3.readthedocs.io/en/latest/guides/cookie-control.html>`__.
-
 Despite its name and the fact that it is documented as a part of
 feincms3, feincms3-cookiecontrol can also be used standalone.
+
+
+Cookie control
+==============
+
+Some jurisidictions require the the users' consent before adding analytics
+scripts and tracking cookies. While it may be best to not use any analytics and
+tracking at all this may not be possible or even desirable in all
+circumstances.
+
+Many solutions exist for adding a consent banner to the website. Some of those
+banners require loading JavaScript and other assets from external servers. This
+raises some questions because loading those scripts may also be seen as
+tracking already. It is certainly safer to implement a cookie control panel
+locally. It would be boring to start from scratch on each site.
+
+This guide explains how to use `feincms3-cookiecontrol <https://github.com/feinheit/feincms3-cookiecontrol/>`__.
+
+Installation
+~~~~~~~~~~~~
+
+Install the package:
+
+.. code-block:: shell
+
+    venv/bin/pip install feincms3-cookiecontrol
+
+Add ``feincms3_cookiecontrol`` to ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "feincms3_cookiecontrol",
+    ]
+
+Apply the initial migration:
+
+.. code-block:: shell
+
+    python manage.py migrate
+
+Add the panel to the template, e.g. in ``base.html`` at the end of the
+``<body>`` element:
+
+.. code-block:: html+django
+
+    <!doctype html>
+    <html>
+      ...
+      <body>
+        ...
+        {% load feincms3_cookiecontrol %}{% feincms3_cookiecontrol %}
+      </body>
+    </html>
+
+You'll have to add all tracking scripts yourself now.
+
+
+Customize the appearance
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The default colors of the control panel may not fit into your site. The best
+way to customize the appearance is to set a few CSS variables, e.g.:
+
+.. code-block:: css
+
+    #f3cc {
+      --f3cc-background-color: #e9e9e9;
+      --f3cc-foreground-color: #000000;
+      --f3cc-button-background: #cbcbcb;
+      --f3cc-accept-background: #90f690;
+    }
+
+
+Hiding the modify button
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The presentation of the panel is a fixed banner at the bottom of the
+viewport. Once any cookies have been accepted (essential cookies have to be
+accepted, e.g. the CSRF cookie) the banner is replaced by a single button which
+allows showing the control panel again.
+
+You may want to suppress the button on some pages, for example on all pages
+except for the privacy policy.
+
+A good way to achieve this follows.
+
+Let's assume you're using page types as described in the feincms3 templates and
+regions guide. Let's also assume that your privacy policy page uses the
+standard page type described in the guide:
+
+.. code-block:: python
+
+    class Page(AbstractPage, PageTypeMixin):
+        TYPES = [
+            TemplateType(
+                key="standard",
+                title=_("standard"),
+                template_name="pages/standard.html",
+                regions=[
+                    Region(key="main", title=_("Main")),
+                ],
+            ),
+        ]
+
+We will add an additional page type which can be used as a marker. Since we're
+using feincms3 apps be sure to read the introduction to feincms3 apps if you
+haven't done this already. You may also want to take a look at the feincms3
+root passthru reference.
+
+.. code-block:: python
+
+    class Page(AbstractPage, PageTypeMixin):
+        TYPES = [
+            TemplateType(
+                key="standard",
+                title=_("standard"),
+                template_name="pages/standard.html",
+                regions=[
+                    Region(key="main", title=_("Main")),
+                ],
+            ),
+            ApplicationType(
+                key="privacy-policy",
+                title=_("privacy policy"),
+                urlconf="feincms3.root.passthru",
+                template_name="pages/standard.html",
+                regions=[
+                    Region(key="main", title=_("Main")),
+                ],
+            ),
+        ]
+
+.. note::
+   We cannot just use a new ``TemplateType`` because we **only** want to hide
+   the button on all other pages if a privacy policy page actually exists!
+
+Now you can extend the ``page_context`` helper:
+
+.. code-block:: python
+
+    from feincms3.root.passthru import reverse_passthru
+
+    def page_context(request, *, page=None):
+        ...
+        context = {
+            ...
+        }
+        if url := reverse_passthru("privacy-policy", fallback=None):
+            context["privacy_policy_url"] = request.build_absolute_uri(url)
+        return context
+
+Now you can use this additional variable in the template:
+
+.. code-block:: html+django
+
+    <!doctype html>
+    <html>
+      ...
+      <body>
+        ...
+        {% load feincms3_cookiecontrol %}
+        {% feincms3_cookiecontrol privacy_policy_url=privacy_policy_url %}
+      </body>
+    </html>
+
+The frontend code will automatically add a link to the privacy policy to the
+banner's content and will only show the modify button if the current location
+matches the privacy policy's URL.
