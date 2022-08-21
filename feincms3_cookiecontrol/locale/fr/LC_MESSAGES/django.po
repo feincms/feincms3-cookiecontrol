@@ -26,12 +26,9 @@ msgstr "Cookies sur notre page Web"
 #: models.py:17
 msgctxt "f3cc"
 msgid "Banner content"
-msgstr "Nous utilisons des cookies pour optimiser l’expérience des utilisateurs sur notre site Web. Cliquez sur «Modifier les paramètres» pour obtenir une description des différents types de cookies et pour décider quels cookies vous souhaitez autoriser et refuser. Lisez notre politique de confidentialité pour en savoir plus sur notre utilisation de cookies et la protection de vos données."
+msgstr "Nous utilisons des cookies pour optimiser l’expérience des utilisateurs sur notre site Web. Lisez notre politique de confidentialité pour en savoir plus sur notre utilisation de cookies et la protection de vos données."
 
 #: models.py:18
-#, fuzzy
-#| msgctxt "f3cc"
-#| msgid "Accept all"
 msgctxt "f3cc"
 msgid "Accept all cookies"
 msgstr "Tout accepter"
@@ -39,7 +36,7 @@ msgstr "Tout accepter"
 #: models.py:19
 msgctxt "f3cc"
 msgid "Refuse non-essential cookies"
-msgstr ""
+msgstr "Refuser les cookies non essentiels"
 
 #: models.py:20
 msgctxt "f3cc"
@@ -49,7 +46,7 @@ msgstr "Modifier les paramètres des cookies"
 #: models.py:23
 msgctxt "f3cc"
 msgid "Privacy policy"
-msgstr ""
+msgstr "Politique de confidentialité"
 
 #: models.py:49
 msgid "technical name"
@@ -74,36 +71,3 @@ msgstr ""
 #: models.py:75
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
-
-#~ msgctxt "f3cc"
-#~ msgid "Your Cookie Settings Protect Your Privacy"
-#~ msgstr "Réglez vos cookies pour protéger votre vie privée"
-
-#~ msgctxt "f3cc"
-#~ msgid "Panel content"
-#~ msgstr "Nous utilisons deux types de cookies pour optimiser l’expérience des utilisateurs sur notre site Web. Vous trouverez ci-dessous une description de chaque type de cookie. Vous pouvez décider quels cookies autoriser et refuser. Vous trouverez plus d'informations sur notre utilisation des cookies et la protection de vos données dans notre politique de confidentialité. Vous pouvez aussi accéder à vos paramètres à tout moment sur la page des mentions légales."
-
-#~ msgctxt "f3cc"
-#~ msgid "Save settings"
-#~ msgstr "Sauvegarder les paramètres"
-
-#~ msgctxt "f3cc"
-#~ msgid "Cancel"
-#~ msgstr "Annuler"
-
-#~ msgctxt "f3cc"
-#~ msgid "Modify settings"
-#~ msgstr "Modifier les paramètres"
-
-#, fuzzy
-#~| msgctxt "f3cc"
-#~| msgid "Modify cookie settings"
-#~ msgid "Modify cookie settings"
-#~ msgstr "Modifier les paramètres des cookies"
-
-#~ msgid "Modify/revoke cookie settings"
-#~ msgstr "Modifier les paramètres des cookies"
-
-#~ msgctxt "f3cc"
-#~ msgid "Modify/revoke cookie settings"
-#~ msgstr "Modifier les paramètres des cookies"

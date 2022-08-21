@@ -26,7 +26,7 @@ msgstr ""
 #: models.py:17
 msgctxt "f3cc"
 msgid "Banner content"
-msgstr "We use cookies to enhance the user experience on our website. Click on \"Modify settings\" for a description of the different types of cookies and to decide which cookies you want to allow or not. Read our privacy policy to find out more about how we use cookies and protect your data."
+msgstr "We use cookies to enhance the user experience on our website. Read our privacy policy to find out more about how we use cookies and protect your data."
 
 #: models.py:18
 msgctxt "f3cc"
@@ -71,7 +71,3 @@ msgstr ""
 #: models.py:75
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
-
-#~ msgctxt "f3cc"
-#~ msgid "Panel content"
-#~ msgstr "We use two types of cookies to enhance the use experience on our website. Below is a description of both cookie types. You can decide which cookies you want to allow or not. You can find more information on how we use cookies and protect your data in our privacy policy. You can also access your settings at any time on our legal information page."
