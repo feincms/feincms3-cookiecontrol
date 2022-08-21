@@ -10,8 +10,7 @@
     "esbuild": "^0.15.5"
   },
   "scripts": {
-    "build": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name]",
-    "watch": "esbuild feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.* --minify --target=es6 --outdir=feincms3_cookiecontrol/static/feincms3_cookiecontrol/ --entry-names=[dir]/build.[name] --watch"
+    "build": "node esbuild.js"
   },
   "eslintIgnore": [
     "**/build.*"

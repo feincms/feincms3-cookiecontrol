@@ -1,6 +1,9 @@
 /**
  * cookie consent banner and modify button rendering
  */
+
+import "./main.css"
+
 // eslint-disable-next-line no-extra-semi
 ;(function () {
   let cookieName = "f3cc",
