@@ -34,8 +34,8 @@ async function generateInjectCSS(sourcePath) {
 }
 
 esbuild.build({
-  entryPoints: ["feincms3_cookiecontrol/static/feincms3_cookiecontrol/main.js"],
-  outfile: "feincms3_cookiecontrol/static/feincms3_cookiecontrol/build.main.js",
+  entryPoints: ["main.js"],
+  outfile: "feincms3_cookiecontrol/static/feincms3_cookiecontrol/build.js",
   bundle: true,
   minify: true,
   plugins: [InlineCSSPlugin()],
