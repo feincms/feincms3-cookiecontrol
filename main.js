@@ -13,15 +13,15 @@ import "./main.css"
     modify,
     injectedScripts = {}
 
-  function crel(tagName, attributes = null) {
+  function crel(tagName, attributes = null, children = []) {
     const dom = document.createElement(tagName)
     if (attributes) {
       for (let [name, value] of Object.entries(attributes)) {
         if (name.startsWith("data-")) dom.setAttribute(name, value)
-        else if (name === "children") dom.append(...value)
         else dom[name] = value
       }
     }
+    dom.append(...children)
     return dom
   }
 
@@ -32,10 +32,7 @@ import "./main.css"
     }
 
     const content = [
-      crel("div", {
-        className: "f3cc-title",
-        textContent: settings.heading,
-      }),
+      crel("div", { className: "f3cc-title", textContent: settings.heading }),
       crel("div", {
         className: "f3cc-description",
         textContent: settings.description,
@@ -63,24 +60,12 @@ import "./main.css"
       }),
     ]
 
-    banner = crel("div", {
-      className: "f3cc f3cc-banner",
-      children: [
-        crel("div", {
-          className: "f3cc-container",
-          children: [
-            crel("div", {
-              className: "f3cc-content",
-              children: content,
-            }),
-            crel("div", {
-              className: "f3cc-buttons",
-              children: buttons,
-            }),
-          ],
-        }),
-      ],
-    })
+    banner = crel("div", { className: "f3cc f3cc-banner" }, [
+      crel("div", { className: "f3cc-container" }, [
+        crel("div", { className: "f3cc-content" }, content),
+        crel("div", { className: "f3cc-buttons" }, buttons),
+      ]),
+    ])
 
     mainElement.append(banner)
   }
@@ -92,29 +77,14 @@ import "./main.css"
     }
 
     if (settings.buttonModify) {
-      modify = crel("div", {
-        className: "f3cc-modify",
-        children: [
-          crel("div", {
-            className: "outer",
-            children: [
-              crel("div", {
-                className: "f3cc-buttons",
-                children: [
-                  crel("a", {
-                    className: "f3cc-button modify",
-                    textContent: settings.buttonModify,
-                    onclick: (e) => {
-                      e.preventDefault()
-                      hide(modify)
-                      renderBanner()
-                    },
-                  }),
-                ],
-              }),
-            ],
-          }),
-        ],
+      modify = crel("a", {
+        className: "f3cc-button modify",
+        textContent: settings.buttonModify,
+        onclick: (e) => {
+          e.preventDefault()
+          hide(modify)
+          renderBanner()
+        },
       })
       mainElement.append(modify)
     }
@@ -168,7 +138,7 @@ import "./main.css"
       let node = injectedScripts[cookie.name]
       if (!node) {
         injectedScripts[cookie.name] = node = document.createElement("div")
-        node.dataset.f3cc = cookie.name
+        node.dataset.name = cookie.name
         mainElement.append(node)
       }
       node.innerHTML = cookie.script
