@@ -44,7 +44,7 @@
         crel("a", {
           textContent: settings.privacyPolicyTitle,
           href: settings.privacyPolicyURL,
-        })
+        }),
       )
     }
     const buttons = [
