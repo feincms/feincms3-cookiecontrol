@@ -7,10 +7,10 @@ import "./main.css"
 // eslint-disable-next-line no-extra-semi
 ;(function () {
   let cookieName = "f3cc",
-    mainElement = document.getElementById("f3cc"),
+    mainElement,
     settings = JSON.parse(document.getElementById("f3cc-data").textContent),
-    banner = null,
-    modify = null,
+    banner,
+    modify,
     injectedScripts = {}
 
   function crel(tagName, attributes = null) {
@@ -169,7 +169,7 @@ import "./main.css"
       if (!node) {
         injectedScripts[cookie.name] = node = document.createElement("div")
         node.dataset.f3cc = cookie.name
-        document.body.append(node)
+        mainElement.append(node)
       }
       node.innerHTML = cookie.script
       nodeScriptReplace(node)
@@ -177,6 +177,9 @@ import "./main.css"
   }
 
   function init() {
+    mainElement = crel("div", { id: "f3cc" })
+    document.body.append(mainElement)
+
     if (getConsent()) {
       injectScripts()
     }
