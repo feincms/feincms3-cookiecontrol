@@ -209,3 +209,8 @@ Embed the script:
 .. code-block:: html
 
     <script async src="https://example.com/f3cc-inject.js"></script>
+
+.. note::
+   The preferred way to embed the panel is using the template tag. The template
+   tag method only requires an additional request for a static asset while the
+   method using a view requires an additional request to a view.
