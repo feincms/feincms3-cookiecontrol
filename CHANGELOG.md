@@ -8,6 +8,10 @@
 - Changed the modify button behavior: When `privacyPolicyURL` is given the
   modify button is only shown if the current URL equals the privacy policy URL
   (protocol, host and pathname have to match).
+- Updated the translations.
+- Added a view which generates a JavaScript file for embedding the cookie panel
+  on other sites, e.g. subdomains.
+- Imported the docs from the feincms3 repository and updated them.
 
 ## 0.9.0 (2022-08-19)
 
