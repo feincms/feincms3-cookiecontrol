@@ -12,6 +12,7 @@
 - Added a view which generates a JavaScript file for embedding the cookie panel
   on other sites, e.g. subdomains.
 - Imported the docs from the feincms3 repository and updated them.
+- Rewrote `getCookie()` to actually return the full cookie value.
 
 ## 0.9.0 (2022-08-19)
 

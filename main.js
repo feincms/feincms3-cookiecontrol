@@ -104,10 +104,11 @@ import "./main.css"
   }
 
   function getCookie() {
-    const re = new RegExp(`\\b${cookieName}=(.+?)\\b`)
-    const matches = document.cookie.match(re)
-    if (matches && matches.length) {
-      return matches[1]
+    const cookies = document.cookie ? document.cookie.split("; ") : []
+    const prefix = `${cookieName}=`
+    for (let cookie of cookies) {
+      if (cookie.startsWith(prefix))
+        return decodeURIComponent(cookie.substring(prefix.length))
     }
   }
 
