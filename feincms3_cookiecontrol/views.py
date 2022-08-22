@@ -36,5 +36,4 @@ window.f3ccData={serialized};\
 }})()\
 """
 
-    response = HttpResponse(content, content_type="text/javascript; charset=UTF-8")
-    return response
+    return HttpResponse(content, content_type="text/javascript; charset=UTF-8")
