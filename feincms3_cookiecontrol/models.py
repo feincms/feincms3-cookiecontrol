@@ -26,7 +26,7 @@ COOKIECONTROL_CACHE_TIMEOUT = 300
 
 
 def clobber_cookiecontrol_data(**kwargs):
-    for code, name in settings.LANGUAGES:
+    for code, _name in settings.LANGUAGES:
         cache.delete(f"feincms3_cookiecontrol_settings_{code}")
 
 
