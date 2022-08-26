@@ -187,7 +187,7 @@ doing this and what restrictions you have to honor):
 
 .. code-block:: code-python
 
-   COOKIECONTROL = {"domain": "example.com"}
+    COOKIECONTROL = {"domain": "example.com"}
 
 Add the view and optionally provide the privacy policy URL:
 
