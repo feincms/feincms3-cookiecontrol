@@ -193,6 +193,7 @@ Add the view and optionally provide the privacy policy URL:
 
 .. code-block:: code-python
 
+    from django.urls import reverse_lazy
     from feincms3_cookiecontrol.views import inject
 
     urlpatterns = [
@@ -201,7 +202,7 @@ Add the view and optionally provide the privacy policy URL:
 
         # With the privacy policy URL; reverse_lazy or
         django.utils.functional.lazy() may be of use here.
-        path("f3cc-inject.js", inject, {"privacy_policy_url": ...}),
+        path("f3cc-inject.js", inject, {"privacy_policy_url": reverse_lazy("...")}),
     ]
 
 Embed the script:
