@@ -7,21 +7,13 @@ repos:
       - id: check-merge-conflict
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: local
-    hooks:
-      - id: django-check
-        name: django check
-        entry: sh -c 'stat venv/bin/python && venv/bin/python manage.py check || echo "Skipped"'
-        pass_filenames: false
-        language: system
-        always_run: true
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.37.3
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: 1.8.0
+    rev: 1.9.0
     hooks:
       - id: django-upgrade
         args: [--target-version, "3.2"]
@@ -45,14 +37,14 @@ repos:
     rev: v3.0.0-alpha.0
     hooks:
       - id: prettier
-        args: [--list-different, --no-semi]
+        args: [--list-different, --no-semi, "--trailing-comma=es5"]
         exclude: "^conf/|.*\\.html$"
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.22.0
+    rev: v8.23.0
     hooks:
       - id: eslint
         additional_dependencies:
-          - eslint@^8.22.0
+          - eslint@^8.23.0
           - eslint-config-prettier
           - "@babel/core"
           - "@babel/eslint-parser"

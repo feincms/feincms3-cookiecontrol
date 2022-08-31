@@ -44,7 +44,7 @@ import "./main.css"
         crel("a", {
           textContent: settings.privacyPolicyTitle,
           href: settings.privacyPolicyURL,
-        }),
+        })
       )
     }
     const buttons = [
