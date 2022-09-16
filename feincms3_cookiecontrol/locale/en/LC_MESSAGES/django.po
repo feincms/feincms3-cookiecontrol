@@ -72,11 +72,11 @@ msgstr ""
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
 
-#: templates/feincms3_cookiecontrol/conscious_embed.html:5
+#: templates/feincms3_cookiecontrol/embed.html:5
 #, python-format
 msgid "We would like to show you content from the provider \"%(provider)s\", but respect your privacy. If you agree to the provider's <a href=\"%(privacy_policy_url)s\" target=\"_blank\" rel=\"noopener\">privacy policy</a>, please click the following button to view the content."
 msgstr ""
 
-#: templates/feincms3_cookiecontrol/conscious_embed.html:6
+#: templates/feincms3_cookiecontrol/embed.html:6
 msgid "OK, thanks."
 msgstr ""

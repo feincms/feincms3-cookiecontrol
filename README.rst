@@ -233,7 +233,7 @@ Extend default providers in your ``settings.py``:
     def embed_some_provider(url):
         # Return HTML code if URL points to provider or ``None`` otherwise
 
-    CONSCIOUS_EMBED_PROVIDERS = {
+    EMBED_PROVIDERS = {
         "some-provider": {
             "handler": embed_some_provider,
             "title": "Some Provider",
@@ -242,9 +242,9 @@ Extend default providers in your ``settings.py``:
     }
 
 **NOTE**: The ``handler`` key is optional if you only ever use ``wrap`` and
-``{% conscious_embed ... %}``.
+``{% embed ... %}``.
 
-Surround the embedded code with the template block ``conscious_embed``:
+Surround the embedded code with the template block ``embed``:
 
 .. code-block:: html
 
@@ -252,9 +252,9 @@ Surround the embedded code with the template block ``conscious_embed``:
     {% load feincms3_cookiecontrol %}
     ...
     <div class="container">
-        {% conscious_embed "some-provider" %}
+        {% embed "some-provider" %}
         <script src="https://some-provider.com/example.js"></script>
-        {% endconscious_embed %}
+        {% endembed %}
     </div>
     ...
 
@@ -263,7 +263,7 @@ embedding content of specific providers.
 
 You can also wrap your default renderer for embedded content plugins like
 ``feincms3.plugins.external`` or ``feincms3.embedding``, but you have to
-explicitly specify the provider (as above with the ``{% conscious_embed %}``
+explicitly specify the provider (as above with the ``{% embed %}``
 template tag).
 
 If you're happy with what the ``handler`` functions of providers return you can

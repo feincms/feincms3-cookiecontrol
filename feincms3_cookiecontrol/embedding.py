@@ -4,7 +4,7 @@ from django.utils.html import format_html, mark_safe
 from feincms3.embedding import embed_vimeo, embed_youtube
 
 
-CONSCIOUS_EMBED_PROVIDERS = {
+EMBED_PROVIDERS = {
     "youtube": {
         "handler": embed_youtube,
         "title": "YouTube",
@@ -20,8 +20,8 @@ CONSCIOUS_EMBED_PROVIDERS = {
 
 def get_providers():
     return {
-        **CONSCIOUS_EMBED_PROVIDERS,
-        **getattr(settings, "CONSCIOUS_EMBED_PROVIDERS", {}),
+        **EMBED_PROVIDERS,
+        **getattr(settings, "EMBED_PROVIDERS", {}),
     }
 
 
@@ -29,7 +29,7 @@ def embed(url):
     for provider, config in get_providers().items():
         if (handler := config.get("handler")) and (html := handler(url)) is not None:
             return render_to_string(
-                "feincms3_cookiecontrol/conscious_embed.html",
+                "feincms3_cookiecontrol/embed.html",
                 {
                     "embedded_html": html,
                     "provider": provider,
@@ -47,7 +47,7 @@ def embed(url):
 def wrap(provider, html):
     config = get_providers()[provider]
     return render_to_string(
-        "feincms3_cookiecontrol/conscious_embed.html",
+        "feincms3_cookiecontrol/embed.html",
         {
             "embedded_html": html,
             "provider": provider,

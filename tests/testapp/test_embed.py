@@ -11,11 +11,11 @@ class ConsciousEmbedTest(test.TestCase):
         html = wrap("vimeo", iframe)
         self.assertIn('href="https://vimeo.com/privacy"', html)
 
-    def test_conscious_embed(self):
+    def test_embed(self):
         template = Template(
             """\
 {% load feincms3_cookiecontrol %}
-{% conscious_embed 'youtube' %}<iframe src="https://youtube.com/"></iframe>{% endconscious_embed %}
+{% embed 'youtube' %}<iframe src="https://youtube.com/"></iframe>{% endembed %}
 """
         )
         html = template.render(Context({}))
@@ -30,14 +30,12 @@ class ConsciousEmbedTest(test.TestCase):
             Template(
                 """
                 {% load feincms3_cookiecontrol %}
-                {% conscious_embed %}{% endconscious_embed %}
+                {% embed %}{% endembed %}
                 """
             )
 
     @override_settings(
-        CONSCIOUS_EMBED_PROVIDERS={
-            "example.com": {"blub": "https://example.com/privacy/"}
-        }
+        EMBED_PROVIDERS={"example.com": {"blub": "https://example.com/privacy/"}}
     )
     def test_defaults(self):
         # ./settings.py
@@ -58,7 +56,7 @@ class ConsciousEmbedTest(test.TestCase):
         self.assertEqual(embed("https://example.com"), "")
 
     @override_settings(
-        CONSCIOUS_EMBED_PROVIDERS={
+        EMBED_PROVIDERS={
             "mailchimp": {
                 # No handler
                 "title": "Mailchimp",
@@ -68,7 +66,7 @@ class ConsciousEmbedTest(test.TestCase):
     )
     def test_mailchimp_wrap(self):
         template = """
-{% load feincms3_cookiecontrol %}{% conscious_embed "mailchimp" %}<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>{% endconscious_embed %}
+{% load feincms3_cookiecontrol %}{% embed "mailchimp" %}<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>{% endembed %}
 """
         html = Template(template).render(Context({}))
         self.assertIn('href="https://mailchimp.com/legal/privacy/"', html)

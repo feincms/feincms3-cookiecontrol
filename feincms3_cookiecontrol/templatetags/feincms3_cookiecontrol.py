@@ -26,7 +26,7 @@ class ConsciousEmbedNode(template.Node):
 
 
 @register.tag
-def conscious_embed(parser, token):
+def embed(parser, token):
     try:
         tag_name, provider = token.split_contents()
     except ValueError:
@@ -34,6 +34,6 @@ def conscious_embed(parser, token):
             "%r tag requires exactly one argument", token.contents.split()[0]
         )
 
-    nodelist = parser.parse("endconscious_embed")
+    nodelist = parser.parse("endembed")
     parser.delete_first_token()
     return ConsciousEmbedNode(provider, nodelist)
