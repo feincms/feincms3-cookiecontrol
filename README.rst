@@ -230,19 +230,13 @@ Extend default providers in your ``settings.py``:
 
 .. code-block:: code-python
 
-    def embed_some_provider(url):
-        # Return HTML code if URL points to provider or ``None`` otherwise
-
     EMBED_PROVIDERS = {
         "some-provider": {
-            "handler": embed_some_provider,
-            "title": "Some Provider",
-            "privacy_policy_url": "https://some-provider.example.com/privacy",
+            # No handler
+            "title": "Mailchimp",
+            "privacy_policy_url": "https://mailchimp.com/legal/privacy/",
         },
     }
-
-**NOTE**: The ``handler`` key is optional if you only ever use ``wrap`` and
-``{% embed ... %}``.
 
 Surround the embedded code with the template block ``embed``:
 
@@ -252,7 +246,7 @@ Surround the embedded code with the template block ``embed``:
     {% load feincms3_cookiecontrol %}
     ...
     <div class="container">
-        {% embed "some-provider" %}
+        {% embed "mailchimp" %}
         <script src="https://some-provider.com/example.js"></script>
         {% endembed %}
     </div>
@@ -266,8 +260,19 @@ You can also wrap your default renderer for embedded content plugins like
 explicitly specify the provider (as above with the ``{% embed %}``
 template tag).
 
-If you're happy with what the ``handler`` functions of providers return you can
-also use the ``embed`` shortcut:
+
+Automatically embedding content using an URL only
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``feincms3_cookiecontrol.embedding`` module also offers an ``embed``
+function where you can only pass an URL and either you get back the wrapped
+embed code or nothing at all. You may also specify your own embed providers; in
+this case you should also add a ``handler`` key to the ``EMBED_PROVIDERS``
+setting; the function only receives the URL and returns either the embedding
+HTML or ``None`` if the URL isn't using the provider at all. At the time of
+writing the module supports embedding YouTube and Vimeo URLs.
+
+You may use the ``embed`` shortcut as follows:
 
 .. code-block:: code-python
 
