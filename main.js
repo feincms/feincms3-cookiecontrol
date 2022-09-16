@@ -190,7 +190,7 @@ import "./main.css"
       }
     }
 
-  function initConsciousEmbed() {
+  function initConsciousEmbed(addEnableListener = true) {
     const embedNodes = document.querySelectorAll(".f3cc-embed")
 
     function renderTemplate(parent, node) {
@@ -200,30 +200,19 @@ import "./main.css"
     }
 
     embedNodes.forEach((node) => {
-      node.classList.add("show")
-
       const template = node.querySelector(".f3cc-embed__template")
       const enableButton = node.querySelector(".f3cc-embed__button")
       const nodesProvider = node.dataset.provider
-      const localStorageProviders = _lsGet(providerKey)
+      const providers = _lsGet(providerKey) || []
 
       if (template && nodesProvider) {
-        if (
-          (localStorageProviders &&
-            localStorageProviders.some((p) => p === nodesProvider)) ||
-          getConsentToAll()
-        ) {
+        if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
           renderTemplate(node, template)
-        } else {
+        } else if (addEnableListener) {
           enableButton.addEventListener("click", () => {
-            let providers = localStorageProviders
-            if (providers) {
-              providers.push(nodesProvider)
-            } else {
-              providers = [nodesProvider]
-            }
+            providers.push(nodesProvider)
             _lsSet(providerKey, providers)
-            renderTemplate(node, template)
+            initConsciousEmbed(false)
           })
         }
       }
