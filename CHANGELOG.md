@@ -15,6 +15,8 @@
 - Rewrote `getCookie()` to actually return the full cookie value.
 - Added some infrastructure code to consciously embed content from third party
   providers if users give their consent.
+- Added `feincms3_cookiecontrol.embedding.embed` which wraps
+  `feincms3.embedding` with a privacy-conscious version.
 
 ## 0.9.0 (2022-08-19)
 

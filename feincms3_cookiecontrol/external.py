@@ -13,6 +13,7 @@ def conscious_embed_context(embedded_html):
         if default_provider in embedded_html:
             provider = default_provider
             privacy_policy_url = defaults[default_provider]
+            break
 
     # TODO: Maybe warn if provider and privacy_policy_url are missing in defaults.
 
