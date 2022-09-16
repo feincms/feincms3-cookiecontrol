@@ -1,36 +1,61 @@
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.utils.html import format_html, mark_safe
 from feincms3.embedding import embed_vimeo, embed_youtube
 
 
-CONSCIOUS_EMBED_PROVIDERS = [
-    {
+CONSCIOUS_EMBED_PROVIDERS = {
+    "youtube": {
         "handler": embed_youtube,
-        "provider": "YouTube",
+        "title": "YouTube",
         "privacy_policy_url": "https://policies.google.com/privacy",
     },
-    {
+    "vimeo": {
         "handler": embed_vimeo,
-        "provider": "Vimeo",
+        "title": "Vimeo",
         "privacy_policy_url": "https://vimeo.com/privacy",
     },
-]
+}
 
 
 def get_providers():
-    return (
-        getattr(settings, "CONSCIOUS_EMBED_PROVIDERS", []) + CONSCIOUS_EMBED_PROVIDERS
-    )
+    return {
+        **CONSCIOUS_EMBED_PROVIDERS,
+        **getattr(settings, "CONSCIOUS_EMBED_PROVIDERS", {}),
+    }
 
 
 def embed(url):
-    for provider in get_providers():
-        if (html := provider["handler"](url)) is not None:
+    for provider, config in get_providers().items():
+        if (handler := config.get("handler")) and (html := handler(url)) is not None:
             return render_to_string(
                 "feincms3_cookiecontrol/conscious_embed.html",
                 {
                     "embedded_html": html,
-                    **provider,
+                    "provider": provider,
+                    "link_start": format_html(
+                        '<a href="{}" target="_blank" rel="noopener">',
+                        config["privacy_policy_url"],
+                    ),
+                    "link_end": mark_safe("</a>"),
+                    **config,
                 },
             )
     return ""
+
+
+def wrap(provider, html):
+    config = get_providers()[provider]
+    return render_to_string(
+        "feincms3_cookiecontrol/conscious_embed.html",
+        {
+            "embedded_html": html,
+            "provider": provider,
+            "link_start": format_html(
+                '<a href="{}" target="_blank" rel="noopener">',
+                config["privacy_policy_url"],
+            ),
+            "link_end": mark_safe("</a>"),
+            **config,
+        },
+    )

@@ -88,15 +88,3 @@ class Script(models.Model):
 
 signals.post_save.connect(clobber_cookiecontrol_data, sender=Script)
 signals.post_delete.connect(clobber_cookiecontrol_data, sender=Script)
-
-
-CONSCIOUS_EMBED_PROVIDERS = {
-    "youtube.com": "https://policies.google.com/privacy",
-    "vimeo.com": "https://vimeo.com/privacy",
-}
-
-
-def get_conscious_embed_defaults():
-    providers = CONSCIOUS_EMBED_PROVIDERS
-    providers.update(getattr(settings, "CONSCIOUS_EMBED_PROVIDERS", {}))
-    return providers

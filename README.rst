@@ -230,38 +230,51 @@ Extend default providers in your ``settings.py``:
 
 .. code-block:: code-python
 
-  CONSCIOUS_EMBED_PROVIDERS = {
-    "some-third-party-provider.com": "https://some-third-party-provider.com/privacy",
-  }
+    def embed_some_provider(url):
+        # Return HTML code if URL points to provider or ``None`` otherwise
+
+    CONSCIOUS_EMBED_PROVIDERS = {
+        "some-provider": {
+            "handler": embed_some_provider,
+            "title": "Some Provider",
+            "privacy_policy_url": "https://some-provider.example.com/privacy",
+        },
+    }
+
+**NOTE**: The ``handler`` key is optional if you only ever use ``wrap`` and
+``{% conscious_embed ... %}``.
 
 Surround the embedded code with the template block ``conscious_embed``:
 
 .. code-block:: html
 
-  ...
-  {% load feincms3_cookiecontrol %}
-  ...
-  <div class="container">
-    {% conscious_embed %}
-    <script language="javascript" src="https://some-third-party-provider.com/example.js" type="text/javascript">
-    {% endconscious_embed %}
-  </div>
-  ...
+    ...
+    {% load feincms3_cookiecontrol %}
+    ...
+    <div class="container">
+        {% conscious_embed "some-provider" %}
+        <script src="https://some-provider.com/example.js"></script>
+        {% endconscious_embed %}
+    </div>
+    ...
 
 Users that did not consent to your general cookie policy will now get asked to allow
 embedding content of specific providers.
 
 You can also wrap your default renderer for embedded content plugins like
-``feincms3.plugins.external`` or ``feincms3.embedding``:
+``feincms3.plugins.external`` or ``feincms3.embedding``, but you have to
+explicitly specify the provider (as above with the ``{% conscious_embed %}``
+template tag).
+
+If you're happy with what the ``handler`` functions of providers return you can
+also use the ``embed`` shortcut:
 
 .. code-block:: code-python
 
-  ...
-  from feincms3_cookiecontrol.external import render_external_consciously
-  ...
-  class EmbeddedVideo(plugins.external.External, PagePlugin):
-    ...
-    def embedded_html(self):
-      html = feincms3.embedding.embed(self.url)
-      return render_external_consciously(html)
-    ...
+    # ...
+    from feincms3_cookiecontrol.embedding import embed
+    # ...
+    class EmbeddedVideo(plugins.external.External, PagePlugin):
+        # ...
+        def embedded_html(self):
+            return embed(self.url)
