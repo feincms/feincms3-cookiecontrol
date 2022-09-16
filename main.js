@@ -136,6 +136,7 @@ import "./main.css"
     hide(banner)
     renderModify()
     injectScripts()
+    initConsciousEmbed()
   }
 
   function onRejectClick(e) {
@@ -194,8 +195,8 @@ import "./main.css"
 
     function renderTemplate(parent, node) {
       const clone = node.content.cloneNode(true)
-      parent.classList.add("enabled")
-      parent.appendChild(clone)
+      parent.replaceWith(clone)
+      nodeScriptReplace(clone)
     }
 
     embedNodes.forEach((node) => {

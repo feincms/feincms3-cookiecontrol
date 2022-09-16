@@ -68,9 +68,11 @@
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  border: none;
 }
 
-#f3cc .f3cc-button:hover {
+#f3cc .f3cc-button:hover,
+.f3cc-embed__button:hover {
   opacity: 0.7;
 }
 
@@ -93,16 +95,4 @@
 
 .f3cc-embed .f3cc-embed__statement {
   margin-bottom: 1em;
-}
-
-.f3cc-embed {
-  display: none;
-}
-
-.f3cc-embed.show {
-  display: block;
-}
-
-.f3cc-embed.enabled .f3cc-embed__overlay {
-  display: none;
 }
