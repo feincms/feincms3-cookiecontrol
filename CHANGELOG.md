@@ -13,6 +13,8 @@
   on other sites, e.g. subdomains.
 - Imported the docs from the feincms3 repository and updated them.
 - Rewrote `getCookie()` to actually return the full cookie value.
+- Added some infrastructure code to consciously embed content from third party
+  providers if users give their consent.
 
 ## 0.9.0 (2022-08-19)
 
