@@ -118,7 +118,7 @@ import "./main.css"
     return ["all", "essential"].includes(getCookie())
   }
 
-  function getConsent() {
+  function getConsentToAll() {
     return getCookie() === "all"
   }
 
@@ -162,7 +162,7 @@ import "./main.css"
     mainElement = crel("div", { id: "f3cc" })
     document.body.append(mainElement)
 
-    if (getConsent()) {
+    if (getConsentToAll()) {
       injectScripts()
     }
 
@@ -206,13 +206,11 @@ import "./main.css"
       const nodesProvider = node.dataset.provider
       const localStorageProviders = _lsGet(providerKey)
 
-      const allInCookie = getCookie("f3cc") === "all"
-
       if (template && nodesProvider) {
         if (
           (localStorageProviders &&
             localStorageProviders.some((p) => p === nodesProvider)) ||
-          allInCookie
+          getConsentToAll()
         ) {
           renderTemplate(node, template)
         } else {
