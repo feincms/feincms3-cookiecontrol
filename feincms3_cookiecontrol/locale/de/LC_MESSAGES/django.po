@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-16 18:29+0200\n"
+"POT-Creation-Date: 2022-09-16 21:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,11 +72,11 @@ msgstr "Das sieht nicht korrekt aus. Bitte beginne mit einem HTML-Tag (zB <scrip
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr "Die Eingabe von <noscript> Tags macht keinen Sinn."
 
-#: templates/feincms3_cookiecontrol/embed.html:5
+#: templates/feincms3_cookiecontrol/embed.html:4
 #, python-format
-msgid "We would like to show you content from the provider \"%(provider)s\", but respect your privacy. If you agree to the provider's <a href=\"%(privacy_policy_url)s\" target=\"_blank\" rel=\"noopener\">privacy policy</a>, please click the following button to view the content."
-msgstr "Wir möchten Ihnen gerne Inhalte des Anbieters \"%(provider)s\" anzeigen, aber respektieren Ihre Privatsphäre. Falls Sie mit den <a href=\"%(privacy_policy_url)s\" target=\"_blank\" rel=\"noopener\">Datenschutzrichtlinien</a> des Anbieters einverstanden sind, klicken Sie bitte den folgenden Button, um die Inhalte anzuzeigen."
+msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's %(link_start)sprivacy policy%(link_end)s, please click the following button to view the content."
+msgstr "Wir möchten Ihnen gerne Inhalte des Anbieters %(title)s anzeigen, aber respektieren Ihre Privatsphäre. Falls Sie mit den %(link_start)sDatenschutzrichtlinien%(link_end)s des Anbieters einverstanden sind, klicken Sie bitte den folgenden Button, um die Inhalte anzuzeigen."
 
-#: templates/feincms3_cookiecontrol/embed.html:6
+#: templates/feincms3_cookiecontrol/embed.html:5
 msgid "OK, thanks."
 msgstr "OK, danke."
