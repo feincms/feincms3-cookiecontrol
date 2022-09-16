@@ -190,7 +190,7 @@ import "./main.css"
       }
     }
 
-  function initConsciousEmbed(addEnableListener = true) {
+  function initConsciousEmbed(enableClickListener = true) {
     const embedNodes = document.querySelectorAll(".f3cc-embed")
 
     function renderTemplate(parent, node) {
@@ -208,7 +208,7 @@ import "./main.css"
       if (template && nodesProvider) {
         if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
           renderTemplate(node, template)
-        } else if (addEnableListener) {
+        } else if (enableClickListener) {
           enableButton.addEventListener("click", () => {
             providers.push(nodesProvider)
             _lsSet(providerKey, providers)
