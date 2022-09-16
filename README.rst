@@ -215,3 +215,53 @@ Embed the script:
    The preferred way to embed the panel is using the template tag. The template
    tag method only requires an additional request for a static asset while the
    method using a view requires an additional request to a view.
+
+
+Selectively embed iframes or other third party scripts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If users do not consent to your cookie policy, embedding third party scripts or iframes
+might violate data protection laws, since personal data is transfered to a third party
+without the users knowledge or consent. One way is to disable third party content
+alltogether or selectively asking users to consent to the data policies of specific
+providers. The letter is accomplished by the 'conscious embed' functionality.
+
+Extend default providers in your ``settings.py``:
+
+.. code-block:: code-python
+
+  CONSCIOUS_EMBED_PROVIDERS = {
+    "some-third-party-provider.com": "https://some-third-party-provider.com/privacy",
+  }
+
+Surround the embedded code with the template block ``conscious_embed``:
+
+.. code-block:: html
+
+  ...
+  {% load feincms3_cookiecontrol %}
+  ...
+  <div class="container">
+    {% conscious_embed %}
+    <script language="javascript" src="https://some-third-party-provider.com/example.js" type="text/javascript">
+    {% endconscious_embed %}
+  </div>
+  ...
+
+Users that did not consent to your general cookie policy will now get asked to allow
+embedding content of specific providers.
+
+You can also wrap your default renderer for embedded content plugins like
+``feincms3.plugins.external`` or ``feincms3.embedding``:
+
+.. code-block:: code-python
+
+  ...
+  from feincms3_cookiecontrol.external import render_external_consciously
+  ...
+  class EmbeddedVideo(plugins.external.External, PagePlugin):
+    ...
+    def embedded_html(self):
+      html = feincms3.embedding.embed(self.url)
+      return render_external_consciously(html)
+    ...

@@ -52,3 +52,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CONSCIOUS_EMBED_PROVIDERS = {
+    "example.com": "https://example.com/privacy/",
+}

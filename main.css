@@ -58,7 +58,8 @@
   align-items: stretch;
 }
 
-#f3cc .f3cc-button {
+#f3cc .f3cc-button,
+.f3cc-embed__button {
   display: inline-block;
   background: var(--f3cc-button-background);
   color: var(--f3cc-foreground-color);
@@ -73,7 +74,8 @@
   opacity: 0.7;
 }
 
-#f3cc .f3cc-button.accept {
+#f3cc .f3cc-button.accept,
+.f3cc-embed .f3cc-embed__button {
   background: var(--f3cc-accept-background);
 }
 
@@ -82,4 +84,25 @@
   z-index: 2000;
   bottom: 1rem;
   right: 1rem;
+}
+
+.f3cc-embed .f3cc-embed__overlay {
+  background-color: var(--f3cc-background-color);
+  padding: 4rem 2.5rem;
+}
+
+.f3cc-embed .f3cc-embed__statement {
+  margin-bottom: 1em;
+}
+
+.f3cc-embed {
+  display: none;
+}
+
+.f3cc-embed.show {
+  display: block;
+}
+
+.f3cc-embed.enabled .f3cc-embed__overlay {
+  display: none;
 }

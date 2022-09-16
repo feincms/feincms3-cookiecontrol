@@ -1,5 +1,6 @@
 /**
  * cookie consent banner and modify button rendering
+ *
  */
 
 import "./main.css"
@@ -10,7 +11,8 @@ import "./main.css"
     settings =
       window.f3ccData ||
       JSON.parse(document.getElementById("f3cc-data").textContent),
-    injectedScripts = {}
+    injectedScripts = {},
+    providerKey = "f3cc-embed-providers"
   let mainElement, banner, modify
 
   function crel(tagName, attributes = null, children = []) {
@@ -171,7 +173,52 @@ import "./main.css"
     }
   }
 
+  function initConsciousEmbed() {
+    const embedNodes = document.querySelectorAll(".f3cc-embed")
+
+    function renderTemplate(parent, node) {
+      const clone = node.content.cloneNode(true)
+      parent.classList.add("enabled")
+      parent.appendChild(clone)
+    }
+
+    embedNodes.forEach((node) => {
+      node.classList.add("show")
+
+      const template = node.querySelector(".f3cc-embed__template")
+      const enableButton = node.querySelector(".f3cc-embed__button")
+      const nodesProvider = node.dataset.provider
+      const localStorageProviders = JSON.parse(
+        window.localStorage.getItem(providerKey)
+      )
+
+      const allInCookie = getCookie("f3cc") === "all"
+
+      if (template && nodesProvider) {
+        if (
+          (localStorageProviders &&
+            localStorageProviders.some((p) => p === nodesProvider)) ||
+          allInCookie
+        ) {
+          renderTemplate(node, template)
+        } else {
+          enableButton.addEventListener("click", () => {
+            let providers = localStorageProviders
+            if (providers) {
+              providers.push(nodesProvider)
+            } else {
+              providers = [nodesProvider]
+            }
+            window.localStorage.setItem(providerKey, JSON.stringify(providers))
+            renderTemplate(node, template)
+          })
+        }
+      }
+    })
+  }
+
   init()
+  initConsciousEmbed()
 
   /*
   The following functions allow executing scripts added via innerHTML
