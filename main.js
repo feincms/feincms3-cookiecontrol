@@ -173,6 +173,22 @@ import "./main.css"
     }
   }
 
+  const _lsFallback = {},
+    _lsSet = (key, value) => {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(value))
+      } catch (e) {
+        _lsFallback[key] = value
+      }
+    },
+    _lsGet = (key) => {
+      try {
+        return JSON.parse(window.localStorage.getItem(key))
+      } catch (e) {
+        return _lsFallback[key]
+      }
+    }
+
   function initConsciousEmbed() {
     const embedNodes = document.querySelectorAll(".f3cc-embed")
 
@@ -188,9 +204,7 @@ import "./main.css"
       const template = node.querySelector(".f3cc-embed__template")
       const enableButton = node.querySelector(".f3cc-embed__button")
       const nodesProvider = node.dataset.provider
-      const localStorageProviders = JSON.parse(
-        window.localStorage.getItem(providerKey)
-      )
+      const localStorageProviders = _lsGet(providerKey)
 
       const allInCookie = getCookie("f3cc") === "all"
 
@@ -209,7 +223,7 @@ import "./main.css"
             } else {
               providers = [nodesProvider]
             }
-            window.localStorage.setItem(providerKey, JSON.stringify(providers))
+            _lsSet(providerKey, providers)
             renderTemplate(node, template)
           })
         }
