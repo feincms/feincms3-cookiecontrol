@@ -191,32 +191,38 @@ import "./main.css"
     }
 
   function initConsciousEmbed(enableClickListener = true) {
-    const embedNodes = document.querySelectorAll(".f3cc-embed")
-
     function renderTemplate(parent, node) {
       const clone = node.content.cloneNode(true)
       parent.replaceWith(clone)
       nodeScriptReplace(clone)
     }
 
+    const providers = _lsGet(providerKey) || []
+    const embedNodes = document.querySelectorAll(".f3cc-embed")
+
     embedNodes.forEach((node) => {
       const template = node.querySelector(".f3cc-embed__template")
-      const enableButton = node.querySelector(".f3cc-embed__button")
       const nodesProvider = node.dataset.provider
-      const providers = _lsGet(providerKey) || []
 
       if (template && nodesProvider) {
         if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
           renderTemplate(node, template)
-        } else if (enableClickListener) {
-          enableButton.addEventListener("click", () => {
-            providers.push(nodesProvider)
-            _lsSet(providerKey, providers)
-            initConsciousEmbed(false)
-          })
         }
       }
     })
+
+    if (enableClickListener) {
+      document.body.addEventListener("click", (e) => {
+        const button = e.target.closest(".f3cc-embed__button")
+        const node = button && button.closest(".f3cc-embed")
+        if (button && node) {
+          e.preventDefault()
+          providers.push(node.dataset.provider)
+          _lsSet(providerKey, providers)
+          initConsciousEmbed(false)
+        }
+      })
+    }
   }
 
   init()
