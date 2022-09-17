@@ -136,7 +136,7 @@ import "./main.css"
     hide(banner)
     renderModify()
     injectScripts()
-    initConsciousEmbed()
+    renderEmbeds()
   }
 
   function onRejectClick(e) {
@@ -159,7 +159,7 @@ import "./main.css"
     }
   }
 
-  function init() {
+  function initCookieBanner() {
     mainElement = crel("div", { id: "f3cc" })
     document.body.append(mainElement)
 
@@ -190,13 +190,7 @@ import "./main.css"
       }
     }
 
-  function initConsciousEmbed(enableClickListener = true) {
-    function renderTemplate(parent, node) {
-      const clone = node.content.cloneNode(true)
-      parent.replaceWith(clone)
-      nodeScriptReplace(clone)
-    }
-
+  function renderEmbeds() {
     const providers = _lsGet(providerKey) || []
     const embedNodes = document.querySelectorAll(".f3cc-embed")
 
@@ -206,27 +200,31 @@ import "./main.css"
 
       if (template && nodesProvider) {
         if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
-          renderTemplate(node, template)
+          const clone = template.content.cloneNode(true)
+          node.replaceWith(clone)
+          nodeScriptReplace(clone)
         }
       }
     })
-
-    if (enableClickListener) {
-      document.body.addEventListener("click", (e) => {
-        const button = e.target.closest(".f3cc-embed__button")
-        const node = button && button.closest(".f3cc-embed")
-        if (button && node) {
-          e.preventDefault()
-          providers.push(node.dataset.provider)
-          _lsSet(providerKey, providers)
-          initConsciousEmbed(false)
-        }
-      })
-    }
   }
 
-  init()
-  initConsciousEmbed()
+  function initEmbedClickListener() {
+    document.body.addEventListener("click", (e) => {
+      const button = e.target.closest(".f3cc-embed__button")
+      const node = button && button.closest(".f3cc-embed")
+      if (button && node) {
+        e.preventDefault()
+        const providers = _lsGet(providerKey) || []
+        providers.push(node.dataset.provider)
+        _lsSet(providerKey, providers)
+        renderEmbeds()
+      }
+    })
+  }
+
+  initCookieBanner()
+  renderEmbeds()
+  initEmbedClickListener()
 
   /*
   The following functions allow executing scripts added via innerHTML
@@ -263,3 +261,11 @@ import "./main.css"
     return node.tagName === "SCRIPT"
   }
 })()
+
+/*
+  function initEmbedMutationObserver() {
+    const observer = new MutationObserver(renderEmbeds)
+    observer.observe(document.body, { subtree: true, childList: true })
+  }
+  initEmbedMutationObserver()
+  */
