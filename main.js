@@ -222,9 +222,15 @@ import "./main.css"
     })
   }
 
+  function initEmbedMutationObserver() {
+    const observer = new MutationObserver(renderEmbeds)
+    observer.observe(document.body, { subtree: true, childList: true })
+  }
+
   initCookieBanner()
   renderEmbeds()
   initEmbedClickListener()
+  initEmbedMutationObserver()
 
   /*
   The following functions allow executing scripts added via innerHTML
@@ -261,11 +267,3 @@ import "./main.css"
     return node.tagName === "SCRIPT"
   }
 })()
-
-/*
-  function initEmbedMutationObserver() {
-    const observer = new MutationObserver(renderEmbeds)
-    observer.observe(document.body, { subtree: true, childList: true })
-  }
-  initEmbedMutationObserver()
-  */
