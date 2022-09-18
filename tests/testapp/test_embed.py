@@ -21,7 +21,7 @@ class ConsciousEmbedTest(test.TestCase):
         html = template.render(Context({}))
         self.assertIn("f3cc-embed", html)
         self.assertIn(
-            '<template class="f3cc-embed__template"><iframe src="https://youtube.com/"></iframe></template>',
+            '<template><iframe src="https://youtube.com/"></iframe></template>',
             html,
         )
 
@@ -71,7 +71,7 @@ class ConsciousEmbedTest(test.TestCase):
         html = Template(template).render(Context({}))
         self.assertIn('href="https://mailchimp.com/legal/privacy/"', html)
         self.assertIn(
-            """<template class="f3cc-embed__template"><script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script></template>""",
+            """<template><script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script></template>""",
             html,
         )
 
