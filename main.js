@@ -190,7 +190,7 @@ import "./main.css"
       }
     }
 
-  function renderEmbeds() {
+  const renderEmbeds = (window.f3ccRenderEmbeds = () => {
     const providers = _lsGet(providerKey) || []
     const embedNodes = document.querySelectorAll(".f3cc-embed")
 
@@ -206,7 +206,7 @@ import "./main.css"
         }
       }
     })
-  }
+  })
 
   function initEmbedClickListener() {
     document.body.addEventListener("click", (e) => {
@@ -263,9 +263,9 @@ import "./main.css"
 })()
 
 /*
-  function initEmbedMutationObserver() {
-    const observer = new MutationObserver(renderEmbeds)
-    observer.observe(document.body, { subtree: true, childList: true })
-  }
-  initEmbedMutationObserver()
-  */
+function initEmbedMutationObserver() {
+  const observer = new MutationObserver(renderEmbeds)
+  observer.observe(document.body, { subtree: true, childList: true })
+}
+initEmbedMutationObserver()
+*/
