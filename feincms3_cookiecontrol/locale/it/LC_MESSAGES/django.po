@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-16 21:11+0200\n"
+"POT-Creation-Date: 2022-09-18 10:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgstr ""
 
 #: templates/feincms3_cookiecontrol/embed.html:4
 #, python-format
-msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's %(link_start)sprivacy policy%(link_end)s, please click the following button to view the content."
+msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the %(link_start)sprovider's privacy policy%(link_end)s, please click the following button to view the content."
 msgstr ""
 
 #: templates/feincms3_cookiecontrol/embed.html:5

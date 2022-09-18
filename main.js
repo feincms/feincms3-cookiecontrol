@@ -201,7 +201,7 @@ import "./main.css"
       if (template && nodesProvider) {
         if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
           const clone = template.content.cloneNode(true)
-          node.replaceWith(clone)
+          node.closest(".f3cc").replaceWith(clone)
           nodeScriptReplace(clone)
         }
       }

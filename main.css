@@ -20,7 +20,7 @@
   padding: 1rem 1rem 1.25rem;
 }
 
-.f3cc.f3cc-embed {
+.f3cc .f3cc-embed {
   background: var(--f3cc-background-color);
   color: var(--f3cc-foreground-color);
   padding: 4rem 2.5rem;
