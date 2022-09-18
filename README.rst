@@ -260,6 +260,10 @@ You can also wrap your default renderer for embedded content plugins like
 explicitly specify the provider (as above with the ``{% embed %}``
 template tag).
 
+If HTML is added dynamically to the site which contains such embedded fragments
+you have to call the ``f3ccRenderEmbeds()`` JavaScript function yourself to
+embed the third party content which has already been accepted by the user.
+
 
 Automatically embedding content using an URL only
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
