@@ -160,7 +160,7 @@ import "./main.css"
   }
 
   function initCookieBanner() {
-    mainElement = crel("div", { id: "f3cc" })
+    mainElement = crel("div", { className: "f3cc" })
     document.body.append(mainElement)
 
     if (getConsentToAll()) {
@@ -195,7 +195,7 @@ import "./main.css"
     const embedNodes = document.querySelectorAll(".f3cc-embed")
 
     embedNodes.forEach((node) => {
-      const template = node.querySelector(".f3cc-embed__template")
+      const template = node.querySelector("template")
       const nodesProvider = node.dataset.provider
 
       if (template && nodesProvider) {
@@ -210,7 +210,7 @@ import "./main.css"
 
   function initEmbedClickListener() {
     document.body.addEventListener("click", (e) => {
-      const button = e.target.closest(".f3cc-embed__button")
+      const button = e.target.closest(".f3cc-button")
       const node = button && button.closest(".f3cc-embed")
       if (button && node) {
         e.preventDefault()
