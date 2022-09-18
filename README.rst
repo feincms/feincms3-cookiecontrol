@@ -62,6 +62,11 @@ Add the panel to the template, e.g. in ``base.html`` at the end of the
 
 You'll have to add all tracking scripts yourself now.
 
+The presentation of the panel is a fixed banner at the bottom of the
+viewport. Once any cookies have been accepted (essential cookies have to be
+accepted, e.g. the CSRF cookie) the banner is replaced by a single button which
+allows showing the control panel again.
+
 
 Customize the appearance
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,15 +87,9 @@ way to customize the appearance is to set a few CSS variables, e.g.:
 Hiding the modify button
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The presentation of the panel is a fixed banner at the bottom of the
-viewport. Once any cookies have been accepted (essential cookies have to be
-accepted, e.g. the CSRF cookie) the banner is replaced by a single button which
-allows showing the control panel again.
-
-You may want to suppress the button on some pages, for example on all pages
-except for the privacy policy.
-
-A good way to achieve this follows.
+You may want to suppress the button to modify the consent on some pages, for
+example on all pages except for the privacy policy. A good way to achieve this
+follows.
 
 Let's assume you're using page types as described in the feincms3 templates and
 regions guide. Let's also assume that your privacy policy page uses the
@@ -232,7 +231,6 @@ Extend default providers in your ``settings.py``:
 
     EMBED_PROVIDERS = {
         "some-provider": {
-            # No handler
             "title": "Mailchimp",
             "privacy_policy_url": "https://mailchimp.com/legal/privacy/",
         },
