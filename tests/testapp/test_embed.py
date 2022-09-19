@@ -76,3 +76,13 @@ class ConsciousEmbedTest(test.TestCase):
         )
 
         self.assertEqual(embed("https://example.com"), "")  # No crash
+
+    def test_embed_raisenow_lema(self):
+        html = embed(
+            "https://widget.raisenow.com/widgets/lema/schwe-xx99/js/dds-init-widget-de.js"
+        )
+        self.assertIn("dds-widget-container", html)
+
+    def test_embed_raisenow_tamaro(self):
+        html = embed("https://tamaro.raisenow.com/schwe-xx99/latest/widget.js")
+        self.assertIn("rnw-widget-container", html)
