@@ -50,33 +50,33 @@ msgstr "Politique de confidentialité"
 
 #: models.py:49
 msgid "technical name"
-msgstr ""
+msgstr "nom technique"
 
 #: models.py:51 models.py:58
 msgid "script"
-msgstr ""
+msgstr "script"
 
 #: models.py:53
 msgid "HTML code to inject if cookies are accepted."
-msgstr ""
+msgstr "Code html à injecter si les cookies sont acceptés."
 
 #: models.py:59
 msgid "scripts"
-msgstr ""
+msgstr "scripts"
 
 #: models.py:68
 msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
-msgstr ""
+msgstr "Cela n'a pas l'air correct. Veuillez commencer par une balise html (par exemple <script>, <div>)."
 
 #: models.py:75
 msgid "Entering <noscript> tags doesn't make sense."
-msgstr ""
+msgstr "La saisie de balises <noscript> n'a pas de sens."
 
 #: templates/feincms3_cookiecontrol/embed.html:4
 #, python-format
 msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the %(link_start)sprovider's privacy policy%(link_end)s, please click the following button to view the content."
-msgstr ""
+msgstr "Nous aimerions vous montrer le contenu du fournisseur %(title)s, mais respectons votre vie privée. Si vous acceptez %(link_start)sla politique de confidentialité provider%(link_end)s, veuillez cliquer sur le bouton suivant pour afficher le contenu."
 
 #: templates/feincms3_cookiecontrol/embed.html:5
 msgid "Show the content"
-msgstr ""
+msgstr "Afficher le contenu"
