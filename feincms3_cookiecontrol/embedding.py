@@ -1,41 +1,7 @@
-import re
-
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import format_html, mark_safe
-from django.utils.translation import get_language
 from feincms3.embedding import embed_vimeo, embed_youtube
-
-
-RAISENOW_LEMA_RE = re.compile(
-    r"""widget\.raisenow\.com/widgets/lema/(?P<code>[-\w]+)/js/dds-init-widget""",
-    re.I,
-)
-RAISENOW_TAMARO_RE = re.compile(
-    r"""tamaro\.raisenow\.com/(?P<code>[-\w+]+)/latest/widget.js""",
-    re.I,
-)
-
-
-def embed_raisenow(url):
-    if match := RAISENOW_LEMA_RE.search(url):
-        d = match.groupdict()
-        return mark_safe(
-            f"""\
-<div class="dds-widget-container" data-widget="lema"></div>
-<script src="https://widget.raisenow.com/widgets/lema/{d["code"]}/js/dds-init-widget-{get_language()[:2]}.js"></script>
-"""
-        )
-    if match := RAISENOW_TAMARO_RE.search(url):
-        d = match.groupdict()
-        return mark_safe(
-            f"""\
-<div class="rnw-widget-container"></div>
-<script src="https://tamaro.raisenow.com/{d["code"]}/latest/widget.js"></script>
-<script>window.rnw.tamaro.runWidget('.rnw-widget-container', {{ language: '{get_language()[:2]}' }})</script>
-"""
-        )
-    return None
 
 
 # This isn't a list of recommended third party providers.
@@ -62,7 +28,7 @@ EMBED_PROVIDERS = {
         "privacy_policy_url": "http://www.cleverreach.com/privacy-policy/",
     },
     "raisenow": {
-        "handler": embed_raisenow,
+        "handler": None,
         "title": "RaiseNow",
         "privacy_policy_url": "https://www.raisenow.com/privacy-policy",
     },
