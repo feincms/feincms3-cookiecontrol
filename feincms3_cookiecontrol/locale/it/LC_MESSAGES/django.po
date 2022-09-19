@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-18 10:43+0200\n"
+"POT-Creation-Date: 2022-09-19 13:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,5 +78,5 @@ msgid "We would like to show you content from the provider %(title)s, but respec
 msgstr ""
 
 #: templates/feincms3_cookiecontrol/embed.html:5
-msgid "OK, thanks."
+msgid "Show the content"
 msgstr ""

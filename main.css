@@ -23,7 +23,7 @@
 .f3cc .f3cc-embed {
   background: var(--f3cc-background-color);
   color: var(--f3cc-foreground-color);
-  padding: 4rem 2.5rem;
+  padding: 4rem;
 }
 
 .f3cc .f3cc-container {
