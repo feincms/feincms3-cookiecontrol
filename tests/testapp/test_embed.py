@@ -57,16 +57,16 @@ class ConsciousEmbedTest(test.TestCase):
 
     @override_settings(
         EMBED_PROVIDERS={
-            "mailchimp": {
-                # No handler
-                "title": "Mailchimp",
+            "test": {
+                "handler": None,
+                "title": "Test",
                 "privacy_policy_url": "https://mailchimp.com/legal/privacy/",
             },
         }
     )
     def test_mailchimp_wrap(self):
         template = """
-{% load feincms3_cookiecontrol %}{% embed "mailchimp" %}<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>{% endembed %}
+{% load feincms3_cookiecontrol %}{% embed "test" %}<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>{% endembed %}
 """
         html = Template(template).render(Context({}))
         self.assertIn('href="https://mailchimp.com/legal/privacy/"', html)

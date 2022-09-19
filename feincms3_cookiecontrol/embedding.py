@@ -4,6 +4,8 @@ from django.utils.html import format_html, mark_safe
 from feincms3.embedding import embed_vimeo, embed_youtube
 
 
+# This isn't a list of recommended third party providers.
+# Additions are welcome, especially those including a handler.
 EMBED_PROVIDERS = {
     "youtube": {
         "handler": embed_youtube,
@@ -14,6 +16,21 @@ EMBED_PROVIDERS = {
         "handler": embed_vimeo,
         "title": "Vimeo",
         "privacy_policy_url": "https://vimeo.com/privacy",
+    },
+    "mailchimp": {
+        "handler": None,
+        "title": "Mailchimp",
+        "privacy_policy_url": "https://mailchimp.com/legal/privacy/",
+    },
+    "cleverreach": {
+        "handler": None,
+        "title": "CleverReach",
+        "privacy_policy_url": "http://www.cleverreach.com/privacy-policy/",
+    },
+    "raisenow": {
+        "handler": None,
+        "title": "RaiseNow",
+        "privacy_policy_url": "https://www.raisenow.com/privacy-policy",
     },
 }
 
@@ -27,7 +44,7 @@ def get_providers():
 
 def embed(url):
     for provider, config in get_providers().items():
-        if (handler := config.get("handler")) and (html := handler(url)) is not None:
+        if (handler := config["handler"]) and (html := handler(url)) is not None:
             return render_to_string(
                 "feincms3_cookiecontrol/embed.html",
                 {
