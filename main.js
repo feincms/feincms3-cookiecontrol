@@ -202,7 +202,6 @@ import "./main.css"
         if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
           const clone = template.content.cloneNode(true)
           node.closest(".f3cc").replaceWith(clone)
-          nodeScriptReplace(clone)
         }
       }
     })
