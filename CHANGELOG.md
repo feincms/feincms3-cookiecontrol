@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Stopped needlessly post-processing the script tags of embeds, thanks
+  @yoshson.
+- Tweaked texts and spacing of embeds.
+- Completed the translations.
+- Changed the modify button rendering logic: If a HTML element with
+  `class="f3cc-modify"` exists anywhere on the page (e.g. `<button type="button" class="f3cc-modify">Modify cookie settings</button>`) the
+  banner revealing functionality is bound to this element and the fixed button
+  in the bottom right side of the viewport isn't added at all.
+
 ## 0.99.0 (2022-09-19)
 
 - Started showing the banner again when encountering unknown cookie values.

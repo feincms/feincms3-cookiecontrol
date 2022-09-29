@@ -78,6 +78,15 @@ import "./main.css"
       return
     }
 
+    let existing
+    if ((existing = document.querySelector(".f3cc-modify"))) {
+      existing.addEventListener("click", (e) => {
+        e.preventDefault()
+        renderBanner()
+      })
+      return
+    }
+
     const ppu = settings.privacyPolicyURL
     const loc = window.location
     if (
