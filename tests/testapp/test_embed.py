@@ -2,7 +2,7 @@ from django import test
 from django.template import Context, Template, TemplateSyntaxError
 from django.test.utils import override_settings
 
-from feincms3_cookiecontrol.embedding import embed, get_providers, wrap
+from feincms3_cookiecontrol.embedding import _get_providers, embed, wrap
 
 
 class ConsciousEmbedTest(test.TestCase):
@@ -39,7 +39,7 @@ class ConsciousEmbedTest(test.TestCase):
     )
     def test_defaults(self):
         # ./settings.py
-        providers = get_providers()
+        providers = _get_providers()
         self.assertIn("example.com", providers)
 
     def test_embed_vimeo_url(self):

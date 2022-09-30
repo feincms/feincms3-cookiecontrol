@@ -4,6 +4,9 @@ from django.utils.html import format_html, mark_safe
 from feincms3.embedding import embed_vimeo, embed_youtube
 
 
+__all__ = ["embed", "wrap"]
+
+
 # This isn't a list of recommended third party providers.
 # Additions are welcome, especially those including a handler.
 EMBED_PROVIDERS = {
@@ -35,7 +38,7 @@ EMBED_PROVIDERS = {
 }
 
 
-def get_providers():
+def _get_providers():
     return {
         **EMBED_PROVIDERS,
         **getattr(settings, "EMBED_PROVIDERS", {}),
@@ -43,14 +46,14 @@ def get_providers():
 
 
 def embed(url):
-    for provider, config in get_providers().items():
+    for provider, config in _get_providers().items():
         if (handler := config["handler"]) and (html := handler(url)) is not None:
             return _render(html, provider, config)
     return ""
 
 
 def wrap(provider, html):
-    return _render(html, provider, get_providers()[provider])
+    return _render(html, provider, _get_providers()[provider])
 
 
 def _render(html, provider, config):
