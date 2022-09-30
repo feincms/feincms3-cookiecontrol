@@ -45,24 +45,15 @@ def get_providers():
 def embed(url):
     for provider, config in get_providers().items():
         if (handler := config["handler"]) and (html := handler(url)) is not None:
-            return render_to_string(
-                "feincms3_cookiecontrol/embed.html",
-                {
-                    "embedded_html": html,
-                    "provider": provider,
-                    "link_start": format_html(
-                        '<a href="{}" target="_blank" rel="noopener">',
-                        config["privacy_policy_url"],
-                    ),
-                    "link_end": mark_safe("</a>"),
-                    **config,
-                },
-            )
+            return _render(html, provider, config)
     return ""
 
 
 def wrap(provider, html):
-    config = get_providers()[provider]
+    return _render(html, provider, get_providers()[provider])
+
+
+def _render(html, provider, config):
     return render_to_string(
         "feincms3_cookiecontrol/embed.html",
         {
