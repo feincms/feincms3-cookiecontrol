@@ -1,6 +1,6 @@
 from django import template
 
-from feincms3_cookiecontrol.embedding import wrap
+from feincms3_cookiecontrol.embedding import embed, wrap
 from feincms3_cookiecontrol.models import cookiecontrol_data
 
 
@@ -16,7 +16,7 @@ def feincms3_cookiecontrol(*, hide_modify_button=False, privacy_policy_url=None)
     return {"data": data}
 
 
-class ConsciousEmbedNode(template.Node):
+class ConsciousWrapNode(template.Node):
     def __init__(self, provider, nodelist):
         self.provider = template.Variable(provider)
         self.nodelist = nodelist
@@ -25,15 +25,20 @@ class ConsciousEmbedNode(template.Node):
         return wrap(self.provider.resolve(context), self.nodelist.render(context))
 
 
-@register.tag
-def embed(parser, token):
+@register.tag(name="wrap")
+def do_wrap(parser, token):
     try:
         tag_name, provider = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError(
-            "%r tag requires exactly one argument", token.contents.split()[0]
+            "%r tag requires exactly one argument", str(token.contents).split()[0]
         )
 
-    nodelist = parser.parse("endembed")
+    nodelist = parser.parse(("endwrap",))
     parser.delete_first_token()
-    return ConsciousEmbedNode(provider, nodelist)
+    return ConsciousWrapNode(provider, nodelist)
+
+
+@register.simple_tag(name="embed")
+def do_embed(url):
+    return embed(url)

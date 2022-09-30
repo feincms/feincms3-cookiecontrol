@@ -244,9 +244,9 @@ Surround the embedded code with the template block ``embed``:
     {% load feincms3_cookiecontrol %}
     ...
     <div class="container">
-        {% embed "mailchimp" %}
+        {% wrap "mailchimp" %}
         <script src="https://some-provider.com/example.js"></script>
-        {% endembed %}
+        {% endwrap %}
     </div>
     ...
 
@@ -255,7 +255,7 @@ embedding content of specific providers.
 
 You can also wrap your default renderer for embedded content plugins like
 ``feincms3.plugins.external`` or ``feincms3.embedding``, but you have to
-explicitly specify the provider (as above with the ``{% embed %}``
+explicitly specify the provider (as above with the ``{% wrap %}``
 template tag).
 
 If HTML is added dynamically to the site which contains such embedded fragments
@@ -285,3 +285,12 @@ You may use the ``embed`` shortcut as follows:
         # ...
         def embedded_html(self):
             return embed(self.url)
+
+The same functionality is also available directly in templates:
+
+.. code-block:: html
+
+    ...
+    {% load feincms3_cookiecontrol %}
+    {% embed plugin.url %}
+    ...

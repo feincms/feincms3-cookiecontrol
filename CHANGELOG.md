@@ -10,6 +10,8 @@
   `class="f3cc-modify"` exists anywhere on the page (e.g. `<button type="button" class="f3cc-modify">Modify cookie settings</button>`) the
   banner revealing functionality is bound to this element and the fixed button
   in the bottom right side of the viewport isn't added at all.
+- Introduced `{% embed %}` and `{% wrap %}` tags mirroring the embedding
+  functions.
 
 ## 0.99.0 (2022-09-19)
 

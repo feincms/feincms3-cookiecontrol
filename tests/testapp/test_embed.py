@@ -1,36 +1,30 @@
 from django import test
 from django.template import Context, Template, TemplateSyntaxError
 
-from feincms3_cookiecontrol.embedding import embed, wrap
+from feincms3_cookiecontrol.embedding import embed
 
 
 class ConsciousEmbedTest(test.TestCase):
-    def test_known_wrap(self):
-        iframe = "<iframe src='https://vimeo.com/'></iframe>"
-        html = wrap("vimeo", iframe)
-        self.assertIn('href="https://vimeo.com/privacy"', html)
-
-    def test_embed(self):
+    def test_wrap_tag(self):
         template = Template(
             """\
 {% load feincms3_cookiecontrol %}
-{% embed 'youtube' %}<iframe src="https://youtube.com/"></iframe>{% endembed %}
+{% wrap 'youtube' %}<iframe src="https://example.com/"></iframe>{% endwrap %}
 """
         )
         html = template.render(Context({}))
         self.assertIn("f3cc-embed", html)
         self.assertIn(
-            '<template><iframe src="https://youtube.com/"></iframe></template>',
+            '<template><iframe src="https://example.com/"></iframe></template>',
             html,
         )
 
-    def test_template_syntax_error(self):
+    def test_wrap_tag_template_syntax_error(self):
         with self.assertRaises(TemplateSyntaxError):
             Template(
-                """
-                {% load feincms3_cookiecontrol %}
-                {% embed %}{% endembed %}
-                """
+                """\
+{% load feincms3_cookiecontrol %}{% wrap %}{% endwrap %}
+"""
             )
 
     def test_embed_vimeo_url(self):
@@ -45,3 +39,14 @@ class ConsciousEmbedTest(test.TestCase):
 
     def test_embed_unknown(self):
         self.assertEqual(embed("https://example.com"), "")
+
+    def test_embed_tag(self):
+        template = Template("{% load feincms3_cookiecontrol %}{% embed url %}")
+        html = template.render(Context({}))
+        self.assertEqual(html, "")
+
+        html = template.render(
+            Context({"url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"})
+        )
+        self.assertIn('href="https://policies.google.com/privacy"', html)
+        self.assertIn("dQw4w9WgXcQ", html)
