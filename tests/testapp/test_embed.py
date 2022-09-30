@@ -1,8 +1,7 @@
 from django import test
 from django.template import Context, Template, TemplateSyntaxError
-from django.test.utils import override_settings
 
-from feincms3_cookiecontrol.embedding import _get_providers, embed, wrap
+from feincms3_cookiecontrol.embedding import embed, wrap
 
 
 class ConsciousEmbedTest(test.TestCase):
@@ -34,14 +33,6 @@ class ConsciousEmbedTest(test.TestCase):
                 """
             )
 
-    @override_settings(
-        EMBED_PROVIDERS={"example.com": {"blub": "https://example.com/privacy/"}}
-    )
-    def test_defaults(self):
-        # ./settings.py
-        providers = _get_providers()
-        self.assertIn("example.com", providers)
-
     def test_embed_vimeo_url(self):
         html = embed("https://vimeo.com/455728498")
         self.assertIn('href="https://vimeo.com/privacy"', html)
@@ -54,25 +45,3 @@ class ConsciousEmbedTest(test.TestCase):
 
     def test_embed_unknown(self):
         self.assertEqual(embed("https://example.com"), "")
-
-    @override_settings(
-        EMBED_PROVIDERS={
-            "test": {
-                "handler": None,
-                "title": "Test",
-                "privacy_policy_url": "https://mailchimp.com/legal/privacy/",
-            },
-        }
-    )
-    def test_mailchimp_wrap(self):
-        template = """
-{% load feincms3_cookiecontrol %}{% embed "test" %}<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>{% endembed %}
-"""
-        html = Template(template).render(Context({}))
-        self.assertIn('href="https://mailchimp.com/legal/privacy/"', html)
-        self.assertIn(
-            """<template><script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script></template>""",
-            html,
-        )
-
-        self.assertEqual(embed("https://example.com"), "")  # No crash

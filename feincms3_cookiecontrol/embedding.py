@@ -9,7 +9,7 @@ __all__ = ["embed", "wrap"]
 
 # This isn't a list of recommended third party providers.
 # Additions are welcome, especially those including a handler.
-EMBED_PROVIDERS = {
+_providers = {
     "youtube": {
         "handler": embed_youtube,
         "title": "YouTube",
@@ -36,24 +36,18 @@ EMBED_PROVIDERS = {
         "privacy_policy_url": "https://www.raisenow.com/privacy-policy",
     },
 }
-
-
-def _get_providers():
-    return {
-        **EMBED_PROVIDERS,
-        **getattr(settings, "EMBED_PROVIDERS", {}),
-    }
+_providers.update(getattr(settings, "EMBED_PROVIDERS", {}))
 
 
 def embed(url):
-    for provider, config in _get_providers().items():
+    for provider, config in _providers.items():
         if (handler := config["handler"]) and (html := handler(url)) is not None:
             return _render(html, provider, config)
     return ""
 
 
 def wrap(provider, html):
-    return _render(html, provider, _get_providers()[provider])
+    return _render(html, provider, _providers[provider])
 
 
 def _render(html, provider, config):
