@@ -20,6 +20,11 @@ _providers = {
         "title": "Vimeo",
         "privacy_policy_url": "https://vimeo.com/privacy",
     },
+    "google": {
+        "handler": None,
+        "title": "Google",
+        "privacy_policy_url": "https://policies.google.com/privacy",
+    },
     "mailchimp": {
         "handler": None,
         "title": "Mailchimp",

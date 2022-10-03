@@ -12,6 +12,7 @@
   in the bottom right side of the viewport isn't added at all.
 - Introduced `{% embed %}` and `{% wrap %}` tags mirroring the embedding
   functions.
+- Added Google to the list of well-known providers.
 
 ## 0.99.0 (2022-09-19)
 
