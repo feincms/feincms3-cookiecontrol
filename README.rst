@@ -184,13 +184,13 @@ Set the domain for the cookie so that the cookie is available on subdomains (be
 sure to check the relevant guides to understand what the problems may be when
 doing this and what restrictions you have to honor):
 
-.. code-block:: code-python
+.. code-block:: python
 
     COOKIECONTROL = {"domain": "example.com"}
 
 Add the view and optionally provide the privacy policy URL:
 
-.. code-block:: code-python
+.. code-block:: python
 
     from django.urls import reverse_lazy
     from feincms3_cookiecontrol.views import inject
@@ -227,7 +227,7 @@ providers. The letter is accomplished by the 'conscious embed' functionality.
 
 Extend default providers in your ``settings.py``:
 
-.. code-block:: code-python
+.. code-block:: python
 
     EMBED_PROVIDERS = {
         "some-provider": {
@@ -276,7 +276,7 @@ writing the module supports embedding YouTube and Vimeo URLs.
 
 You may use the ``embed`` shortcut as follows:
 
-.. code-block:: code-python
+.. code-block:: python
 
     # ...
     from feincms3_cookiecontrol.embedding import embed
