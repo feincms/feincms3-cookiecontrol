@@ -77,12 +77,16 @@ way to customize the appearance is to set a few CSS variables, e.g.:
 .. code-block:: css
 
     .f3cc {
-      --f3cc-background-color: #e9e9e9;
-      --f3cc-foreground-color: #000000;
-      --f3cc-button-foreground: #cbcbcb;
+      --f3cc-background: #e9e9e9;
+      --f3cc-foreground: #000000;
       --f3cc-button-background: #cbcbcb;
       --f3cc-accept-background: #90f690;
+      --f3cc-button-foreground: #cbcbcb;
     }
+
+It's recommended to set all variables if you set a single one; the exception is
+``--f3cc-button-foreground`` which defaults to the value of
+``f3cc-foreground``.
 
 
 Hiding the modify button
