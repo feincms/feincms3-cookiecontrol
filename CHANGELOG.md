@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0 (2022-10-28)
+
 - Stopped needlessly post-processing the script tags of embeds, thanks
   @yoshson.
 - Tweaked texts and spacing of embeds.
