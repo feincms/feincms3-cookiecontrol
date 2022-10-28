@@ -79,6 +79,7 @@ way to customize the appearance is to set a few CSS variables, e.g.:
     .f3cc {
       --f3cc-background-color: #e9e9e9;
       --f3cc-foreground-color: #000000;
+      --f3cc-button-foreground: #cbcbcb;
       --f3cc-button-background: #cbcbcb;
       --f3cc-accept-background: #90f690;
     }

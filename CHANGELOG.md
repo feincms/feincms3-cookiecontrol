@@ -13,6 +13,8 @@
 - Introduced `{% embed %}` and `{% wrap %}` tags mirroring the embedding
   functions.
 - Added Google to the list of well-known providers.
+- Added the `--f3cc-button-foreground` CSS variable. It defaults to
+  `var(--f3cc-foreground-color)` for backwards compatibility.
 
 ## 0.99.0 (2022-09-19)
 
