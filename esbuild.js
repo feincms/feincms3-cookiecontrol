@@ -24,7 +24,7 @@ async function generateInjectCSS(sourcePath) {
   const sourceCSS = await readFile(sourcePath)
   const minified = ("" + sourceCSS)
     .replaceAll(/\s+/g, " ")
-    .replaceAll(/\s*([{};:])\s*/g, "$1")
+    .replaceAll(/\s*([{},;:])\s*/g, "$1")
 
   return `(function(){
     var e = document.createElement('style')

@@ -33,7 +33,7 @@
   width: 80%;
 }
 
-@media screen and (max-width: 60rem) {
+@media (max-width: 60rem) {
   .f3cc .f3cc-container {
     width: 100%;
     flex-direction: column;
