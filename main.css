@@ -7,6 +7,7 @@
   --_B: var(--f3cc-button-background, #cbcbcb);
   --_A: var(--f3cc-accept-background, #90f690);
   --_F: var(--f3cc-button-foreground, var(--_f));
+  --_E: var(--f3cc-accept-foreground, var(--_F));
 }
 
 .f3cc .f3cc-banner {
@@ -81,6 +82,7 @@
 
 .f3cc .f3cc-button.accept {
   background: var(--_A);
+  color: var(--_E);
 }
 
 .f3cc .f3cc-button.modify {

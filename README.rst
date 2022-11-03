@@ -82,11 +82,13 @@ way to customize the appearance is to set a few CSS variables, e.g.:
       --f3cc-button-background: #cbcbcb;
       --f3cc-accept-background: #90f690;
       --f3cc-button-foreground: #cbcbcb;
+      --f3cc-accept-foreground: #cbcbcb;
     }
 
 It's recommended to set all variables if you set a single one; the exception is
 ``--f3cc-button-foreground`` which defaults to the value of
-``f3cc-foreground``.
+``--f3cc-foreground`` and ``--f3cc-accept-foreground`` which defaults to the
+value of ``--f3cc-button-foreground``.
 
 
 Hiding the modify button
