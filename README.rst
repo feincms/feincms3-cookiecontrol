@@ -5,6 +5,10 @@ feincms3-cookiecontrol
 Despite its name and the fact that it is documented as a part of
 feincms3, feincms3-cookiecontrol can also be used standalone.
 
+.. image:: docs/banner.png
+   :width: 400
+   :alt: The cookie banner
+
 
 Cookie control
 ==============
@@ -225,6 +229,10 @@ Embed the script:
 
 Selectively embed iframes or other third party scripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: docs/embed.png
+   :width: 400
+   :alt: Consciously embed a YouTube video
 
 If users do not consent to your cookie policy, embedding third party scripts or iframes
 might violate data protection laws, since personal data is transfered to a third party
