@@ -2,7 +2,11 @@
 
 ## Unreleased
 
+## 1.1 (2022-11-22)
+
 - Added the `--f3cc-accept-foreground` CSS variable.
+- Made it possible to override the default description and button text when
+  using the `{% wrap %}` template tag.
 
 ## 1.0 (2022-10-28)
 
