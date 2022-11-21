@@ -1,8 +1,7 @@
-{% load i18n %}
 <div class="f3cc">
   <div class="f3cc-embed" data-provider="{{ provider }}">
-    <div class="f3cc-description">{% blocktranslate %}We would like to show you content from the provider {{ title }}, but respect your privacy. If you agree to the {{ link_start }}provider's privacy policy{{ link_end }}, please click the following button to view the content.{% endblocktranslate %}</div>
-    <button type="button" class="f3cc-button accept">{% translate "Show the content" %}</button>
+    <div class="f3cc-description">{{ description }}<br>{{ privacy_policy_link }}</div>
+    <button type="button" class="f3cc-button accept">{{ button }}</button>
     <template>{{ embedded_html|safe }}</template>
   </div>
 </div>

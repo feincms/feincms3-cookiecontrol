@@ -27,6 +27,24 @@ class ConsciousEmbedTest(test.TestCase):
 """
             )
 
+    def test_show_me_the_good_stuff(self):
+        template = Template(
+            """\
+{% load feincms3_cookiecontrol %}
+{% wrap 'youtube' button="Show me the good stuff!" %}<iframe src="https://example.com/"></iframe>{% endwrap %}
+"""
+        )
+        html = template.render(Context({}))
+        self.assertIn("f3cc-embed", html)
+        self.assertIn(
+            '<template><iframe src="https://example.com/"></iframe></template>',
+            html,
+        )
+        self.assertIn(
+            '<button type="button" class="f3cc-button accept">Show me the good stuff!</button>',
+            html,
+        )
+
     def test_embed_vimeo_url(self):
         html = embed("https://vimeo.com/455728498")
         self.assertIn('href="https://vimeo.com/privacy"', html)

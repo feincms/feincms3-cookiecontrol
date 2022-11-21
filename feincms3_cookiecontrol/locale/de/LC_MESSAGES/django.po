@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-19 13:57+0200\n"
+"POT-Creation-Date: 2022-11-21 17:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: embedding.py:48
+#, python-format
+msgctxt "f3cc"
+msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
+msgstr "Wir möchten Ihnen gerne Inhalte des Anbieters %(title)s anzeigen, aber respektieren Ihre Privatsphäre. Falls Sie mit den Datenschutzrichtlinien des Anbieters einverstanden sind, klicken Sie bitte den folgenden Button, um die Inhalte anzuzeigen."
+
+#: embedding.py:50
+msgctxt "f3cc"
+msgid "Show the content"
+msgstr "Inhalt anzeigen"
+
+#: embedding.py:73 models.py:23
+msgctxt "f3cc"
+msgid "Privacy policy"
+msgstr "Datenschutzerklärung"
 
 #: models.py:16
 msgctxt "f3cc"
@@ -43,11 +59,6 @@ msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr "Cookie-Einstellungen anpassen"
 
-#: models.py:23
-msgctxt "f3cc"
-msgid "Privacy policy"
-msgstr "Datenschutzerklärung"
-
 #: models.py:49
 msgid "technical name"
 msgstr "Technischer Name"
@@ -71,15 +82,3 @@ msgstr "Das sieht nicht korrekt aus. Bitte beginne mit einem HTML-Tag (zB <scrip
 #: models.py:75
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr "Die Eingabe von <noscript> Tags macht keinen Sinn."
-
-#: templates/feincms3_cookiecontrol/embed.html:4
-#, python-format
-msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the %(link_start)sprovider's privacy policy%(link_end)s, please click the following button to view the content."
-msgstr "Wir möchten Ihnen gerne Inhalte des Anbieters %(title)s anzeigen, aber respektieren Ihre Privatsphäre. Falls Sie mit den %(link_start)sDatenschutzrichtlinien des Anbieters%(link_end)s einverstanden sind, klicken Sie bitte den folgenden Button, um die Inhalte anzuzeigen."
-
-#: templates/feincms3_cookiecontrol/embed.html:5
-msgid "Show the content"
-msgstr "Inhalt anzeigen"
-
-#~ msgid "OK, thanks."
-#~ msgstr "OK, danke."

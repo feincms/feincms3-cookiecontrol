@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.utils.html import format_html, mark_safe
+from django.utils.html import format_html
+from django.utils.translation import pgettext, pgettext_lazy
 from feincms3.embedding import embed_vimeo, embed_youtube
 
 
@@ -43,6 +44,12 @@ _providers = {
 }
 _providers.update(getattr(settings, "EMBED_PROVIDERS", {}))
 
+_default_description = pgettext_lazy(
+    "f3cc",
+    "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content.",
+)
+_default_button = pgettext_lazy("f3cc", "Show the content")
+
 
 def embed(url):
     for provider, config in _providers.items():
@@ -51,21 +58,23 @@ def embed(url):
     return ""
 
 
-def wrap(provider, html):
-    return _render(html, provider, _providers[provider])
+def wrap(provider, html, **kwargs):
+    return _render(html, provider, _providers[provider], **kwargs)
 
 
-def _render(html, provider, config):
+def _render(html, provider, config, *, description=None, button=None):
     return render_to_string(
         "feincms3_cookiecontrol/embed.html",
         {
             "embedded_html": html,
             "provider": provider,
-            "link_start": format_html(
-                '<a href="{}" target="_blank" rel="noopener">',
+            "privacy_policy_link": format_html(
+                '<a href="{}" target="_blank" rel="noopener">{}</a>',
                 config["privacy_policy_url"],
+                pgettext("f3cc", "Privacy policy"),
             ),
-            "link_end": mark_safe("</a>"),
+            "description": description or (_default_description % config),
+            "button": button or _default_button,
             **config,
         },
     )
