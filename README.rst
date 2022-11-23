@@ -203,16 +203,22 @@ Add the view and optionally provide the privacy policy URL:
 
 .. code-block:: python
 
-    from django.urls import reverse_lazy
+    from feincms3.root.passthru import reverse_passthru_lazy
     from feincms3_cookiecontrol.views import inject
 
     urlpatterns = [
         # Base case
         path("f3cc-inject.js", inject),
 
-        # With the privacy policy URL; reverse_lazy or
-        django.utils.functional.lazy() may be of use here.
-        path("f3cc-inject.js", inject, {"privacy_policy_url": reverse_lazy("...")}),
+        # Using reverse_passthru_lazy.
+        # NOTE! The inject view uses `request.build_absolute_uri` to
+        # complete the URL, you do not have to add the domain and
+        # protocol yourself here.
+        path(
+            "f3cc-inject.js",
+            inject,
+            {"privacy_policy_url": reverse_passthru_lazy("privacy-policy", fallback="/")},
+        ),
     ]
 
 Embed the script:
