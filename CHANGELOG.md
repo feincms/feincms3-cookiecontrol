@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Updated pre-commit hooks.
+- Added Django 4.2a1 to the CI.
+- Django 5.0 will require Python 3.10 or better, updated the CI to take this
+  into account.
+- Documented a better way to integrate the inject view. (Still only really
+  useful for special cases.)
+
 ## 1.1 (2022-11-22)
 
 - Added the `--f3cc-accept-foreground` CSS variable.
