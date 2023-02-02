@@ -3,7 +3,7 @@
 ## Unreleased
 
 - Updated pre-commit hooks.
-- Added Django 4.2a1 to the CI.
+- Added Django 4.2a1 and Python 3.11 to the CI.
 - Django 5.0 will require Python 3.10 or better, updated the CI to take this
   into account.
 - Documented a better way to integrate the inject view. (Still only really
