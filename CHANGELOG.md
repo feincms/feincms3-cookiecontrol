@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.2 (2023-03-24)
+
 - Updated pre-commit hooks.
 - Added Django 4.2a1 and Python 3.11 to the CI.
 - Django 5.0 will require Python 3.10 or better, updated the CI to take this
