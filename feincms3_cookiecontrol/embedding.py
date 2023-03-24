@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.translation import pgettext, pgettext_lazy
 from feincms3.embedding import embed_vimeo, embed_youtube
+from feincms3.plugins.external import oembed_json
 
 
 __all__ = ["embed", "wrap"]
@@ -60,6 +61,20 @@ def embed(url):
 
 def wrap(provider, html, **kwargs):
     return _render(html, provider, _providers[provider], **kwargs)
+
+
+def oembed(url):
+    if data := oembed_json(url):
+        return render_to_string(
+            "feincms3_cookiecontrol/embed.html",
+            {
+                "embedded_html": f'<div class="responsive-embed widescreen">{data["html"]}</div>',
+                "provider": data["provider_name"],
+                "privacy_policy_link": "",
+                "description": _default_description % {"title": data["provider_name"]},
+                "button": _default_button,
+            },
+        )
 
 
 def _render(html, provider, config, *, description=None, button=None):

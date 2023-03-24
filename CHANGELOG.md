@@ -9,6 +9,7 @@
 - Documented a better way to integrate the inject view. (Still only really
   useful for special cases.)
 - Code golfed the generated JavaScript a bit to shave off a few bytes.
+- Added a `oembed` embedder to `feincms3_cookiecontrol.embedding`.
 
 ## 1.1 (2022-11-22)
 
