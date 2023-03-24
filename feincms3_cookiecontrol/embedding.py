@@ -3,7 +3,6 @@ from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.translation import pgettext, pgettext_lazy
 from feincms3.embedding import embed_vimeo, embed_youtube
-from feincms3.plugins.external import oembed_json
 
 
 __all__ = ["embed", "wrap"]
@@ -64,6 +63,8 @@ def wrap(provider, html, **kwargs):
 
 
 def oembed(url):
+    from feincms3.plugins.external import oembed_json
+
     if data := oembed_json(url):
         return render_to_string(
             "feincms3_cookiecontrol/embed.html",
