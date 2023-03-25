@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "feincms3-cookiecontrol"
+dynamic = ["version"]
+description = "Cookie Control Panel for GDPR compliant feincms3 websites"
+readme = "README.rst"
+license = "BSD-3-Clause"
+requires-python = ">=3.8"
+authors = [
+    { name = "York Schickl", email = "ys@feinheit.ch" },
+]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+dependencies = [
+    "Django>=3.2",
+    "feincms3>=0.37",
+]
+
+[project.optional-dependencies]
+tests = [
+    "coverage",
+    "requests",
+]
+
+[project.urls]
+Homepage = "https://github.com/feinheit/feincms3-cookiecontrol/"
+
+[tool.hatch.version]
+path = "feincms3_cookiecontrol/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/feincms3_cookiecontrol",
+]
