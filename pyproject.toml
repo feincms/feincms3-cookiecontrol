@@ -56,6 +56,8 @@ include = [
 [tool.ruff]
 extend-select = ["B", "E", "F", "W", "C90", "I", "N", "UP", "FBT", "C4", "DJ", "PIE"]
 extend-ignore = ["E501"]
+fix = true
+target-version = "py38"
 
 [tool.ruff.isort]
 combine-as-imports = true
