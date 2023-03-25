@@ -27,7 +27,7 @@ class ConsciousWrapNode(template.Node):
         return wrap(
             self.provider.resolve(context),
             self.nodelist.render(context),
-            **{key: value.resolve(context) for key, value in self.kw.items()}
+            **{key: value.resolve(context) for key, value in self.kw.items()},
         )
 
 
@@ -35,10 +35,10 @@ class ConsciousWrapNode(template.Node):
 def do_wrap(parser, token):
     try:
         tag_name, provider, *bits = token.split_contents()
-    except ValueError:
+    except ValueError as exc:
         raise template.TemplateSyntaxError(
             "%r tag requires exactly one argument", str(token.contents).split()[0]
-        )
+        ) from exc
 
     kw = token_kwargs(bits, parser)
 

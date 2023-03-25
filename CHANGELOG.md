@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Switched to hatchling.
+- Switched to ruff.
+
 ## 1.2 (2023-03-24)
 
 - Updated pre-commit hooks.
