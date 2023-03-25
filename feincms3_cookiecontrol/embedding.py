@@ -65,17 +65,19 @@ def wrap(provider, html, **kwargs):
 def oembed(url):
     from feincms3.plugins.external import oembed_json
 
-    if data := oembed_json(url):
+    if (data := oembed_json(url)) and (html := data.get("html")):
+        provider_name = data.get("provider_name", "")
         return render_to_string(
             "feincms3_cookiecontrol/embed.html",
             {
-                "embedded_html": f'<div class="responsive-embed widescreen">{data["html"]}</div>',
-                "provider": data["provider_name"],
+                "embedded_html": f'<div class="responsive-embed widescreen">{html}</div>',
+                "provider": provider_name,
                 "privacy_policy_link": "",
-                "description": _default_description % {"title": data["provider_name"]},
+                "description": _default_description % {"title": provider_name},
                 "button": _default_button,
             },
         )
+    return ""
 
 
 def _render(html, provider, config, *, description=None, button=None):
