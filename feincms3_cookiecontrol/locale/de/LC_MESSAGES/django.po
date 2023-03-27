@@ -22,7 +22,7 @@ msgstr ""
 #, python-format
 msgctxt "f3cc"
 msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
-msgstr "Wir möchten Ihnen gerne Inhalte des Anbieters %(title)s anzeigen, aber respektieren Ihre Privatsphäre. Falls Sie mit den Datenschutzrichtlinien des Anbieters einverstanden sind, klicken Sie bitte den folgenden Button, um die Inhalte anzuzeigen."
+msgstr "Wir möchten Ihnen gerne Inhalte des Anbieters %(title)s anzeigen, aber respektieren Ihre Privatsphäre. Falls Sie mit der Datenschutzerklärung des Anbieters einverstanden sind, klicken Sie bitte den folgenden Button, um die Inhalte anzuzeigen."
 
 #: embedding.py:50
 msgctxt "f3cc"
@@ -42,7 +42,7 @@ msgstr "Cookies auf unserer Website"
 #: models.py:17
 msgctxt "f3cc"
 msgid "Banner content"
-msgstr "Wir verwenden Cookies, um unsere Website benutzerfreundlich zu gestalten. In unserer Datenschutzrichtlinie finden Sie weitere Informationen darüber, wie wir Cookies einsetzen und Ihre Daten schützen."
+msgstr "Wir verwenden Cookies, um unsere Website benutzerfreundlich zu gestalten. In unserer Datenschutzerklärung finden Sie weitere Informationen darüber, wie wir Cookies einsetzen und Ihre Daten schützen."
 
 #: models.py:18
 msgctxt "f3cc"
