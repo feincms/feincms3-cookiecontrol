@@ -72,7 +72,7 @@ def oembed(url):
             "feincms3_cookiecontrol/embed.html",
             {
                 "embedded_html": f'<div class="responsive-embed widescreen {slugify(provider_name)}">{html}</div>',
-                "provider": provider_name,
+                "provider": slugify(provider_name),
                 "privacy_policy_link": "",
                 "description": _default_description % {"title": provider_name},
                 "button": _default_button,
