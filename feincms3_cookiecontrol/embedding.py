@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import format_html
+from django.utils.text import slugify
 from django.utils.translation import pgettext, pgettext_lazy
 from feincms3.embedding import embed_vimeo, embed_youtube
 
@@ -70,7 +71,7 @@ def oembed(url):
         return render_to_string(
             "feincms3_cookiecontrol/embed.html",
             {
-                "embedded_html": f'<div class="responsive-embed widescreen">{html}</div>',
+                "embedded_html": f'<div class="responsive-embed widescreen {slugify(provider_name)}">{html}</div>',
                 "provider": provider_name,
                 "privacy_policy_link": "",
                 "description": _default_description % {"title": provider_name},
