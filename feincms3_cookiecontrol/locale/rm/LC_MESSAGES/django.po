@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-13 19:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: embedding.py:50
+#, python-format
+msgctxt "f3cc"
+msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
+msgstr "Nus vulain mussar a Vus cuntegns dal purschider %(title)s, ma respectar Vossa sfera privata. Sche Vus essas d’accord cun la decleraziun da protecziun da datas da l’offerent, cliccai sin il suandant buttun per inditgar il cuntegn."
+
+#: embedding.py:52
+msgctxt "f3cc"
+msgid "Show the content"
+msgstr "Mussai il cuntegn"
+
+#: embedding.py:93 models.py:23
+msgctxt "f3cc"
+msgid "Privacy policy"
+msgstr "Decleraziun davart la protecziun da datas"
+
+#: models.py:16
+msgctxt "f3cc"
+msgid "Cookies on Our Website"
+msgstr "Cookies sin nossa pagina-web"
+
+#: models.py:17
+msgctxt "f3cc"
+msgid "Banner content"
+msgstr "Nus utilisain cookies per porscher ina pagina-web pratica per las utilisadras ed ils utilisaders. En nossa directiva davart la protecziun da datas chattais Vus ulteriuras infurmaziuns co che nus faschain diever da cookies e protegin Vossas datas."
+
+#: models.py:18
+msgctxt "f3cc"
+msgid "Accept all cookies"
+msgstr "Acceptar tut"
+
+#: models.py:19
+msgctxt "f3cc"
+msgid "Refuse non-essential cookies"
+msgstr "Refusar ils cookies betg essenzials"
+
+#: models.py:20
+msgctxt "f3cc"
+msgid "Modify cookie settings"
+msgstr "Midar ils parameters da cookie"
+
+#: models.py:49
+msgid "technical name"
+msgstr ""
+
+#: models.py:51 models.py:58
+msgid "script"
+msgstr ""
+
+#: models.py:53
+msgid "HTML code to inject if cookies are accepted."
+msgstr ""
+
+#: models.py:59
+msgid "scripts"
+msgstr ""
+
+#: models.py:68
+msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+msgstr ""
+
+#: models.py:75
+msgid "Entering <noscript> tags doesn't make sense."
+msgstr ""

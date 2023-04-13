@@ -7,6 +7,7 @@
 - Stopped crashing when `oembed` doesn't succeed.
 - Added the slugified provider name to the CSS class of the
   `<div class="responsive-embed">` element when using `oembed`.
+- Added `rm` (Romansh) translations.
 
 ## 1.2 (2023-03-24)
 
