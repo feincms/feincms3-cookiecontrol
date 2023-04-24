@@ -5,15 +5,17 @@
 
 import "./main.css"
 
-const qs = (selector, node = document) => node.querySelector(selector)
-
-const cookieName = "f3cc",
-  settings = window.f3ccData || JSON.parse(qs("#f3cc-data").textContent),
+const qs = (selector, node = document) => node.querySelector(selector),
+  body = document.body,
+  sClassName = "className",
+  sTextContent = "textContent",
+  cookieName = "f3cc",
+  settings = window.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent]),
   injectedScripts = {},
   providerKey = "f3cc-embed-providers"
 let mainElement, banner, modify
 
-function crel(tagName, attributes = null, children = []) {
+const crel = (tagName, attributes = null, children = []) => {
   const dom = document.createElement(tagName)
   if (attributes) {
     for (let [name, value] of Object.entries(attributes)) {
@@ -25,52 +27,55 @@ function crel(tagName, attributes = null, children = []) {
   return dom
 }
 
-function renderBanner() {
+const renderBanner = () => {
   if (banner) {
     show(banner)
     return
   }
 
   const content = [
-    crel("div", { className: "f3cc-title", textContent: settings.heading }),
     crel("div", {
-      className: "f3cc-description",
-      textContent: settings.description,
+      [sClassName]: "f3cc-title",
+      [sTextContent]: settings.heading,
+    }),
+    crel("div", {
+      [sClassName]: "f3cc-description",
+      [sTextContent]: settings.description,
     }),
   ]
   if (settings.privacyPolicyURL) {
     content[1].append(
       crel("br"),
       crel("a", {
-        textContent: settings.privacyPolicyTitle,
+        [sTextContent]: settings.privacyPolicyTitle,
         href: settings.privacyPolicyURL,
       })
     )
   }
   const buttons = [
     crel("a", {
-      className: "f3cc-button accept",
-      textContent: settings.buttonAccept,
+      [sClassName]: "f3cc-button accept",
+      [sTextContent]: settings.buttonAccept,
       onclick: onAcceptClick,
     }),
     crel("a", {
-      className: "f3cc-button reject",
-      textContent: settings.buttonReject,
+      [sClassName]: "f3cc-button reject",
+      [sTextContent]: settings.buttonReject,
       onclick: onRejectClick,
     }),
   ]
 
-  banner = crel("div", { className: "f3cc f3cc-banner" }, [
-    crel("div", { className: "f3cc-container" }, [
-      crel("div", { className: "f3cc-content" }, content),
-      crel("div", { className: "f3cc-buttons" }, buttons),
+  banner = crel("div", { [sClassName]: "f3cc f3cc-banner" }, [
+    crel("div", { [sClassName]: "f3cc-container" }, [
+      crel("div", { [sClassName]: "f3cc-content" }, content),
+      crel("div", { [sClassName]: "f3cc-buttons" }, buttons),
     ]),
   ])
 
   mainElement.append(banner)
 }
 
-function renderModify() {
+const renderModify = () => {
   if (modify) {
     show(modify)
     return
@@ -92,8 +97,8 @@ function renderModify() {
     (!ppu || ppu == `${loc.protocol}//${loc.host}${loc.pathname}`)
   ) {
     modify = crel("a", {
-      className: "f3cc-button modify",
-      textContent: settings.buttonModify,
+      [sClassName]: "f3cc-button modify",
+      [sTextContent]: settings.buttonModify,
       onclick: (e) => {
         e.preventDefault()
         hide(modify)
@@ -104,7 +109,7 @@ function renderModify() {
   }
 }
 
-function setCookie(value) {
+const setCookie = (value) => {
   let cookie = `${cookieName}=${value};max-age=31536000;path=/;sameSite=Strict`
   if (settings.domain) {
     cookie += `;domain=${settings.domain}`
@@ -112,52 +117,54 @@ function setCookie(value) {
   document.cookie = cookie
 }
 
-function getCookie() {
-  const cookies = document.cookie ? document.cookie.split("; ") : []
+const getCookie = () => {
   const prefix = `${cookieName}=`
-  for (let cookie of cookies) {
+  for (let cookie of document.cookie.split("; ")) {
     if (cookie.startsWith(prefix))
       return decodeURIComponent(cookie.substring(prefix.length))
   }
 }
 
-function isKnownCookieValue() {
-  return ["all", "essential"].includes(getCookie())
+const sAll = "all",
+  sEssential = "essential"
+const isKnownCookieValue = () => {
+  const c = getCookie()
+  return sAll == c || sEssential == c
 }
 
-function getConsentToAll() {
-  return getCookie() === "all"
+const getConsentToAll = () => {
+  return getCookie() === sAll
 }
 
-function show(el) {
+const show = (el) => {
   el.style.display = ""
 }
 
-function hide(el) {
+const hide = (el) => {
   if (el) el.style.display = "none"
 }
 
-function onAcceptClick(e) {
+const onAcceptClick = (e) => {
   e.preventDefault()
-  setCookie("all")
+  setCookie(sAll)
   hide(banner)
   renderModify()
   injectScripts()
   renderEmbeds()
 }
 
-function onRejectClick(e) {
+const onRejectClick = (e) => {
   e.preventDefault()
-  setCookie("essential")
+  setCookie(sEssential)
   hide(banner)
   renderModify()
 }
 
-function injectScripts() {
+const injectScripts = () => {
   for (let cookie of settings.cookies) {
     let node = injectedScripts[cookie.name]
     if (!node) {
-      injectedScripts[cookie.name] = node = document.createElement("div")
+      injectedScripts[cookie.name] = node = crel("div")
       node.dataset.name = cookie.name
       mainElement.append(node)
     }
@@ -166,9 +173,9 @@ function injectScripts() {
   }
 }
 
-function initCookieBanner() {
-  mainElement = crel("div", { className: "f3cc" })
-  document.body.append(mainElement)
+const initCookieBanner = () => {
+  mainElement = crel("div", { [sClassName]: "f3cc" })
+  body.append(mainElement)
 
   if (getConsentToAll()) {
     injectScripts()
@@ -214,8 +221,8 @@ const renderEmbeds = (window.f3ccRenderEmbeds = () => {
   })
 })
 
-function initEmbedClickListener() {
-  document.body.addEventListener("click", (e) => {
+const initEmbedClickListener = () => {
+  body.addEventListener("click", (e) => {
     const button = e.target.closest(".f3cc-button")
     const node = button && button.closest(".f3cc-embed")
     if (button && node) {
@@ -232,7 +239,7 @@ function initEmbedClickListener() {
 The following functions allow executing scripts added via innerHTML
 Thanks, https://stackoverflow.com/a/20584396
 */
-function nodeScriptReplace(node) {
+const nodeScriptReplace = (node) => {
   if (nodeScriptIs(node) === true) {
     node.parentNode.replaceChild(nodeScriptClone(node), node)
   } else {
@@ -246,8 +253,8 @@ function nodeScriptReplace(node) {
   return node
 }
 
-function nodeScriptClone(node) {
-  const script = document.createElement("script")
+const nodeScriptClone = (node) => {
+  const script = crel("script")
   script.text = node.innerHTML
 
   let i = -1,
@@ -259,14 +266,14 @@ function nodeScriptClone(node) {
   return script
 }
 
-function nodeScriptIs(node) {
+const nodeScriptIs = (node) => {
   return node.tagName === "SCRIPT"
 }
 
 /*
-function initEmbedMutationObserver() {
+const initEmbedMutationObserver = () => {
   const observer = new MutationObserver(renderEmbeds)
-  observer.observe(document.body, { subtree: true, childList: true })
+  observer.observe(body, { subtree: true, childList: true })
 }
 initEmbedMutationObserver()
 */
