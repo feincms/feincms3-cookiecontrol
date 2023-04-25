@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "Cookie Control Panel for GDPR compliant feincms3 websites"
 readme = "README.rst"
 license = "BSD-3-Clause"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 authors = [
     { name = "York Schickl", email = "ys@feinheit.ch" },
 ]
@@ -23,7 +23,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -57,7 +56,7 @@ include = [
 extend-select = ["B", "E", "F", "W", "C90", "I", "N", "UP", "FBT", "C4", "DJ", "PIE"]
 extend-ignore = ["E501"]
 fix = true
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.isort]
 combine-as-imports = true

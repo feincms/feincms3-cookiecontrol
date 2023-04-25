@@ -8,6 +8,10 @@
 - Added the slugified provider name to the CSS class of the
   `<div class="responsive-embed">` element when using `oembed`.
 - Added `rm` (Romansh) translations.
+- Further reduced the size of the generated JavaScript.
+- Renamed the JavaScript file from `feincms3_cookiecontrol/build.js` to
+  `f3cc.js` because it's nicer.
+- Dropped compatibility with Python 3.8.
 
 ## 1.2 (2023-03-24)
 
