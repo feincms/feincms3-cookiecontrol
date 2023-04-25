@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.3 (2023-04-25)
+
 - Switched to hatchling.
 - Switched to ruff.
 - Stopped crashing when `oembed` doesn't succeed.
