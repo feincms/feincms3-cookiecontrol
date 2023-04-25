@@ -11,11 +11,7 @@ from feincms3_cookiecontrol.models import (
 )
 
 
-BASE = Path(__file__).parent / "static" / "feincms3_cookiecontrol"
-
-
-def read_staticfile(filename):
-    return (BASE / filename).read_text()
+SCRIPT = Path(__file__).parent / "static" / "f3cc.js"
 
 
 @cache_page(COOKIECONTROL_CACHE_TIMEOUT)
@@ -32,7 +28,7 @@ def inject(request, *, privacy_policy_url=None):
     content = f"""\
 (function(){{\
 window.f3ccData={serialized};\
-{read_staticfile('build.js')}\
+{SCRIPT.read_text()}\
 }})()\
 """
 
