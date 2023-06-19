@@ -63,8 +63,9 @@ def wrap(provider, html, **kwargs):
     return _render(html, provider, _providers[provider], **kwargs)
 
 
-def oembed(url):
-    from feincms3.plugins.external import oembed_json
+def oembed(url, *, oembed_json=None):
+    if oembed_json is None:
+        from feincms3.plugins.external import oembed_json
 
     if (data := oembed_json(url)) and (html := data.get("html")):
         provider_name = data.get("provider_name", "")

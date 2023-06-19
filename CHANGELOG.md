@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Allowed overriding the `oembed_json` callable used by the conscious oEmbed
+  utility; you could e.gg. use `import micawber; providers = micawber.bootstrap_oembed(); embed(..., oembed_json=providers.request)` now.
+
 ## 1.3 (2023-04-25)
 
 - Switched to hatchling.
