@@ -44,6 +44,9 @@ tests = [
 [project.urls]
 Homepage = "https://github.com/feinheit/feincms3-cookiecontrol/"
 
+[tool.hatch.build]
+include = ["feincms3_cookiecontrol/"]
+
 [tool.hatch.version]
 path = "feincms3_cookiecontrol/__init__.py"
 
