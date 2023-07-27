@@ -13,7 +13,7 @@ const qs = (selector, node = document) => node.querySelector(selector),
   settings = window.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent]),
   injectedScripts = {},
   providerKey = "f3cc-embed-providers"
-let mainElement, banner, modify
+let mainElementRef, banner, modify
 
 const crel = (tagName, attributes = null, children = []) => {
   const dom = document.createElement(tagName)
@@ -72,7 +72,7 @@ const renderBanner = () => {
     ]),
   ])
 
-  mainElement.append(banner)
+  mainElement().append(banner)
 }
 
 const renderModify = () => {
@@ -105,7 +105,7 @@ const renderModify = () => {
         renderBanner()
       },
     })
-    mainElement.append(modify)
+    mainElement().append(modify)
   }
 }
 
@@ -166,17 +166,22 @@ const injectScripts = () => {
     if (!node) {
       injectedScripts[cookie.name] = node = crel("div")
       node.dataset.name = cookie.name
-      mainElement.append(node)
+      mainElement().append(node)
     }
     node.innerHTML = cookie.script
     nodeScriptReplace(node)
   }
 }
 
-const initCookieBanner = () => {
-  mainElement = crel("div", { [sClassName]: "f3cc" })
-  body.append(mainElement)
+const mainElement = () => {
+  if (!mainElementRef) {
+    mainElementRef = crel("div", { [sClassName]: "f3cc" })
+    body.append(mainElementRef)
+  }
+  return mainElementRef
+}
 
+const initCookieBanner = () => {
   if (getConsentToAll()) {
     injectScripts()
   }
