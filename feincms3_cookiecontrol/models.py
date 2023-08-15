@@ -37,11 +37,13 @@ def cookiecontrol_data(*, privacy_policy_url):
 
     data = cache.get(cache_key)
     if not data:
-        data = {
-            **COOKIECONTROL_DEFAULTS,
-            **getattr(settings, "COOKIECONTROL", {}),
-            "cookies": [script.serialize() for script in Script.objects.all()],
-        }
+        data = (
+            COOKIECONTROL_DEFAULTS
+            | getattr(settings, "COOKIECONTROL", {})
+            | {
+                "cookies": [script.serialize() for script in Script.objects.all()],
+            }
+        )
         cache.set(cache_key, data, timeout=COOKIECONTROL_CACHE_TIMEOUT)
 
     if privacy_policy_url:

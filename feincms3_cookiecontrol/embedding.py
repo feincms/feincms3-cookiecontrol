@@ -95,6 +95,6 @@ def _render(html, provider, config, *, description=None, button=None):
             ),
             "description": description or (_default_description % config),
             "button": button or _default_button,
-            **config,
-        },
+        }
+        | config,
     )
