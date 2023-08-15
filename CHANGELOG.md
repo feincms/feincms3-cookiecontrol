@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.4 (2023-08-15)
+
 - Allowed overriding the `oembed_json` callable used by the conscious oEmbed
   utility; you could e.gg. use `import micawber; providers = micawber.bootstrap_oembed(); embed(..., oembed_json=providers.request)` now.
 - Stopped generating an empty `<div class="f3cc"></div>` element if there's
