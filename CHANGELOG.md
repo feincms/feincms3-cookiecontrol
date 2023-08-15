@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Started clobbering the cookie control data on app startup.
+
 ## 1.4 (2023-08-15)
 
 - Allowed overriding the `oembed_json` callable used by the conscious oEmbed
