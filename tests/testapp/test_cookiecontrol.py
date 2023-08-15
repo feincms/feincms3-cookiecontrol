@@ -84,7 +84,7 @@ class CookieControlTest(test.TestCase):
             script="inject-if",
         )
 
-        data = cookiecontrol_data()
+        data = cookiecontrol_data(privacy_policy_url=None)
         self.assertEqual(
             set(data.keys()),
             {
@@ -95,8 +95,7 @@ class CookieControlTest(test.TestCase):
                 "buttonModify",
                 "cookies",
                 "domain",
-                "privacyPolicyURL",
-                "privacyPolicyTitle",
+                "ppu",
             },
         )
         self.assertEqual(
@@ -124,7 +123,7 @@ class CookieControlTest(test.TestCase):
         self.assertContains(response, "window.f3ccData")
         self.assertContains(response, "document.createElement")
         self.assertEqual(response["content-type"], "text/javascript; charset=UTF-8")
-        self.assertContains(response, '"privacyPolicyURL":null')
+        self.assertContains(response, '"ppu":null')
         # print(response)
         # print(response.content.decode("utf-8"))
         # open("test.js", "w").write(response.content.decode("utf-8"))
@@ -132,4 +131,4 @@ class CookieControlTest(test.TestCase):
         response = self.client.get("/inject-f3cc-with-ppu.js")
         # print(response)
         # print(response.content.decode("utf-8"))
-        self.assertContains(response, '"privacyPolicyURL":"http://testserver/privacy/"')
+        self.assertContains(response, '"ppu":"http://testserver/privacy/"')

@@ -3,7 +3,7 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import signals
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from django.utils.translation import (
     get_language,
     gettext,
@@ -14,13 +14,15 @@ from django.utils.translation import (
 
 COOKIECONTROL_DEFAULTS = {
     "heading": pgettext_lazy("f3cc", "Cookies on Our Website"),
-    "description": pgettext_lazy("f3cc", "Banner content"),
+    "description": pgettext_lazy(
+        "f3cc",
+        "We use cookies to enhance the user experience on our website. Read our {link_start}privacy policy{link_end} to find out more about how we use cookies and protect your data.",
+    ),
     "buttonAccept": pgettext_lazy("f3cc", "Accept all cookies"),
     "buttonReject": pgettext_lazy("f3cc", "Refuse non-essential cookies"),
     "buttonModify": pgettext_lazy("f3cc", "Modify cookie settings"),
     "domain": None,
-    "privacyPolicyURL": None,
-    "privacyPolicyTitle": pgettext_lazy("f3cc", "Privacy policy"),
+    "ppu": None,
 }
 COOKIECONTROL_CACHE_TIMEOUT = 300
 
@@ -30,7 +32,7 @@ def clobber_cookiecontrol_data(**kwargs):
         cache.delete(f"feincms3_cookiecontrol_settings_{code}")
 
 
-def cookiecontrol_data():
+def cookiecontrol_data(*, privacy_policy_url):
     cache_key = f"feincms3_cookiecontrol_settings_{get_language()}"
 
     data = cache.get(cache_key)
@@ -41,6 +43,15 @@ def cookiecontrol_data():
             "cookies": [script.serialize() for script in Script.objects.all()],
         }
         cache.set(cache_key, data, timeout=COOKIECONTROL_CACHE_TIMEOUT)
+
+    if privacy_policy_url:
+        data["description"] = data["description"].format(
+            link_start=format_html('<a href="{}">', privacy_policy_url),
+            link_end="</a>",
+        )
+        data["ppu"] = privacy_policy_url
+    else:
+        data["description"] = data["description"].format(link_start="", link_end="")
 
     return data
 
@@ -82,7 +93,7 @@ class Script(models.Model):
     def serialize(self):
         return {
             "name": self.name,
-            "script": mark_safe(self.script),
+            "script": self.script,
         }
 
 

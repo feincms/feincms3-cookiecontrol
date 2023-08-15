@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 17:45+0100\n"
+"POT-Creation-Date: 2023-08-15 17:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: embedding.py:48
+#: embedding.py:50
 #, python-format
 msgctxt "f3cc"
 msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
 msgstr ""
 
-#: embedding.py:50
+#: embedding.py:52
 msgctxt "f3cc"
 msgid "Show the content"
 msgstr ""
 
-#: embedding.py:73 models.py:23
+#: embedding.py:94
 msgctxt "f3cc"
 msgid "Privacy policy"
 msgstr ""
@@ -39,46 +39,51 @@ msgctxt "f3cc"
 msgid "Cookies on Our Website"
 msgstr ""
 
-#: models.py:17
+#: models.py:19
+#, python-brace-format
 msgctxt "f3cc"
-msgid "Banner content"
-msgstr "We use cookies to enhance the user experience on our website. Read our privacy policy to find out more about how we use cookies and protect your data."
+msgid "We use cookies to enhance the user experience on our website. Read our {link_start}privacy policy{link_end} to find out more about how we use cookies and protect your data."
+msgstr ""
 
-#: models.py:18
+#: models.py:21
 msgctxt "f3cc"
 msgid "Accept all cookies"
 msgstr ""
 
-#: models.py:19
+#: models.py:22
 msgctxt "f3cc"
 msgid "Refuse non-essential cookies"
 msgstr ""
 
-#: models.py:20
+#: models.py:23
 msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr ""
 
-#: models.py:49
+#: models.py:60
 msgid "technical name"
 msgstr ""
 
-#: models.py:51 models.py:58
+#: models.py:62 models.py:69
 msgid "script"
 msgstr ""
 
-#: models.py:53
+#: models.py:64
 msgid "HTML code to inject if cookies are accepted."
 msgstr ""
 
-#: models.py:59
+#: models.py:70
 msgid "scripts"
 msgstr ""
 
-#: models.py:68
+#: models.py:79
 msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
 msgstr ""
 
-#: models.py:75
+#: models.py:86
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""
+
+#~ msgctxt "f3cc"
+#~ msgid "Banner content"
+#~ msgstr "We use cookies to enhance the user experience on our website. Read our privacy policy to find out more about how we use cookies and protect your data."

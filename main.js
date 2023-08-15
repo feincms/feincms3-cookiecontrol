@@ -9,6 +9,7 @@ const qs = (selector, node = document) => node.querySelector(selector),
   body = document.body,
   sClassName = "className",
   sTextContent = "textContent",
+  sInnerHTML = "innerHTML",
   cookieName = "f3cc",
   settings = window.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent]),
   injectedScripts = {},
@@ -40,18 +41,9 @@ const renderBanner = () => {
     }),
     crel("div", {
       [sClassName]: "f3cc-description",
-      [sTextContent]: settings.description,
+      [sInnerHTML]: settings.description,
     }),
   ]
-  if (settings.privacyPolicyURL) {
-    content[1].append(
-      crel("br"),
-      crel("a", {
-        [sTextContent]: settings.privacyPolicyTitle,
-        href: settings.privacyPolicyURL,
-      })
-    )
-  }
   const buttons = [
     crel("a", {
       [sClassName]: "f3cc-button accept",
@@ -90,7 +82,7 @@ const renderModify = () => {
     return
   }
 
-  const ppu = settings.privacyPolicyURL
+  const ppu = settings.ppu
   const loc = window.location
   if (
     settings.buttonModify &&

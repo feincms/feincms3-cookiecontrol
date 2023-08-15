@@ -16,9 +16,11 @@ SCRIPT = Path(__file__).parent / "static" / "f3cc.js"
 
 @cache_page(COOKIECONTROL_CACHE_TIMEOUT)
 def inject(request, *, privacy_policy_url=None):
-    data = cookiecontrol_data()
-    if privacy_policy_url:
-        data["privacyPolicyURL"] = request.build_absolute_uri(privacy_policy_url)
+    data = cookiecontrol_data(
+        privacy_policy_url=request.build_absolute_uri(privacy_policy_url)
+        if privacy_policy_url
+        else None
+    )
     serialized = json.dumps(
         data,
         cls=DjangoJSONEncoder,

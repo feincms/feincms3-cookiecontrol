@@ -10,10 +10,9 @@ register = template.Library()
 
 @register.inclusion_tag("feincms3_cookiecontrol/banner.html")
 def feincms3_cookiecontrol(*, hide_modify_button=False, privacy_policy_url=None):
-    data = cookiecontrol_data()
+    data = cookiecontrol_data(privacy_policy_url=privacy_policy_url)
     if hide_modify_button:
         data.pop("buttonModify")
-    data["privacyPolicyURL"] = privacy_policy_url
     return {"data": data}
 
 

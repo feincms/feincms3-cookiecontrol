@@ -6,6 +6,8 @@
   utility; you could e.gg. use `import micawber; providers = micawber.bootstrap_oembed(); embed(..., oembed_json=providers.request)` now.
 - Stopped generating an empty `<div class="f3cc"></div>` element if there's
   nothing to add inside.
+- Moved the privacy policy link into the text instead of adding another
+  "privacy policy" title at the end.
 
 ## 1.3 (2023-04-25)
 
