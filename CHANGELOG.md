@@ -3,6 +3,9 @@
 ## Unreleased
 
 - Started clobbering the cookie control data on app startup.
+- Updated the pre-commit hooks.
+- Updated the esbuild version.
+- Changed the build step to also send the CSS through esbuild's minificator.
 
 ## 1.4 (2023-08-15)
 

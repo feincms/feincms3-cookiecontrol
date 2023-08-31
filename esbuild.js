@@ -22,7 +22,11 @@ const InlineCSSPlugin = (_options = {}) => {
 
 async function generateInjectCSS(sourcePath) {
   const sourceCSS = await readFile(sourcePath)
-  const minified = ("" + sourceCSS)
+  let transformed = await esbuild.transform(sourceCSS, {
+    loader: "css",
+    minify: true,
+  })
+  const minified = ("" + transformed.code.trim())
     .replaceAll(/\s+/g, " ")
     .replaceAll(/\s*([{},;:])\s*/g, "$1")
 
