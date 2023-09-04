@@ -141,23 +141,22 @@ const onAccept = (accept) => (e) => {
   setCookie(accept ? sAll : sEssential)
   hide(banner)
   renderModify()
-
-  if (accept) {
-    injectScripts()
-    renderEmbeds()
-  }
+  renderAcceptedEmbeds()
+  injectAcceptedScripts()
 }
 
-const injectScripts = () => {
-  for (let cookie of settings.cookies) {
-    let node = injectedScripts[cookie.name]
-    if (!node) {
-      injectedScripts[cookie.name] = node = crel("div")
-      node.dataset.name = cookie.name
-      mainElement().append(node)
+const injectAcceptedScripts = () => {
+  if (getConsentToAll()) {
+    for (let cookie of settings.cookies) {
+      let node = injectedScripts[cookie.name]
+      if (!node) {
+        injectedScripts[cookie.name] = node = crel("div")
+        node.dataset.name = cookie.name
+        mainElement().append(node)
+      }
+      node.innerHTML = cookie.script
+      nodeScriptReplace(node)
     }
-    node.innerHTML = cookie.script
-    nodeScriptReplace(node)
   }
 }
 
@@ -167,18 +166,6 @@ const mainElement = () => {
     body.append(mainElementRef)
   }
   return mainElementRef
-}
-
-const initCookieBanner = () => {
-  if (getConsentToAll()) {
-    injectScripts()
-  }
-
-  if (!isKnownCookieValue()) {
-    renderBanner()
-  } else {
-    renderModify()
-  }
 }
 
 const _lsFallback = {},
@@ -197,7 +184,7 @@ const _lsFallback = {},
     }
   }
 
-const renderEmbeds = (window.f3ccRenderEmbeds = () => {
+const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
   const providers = _lsGet(providerKey) || []
   const embedNodes = document.querySelectorAll(".f3cc-embed")
 
@@ -223,7 +210,7 @@ const initEmbedClickListener = () => {
       const providers = _lsGet(providerKey) || []
       providers.push(node.dataset.provider)
       _lsSet(providerKey, providers)
-      renderEmbeds()
+      renderAcceptedEmbeds()
     }
   })
 }
@@ -265,12 +252,18 @@ const nodeScriptIs = (node) => {
 
 /*
 const initEmbedMutationObserver = () => {
-  const observer = new MutationObserver(renderEmbeds)
+  const observer = new MutationObserver(renderAcceptedEmbeds)
   observer.observe(body, { subtree: true, childList: true })
 }
 initEmbedMutationObserver()
 */
 
-initCookieBanner()
-renderEmbeds()
+injectAcceptedScripts()
+renderAcceptedEmbeds()
 initEmbedClickListener()
+
+if (!isKnownCookieValue()) {
+  renderBanner()
+} else {
+  renderModify()
+}
