@@ -48,12 +48,12 @@ const renderBanner = () => {
     crel("a", {
       [sClassName]: "f3cc-button accept",
       [sTextContent]: settings.buttonAccept,
-      onclick: onAcceptClick,
+      onclick: onAccept(true),
     }),
     crel("a", {
       [sClassName]: "f3cc-button reject",
       [sTextContent]: settings.buttonReject,
-      onclick: onRejectClick,
+      onclick: onAccept(false),
     }),
   ]
 
@@ -136,20 +136,16 @@ const hide = (el) => {
   if (el) el.style.display = "none"
 }
 
-const onAcceptClick = (e) => {
+const onAccept = (accept) => (e) => {
   e.preventDefault()
-  setCookie(sAll)
+  setCookie(accept ? sAll : sEssential)
   hide(banner)
   renderModify()
-  injectScripts()
-  renderEmbeds()
-}
 
-const onRejectClick = (e) => {
-  e.preventDefault()
-  setCookie(sEssential)
-  hide(banner)
-  renderModify()
+  if (accept) {
+    injectScripts()
+    renderEmbeds()
+  }
 }
 
 const injectScripts = () => {
