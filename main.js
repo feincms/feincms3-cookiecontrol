@@ -193,7 +193,7 @@ const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
     const nodesProvider = node.dataset.provider
 
     if (template && nodesProvider) {
-      if (getConsentToAll() || providers.some((p) => p === nodesProvider)) {
+      if (getConsentToAll() || providers.includes(nodesProvider)) {
         const clone = template.content.cloneNode(true)
         node.closest(".f3cc").replaceWith(clone)
       }
