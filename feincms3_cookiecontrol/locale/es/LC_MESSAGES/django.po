@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-14 14:10+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: embedding.py:50
+#, python-format
+msgctxt "f3cc"
+msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
+msgstr ""
+
+#: embedding.py:52
+msgctxt "f3cc"
+msgid "Show the content"
+msgstr ""
+
+#: embedding.py:94
+msgctxt "f3cc"
+msgid "Privacy policy"
+msgstr "Política de privacidad"
+
+#: models.py:16
+msgctxt "f3cc"
+msgid "Cookies on Our Website"
+msgstr ""
+
+#: models.py:19
+#, python-brace-format
+msgctxt "f3cc"
+msgid "We use cookies to enhance the user experience on our website. Read our {link_start}privacy policy{link_end} to find out more about how we use cookies and protect your data."
+msgstr "Cookies en nuestro sitio web: Utilizamos cookies para facilitar el uso de nuestro sitio web. Consulte nuestra {link_start}política de privacidad{link_end} para obtener más información sobre cómo utilizamos las cookies y protegemos sus datos."
+
+#: models.py:21
+msgctxt "f3cc"
+msgid "Accept all cookies"
+msgstr "Aceptar todos"
+
+#: models.py:22
+msgctxt "f3cc"
+msgid "Refuse non-essential cookies"
+msgstr "Rechazar cookies no esenciales"
+
+#: models.py:23
+msgctxt "f3cc"
+msgid "Modify cookie settings"
+msgstr "Adaptar la configuración de las cookies"
+
+#: models.py:62
+msgid "technical name"
+msgstr ""
+
+#: models.py:64 models.py:71
+msgid "script"
+msgstr ""
+
+#: models.py:66
+msgid "HTML code to inject if cookies are accepted."
+msgstr ""
+
+#: models.py:72
+msgid "scripts"
+msgstr ""
+
+#: models.py:81
+msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+msgstr ""
+
+#: models.py:88
+msgid "Entering <noscript> tags doesn't make sense."
+msgstr ""

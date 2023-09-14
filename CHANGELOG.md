@@ -6,6 +6,7 @@
 - Updated the pre-commit hooks.
 - Updated the esbuild version.
 - Changed the build step to also send the CSS through esbuild's minificator.
+- Added spanish translations of the cookie banner.
 
 ## 1.4 (2023-08-15)
 
