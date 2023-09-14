@@ -22,12 +22,12 @@ msgstr ""
 #, python-format
 msgctxt "f3cc"
 msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
-msgstr ""
+msgstr "Nos gustaría mostrarle contenido del proveedor %(title)s, pero respete su privacidad. Si está de acuerdo con la política de privacidad del proveedor, haga clic en el siguiente botón para ver el contenido."
 
 #: embedding.py:52
 msgctxt "f3cc"
 msgid "Show the content"
-msgstr ""
+msgstr "Mostrar el contenido"
 
 #: embedding.py:94
 msgctxt "f3cc"
@@ -37,7 +37,7 @@ msgstr "Política de privacidad"
 #: models.py:16
 msgctxt "f3cc"
 msgid "Cookies on Our Website"
-msgstr ""
+msgstr "Cookies en nuestro sitio web"
 
 #: models.py:19
 #, python-brace-format
@@ -62,24 +62,24 @@ msgstr "Adaptar la configuración de las cookies"
 
 #: models.py:62
 msgid "technical name"
-msgstr ""
+msgstr "Nombre técnico"
 
 #: models.py:64 models.py:71
 msgid "script"
-msgstr ""
+msgstr "script"
 
 #: models.py:66
 msgid "HTML code to inject if cookies are accepted."
-msgstr ""
+msgstr "Código HTML para inyectar si se aceptan cookies."
 
 #: models.py:72
 msgid "scripts"
-msgstr ""
+msgstr "scripts"
 
 #: models.py:81
 msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
-msgstr ""
+msgstr "Esto no se ve bien. Por favor, comience con una etiqueta HTML (por ejemplo <script>, <div>)."
 
 #: models.py:88
 msgid "Entering <noscript> tags doesn't make sense."
-msgstr ""
+msgstr "Introducir elementos <noscript> no tiene sentido."
