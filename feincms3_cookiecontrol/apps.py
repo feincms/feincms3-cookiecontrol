@@ -1,3 +1,5 @@
+import contextlib
+
 from django.apps import AppConfig
 
 
@@ -9,4 +11,5 @@ class CookiecontrolConfig(AppConfig):
     def ready(self):
         from feincms3_cookiecontrol.models import clobber_cookiecontrol_data
 
-        clobber_cookiecontrol_data()
+        with contextlib.suppress(Exception):
+            clobber_cookiecontrol_data()
