@@ -7,6 +7,8 @@
 - Updated the esbuild version.
 - Changed the build step to also send the CSS through esbuild's minificator.
 - Added spanish translations of the cookie banner.
+- Dropped compatibility with Django before 4.2.
+- Added Python 3.12 and Django 5.0.
 
 ## 1.4 (2023-08-15)
 
