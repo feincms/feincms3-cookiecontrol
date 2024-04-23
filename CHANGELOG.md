@@ -9,6 +9,7 @@
 - Added spanish translations of the cookie banner.
 - Dropped compatibility with Django before 4.2.
 - Added Python 3.12 and Django 5.0.
+- Added experimental support for Google Consent Management.
 
 ## 1.4 (2023-08-15)
 
