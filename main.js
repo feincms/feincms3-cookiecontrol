@@ -143,6 +143,7 @@ const onAccept = (accept) => (e) => {
   renderModify()
   renderAcceptedEmbeds()
   injectAcceptedScripts()
+  updateGAConsentData()
 }
 
 const injectAcceptedScripts = () => {
@@ -158,6 +159,21 @@ const injectAcceptedScripts = () => {
       nodeScriptReplace(node)
     }
   }
+}
+
+const updateGAConsentData = () => {
+  const dataLayer = (window.dataLayer = window.dataLayer || [])
+  const status = getConsentToAll() ? "granted" : "denied"
+  dataLayer.push([
+    "consent",
+    "update",
+    {
+      ad_user_data: status,
+      ad_personalization: status,
+      ad_storage: status,
+      analytics_storage: status,
+    },
+  ])
 }
 
 const mainElement = () => {
