@@ -143,6 +143,7 @@ const onAccept = (accept) => (e) => {
   renderModify()
   renderAcceptedEmbeds()
   injectAcceptedScripts()
+  updateGAConsentData()
 }
 
 const injectAcceptedScripts = () => {
@@ -157,6 +158,33 @@ const injectAcceptedScripts = () => {
       node.innerHTML = cookie.script
       nodeScriptReplace(node)
     }
+  }
+}
+
+const updateGAConsentData = () => {
+  window.dataLayer = window.dataLayer || []
+  if (getConsentToAll()) {
+    window.dataLayer.push([
+      "consent",
+      "update",
+      {
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        ad_storage: "granted",
+        analytics_storage: "granted",
+      },
+    ])
+  } else {
+    window.dataLayer.push([
+      "consent",
+      "update",
+      {
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        analytics_storage: "denied",
+      },
+    ])
   }
 }
 
