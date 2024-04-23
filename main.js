@@ -162,30 +162,18 @@ const injectAcceptedScripts = () => {
 }
 
 const updateGAConsentData = () => {
-  window.dataLayer = window.dataLayer || []
-  if (getConsentToAll()) {
-    window.dataLayer.push([
-      "consent",
-      "update",
-      {
-        ad_user_data: "granted",
-        ad_personalization: "granted",
-        ad_storage: "granted",
-        analytics_storage: "granted",
-      },
-    ])
-  } else {
-    window.dataLayer.push([
-      "consent",
-      "update",
-      {
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        ad_storage: "denied",
-        analytics_storage: "denied",
-      },
-    ])
-  }
+  const dataLayer = (window.dataLayer = window.dataLayer || [])
+  const status = getConsentToAll() ? "granted" : "denied"
+  dataLayer.push([
+    "consent",
+    "update",
+    {
+      ad_user_data: status,
+      ad_personalization: status,
+      ad_storage: status,
+      analytics_storage: status,
+    },
+  ])
 }
 
 const mainElement = () => {
