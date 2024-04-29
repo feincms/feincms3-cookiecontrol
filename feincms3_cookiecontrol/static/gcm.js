@@ -1,0 +1,1 @@
+(()=>{window.addEventListener("f3cc_consent_granted",()=>{e("granted")});window.addEventListener("f3cc_consent_denied",()=>{e("denied")});var e=a=>{(window.dataLayer=window.dataLayer||[]).push(["consent","update",{ad_user_data:a,ad_personalization:a,ad_storage:a,analytics_storage:a}])};})();
