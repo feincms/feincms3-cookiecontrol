@@ -9,7 +9,7 @@
 - Added spanish translations of the cookie banner.
 - Dropped compatibility with Django before 4.2.
 - Added Python 3.12 and Django 5.0.
-- Added experimental support for Google Consent Management. Add the `gcm.js` asset to pass the users general consent to GA.
+- Added experimental support for Google Consent Management. Add the `f3cc/gcm.js` asset to pass the users general consent to GA.
 
 ## 1.4 (2023-08-15)
 
