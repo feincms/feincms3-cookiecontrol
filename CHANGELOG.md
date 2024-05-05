@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.5 (2024-05-05)
+
 - Started clobbering the cookie control data on app startup.
 - Updated the pre-commit hooks.
 - Updated the esbuild version.
