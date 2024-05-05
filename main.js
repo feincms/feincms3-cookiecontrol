@@ -6,6 +6,7 @@
 import "./main.css"
 
 const qs = (selector, node = document) => node.querySelector(selector),
+  qsa = (selector, node = document) => node.querySelectorAll(selector),
   body = document.body,
   sClassName = "className",
   sTextContent = "textContent",
@@ -143,7 +144,9 @@ const onAccept = (accept) => (e) => {
   renderModify()
   renderAcceptedEmbeds()
   injectAcceptedScripts()
-  window.dispatchEvent(new Event(`f3cc_consent_${accept ? "granted" : "denied"}`))
+  window.dispatchEvent(
+    new Event(`f3cc_consent_${accept ? "granted" : "denied"}`)
+  )
 }
 
 const injectAcceptedScripts = () => {
@@ -155,8 +158,7 @@ const injectAcceptedScripts = () => {
         node.dataset.name = cookie.name
         mainElement().append(node)
       }
-      node.innerHTML = cookie.script
-      nodeScriptReplace(node)
+      setInnerHTML(node, cookie.script)
     }
   }
 }
@@ -187,7 +189,7 @@ const _lsFallback = {},
 
 const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
   const providers = _lsGet(providerKey) || []
-  const embedNodes = document.querySelectorAll(".f3cc-embed")
+  const embedNodes = qsa(".f3cc-embed")
 
   embedNodes.forEach((node) => {
     const template = qs("template", node)
@@ -216,39 +218,19 @@ const initEmbedClickListener = () => {
   })
 }
 
-/*
-The following functions allow executing scripts added via innerHTML
-Thanks, https://stackoverflow.com/a/20584396
-*/
-const nodeScriptReplace = (node) => {
-  if (nodeScriptIs(node) === true) {
-    node.parentNode.replaceChild(nodeScriptClone(node), node)
-  } else {
-    let i = -1,
-      children = node.childNodes
-    while (++i < children.length) {
-      nodeScriptReplace(children[i])
+const setInnerHTML = (elm, html) => {
+  elm.innerHTML = html
+  for (const oldScriptEl of qsa("script", elm)) {
+    const newScriptEl = document.createElement("script")
+    for (const attr of oldScriptEl.attributes) {
+      newScriptEl.setAttribute(attr.name, attr.value)
     }
+
+    const scriptText = document.createTextNode(oldScriptEl.innerHTML)
+    newScriptEl.appendChild(scriptText)
+
+    oldScriptEl.replaceWith(newScriptEl)
   }
-
-  return node
-}
-
-const nodeScriptClone = (node) => {
-  const script = crel("script")
-  script.text = node.innerHTML
-
-  let i = -1,
-    attrs = node.attributes,
-    attr
-  while (++i < attrs.length) {
-    script.setAttribute((attr = attrs[i]).name, attr.value)
-  }
-  return script
-}
-
-const nodeScriptIs = (node) => {
-  return node.tagName === "SCRIPT"
 }
 
 /*
