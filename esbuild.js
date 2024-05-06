@@ -38,7 +38,10 @@ async function generateInjectCSS(sourcePath) {
 }
 
 esbuild.build({
-  entryPoints: [{out:"f3cc",in:"main.js"}, {out:"f3cc/gcm", in:"gcm.js"}],
+  entryPoints: [
+    { out: "f3cc", in: "./src/main.js" },
+    { out: "f3cc/gcm", in: "./src/gcm.js" },
+  ],
   outdir: "feincms3_cookiecontrol/static",
   bundle: true,
   minify: true,
