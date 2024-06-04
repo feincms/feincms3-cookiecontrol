@@ -1,1 +1,1 @@
-(()=>{window.dataLayer=window.dataLayer||[];function d(){dataLayer.push(arguments)}function n(a,e){d("consent",a,{ad_user_data:e,ad_personalization:e,ad_storage:e,analytics_storage:e})}n("default","denied");window.addEventListener("f3cc_consent_granted",()=>{n("update","granted")});window.addEventListener("f3cc_consent_denied",()=>{n("update","denied")});})();
+(()=>{window.dataLayer=window.dataLayer||[];function a(){dataLayer.push(arguments)}a("consent","default",{ad_user_data:"granted",ad_personalization:"granted",ad_storage:"granted",analytics_storage:"granted"});})();
