@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Reorganized the repository a bit.
+- Fixed and simplified the Google Consent Management integration.
+- Added SRF support to the embedding functionality.
+
 ## 1.5 (2024-05-05)
 
 - Started clobbering the cookie control data on app startup.

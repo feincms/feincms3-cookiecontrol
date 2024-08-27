@@ -34,7 +34,7 @@ classifiers = [
 ]
 dependencies = [
     "Django>=3.2",
-    "feincms3>=0.37",
+    "feincms3>=5.2.2",
 ]
 
 [project.optional-dependencies]
