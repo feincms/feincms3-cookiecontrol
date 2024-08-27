@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import pgettext, pgettext_lazy
-from feincms3.embedding import embed_vimeo, embed_youtube, embed_srf
+from feincms3.embedding import embed_srf, embed_vimeo, embed_youtube
 
 
 __all__ = ["embed", "wrap"]

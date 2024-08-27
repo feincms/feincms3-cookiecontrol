@@ -1,1 +1,1 @@
-(()=>{window.dataLayer=window.dataLayer||[];function a(){dataLayer.push(arguments)}a("consent","default",{ad_user_data:"granted",ad_personalization:"granted",ad_storage:"granted",analytics_storage:"granted"});})();
+(()=>{window.dataLayer=window.dataLayer||[];function a(){window.dataLayer.push(arguments)}a("consent","default",{ad_user_data:"granted",ad_personalization:"granted",ad_storage:"granted",analytics_storage:"granted"});})();
