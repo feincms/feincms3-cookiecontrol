@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import pgettext, pgettext_lazy
-from feincms3.embedding import embed_vimeo, embed_youtube
+from feincms3.embedding import embed_vimeo, embed_youtube, embed_srf
 
 
 __all__ = ["embed", "wrap"]
@@ -21,6 +21,11 @@ _providers = {
         "handler": embed_vimeo,
         "title": "Vimeo",
         "privacy_policy_url": "https://vimeo.com/privacy",
+    },
+    "srf": {
+        "handler": embed_srf,
+        "title": "SRF",
+        "privacy_policy_url": "https://www.srf.ch/rechtliches-datenschutzerklaerung",
     },
     "google": {
         "handler": None,
