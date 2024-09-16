@@ -1,8 +1,8 @@
 const esbuild = require("esbuild")
 
-const path = require("path")
-const util = require("util")
-const readFile = util.promisify(require("fs").readFile)
+const path = require("node:path")
+const util = require("node:util")
+const readFile = util.promisify(require("node:fs").readFile)
 
 const InlineCSSPlugin = (_options = {}) => {
   return {
@@ -22,11 +22,11 @@ const InlineCSSPlugin = (_options = {}) => {
 
 async function generateInjectCSS(sourcePath) {
   const sourceCSS = await readFile(sourcePath)
-  let transformed = await esbuild.transform(sourceCSS, {
+  const transformed = await esbuild.transform(sourceCSS, {
     loader: "css",
     minify: true,
   })
-  const minified = ("" + transformed.code.trim())
+  const minified = `${transformed.code.trim()}`
     .replaceAll(/\s+/g, " ")
     .replaceAll(/\s*([{},;:])\s*/g, "$1")
 

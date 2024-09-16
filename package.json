@@ -12,9 +12,6 @@
   "scripts": {
     "build": "node esbuild.js"
   },
-  "eslintIgnore": [
-    "**/build.*"
-  ],
   "prettier": {
     "semi": false
   }

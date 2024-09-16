@@ -5,6 +5,7 @@
 - Reorganized the repository a bit.
 - Fixed and simplified the Google Consent Management integration.
 - Added SRF support to the embedding functionality.
+- Updated the pre-commit hooks, switched to biome.
 
 ## 1.5 (2024-05-05)
 

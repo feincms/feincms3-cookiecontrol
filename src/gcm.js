@@ -1,5 +1,6 @@
 window.dataLayer = window.dataLayer || []
 function gtag() {
+  // biome-ignore lint/style: arguments is fine here.
   window.dataLayer.push(arguments)
 }
 gtag("consent", "default", {

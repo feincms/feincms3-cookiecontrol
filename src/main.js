@@ -5,22 +5,24 @@
 
 import "./main.css"
 
-const qs = (selector, node = document) => node.querySelector(selector),
-  qsa = (selector, node = document) => node.querySelectorAll(selector),
-  body = document.body,
-  sClassName = "className",
-  sTextContent = "textContent",
-  sInnerHTML = "innerHTML",
-  cookieName = "f3cc",
-  settings = window.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent]),
-  injectedScripts = {},
-  providerKey = "f3cc-embed-providers"
-let mainElementRef, banner, modify
+const qs = (selector, node = document) => node.querySelector(selector)
+const qsa = (selector, node = document) => node.querySelectorAll(selector)
+const body = document.body
+const sClassName = "className"
+const sTextContent = "textContent"
+const sInnerHTML = "innerHTML"
+const cookieName = "f3cc"
+const settings = window.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent])
+const injectedScripts = {}
+const providerKey = "f3cc-embed-providers"
+let mainElementRef
+let banner
+let modify
 
 const crel = (tagName, attributes = null, children = []) => {
   const dom = document.createElement(tagName)
   if (attributes) {
-    for (let [name, value] of Object.entries(attributes)) {
+    for (const [name, value] of Object.entries(attributes)) {
       if (name.startsWith("data-")) dom.setAttribute(name, value)
       else dom[name] = value
     }
@@ -87,7 +89,7 @@ const renderModify = () => {
   const loc = window.location
   if (
     settings.buttonModify &&
-    (!ppu || ppu == `${loc.protocol}//${loc.host}${loc.pathname}`)
+    (!ppu || ppu === `${loc.protocol}//${loc.host}${loc.pathname}`)
   ) {
     modify = crel("a", {
       [sClassName]: "f3cc-button modify",
@@ -112,17 +114,17 @@ const setCookie = (value) => {
 
 const getCookie = () => {
   const prefix = `${cookieName}=`
-  for (let cookie of document.cookie.split("; ")) {
+  for (const cookie of document.cookie.split("; ")) {
     if (cookie.startsWith(prefix))
       return decodeURIComponent(cookie.substring(prefix.length))
   }
 }
 
-const sAll = "all",
-  sEssential = "essential"
+const sAll = "all"
+const sEssential = "essential"
 const isKnownCookieValue = () => {
   const c = getCookie()
-  return sAll == c || sEssential == c
+  return sAll === c || sEssential === c
 }
 
 const getConsentToAll = () => {
@@ -145,13 +147,13 @@ const onAccept = (accept) => (e) => {
   renderAcceptedEmbeds()
   injectAcceptedScripts()
   window.dispatchEvent(
-    new Event(`f3cc_consent_${accept ? "granted" : "denied"}`)
+    new Event(`f3cc_consent_${accept ? "granted" : "denied"}`),
   )
 }
 
 const injectAcceptedScripts = () => {
   if (getConsentToAll()) {
-    for (let cookie of settings.cookies) {
+    for (const cookie of settings.cookies) {
       let node = injectedScripts[cookie.name]
       if (!node) {
         injectedScripts[cookie.name] = node = crel("div")
@@ -171,27 +173,26 @@ const mainElement = () => {
   return mainElementRef
 }
 
-const _lsFallback = {},
-  _lsSet = (key, value) => {
-    try {
-      window.localStorage.setItem(key, JSON.stringify(value))
-    } catch (e) {
-      _lsFallback[key] = value
-    }
-  },
-  _lsGet = (key) => {
-    try {
-      return JSON.parse(window.localStorage.getItem(key))
-    } catch (e) {
-      return _lsFallback[key]
-    }
+const _lsFallback = {}
+const _lsSet = (key, value) => {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value))
+  } catch (_e) {
+    _lsFallback[key] = value
   }
+}
+const _lsGet = (key) => {
+  try {
+    return JSON.parse(window.localStorage.getItem(key))
+  } catch (_e) {
+    return _lsFallback[key]
+  }
+}
 
 const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
   const providers = _lsGet(providerKey) || []
-  const embedNodes = qsa(".f3cc-embed")
 
-  embedNodes.forEach((node) => {
+  for (const node of qsa(".f3cc-embed")) {
     const template = qs("template", node)
     const nodesProvider = node.dataset.provider
 
@@ -201,13 +202,13 @@ const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
         node.closest(".f3cc").replaceWith(clone)
       }
     }
-  })
+  }
 })
 
 const initEmbedClickListener = () => {
   body.addEventListener("click", (e) => {
     const button = e.target.closest(".f3cc-button")
-    const node = button && button.closest(".f3cc-embed")
+    const node = button?.closest(".f3cc-embed")
     if (button && node) {
       e.preventDefault()
       const providers = _lsGet(providerKey) || []

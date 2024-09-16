@@ -1,61 +1,66 @@
 [build-system]
-requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+requires = [ "hatchling" ]
 
 [project]
 name = "feincms3-cookiecontrol"
-dynamic = ["version"]
 description = "Cookie Control Panel for GDPR compliant feincms3 websites"
 readme = "README.rst"
-license = "BSD-3-Clause"
-requires-python = ">=3.9"
+license = { text = "BSD-3-Clause" }
 authors = [
-    { name = "York Schickl", email = "ys@feinheit.ch" },
+  { name = "York Schickl", email = "ys@feinheit.ch" },
 ]
+requires-python = ">=3.9"
 classifiers = [
-    "Environment :: Web Environment",
-    "Framework :: Django",
-    "Framework :: Django :: 3.2",
-    "Framework :: Django :: 4.0",
-    "Framework :: Django :: 4.1",
-    "Framework :: Django :: 4.2",
-    "Framework :: Django :: 5.0",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-    "Topic :: Software Development",
-    "Topic :: Software Development :: Libraries :: Application Frameworks",
+  "Environment :: Web Environment",
+  "Framework :: Django",
+  "Framework :: Django :: 3.2",
+  "Framework :: Django :: 4.0",
+  "Framework :: Django :: 4.1",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+  "Topic :: Software Development",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
+dynamic = [ "version" ]
 dependencies = [
-    "Django>=3.2",
-    "feincms3>=5.2.2",
+  "django>=3.2",
+  "feincms3>=5.2.2",
 ]
 
-[project.optional-dependencies]
-tests = [
-    "coverage",
-    "requests",
+optional-dependencies.tests = [
+  "coverage",
+  "requests",
 ]
-
-[project.urls]
-Homepage = "https://github.com/feinheit/feincms3-cookiecontrol/"
+urls.Homepage = "https://github.com/feinheit/feincms3-cookiecontrol/"
 
 [tool.hatch.build]
-include = ["feincms3_cookiecontrol/"]
+include = [ "feincms3_cookiecontrol/" ]
 
 [tool.hatch.version]
 path = "feincms3_cookiecontrol/__init__.py"
 
 [tool.ruff]
+target-version = "py39"
+
+fix = true
+show-fixes = true
 extend-select = [
   # pyflakes, pycodestyle
-  "F", "E", "W",
+  "F",
+  "E",
+  "W",
   # mmcabe
   "C90",
   # isort
@@ -97,21 +102,12 @@ extend-ignore = [
   # No line length errors
   "E501",
 ]
-fix = true
-show-fixes = true
-target-version = "py39"
-
-[tool.ruff.isort]
-combine-as-imports = true
-lines-after-imports = 2
-
-[tool.ruff.mccabe]
-max-complexity = 15
-
-[tool.ruff.per-file-ignores]
-"*/migrat*/*" = [
+mccabe.max-complexity = 15
+per-file-ignores."*/migrat*/*" = [
   # Allow using PascalCase model names in migrations
   "N806",
   # Ignore the fact that migration files are invalid module names
   "N999",
 ]
+isort.combine-as-imports = true
+isort.lines-after-imports = 2
