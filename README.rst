@@ -24,7 +24,7 @@ raises some questions because loading those scripts may also be seen as
 tracking already. It is certainly safer to implement a cookie control panel
 locally. It would be boring to start from scratch on each site.
 
-This guide explains how to use `feincms3-cookiecontrol <https://github.com/feinheit/feincms3-cookiecontrol/>`__.
+This guide explains how to use `feincms3-cookiecontrol <https://github.com/feincms/feincms3-cookiecontrol/>`__.
 
 Installation
 ~~~~~~~~~~~~

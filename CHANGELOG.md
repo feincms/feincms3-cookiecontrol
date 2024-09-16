@@ -6,6 +6,7 @@
 - Fixed and simplified the Google Consent Management integration.
 - Added SRF support to the embedding functionality.
 - Updated the pre-commit hooks, switched to biome.
+- Pruned Python 3.9 and Django 4.1 from the CI matrix.
 
 ## 1.5 (2024-05-05)
 
