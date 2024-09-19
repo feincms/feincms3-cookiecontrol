@@ -33,7 +33,7 @@ const crel = (tagName, attributes = null, children = []) => {
 
 const renderBanner = () => {
   if (banner) {
-    show(banner)
+    display(banner)
     return
   }
 
@@ -72,7 +72,7 @@ const renderBanner = () => {
 
 const renderModify = () => {
   if (modify) {
-    show(modify)
+    display(modify)
     return
   }
 
@@ -96,7 +96,7 @@ const renderModify = () => {
       [sTextContent]: settings.buttonModify,
       onclick: (e) => {
         e.preventDefault()
-        hide(modify)
+        display(modify, "none")
         renderBanner()
       },
     })
@@ -131,18 +131,14 @@ const getConsentToAll = () => {
   return getCookie() === sAll
 }
 
-const show = (el) => {
-  el.style.display = ""
-}
-
-const hide = (el) => {
-  if (el) el.style.display = "none"
+const display = (el, display = "") => {
+  if (el) el.style.display = display
 }
 
 const onAccept = (accept) => (e) => {
   e.preventDefault()
   setCookie(accept ? sAll : sEssential)
-  hide(banner)
+  display(banner, "none")
   renderModify()
   renderAcceptedEmbeds()
   injectAcceptedScripts()
