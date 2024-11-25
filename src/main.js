@@ -5,14 +5,16 @@
 
 import "./main.css"
 
-const qs = (selector, node = document) => node.querySelector(selector)
-const qsa = (selector, node = document) => node.querySelectorAll(selector)
-const body = document.body
+const w = window
+const d = document
+const qs = (selector, node = d) => node.querySelector(selector)
+const qsa = (selector, node = d) => node.querySelectorAll(selector)
+const body = d.body
 const sClassName = "className"
 const sTextContent = "textContent"
 const sInnerHTML = "innerHTML"
 const cookieName = "f3cc"
-const settings = window.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent])
+const settings = w.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent])
 const injectedScripts = {}
 const providerKey = "f3cc-embed-providers"
 let mainElementRef
@@ -20,7 +22,7 @@ let banner
 let modify
 
 const crel = (tagName, attributes = null, children = []) => {
-  const dom = document.createElement(tagName)
+  const dom = d.createElement(tagName)
   if (attributes) {
     for (const [name, value] of Object.entries(attributes)) {
       if (name.startsWith("data-")) dom.setAttribute(name, value)
@@ -86,7 +88,7 @@ const renderModify = () => {
   }
 
   const ppu = settings.ppu
-  const loc = window.location
+  const loc = w.location
   if (
     settings.buttonModify &&
     (!ppu || ppu === `${loc.protocol}//${loc.host}${loc.pathname}`)
@@ -109,12 +111,12 @@ const setCookie = (value) => {
   if (settings.domain) {
     cookie += `;domain=${settings.domain}`
   }
-  document.cookie = cookie
+  d.cookie = cookie
 }
 
 const getCookie = () => {
   const prefix = `${cookieName}=`
-  for (const cookie of document.cookie.split("; ")) {
+  for (const cookie of d.cookie.split("; ")) {
     if (cookie.startsWith(prefix))
       return decodeURIComponent(cookie.substring(prefix.length))
   }
@@ -142,9 +144,7 @@ const onAccept = (accept) => (e) => {
   renderModify()
   renderAcceptedEmbeds()
   injectAcceptedScripts()
-  window.dispatchEvent(
-    new Event(`f3cc_consent_${accept ? "granted" : "denied"}`),
-  )
+  w.dispatchEvent(new Event(`f3cc_consent_${accept ? "granted" : "denied"}`))
 }
 
 const injectAcceptedScripts = () => {
@@ -172,20 +172,20 @@ const mainElement = () => {
 const _lsFallback = {}
 const _lsSet = (key, value) => {
   try {
-    window.localStorage.setItem(key, JSON.stringify(value))
+    localStorage.setItem(key, JSON.stringify(value))
   } catch (_e) {
     _lsFallback[key] = value
   }
 }
 const _lsGet = (key) => {
   try {
-    return JSON.parse(window.localStorage.getItem(key))
+    return JSON.parse(localStorage.getItem(key))
   } catch (_e) {
     return _lsFallback[key]
   }
 }
 
-const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
+const renderAcceptedEmbeds = () => {
   const providers = _lsGet(providerKey) || []
 
   for (const node of qsa(".f3cc-embed")) {
@@ -199,7 +199,8 @@ const renderAcceptedEmbeds = (window.f3ccRenderEmbeds = () => {
       }
     }
   }
-})
+}
+w.f3ccRenderEmbeds = renderAcceptedEmbeds
 
 const initEmbedClickListener = () => {
   body.addEventListener("click", (e) => {
@@ -218,12 +219,12 @@ const initEmbedClickListener = () => {
 const setInnerHTML = (elm, html) => {
   elm.innerHTML = html
   for (const oldScriptEl of qsa("script", elm)) {
-    const newScriptEl = document.createElement("script")
+    const newScriptEl = d.createElement("script")
     for (const attr of oldScriptEl.attributes) {
       newScriptEl.setAttribute(attr.name, attr.value)
     }
 
-    const scriptText = document.createTextNode(oldScriptEl.innerHTML)
+    const scriptText = d.createTextNode(oldScriptEl.innerHTML)
     newScriptEl.appendChild(scriptText)
 
     oldScriptEl.replaceWith(newScriptEl)
