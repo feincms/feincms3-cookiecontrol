@@ -7,7 +7,7 @@
   "license": "BSD-3",
   "private": true,
   "devDependencies": {
-    "esbuild": "^0.24.0"
+    "esbuild": "^0.24.2"
   },
   "scripts": {
     "build": "node esbuild.js"
