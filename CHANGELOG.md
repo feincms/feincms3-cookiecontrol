@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.6 (2025-01-16)
+
 - Reorganized the repository a bit.
 - Fixed and simplified the Google Consent Management integration.
 - Added SRF support to the embedding functionality.
