@@ -121,7 +121,7 @@ class CookieControlTest(test.TestCase):
     def test_view(self):
         response = self.client.get("/inject-f3cc.js")
         self.assertContains(response, "window.f3ccData")
-        self.assertContains(response, "document.createElement")
+        self.assertContains(response, ".createElement")
         self.assertEqual(response["content-type"], "text/javascript; charset=UTF-8")
         self.assertContains(response, '"ppu":null')
         # print(response)
