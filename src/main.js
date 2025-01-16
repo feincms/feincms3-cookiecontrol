@@ -217,14 +217,14 @@ const initEmbedClickListener = () => {
 }
 
 const setInnerHTML = (elm, html) => {
-  elm.innerHTML = html
+  elm[sInnerHTML] = html
   for (const oldScriptEl of qsa("script", elm)) {
-    const newScriptEl = d.createElement("script")
+    const newScriptEl = crel("script")
     for (const attr of oldScriptEl.attributes) {
       newScriptEl.setAttribute(attr.name, attr.value)
     }
 
-    const scriptText = d.createTextNode(oldScriptEl.innerHTML)
+    const scriptText = d.createTextNode(oldScriptEl[sInnerHTML])
     newScriptEl.appendChild(scriptText)
 
     oldScriptEl.replaceWith(newScriptEl)
