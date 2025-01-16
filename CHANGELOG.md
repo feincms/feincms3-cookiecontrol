@@ -9,6 +9,7 @@
 - Pruned Python 3.9 and Django 4.1 from the CI matrix.
 - Added Python 3.13 to the CI matrix.
 - Added Django 5.2a1 to the CI matrix.
+- Made feincms3 an optional dependency.
 
 ## 1.5 (2024-05-05)
 

@@ -38,11 +38,13 @@ classifiers = [
 dynamic = [ "version" ]
 dependencies = [
   "django>=3.2",
+]
+optional-dependencies.embedding = [
   "feincms3>=5.2.2",
 ]
-
 optional-dependencies.tests = [
   "coverage",
+  "feincms3>=5.2.2",
   "requests",
 ]
 urls.Homepage = "https://github.com/feincms/feincms3-cookiecontrol/"

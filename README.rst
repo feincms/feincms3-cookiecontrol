@@ -33,7 +33,7 @@ Install the package:
 
 .. code-block:: shell
 
-    venv/bin/pip install feincms3-cookiecontrol
+    pip install feincms3-cookiecontrol
 
 Add ``feincms3_cookiecontrol`` to ``INSTALLED_APPS``:
 
@@ -240,11 +240,15 @@ Selectively embed iframes or other third party scripts
    :width: 400
    :alt: Consciously embed a YouTube video
 
-If users do not consent to your cookie policy, embedding third party scripts or iframes
-might violate data protection laws, since personal data is transfered to a third party
-without the users knowledge or consent. One way is to disable third party content
-alltogether or selectively asking users to consent to the data policies of specific
-providers. The letter is accomplished by the 'conscious embed' functionality.
+If users do not consent to your cookie policy, embedding third party scripts or
+iframes might violate data protection laws, since personal data is transfered
+to a third party without the users knowledge or consent. One way is to disable
+third party content alltogether or selectively asking users to consent to the
+data policies of specific providers. The letter is accomplished by the
+'conscious embed' functionality.
+
+You have to install the ``feincms3-cookiecontrol[embedding]`` extra for this to
+work.
 
 Extend default providers in your ``settings.py``:
 
