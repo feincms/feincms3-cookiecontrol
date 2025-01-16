@@ -1,7 +1,6 @@
 from django import template
 from django.template.base import token_kwargs
 
-from feincms3_cookiecontrol.embedding import embed, wrap
 from feincms3_cookiecontrol.models import cookiecontrol_data
 
 
@@ -16,6 +15,13 @@ def feincms3_cookiecontrol(*, hide_modify_button=False, privacy_policy_url=None)
     return {"data": data}
 
 
+@register.simple_tag(name="embed")
+def do_embed(url):
+    from feincms3_cookiecontrol.embedding import embed
+
+    return embed(url)
+
+
 class ConsciousWrapNode(template.Node):
     def __init__(self, provider, nodelist, kw):
         self.provider = template.Variable(provider)
@@ -23,6 +29,8 @@ class ConsciousWrapNode(template.Node):
         self.kw = kw
 
     def render(self, context):
+        from feincms3_cookiecontrol.embedding import wrap
+
         return wrap(
             self.provider.resolve(context),
             self.nodelist.render(context),
@@ -44,8 +52,3 @@ def do_wrap(parser, token):
     nodelist = parser.parse(("endwrap",))
     parser.delete_first_token()
     return ConsciousWrapNode(provider, nodelist, kw)
-
-
-@register.simple_tag(name="embed")
-def do_embed(url):
-    return embed(url)
