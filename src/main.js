@@ -223,10 +223,7 @@ const setInnerHTML = (elm, html) => {
     for (const attr of oldScriptEl.attributes) {
       newScriptEl.setAttribute(attr.name, attr.value)
     }
-
-    const scriptText = d.createTextNode(oldScriptEl[sInnerHTML])
-    newScriptEl.appendChild(scriptText)
-
+    newScriptEl[sTextContent] = oldScriptEl[sTextContent]
     oldScriptEl.replaceWith(newScriptEl)
   }
 }
