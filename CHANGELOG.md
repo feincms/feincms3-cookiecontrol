@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Trimmed the CI a bit.
+
 ## 1.6 (2025-01-16)
 
 - Reorganized the repository a bit.
