@@ -31,10 +31,9 @@ async function generateInjectCSS(sourcePath) {
     .replaceAll(/\s*([{},;:])\s*/g, "$1")
 
   return `(()=>{
-    let d = document
-    var e = d.createElement('style')
+    let d = document, e = d.createElement('style')
     e.textContent = \`${minified}\`
-    d.head.appendChild(e)
+    d.head.append(e)
   })();`
 }
 
