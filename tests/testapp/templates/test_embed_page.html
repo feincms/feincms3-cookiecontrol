@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Embed Page</title>
+</head>
+<body>
+    <h1>Test Embed Page</h1>
+    <p>This page tests the embed functionality with cookie control.</p>
+
+    <div class="f3cc-embed" data-provider="youtube">
+        <div class="f3cc-placeholder">
+            <p>To view this content, please accept YouTube cookies.</p>
+            <button type="button" class="f3cc-button accept">Accept YouTube</button>
+            <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a>
+        </div>
+        <template>
+            <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                width="560"
+                height="315"
+                frameborder="0">
+            </iframe>
+        </template>
+    </div>
+
+    {# {% load feincms3_cookiecontrol %}{% feincms3_cookiecontrol %} #}
+
+    <script src="/inject-f3cc.js"></script>
+</body>
+</html>
