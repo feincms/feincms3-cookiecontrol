@@ -48,6 +48,7 @@ optional-dependencies.tests = [
   "pytest",
   "pytest-cov",
   "pytest-django",
+  "pytest-playwright",
   "requests",
 ]
 urls.Homepage = "https://github.com/feincms/feincms3-cookiecontrol/"
@@ -125,9 +126,12 @@ isort.lines-after-imports = 2
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "testapp.settings"
-python_files = [ "tests/*.py" ]
+python_files = [ "test_*.py" ]
 python_classes = [ "Test*" ]
 python_functions = [ "test_*" ]
 addopts = "-v --tb=short"
 testpaths = [ "tests" ]
 pythonpath = [ "tests" ]
+markers = [
+  "e2e: end-to-end tests",
+]
