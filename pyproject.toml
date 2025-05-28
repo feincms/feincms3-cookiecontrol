@@ -45,6 +45,9 @@ optional-dependencies.embedding = [
 optional-dependencies.tests = [
   "coverage",
   "feincms3>=5.2.2",
+  "pytest",
+  "pytest-cov",
+  "pytest-django",
   "requests",
 ]
 urls.Homepage = "https://github.com/feincms/feincms3-cookiecontrol/"
@@ -89,6 +92,8 @@ extend-select = [
   "G",
   # flake8-pie
   "PIE",
+  # flake8-pytest-style
+  "PT",
   # flake8-simplify
   "SIM",
   # flake8-gettext
@@ -96,7 +101,9 @@ extend-select = [
   # pygrep-hooks
   "PGH",
   # pylint
-  "PL",
+  "PLC",
+  "PLE",
+  "PLW",
   # unused noqa
   "RUF100",
 ]
@@ -115,3 +122,12 @@ per-file-ignores."*/migrat*/*" = [
 ]
 isort.combine-as-imports = true
 isort.lines-after-imports = 2
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "testapp.settings"
+python_files = [ "tests/*.py" ]
+python_classes = [ "Test*" ]
+python_functions = [ "test_*" ]
+addopts = "-v --tb=short"
+testpaths = [ "tests" ]
+pythonpath = [ "tests" ]

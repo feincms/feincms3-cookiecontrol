@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Trimmed the CI a bit.
+- Updated the tests to use pytest.
 
 ## 1.6 (2025-01-16)
 
