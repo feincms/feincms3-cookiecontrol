@@ -17,7 +17,7 @@ def feincms3_cookiecontrol(*, hide_modify_button=False, privacy_policy_url=None)
 
 @register.simple_tag(name="embed")
 def do_embed(url):
-    from feincms3_cookiecontrol.embedding import embed
+    from feincms3_cookiecontrol.embedding import embed  # noqa: PLC0415
 
     return embed(url)
 
@@ -29,7 +29,7 @@ class ConsciousWrapNode(template.Node):
         self.kw = kw
 
     def render(self, context):
-        from feincms3_cookiecontrol.embedding import wrap
+        from feincms3_cookiecontrol.embedding import wrap  # noqa: PLC0415
 
         return wrap(
             self.provider.resolve(context),

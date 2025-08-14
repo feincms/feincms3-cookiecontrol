@@ -111,6 +111,7 @@ const setCookie = (value) => {
   if (settings.domain) {
     cookie += `;domain=${settings.domain}`
   }
+  // biome-ignore lint/suspicious/noDocumentCookie: The recommended API isn't available everywhere
   d.cookie = cookie
 }
 

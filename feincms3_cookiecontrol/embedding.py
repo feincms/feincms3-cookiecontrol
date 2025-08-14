@@ -70,7 +70,7 @@ def wrap(provider, html, **kwargs):
 
 def oembed(url, *, oembed_json=None):
     if oembed_json is None:
-        from feincms3.plugins.external import oembed_json
+        from feincms3.plugins.external import oembed_json  # noqa: PLC0415
 
     if (data := oembed_json(url)) and (html := data.get("html")):
         provider_name = data.get("provider_name", "")

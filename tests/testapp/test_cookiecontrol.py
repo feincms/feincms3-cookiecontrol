@@ -1,7 +1,7 @@
 import pytest
 from django.core.exceptions import ValidationError
 from django.template import Context, Template
-from django.test import Client
+from django.test import Client, TestCase
 from django.utils.translation import activate
 
 from feincms3_cookiecontrol.models import Script, clobber_cookiecontrol_data
@@ -27,8 +27,6 @@ class TestCookieControl:
         Script.objects.create(
             name="script2",
         )
-
-        from django.test import TestCase
 
         with TestCase().assertNumQueries(1):  # One query for all scripts
             html = t.render(Context({}))

@@ -114,16 +114,16 @@ lint.extend-ignore = [
   # No line length errors
   "E501",
 ]
-lint.isort.combine-as-imports = true
-lint.isort.lines-after-imports = 2
-
-lint.mccabe.max-complexity = 15
-per-file-ignores."*/migrat*/*" = [
+lint.per-file-ignores."*/migrat*/*" = [
   # Allow using PascalCase model names in migrations
   "N806",
   # Ignore the fact that migration files are invalid module names
   "N999",
 ]
+lint.isort.combine-as-imports = true
+lint.isort.lines-after-imports = 2
+
+lint.mccabe.max-complexity = 15
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "testapp.settings"

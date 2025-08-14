@@ -9,7 +9,9 @@ class CookiecontrolConfig(AppConfig):
     default_auto_field = "django.db.models.AutoField"
 
     def ready(self):
-        from feincms3_cookiecontrol.models import clobber_cookiecontrol_data
+        from feincms3_cookiecontrol.models import (  # noqa: PLC0415
+            clobber_cookiecontrol_data,
+        )
 
         with contextlib.suppress(Exception):
             clobber_cookiecontrol_data()
