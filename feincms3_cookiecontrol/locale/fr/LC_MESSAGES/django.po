@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 17:35+0200\n"
+"POT-Creation-Date: 2026-03-30 19:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: embedding.py:50
-#, python-format
+#: embedding.py:55
+#, python-brace-format
 msgctxt "f3cc"
-msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
-msgstr "Nous aimerions vous montrer le contenu du fournisseur %(title)s, mais respectons votre vie privée. Si vous acceptez la politique de confidentialité provider, veuillez cliquer sur le bouton suivant pour afficher le contenu."
+msgid ""
+"We would like to show you content from the provider {title}, but respect "
+"your privacy. If you agree to the {link_start}provider's privacy "
+"policy{link_end}, please click the following button to view the content."
+msgstr ""
+"Nous aimerions vous montrer le contenu du fournisseur {title}, mais "
+"respectons votre vie privée. Si vous acceptez la {link_start}politique de "
+"confidentialité du fournisseur{link_end}, veuillez cliquer sur le bouton "
+"suivant pour afficher le contenu."
 
-#: embedding.py:52
+#: embedding.py:57
 msgctxt "f3cc"
 msgid "Show the content"
 msgstr "Afficher le contenu"
 
-#: embedding.py:94
+#: embedding.py:109
 msgctxt "f3cc"
 msgid "Privacy policy"
 msgstr "Politique de confidentialité"
@@ -42,8 +49,15 @@ msgstr "Cookies sur notre page Web"
 #: models.py:19
 #, python-brace-format
 msgctxt "f3cc"
-msgid "We use cookies to enhance the user experience on our website. Read our {link_start}privacy policy{link_end} to find out more about how we use cookies and protect your data."
-msgstr "Nous utilisons des cookies pour optimiser l’expérience des utilisateurs sur notre site Web. Lisez notre {link_start}politique de confidentialité{link_end} pour en savoir plus sur notre utilisation de cookies et la protection de vos données."
+msgid ""
+"We use cookies to enhance the user experience on our website. Read our "
+"{link_start}privacy policy{link_end} to find out more about how we use "
+"cookies and protect your data."
+msgstr ""
+"Nous utilisons des cookies pour optimiser l’expérience des utilisateurs sur "
+"notre site Web. Lisez notre {link_start}politique de "
+"confidentialité{link_end} pour en savoir plus sur notre utilisation de "
+"cookies et la protection de vos données."
 
 #: models.py:21
 msgctxt "f3cc"
@@ -60,26 +74,29 @@ msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr "Modifier les paramètres des cookies"
 
-#: models.py:60
+#: models.py:62
 msgid "technical name"
 msgstr "nom technique"
 
-#: models.py:62 models.py:69
+#: models.py:64 models.py:71
 msgid "script"
 msgstr "script"
 
-#: models.py:64
+#: models.py:66
 msgid "HTML code to inject if cookies are accepted."
 msgstr "Code html à injecter si les cookies sont acceptés."
 
-#: models.py:70
+#: models.py:72
 msgid "scripts"
 msgstr "scripts"
 
-#: models.py:79
-msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
-msgstr "Cela n'a pas l'air correct. Veuillez commencer par une balise html (par exemple <script>, <div>)."
+#: models.py:81
+msgid ""
+"This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+msgstr ""
+"Cela n'a pas l'air correct. Veuillez commencer par une balise html (par "
+"exemple <script>, <div>)."
 
-#: models.py:86
+#: models.py:88
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr "La saisie de balises <noscript> n'a pas de sens."

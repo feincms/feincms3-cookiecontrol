@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 17:35+0200\n"
+"POT-Creation-Date: 2026-03-30 19:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: embedding.py:50
-#, python-format
+#: embedding.py:55
+#, python-brace-format
 msgctxt "f3cc"
-msgid "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content."
-msgstr "Nus vulain mussar a Vus cuntegns dal purschider %(title)s, ma respectar Vossa sfera privata. Sche Vus essas d’accord cun la decleraziun da protecziun da datas da l’offerent, cliccai sin il suandant buttun per inditgar il cuntegn."
+msgid ""
+"We would like to show you content from the provider {title}, but respect "
+"your privacy. If you agree to the {link_start}provider’s privacy "
+"policy{link_end}, please click the following button to view the content."
+msgstr ""
+"Nus vulain mussar a Vus cuntegns dal purschider {title}, ma respectar Vossa "
+"sfera privata. Sche Vus essas d’accord cun la {link_start}decleraziun da "
+"protecziun da datas da l’offerent{link_end}, cliccai sin il suandant buttun "
+"per inditgar il cuntegn."
 
-#: embedding.py:52
+#: embedding.py:57
 msgctxt "f3cc"
 msgid "Show the content"
 msgstr "Mussai il cuntegn"
 
-#: embedding.py:94
+#: embedding.py:109
 msgctxt "f3cc"
 msgid "Privacy policy"
 msgstr "Decleraziun davart la protecziun da datas"
@@ -41,8 +48,15 @@ msgstr "Cookies sin nossa pagina-web"
 #: models.py:19
 #, python-brace-format
 msgctxt "f3cc"
-msgid "We use cookies to enhance the user experience on our website. Read our {link_start}privacy policy{link_end} to find out more about how we use cookies and protect your data."
-msgstr "Nus utilisain cookies per porscher ina pagina-web pratica per las utilisadras ed ils utilisaders. En nossa {link_start}directiva davart la protecziun da datas{link_end} chattais Vus ulteriuras infurmaziuns co che nus faschain diever da cookies e protegin Vossas datas."
+msgid ""
+"We use cookies to enhance the user experience on our website. Read our "
+"{link_start}privacy policy{link_end} to find out more about how we use "
+"cookies and protect your data."
+msgstr ""
+"Nus utilisain cookies per porscher ina pagina-web pratica per las "
+"utilisadras ed ils utilisaders. En nossa {link_start}directiva davart la "
+"protecziun da datas{link_end} chattais Vus ulteriuras infurmaziuns co che "
+"nus faschain diever da cookies e protegin Vossas datas."
 
 #: models.py:21
 msgctxt "f3cc"
@@ -59,26 +73,27 @@ msgctxt "f3cc"
 msgid "Modify cookie settings"
 msgstr "Midar ils parameters da cookie"
 
-#: models.py:60
+#: models.py:62
 msgid "technical name"
 msgstr ""
 
-#: models.py:62 models.py:69
+#: models.py:64 models.py:71
 msgid "script"
 msgstr ""
 
-#: models.py:64
+#: models.py:66
 msgid "HTML code to inject if cookies are accepted."
 msgstr ""
 
-#: models.py:70
+#: models.py:72
 msgid "scripts"
 msgstr ""
 
-#: models.py:79
-msgid "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+#: models.py:81
+msgid ""
+"This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
 msgstr ""
 
-#: models.py:86
+#: models.py:88
 msgid "Entering <noscript> tags doesn't make sense."
 msgstr ""

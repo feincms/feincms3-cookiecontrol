@@ -4,6 +4,8 @@
 
 - Trimmed the CI a bit.
 - Updated the tests to use pytest.
+- Changed the embedding code to use an inline link instead of a separate link
+  for the privacy policy.
 
 ## 1.6 (2025-01-16)
 

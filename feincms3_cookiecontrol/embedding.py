@@ -2,7 +2,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.utils.text import slugify
-from django.utils.translation import pgettext, pgettext_lazy
+from django.utils.translation import pgettext_lazy
 from feincms3.embedding import embed_srf, embed_vimeo, embed_youtube
 
 
@@ -52,9 +52,21 @@ _providers.update(getattr(settings, "EMBED_PROVIDERS", {}))
 
 _default_description = pgettext_lazy(
     "f3cc",
-    "We would like to show you content from the provider %(title)s, but respect your privacy. If you agree to the provider's privacy policy, please click the following button to view the content.",
+    "We would like to show you content from the provider {title}, but respect your privacy. If you agree to the {link_start}provider's privacy policy{link_end}, please click the following button to view the content.",
 )
 _default_button = pgettext_lazy("f3cc", "Show the content")
+
+
+def _render_description(title, privacy_policy_url):
+    if privacy_policy_url:
+        return _default_description.format(
+            title=title,
+            link_start=format_html(
+                '<a href="{}" target="_blank" rel="noopener">', privacy_policy_url
+            ),
+            link_end="</a>",
+        )
+    return _default_description.format(title=title, link_start="", link_end="")
 
 
 def embed(url):
@@ -79,8 +91,7 @@ def oembed(url, *, oembed_json=None):
             {
                 "embedded_html": f'<div class="responsive-embed widescreen {slugify(provider_name)}">{html}</div>',
                 "provider": slugify(provider_name),
-                "privacy_policy_link": "",
-                "description": _default_description % {"title": provider_name},
+                "description": _render_description(provider_name, ""),
                 "button": _default_button,
             },
         )
@@ -93,12 +104,8 @@ def _render(html, provider, config, *, description=None, button=None):
         {
             "embedded_html": html,
             "provider": provider,
-            "privacy_policy_link": format_html(
-                '<a href="{}" target="_blank" rel="noopener">{}</a>',
-                config["privacy_policy_url"],
-                pgettext("f3cc", "Privacy policy"),
-            ),
-            "description": description or (_default_description % config),
+            "description": description
+            or _render_description(config["title"], config["privacy_policy_url"]),
             "button": button or _default_button,
         }
         | config,
