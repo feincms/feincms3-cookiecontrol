@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.7 (2026-03-30)
+
 - Trimmed the CI a bit.
 - Updated the tests to use pytest.
 - Changed the embedding code to use an inline link instead of a separate link
