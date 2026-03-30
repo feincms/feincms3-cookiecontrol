@@ -6,6 +6,7 @@
 - Updated the tests to use pytest.
 - Changed the embedding code to use an inline link instead of a separate link
   for the privacy policy.
+- Added Python 3.14, Django 6.0.
 
 ## 1.6 (2025-01-16)
 
