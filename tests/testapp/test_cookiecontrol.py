@@ -59,8 +59,10 @@ class TestCookieControl:
             ).full_clean()
 
         assert [m.message for m in exc_info.value.error_dict["script"]] == [
-            "This doesn't look right. Please start with a HTML tag"
-            " (e.g. <script>, <div>)."
+            (
+                "This doesn't look right. Please start with a HTML tag"
+                " (e.g. <script>, <div>)."
+            )
         ]
 
         with pytest.raises(ValidationError) as exc_info:

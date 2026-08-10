@@ -41,7 +41,7 @@ class ConsciousWrapNode(template.Node):
 @register.tag(name="wrap")
 def do_wrap(parser, token):
     try:
-        tag_name, provider, *bits = token.split_contents()
+        _tag_name, provider, *bits = token.split_contents()
     except ValueError as exc:
         raise template.TemplateSyntaxError(
             "%r tag requires exactly one argument", str(token.contents).split()[0]
