@@ -98,3 +98,40 @@ class TestBannerE2E:
         # Check that banner is hidden after rejection
         banner = page.locator(".f3cc-banner")
         assert not banner.is_visible(), "Banner should be hidden after rejection"
+
+    def test_banner_ignores_similarly_named_cookies(
+        self, page, live_server, test_scripts
+    ):
+        """Only the f3cc cookie itself counts as a consent decision"""
+        page.context.add_cookies(
+            [
+                {"name": "notf3cc", "value": "all", "url": live_server.url},
+                {"name": "f3ccx", "value": "all", "url": live_server.url},
+            ]
+        )
+        self._create_test_page(page, live_server)
+
+        banner = page.locator(".f3cc-banner")
+        banner.wait_for(state="visible", timeout=5000)
+
+        assert page.evaluate("() => window.ga_injected") is None, (
+            "no consent has been given yet"
+        )
+
+    def test_banner_reads_an_existing_consent_cookie(
+        self, page, live_server, test_scripts
+    ):
+        """A pre-existing f3cc cookie is honoured without showing the banner"""
+        page.context.add_cookies(
+            [
+                {"name": "decoy", "value": "x", "url": live_server.url},
+                {"name": "f3cc", "value": "all", "url": live_server.url},
+                {"name": "trailing", "value": "y", "url": live_server.url},
+            ]
+        )
+        self._create_test_page(page, live_server)
+
+        page.wait_for_function("() => window.ga_injected === true", timeout=5000)
+        assert not page.locator(".f3cc-banner").is_visible(), (
+            "the banner should stay hidden when consent was given before"
+        )

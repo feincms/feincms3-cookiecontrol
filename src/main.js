@@ -113,12 +113,10 @@ const setCookie = (value) => {
   d.cookie = cookie
 }
 
+const cookieRe = new RegExp(`(?:^|;\\s*)${cookieName}=([^;]*)`)
 const getCookie = () => {
-  const prefix = `${cookieName}=`
-  for (const cookie of d.cookie.split("; ")) {
-    if (cookie.startsWith(prefix))
-      return decodeURIComponent(cookie.substring(prefix.length))
-  }
+  const match = d.cookie.match(cookieRe)
+  return match && decodeURIComponent(match[1])
 }
 
 const sAll = "all"
