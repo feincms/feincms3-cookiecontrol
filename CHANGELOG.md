@@ -17,6 +17,7 @@
   which aren't a list at all.
 - Changed `Script.clean` to report both validation errors instead of only the
   last one.
+- Further reduced the size of the generated JavaScript.
 
 ## 1.7 (2026-03-30)
 

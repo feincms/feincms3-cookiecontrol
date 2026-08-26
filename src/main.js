@@ -23,12 +23,7 @@ let modify
 
 const crel = (tagName, attributes = null, children = []) => {
   const dom = d.createElement(tagName)
-  if (attributes) {
-    for (const [name, value] of Object.entries(attributes)) {
-      if (name.startsWith("data-")) dom.setAttribute(name, value)
-      else dom[name] = value
-    }
-  }
+  for (const name in attributes) dom[name] = attributes[name]
   dom.append(...children)
   return dom
 }
