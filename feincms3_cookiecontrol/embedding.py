@@ -71,7 +71,7 @@ def _render_description(title, privacy_policy_url):
 
 def embed(url):
     for provider, config in _providers.items():
-        if (handler := config["handler"]) and (html := handler(url)) is not None:
+        if (handler := config.get("handler")) and (html := handler(url)) is not None:
             return _render(html, provider, config)
     return ""
 
@@ -105,7 +105,9 @@ def _render(html, provider, config, *, description=None, button=None):
             "embedded_html": html,
             "provider": provider,
             "description": description
-            or _render_description(config["title"], config["privacy_policy_url"]),
+            or _render_description(
+                config.get("title") or provider, config.get("privacy_policy_url")
+            ),
             "button": button or _default_button,
         }
         | config,

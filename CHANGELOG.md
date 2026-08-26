@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Fixed a crash in `embed()` when using custom `EMBED_PROVIDERS` entries which
+  do not specify a `handler` (as documented). `title` and `privacy_policy_url`
+  are optional now, too.
+
 ## 1.7 (2026-03-30)
 
 - Trimmed the CI a bit.

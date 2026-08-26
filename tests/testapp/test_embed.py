@@ -1,7 +1,7 @@
 import pytest
 from django.template import Context, Template, TemplateSyntaxError
 
-from feincms3_cookiecontrol.embedding import embed
+from feincms3_cookiecontrol.embedding import _providers, embed, wrap
 
 
 @pytest.mark.django_db
@@ -67,3 +67,42 @@ class TestConsciousEmbed:
         )
         assert 'href="https://policies.google.com/privacy"' in html
         assert "dQw4w9WgXcQ" in html
+
+
+@pytest.mark.django_db
+class TestCustomProviders:
+    @pytest.fixture
+    def provider(self):
+        """Temporarily register an additional embed provider"""
+        added = []
+
+        def _add(name, config):
+            _providers[name] = config
+            added.append(name)
+
+        yield _add
+
+        for name in added:
+            del _providers[name]
+
+    def test_embed_with_handlerless_provider(self, provider):
+        """Custom providers do not have to specify a "handler" (see the README)"""
+        provider(
+            "some-provider",
+            {
+                "title": "Some provider",
+                "privacy_policy_url": "https://example.com/privacy/",
+            },
+        )
+
+        assert embed("https://example.com/") == ""
+        assert "dQw4w9WgXcQ" in embed("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+    def test_wrap_minimal_provider(self, provider):
+        """Neither "title" nor "privacy_policy_url" are required"""
+        provider("minimal", {})
+
+        html = wrap("minimal", "<iframe></iframe>")
+        assert 'data-provider="minimal"' in html
+        assert "provider minimal" in html
+        assert "<a href" not in html
