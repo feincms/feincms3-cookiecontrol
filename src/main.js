@@ -168,25 +168,21 @@ const mainElement = () => {
   return mainElementRef
 }
 
-const _lsFallback = {}
-const _lsSet = (key, value) => {
-  try {
-    localStorage.setItem(key, JSON.stringify(value))
-  } catch (_e) {
-    _lsFallback[key] = value
-  }
-}
-const _lsGet = (key) => {
-  try {
-    return JSON.parse(localStorage.getItem(key))
-  } catch (_e) {
-    return _lsFallback[key]
-  }
-}
-
+// The local storage may be unavailable (or contain garbage); fall back to
+// remembering the providers for the lifetime of the page in that case.
+let providersFallback
 const acceptedProviders = () => {
-  const providers = _lsGet(providerKey)
+  let providers = providersFallback
+  try {
+    providers = JSON.parse(localStorage.getItem(providerKey))
+  } catch (_e) {}
   return Array.isArray(providers) ? providers : []
+}
+const setAcceptedProviders = (providers) => {
+  providersFallback = providers
+  try {
+    localStorage.setItem(providerKey, JSON.stringify(providers))
+  } catch (_e) {}
 }
 
 const renderAcceptedEmbeds = () => {
@@ -219,7 +215,7 @@ const initEmbedClickListener = () => {
       const provider = node.dataset.provider
       if (!providers.includes(provider)) {
         providers.push(provider)
-        _lsSet(providerKey, providers)
+        setAcceptedProviders(providers)
       }
       renderAcceptedEmbeds()
     }
