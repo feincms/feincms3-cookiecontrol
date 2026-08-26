@@ -189,8 +189,13 @@ const _lsGet = (key) => {
   }
 }
 
+const acceptedProviders = () => {
+  const providers = _lsGet(providerKey)
+  return Array.isArray(providers) ? providers : []
+}
+
 const renderAcceptedEmbeds = () => {
-  const providers = _lsGet(providerKey) || []
+  const providers = acceptedProviders()
 
   for (const node of qsa(".f3cc-embed")) {
     const template = qs("template", node)
@@ -215,9 +220,12 @@ const initEmbedClickListener = () => {
     const node = button?.closest(".f3cc-embed")
     if (button && node) {
       e.preventDefault()
-      const providers = _lsGet(providerKey) || []
-      providers.push(node.dataset.provider)
-      _lsSet(providerKey, providers)
+      const providers = acceptedProviders()
+      const provider = node.dataset.provider
+      if (!providers.includes(provider)) {
+        providers.push(provider)
+        _lsSet(providerKey, providers)
+      }
       renderAcceptedEmbeds()
     }
   })

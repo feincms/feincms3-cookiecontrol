@@ -12,6 +12,9 @@
   weren't dispatched at all.
 - Stopped adding a new click listener to an existing `.f3cc-modify` element
   each time the consent changed.
+- Stopped adding duplicate provider entries to the list of accepted embedding
+  providers in the local storage, and started ignoring local storage values
+  which aren't a list at all.
 
 ## 1.7 (2026-03-30)
 
