@@ -5,6 +5,11 @@
 - Fixed a crash in `embed()` when using custom `EMBED_PROVIDERS` entries which
   do not specify a `handler` (as documented). `title` and `privacy_policy_url`
   are optional now, too.
+- Fixed the embedding JavaScript to no longer crash when a `.f3cc-embed`
+  element isn't wrapped in a `.f3cc` element. The exception aborted the
+  remaining consent handling, which meant that accepted scripts weren't
+  injected and the `f3cc_consent_granted` / `f3cc_consent_denied` events
+  weren't dispatched at all.
 
 ## 1.7 (2026-03-30)
 

@@ -196,7 +196,10 @@ const renderAcceptedEmbeds = () => {
     if (template && nodesProvider) {
       if (getConsentToAll() || providers.includes(nodesProvider)) {
         const clone = template.content.cloneNode(true)
-        node.closest(".f3cc").replaceWith(clone)
+        // The .f3cc wrapper is optional: embeds may also be hand-written
+        // markup which only uses .f3cc-embed.
+        const target = node.closest(".f3cc") || node
+        target.replaceWith(clone)
       }
     }
   }

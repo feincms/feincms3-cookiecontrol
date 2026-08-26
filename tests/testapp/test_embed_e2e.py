@@ -19,6 +19,14 @@ def youtube_script():
     return script
 
 
+@pytest.fixture
+def page_errors(page):
+    """Collect uncaught JavaScript exceptions"""
+    errors = []
+    page.on("pageerror", lambda exc: errors.append(str(exc)))
+    return errors
+
+
 @pytest.mark.django_db(transaction=True)
 @pytest.mark.e2e
 class TestEmbedE2E:
@@ -54,7 +62,7 @@ class TestEmbedE2E:
         )
 
     def test_embed_loads_content_after_provider_acceptance(
-        self, page, live_server, youtube_script
+        self, page, live_server, youtube_script, page_errors
     ):
         """Test that embed content handles provider-specific acceptance"""
         self._create_embed_test_page(page, live_server)
@@ -70,12 +78,19 @@ class TestEmbedE2E:
         # Wait for JavaScript to execute
         page.wait_for_timeout(2000)
 
-        # Test that the page handles the click (this verifies the JavaScript is working)
-        # The exact embed behavior may vary, but we can test that the infrastructure works
+        assert not page_errors, f"Uncaught JavaScript errors: {page_errors}"
 
         # Check that the page structure is still intact and JavaScript executed
         f3cc_div = page.locator(".f3cc")
         assert f3cc_div.count() > 0, "Cookie control container should still exist"
+
+        # The placeholder has been replaced by the actual embed
+        assert page.locator('iframe[src*="youtube.com"]').count() == 1, (
+            "iframe should be embedded after accepting the provider"
+        )
+        assert page.locator(".f3cc-placeholder").count() == 0, (
+            "placeholder should be gone after accepting the provider"
+        )
 
         # Verify that provider-specific data is stored (this tests the embed JS logic)
         # The JavaScript should store provider acceptance in localStorage
@@ -96,7 +111,7 @@ class TestEmbedE2E:
         )
 
     def test_embed_with_global_cookie_acceptance(
-        self, page, live_server, youtube_script
+        self, page, live_server, youtube_script, page_errors
     ):
         """Test that global cookie acceptance enables embed content"""
         self._create_embed_test_page(page, live_server)
@@ -127,15 +142,17 @@ class TestEmbedE2E:
             f"Cookie should be set to 'all' after global acceptance, got '{cookie_value}'"
         )
 
-        # Check that YouTube script was loaded (this tests script injection)
-        # Note: Script injection depends on the script name matching the provider
-        youtube_allowed = page.evaluate("() => window.youtube_allowed")
-        # For now, we'll just verify the script injection infrastructure is working
-        # The specific script loading may depend on configuration details
-        assert youtube_allowed is True or youtube_allowed is None, (
-            "YouTube script loading should be handled"
+        assert not page_errors, f"Uncaught JavaScript errors: {page_errors}"
+
+        # Check that the YouTube script was injected
+        assert page.evaluate("() => window.youtube_allowed") is True, (
+            "YouTube script should be injected after global acceptance"
         )
 
-        # Note: Banner visibility after acceptance may depend on specific JavaScript timing
-        # The important thing is that the cookie was set and scripts can be executed
-        # We've verified that the core functionality (cookie setting) works
+        # Accepting all cookies also embeds the third party content
+        assert page.locator('iframe[src*="youtube.com"]').count() == 1, (
+            "iframe should be embedded after global acceptance"
+        )
+
+        banner = page.locator(".f3cc-banner")
+        assert not banner.is_visible(), "Banner should be hidden after acceptance"
