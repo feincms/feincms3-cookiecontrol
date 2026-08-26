@@ -77,20 +77,20 @@ class Script(models.Model):
     def clean(self):
         super().clean()
 
-        msg = gettext(
-            "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
-        )
-        errors = {}
+        errors = []
 
         if (stripped := self.script.strip()) and stripped[0] != "<":
-            errors["script"] = msg
+            errors.append(
+                gettext(
+                    "This doesn't look right. Please start with a HTML tag (e.g. <script>, <div>)."
+                )
+            )
 
-        msg = gettext("Entering <noscript> tags doesn't make sense.")
         if "<noscript" in self.script:
-            errors["script"] = msg
+            errors.append(gettext("Entering <noscript> tags doesn't make sense."))
 
         if errors:
-            raise ValidationError(errors)
+            raise ValidationError({"script": errors})
 
     def serialize(self):
         return {

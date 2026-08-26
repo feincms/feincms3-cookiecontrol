@@ -75,6 +75,21 @@ class TestCookieControl:
             "Entering <noscript> tags doesn't make sense."
         ]
 
+        # Both problems are reported, not just the last one.
+        with pytest.raises(ValidationError) as exc_info:
+            Script(
+                name="script-name",
+                script="function(){}<noscript>Please JS</noscript>",
+            ).full_clean()
+
+        assert [m.message for m in exc_info.value.error_dict["script"]] == [
+            (
+                "This doesn't look right. Please start with a HTML tag"
+                " (e.g. <script>, <div>)."
+            ),
+            "Entering <noscript> tags doesn't make sense.",
+        ]
+
     def test_serialize(self):
         Script.objects.create(
             name="script-name",

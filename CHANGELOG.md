@@ -15,6 +15,8 @@
 - Stopped adding duplicate provider entries to the list of accepted embedding
   providers in the local storage, and started ignoring local storage values
   which aren't a list at all.
+- Changed `Script.clean` to report both validation errors instead of only the
+  last one.
 
 ## 1.7 (2026-03-30)
 
