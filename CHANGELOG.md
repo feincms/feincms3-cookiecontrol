@@ -10,6 +10,8 @@
   remaining consent handling, which meant that accepted scripts weren't
   injected and the `f3cc_consent_granted` / `f3cc_consent_denied` events
   weren't dispatched at all.
+- Stopped adding a new click listener to an existing `.f3cc-modify` element
+  each time the consent changed.
 
 ## 1.7 (2026-03-30)
 

@@ -78,8 +78,11 @@ const renderModify = () => {
     return
   }
 
-  let existing
-  if ((existing = qs(".f3cc-modify"))) {
+  const existing = qs(".f3cc-modify")
+  if (existing) {
+    // Remember the element so that later renderModify() calls short circuit
+    // above instead of adding the click listener again and again.
+    modify = existing
     existing.addEventListener("click", (e) => {
       e.preventDefault()
       renderBanner()
