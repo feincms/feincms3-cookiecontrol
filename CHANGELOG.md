@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.7.3 (2026-10-19)
+
 - Reduced the size of `f3cc.js` a bit by injecting the CSS through the
   existing DOM helper and removing redundant code.
 - Documented how to use `oembed` with a custom `oembed_json` callable.
