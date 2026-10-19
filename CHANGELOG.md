@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Reduced the size of `f3cc.js` a bit by injecting the CSS through the
+  existing DOM helper and removing redundant code.
 - Documented how to use `oembed` with a custom `oembed_json` callable.
 - Fixed a crash in `embed()` when using custom `EMBED_PROVIDERS` entries which
   do not specify a `handler` (as documented). `title` and `privacy_policy_url`

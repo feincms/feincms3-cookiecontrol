@@ -10,7 +10,7 @@ const InlineCSSPlugin = (_options = {}) => {
     setup(build) {
       build.onLoad({ filter: /\.(css)$/ }, async (args) => {
         const sourcePath = path.resolve(args.resolveDir, args.path)
-        const sourceJS = await generateInjectCSS(sourcePath)
+        const sourceJS = await generateCSSModule(sourcePath)
         return {
           contents: sourceJS,
           loader: "js",
@@ -20,7 +20,7 @@ const InlineCSSPlugin = (_options = {}) => {
   }
 }
 
-async function generateInjectCSS(sourcePath) {
+async function generateCSSModule(sourcePath) {
   const sourceCSS = await readFile(sourcePath)
   const transformed = await esbuild.transform(sourceCSS, {
     loader: "css",
@@ -30,11 +30,7 @@ async function generateInjectCSS(sourcePath) {
     .replaceAll(/\s+/g, " ")
     .replaceAll(/\s*([{},;:])\s*/g, "$1")
 
-  return `(()=>{
-    let d = document, e = d.createElement('style')
-    e.textContent = \`${minified}\`
-    d.head.append(e)
-  })();`
+  return `export default ${JSON.stringify(minified)}`
 }
 
 esbuild.build({

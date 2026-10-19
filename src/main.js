@@ -3,7 +3,7 @@
  *
  */
 
-import "./main.css"
+import css from "./main.css"
 
 const w = window
 const d = document
@@ -21,7 +21,7 @@ let mainElementRef
 let banner
 let modify
 
-const crel = (tagName, attributes = null, children = []) => {
+const crel = (tagName, attributes, children = []) => {
   const dom = d.createElement(tagName)
   for (const name in attributes) dom[name] = attributes[name]
   dom.append(...children)
@@ -34,33 +34,32 @@ const renderBanner = () => {
     return
   }
 
-  const content = [
-    crel("div", {
-      [sClassName]: "f3cc-title",
-      [sTextContent]: settings.heading,
-    }),
-    crel("div", {
-      [sClassName]: "f3cc-description",
-      [sInnerHTML]: settings.description,
-    }),
-  ]
-  const buttons = [
-    crel("a", {
-      [sClassName]: "f3cc-button accept",
-      [sTextContent]: settings.buttonAccept,
-      onclick: onAccept(true),
-    }),
-    crel("a", {
-      [sClassName]: "f3cc-button reject",
-      [sTextContent]: settings.buttonReject,
-      onclick: onAccept(false),
-    }),
-  ]
-
+  // The buttons are anchors without a href; they have no default action
+  // which would have to be prevented.
   banner = crel("div", { [sClassName]: "f3cc f3cc-banner" }, [
     crel("div", { [sClassName]: "f3cc-container" }, [
-      crel("div", { [sClassName]: "f3cc-content" }, content),
-      crel("div", { [sClassName]: "f3cc-buttons" }, buttons),
+      crel("div", { [sClassName]: "f3cc-content" }, [
+        crel("div", {
+          [sClassName]: "f3cc-title",
+          [sTextContent]: settings.heading,
+        }),
+        crel("div", {
+          [sClassName]: "f3cc-description",
+          [sInnerHTML]: settings.description,
+        }),
+      ]),
+      crel("div", { [sClassName]: "f3cc-buttons" }, [
+        crel("a", {
+          [sClassName]: "f3cc-button accept",
+          [sTextContent]: settings.buttonAccept,
+          onclick: onAccept(true),
+        }),
+        crel("a", {
+          [sClassName]: "f3cc-button reject",
+          [sTextContent]: settings.buttonReject,
+          onclick: onAccept(false),
+        }),
+      ]),
     ]),
   ])
 
@@ -94,8 +93,7 @@ const renderModify = () => {
     modify = crel("a", {
       [sClassName]: "f3cc-button modify",
       [sTextContent]: settings.buttonModify,
-      onclick: (e) => {
-        e.preventDefault()
+      onclick: () => {
         display(modify, "none")
         renderBanner()
       },
@@ -134,8 +132,7 @@ const display = (el, display = "") => {
   if (el) el.style.display = display
 }
 
-const onAccept = (accept) => (e) => {
-  e.preventDefault()
+const onAccept = (accept) => () => {
   setCookie(accept ? sAll : sEssential)
   display(banner, "none")
   renderModify()
@@ -160,8 +157,7 @@ const injectAcceptedScripts = () => {
 
 const mainElement = () => {
   if (!mainElementRef) {
-    mainElementRef = crel("div", { [sClassName]: "f3cc" })
-    body.append(mainElementRef)
+    body.append((mainElementRef = crel("div", { [sClassName]: "f3cc" })))
   }
   return mainElementRef
 }
@@ -201,24 +197,6 @@ const renderAcceptedEmbeds = () => {
     }
   }
 }
-w.f3ccRenderEmbeds = renderAcceptedEmbeds
-
-const initEmbedClickListener = () => {
-  body.addEventListener("click", (e) => {
-    const button = e.target.closest(".f3cc-button")
-    const node = button?.closest(".f3cc-embed")
-    if (button && node) {
-      e.preventDefault()
-      const providers = acceptedProviders()
-      const provider = node.dataset.provider
-      if (!providers.includes(provider)) {
-        providers.push(provider)
-        setAcceptedProviders(providers)
-      }
-      renderAcceptedEmbeds()
-    }
-  })
-}
 
 const setInnerHTML = (elm, html) => {
   elm[sInnerHTML] = html
@@ -240,9 +218,26 @@ const initEmbedMutationObserver = () => {
 initEmbedMutationObserver()
 */
 
+d.head.append(crel("style", { [sTextContent]: css }))
+w.f3ccRenderEmbeds = renderAcceptedEmbeds
+
+body.addEventListener("click", (e) => {
+  const button = e.target.closest(".f3cc-button")
+  const node = button?.closest(".f3cc-embed")
+  if (button && node) {
+    e.preventDefault()
+    const providers = acceptedProviders()
+    const provider = node.dataset.provider
+    if (!providers.includes(provider)) {
+      providers.push(provider)
+      setAcceptedProviders(providers)
+    }
+    renderAcceptedEmbeds()
+  }
+})
+
 injectAcceptedScripts()
 renderAcceptedEmbeds()
-initEmbedClickListener()
 
 if (!isKnownCookieValue()) {
   renderBanner()
