@@ -42,6 +42,8 @@ assertions.
   biome for JavaScript/CSS/JSON. `pre-commit run -a` before committing.
 - JavaScript is written without semicolons (biome/prettier configuration).
 - User visible strings use the `f3cc` gettext context (`pgettext_lazy("f3cc", …)`).
+- Do not use CSS nesting or other features which would raise the browser
+  support baseline only to save a few bytes; the support isn't wide enough.
 - Add an entry to the `## Unreleased` section of `CHANGELOG.md` for every
   user visible change.
 
