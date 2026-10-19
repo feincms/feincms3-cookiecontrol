@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Documented how to use `oembed` with a custom `oembed_json` callable.
 - Fixed a crash in `embed()` when using custom `EMBED_PROVIDERS` entries which
   do not specify a `handler` (as documented). `title` and `privacy_policy_url`
   are optional now, too.

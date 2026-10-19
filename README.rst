@@ -319,3 +319,72 @@ The same functionality is also available directly in templates:
     {% load feincms3_cookiecontrol %}
     {% embed plugin.url %}
     ...
+
+
+Embedding arbitrary content using oEmbed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For URLs not handled by any of the providers above you can fall back to
+``feincms3_cookiecontrol.embedding.oembed``. It fetches the embed code using
+`oEmbed <https://oembed.com/>`__ and wraps it in a
+``<div class="responsive-embed widescreen {provider}">`` element inside the
+usual consent prompt. The provider is the slugified ``provider_name`` of the
+oEmbed response, so consent is given per oEmbed provider.
+
+By default ``oembed`` uses ``feincms3.plugins.external.oembed_json`` which asks
+`Noembed <https://noembed.com/>`__ for the embed code. Asking a third party
+service may not be what you want; pass your own ``oembed_json`` callable
+instead. It receives the URL and has to return the oEmbed response as a
+dictionary, or a falsy value if the URL cannot be embedded. Using
+`micawber <https://micawber.readthedocs.io/>`__ which talks to the providers
+directly:
+
+.. code-block:: python
+
+    # app/oembed.py
+    from django.core.cache import cache
+    from micawber import ProviderException, bootstrap_basic, bootstrap_oembed
+
+    providers = bootstrap_oembed(cache, registry=bootstrap_basic(), timeout=5)
+
+
+    def oembed_json(url):
+        try:
+            return providers.request(url)
+        except ProviderException:
+            return None
+
+Try the built-in providers first and only fall back to oEmbed afterwards, e.g.
+in a renderer for a plugin with an ``url`` field:
+
+.. code-block:: python
+
+    from feincms3_cookiecontrol.embedding import embed, oembed
+
+    from app.oembed import oembed_json
+
+
+    def render_external(plugin, context):
+        return embed(plugin.url) or oembed(plugin.url, oembed_json=oembed_json)
+
+Both functions return an empty string if they cannot embed the URL. Note that
+the embed code is used as-is, so only use ``oembed`` with URLs entered by
+trusted users. You probably want some CSS to size the embeds, for example:
+
+.. code-block:: css
+
+    .responsive-embed,
+    .f3cc-embed {
+      aspect-ratio: 16 / 9;
+    }
+
+    .responsive-embed {
+      position: relative;
+    }
+
+    .responsive-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
