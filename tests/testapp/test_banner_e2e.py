@@ -135,3 +135,16 @@ class TestBannerE2E:
         assert not page.locator(".f3cc-banner").is_visible(), (
             "the banner should stay hidden when consent was given before"
         )
+
+    def test_malformed_consent_cookie(self, page, live_server, test_scripts):
+        """A cookie value which isn't valid percent-encoding doesn't crash"""
+        errors = []
+        page.on("pageerror", lambda exc: errors.append(str(exc)))
+        page.context.add_cookies(
+            [{"name": "f3cc", "value": "%E0%A4%A", "url": live_server.url}]
+        )
+        self._create_test_page(page, live_server)
+
+        banner = page.locator(".f3cc-banner")
+        banner.wait_for(state="visible", timeout=5000)
+        assert errors == []

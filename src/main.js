@@ -113,8 +113,10 @@ const setCookie = (value) => {
 
 const cookieRe = new RegExp(`(?:^|;\\s*)${cookieName}=([^;]*)`)
 const getCookie = () => {
+  // The values written by setCookie() never need decoding; decoding values
+  // set by somebody else could throw a URIError and abort everything.
   const match = d.cookie.match(cookieRe)
-  return match && decodeURIComponent(match[1])
+  return match?.[1]
 }
 
 const sAll = "all"

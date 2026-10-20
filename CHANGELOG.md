@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Fixed a crash of `f3cc.js` when the `f3cc` cookie contains a value which
+  isn't valid percent-encoding (e.g. `%E0%A4%A`); the URIError aborted the
+  script and the banner never appeared.
+
 ## 1.7.3 (2026-10-19)
 
 - Reduced the size of `f3cc.js` a bit by injecting the CSS through the
