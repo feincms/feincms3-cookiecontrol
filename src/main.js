@@ -3,6 +3,7 @@
  *
  */
 
+import { cookieName, getCookie, sAll, sEssential } from "./cookie.js"
 import css from "./main.css"
 
 const w = window
@@ -13,7 +14,6 @@ const body = d.body
 const sClassName = "className"
 const sTextContent = "textContent"
 const sInnerHTML = "innerHTML"
-const cookieName = "f3cc"
 const settings = w.f3ccData || JSON.parse(qs("#f3cc-data")[sTextContent])
 const injectedScripts = {}
 const providerKey = "f3cc-embed-providers"
@@ -111,16 +111,6 @@ const setCookie = (value) => {
   d.cookie = cookie
 }
 
-const cookieRe = new RegExp(`(?:^|;\\s*)${cookieName}=([^;]*)`)
-const getCookie = () => {
-  // The values written by setCookie() never need decoding; decoding values
-  // set by somebody else could throw a URIError and abort everything.
-  const match = d.cookie.match(cookieRe)
-  return match?.[1]
-}
-
-const sAll = "all"
-const sEssential = "essential"
 const isKnownCookieValue = () => {
   const c = getCookie()
   return sAll === c || sEssential === c
