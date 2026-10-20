@@ -8,6 +8,9 @@
 - Stopped injecting and running the consented scripts again each time the
   user accepts all cookies again after using the modify button; analytics
   scripts were loaded and executed multiple times.
+- Fixed `oembed()` for responses without a `provider_name`: the embed had an
+  empty `data-provider` attribute, which meant that the content could never be
+  shown, not even after consenting. The host name of the URL is used instead.
 
 ## 1.7.3 (2026-10-19)
 

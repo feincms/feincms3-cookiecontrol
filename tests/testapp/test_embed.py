@@ -1,7 +1,7 @@
 import pytest
 from django.template import Context, Template, TemplateSyntaxError
 
-from feincms3_cookiecontrol.embedding import _providers, embed, wrap
+from feincms3_cookiecontrol.embedding import _providers, embed, oembed, wrap
 
 
 @pytest.mark.django_db
@@ -106,3 +106,39 @@ class TestCustomProviders:
         assert 'data-provider="minimal"' in html
         assert "provider minimal" in html
         assert "<a href" not in html
+
+
+class TestOEmbed:
+    def test_oembed(self):
+        html = oembed(
+            "https://www.example.com/video/1",
+            oembed_json=lambda url: {
+                "html": "<iframe></iframe>",
+                "provider_name": "Some Provider",
+            },
+        )
+        assert 'data-provider="some-provider"' in html
+        assert "provider Some Provider," in html
+        assert (
+            '<template><div class="responsive-embed widescreen some-provider">'
+            "<iframe></iframe></div></template>"
+        ) in html
+
+    def test_oembed_nothing(self):
+        assert oembed("https://example.com/", oembed_json=lambda url: None) == ""
+        assert oembed("https://example.com/", oembed_json=lambda url: {}) == ""
+
+    def test_oembed_without_provider_name(self):
+        """The frontend ignores embeds without a provider, use the host name"""
+        html = oembed(
+            "https://www.example.com/video/1",
+            oembed_json=lambda url: {"html": "<iframe></iframe>"},
+        )
+        assert 'data-provider="wwwexamplecom"' in html
+        assert "provider www.example.com," in html
+
+        html = oembed(
+            "/video/1",
+            oembed_json=lambda url: {"html": "<iframe></iframe>"},
+        )
+        assert 'data-provider="oembed"' in html

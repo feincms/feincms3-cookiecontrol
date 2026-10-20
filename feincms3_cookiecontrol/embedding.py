@@ -1,3 +1,5 @@
+from urllib.parse import urlsplit
+
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import format_html
@@ -85,13 +87,16 @@ def oembed(url, *, oembed_json=None):
         from feincms3.plugins.external import oembed_json  # noqa: PLC0415
 
     if (data := oembed_json(url)) and (html := data.get("html")):
-        provider_name = data.get("provider_name", "")
+        # provider_name is optional. The frontend ignores embeds with an empty
+        # provider, so the content couldn't be shown at all without a fallback.
+        provider_name = data.get("provider_name") or urlsplit(url).hostname or ""
+        provider = slugify(provider_name) or "oembed"
         return render_to_string(
             "feincms3_cookiecontrol/embed.html",
             {
-                "embedded_html": f'<div class="responsive-embed widescreen {slugify(provider_name)}">{html}</div>',
-                "provider": slugify(provider_name),
-                "description": _render_description(provider_name, ""),
+                "embedded_html": f'<div class="responsive-embed widescreen {provider}">{html}</div>',
+                "provider": provider,
+                "description": _render_description(provider_name or provider, ""),
                 "button": _default_button,
             },
         )
