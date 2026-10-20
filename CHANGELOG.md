@@ -10,6 +10,8 @@
   for the visitors' privacy.
 - Documented the "basic" implementation of Google Consent Mode with a snippet
   to paste into a cookie control script.
+- Deprecated `f3cc/gcm.js` in favour of that snippet; it now logs a warning
+  to the browser console. The file will be removed in a future release.
 
 ## 1.8 (2026-10-20)
 
