@@ -3,8 +3,9 @@
 ## Layout
 
 - `feincms3_cookiecontrol/` — the Django app.
-- `src/main.js`, `src/main.css`, `src/gcm.js` — frontend sources.
-- `feincms3_cookiecontrol/static/f3cc.js` and `static/f3cc/gcm.js` — **generated**
+- `src/main.js`, `src/main.css`, `src/cookie.js`, `src/consent-mode-advanced.js`
+  and `src/gcm.js` — frontend sources.
+- `feincms3_cookiecontrol/static/f3cc.js` and `static/f3cc/*.js` — **generated**
   bundles which are committed to the repository. Never edit them by hand.
 - `tests/testapp/` — the test project. Tests marked `e2e` drive a real browser
   through playwright.

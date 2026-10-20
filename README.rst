@@ -233,6 +233,123 @@ Embed the script:
    method using a view requires an additional request to a view.
 
 
+Google Consent Mode
+~~~~~~~~~~~~~~~~~~~
+
+Google Tag Manager and the Google tags it loads expect to be told about the
+visitor's consent through `Consent Mode
+<https://developers.google.com/tag-platform/security/concepts/consent-mode>`__.
+Google describes two ways of implementing it, basic and advanced. Use one or
+the other, never both.
+
+**Basic:** Google's scripts are only loaded after the visitor has accepted all
+cookies, which is what the package does anyway. GTM doesn't go into your
+templates at all; ``base.html`` only contains the banner as usual:
+
+.. code-block:: html+django
+
+    {% load feincms3_cookiecontrol %}
+    <!doctype html>
+    <html>
+      <head>
+        ...
+      </head>
+      <body>
+        ...
+        {% feincms3_cookiecontrol %}
+      </body>
+    </html>
+
+Add a cookie control script in the Django admin instead, containing the
+consent defaults followed by the GTM snippet. All four consent signals are
+``granted``, which is the truth by the time the script is injected:
+
+.. code-block:: html
+
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() { dataLayer.push(arguments) }
+      gtag("consent", "default", {
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        ad_storage: "granted",
+        analytics_storage: "granted",
+      })
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+
+**Advanced:** GTM is loaded on every page, with all signals defaulting to
+``denied``. Until the visitor accepts, Google sets no cookies and sends
+cookieless pings instead, which Google uses to model the conversions it
+doesn't observe. Load ``f3cc/consent-mode-advanced.js`` synchronously in the
+``<head>``, *before* the GTM snippet, and add the GTM snippet to the template
+itself instead of to a cookie control script (and don't add the basic mode's
+script either):
+
+.. code-block:: html+django
+
+    {% load feincms3_cookiecontrol static %}
+    <!doctype html>
+    <html>
+      <head>
+        ...
+        <script src="{% static 'f3cc/consent-mode-advanced.js' %}"></script>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+      </head>
+      <body>
+        ...
+        {% feincms3_cookiecontrol %}
+      </body>
+    </html>
+
+The banner tag stays where it always is, at the end of the ``<body>``
+element; it dispatches the events which ``consent-mode-advanced.js`` turns
+into consent updates.
+
+The script sets the defaults to ``denied`` and enables
+``ads_data_redaction``. It updates the signals to ``granted`` when the
+visitor accepts all cookies (or has done so on an earlier visit), and back to
+``denied`` when they withdraw their consent using the modify button.
+
+.. warning::
+   Advanced mode means that Google is contacted **before and regardless of**
+   the visitor's decision. Loading GTM transmits the IP address, the user
+   agent and the page URL on every page view, and the cookieless pings send
+   the consent state, the page URL and the user agent. "Denied" only means
+   that no cookies are set and that the data isn't used for personalised
+   advertising.
+
+   Whether that's acceptable is a legal question, not a technical one. It is
+   contested under the ePrivacy directive in the EU, and it changes what the
+   "refuse" button in the banner actually means. Make that decision
+   deliberately and describe it accurately in your privacy policy.
+
+The banner's default texts are written for the basic case; refusing
+non-essential cookies stays literally true, but the description suggests
+that nothing is sent to Google without consent. Adjust at least the
+description through the ``COOKIECONTROL`` setting, e.g.:
+
+.. code-block:: python
+
+    from django.utils.translation import gettext_lazy as _
+
+    COOKIECONTROL = {
+        "description": _(
+            "We use Google Tag Manager on every page. Without your consent,"
+            " Google sets no cookies, but still receives technical data such as"
+            " your IP address and the visited page. Read our {link_start}privacy"
+            " policy{link_end} to find out more."
+        ),
+    }
+
+``{link_start}`` and ``{link_end}`` are replaced with a link to the privacy
+policy if ``privacy_policy_url`` is passed to the template tag, and removed
+otherwise. ``heading``, ``buttonAccept`` and ``buttonReject`` can be
+overridden the same way.
+
+
 Selectively embed iframes or other third party scripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
