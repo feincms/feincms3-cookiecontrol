@@ -37,6 +37,7 @@ esbuild.build({
   entryPoints: [
     { out: "f3cc", in: "./src/main.js" },
     { out: "f3cc/gcm", in: "./src/gcm.js" },
+    { out: "f3cc/consent-mode-advanced", in: "./src/consent-mode-advanced.js" },
   ],
   outdir: "feincms3_cookiecontrol/static",
   bundle: true,

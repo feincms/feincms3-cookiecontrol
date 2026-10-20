@@ -3,6 +3,15 @@
 ## Unreleased
 
 - Added Python 3.15 and Django 6.1.
+- Added `f3cc/consent-mode-advanced.js` for the "advanced" implementation of
+  Google Consent Mode: GTM is loaded on every page with all consent signals
+  defaulting to `denied`, and the script updates them when the visitor accepts
+  or withdraws their consent. Opt-in only; see the README for what it means
+  for the visitors' privacy.
+- Documented the "basic" implementation of Google Consent Mode with a snippet
+  to paste into a cookie control script.
+- Deprecated `f3cc/gcm.js` in favour of that snippet; it now logs a warning
+  to the browser console. The file will be removed in a future release.
 
 ## 1.8 (2026-10-20)
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Consent Mode Page</title>
+    {% load feincms3_cookiecontrol static %}
+    <script src="{% static 'f3cc/consent-mode-advanced.js' %}"></script>
+</head>
+<body>
+    <h1>Test Consent Mode Page</h1>
+
+    {% feincms3_cookiecontrol %}
+</body>
+</html>

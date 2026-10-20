@@ -9,3 +9,8 @@ gtag("consent", "default", {
   ad_storage: "granted",
   analytics_storage: "granted",
 })
+
+console.warn(
+  "f3cc/gcm.js is deprecated and will be removed; paste the consent defaults " +
+    "snippet from the feincms3-cookiecontrol README into the script instead.",
+)
