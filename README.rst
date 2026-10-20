@@ -294,6 +294,7 @@ script either):
     <html>
       <head>
         ...
+        {# Keep this script synchronous: no async, defer or type="module". #}
         <script src="{% static 'f3cc/consent-mode-advanced.js' %}"></script>
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
@@ -307,6 +308,15 @@ script either):
 The banner tag stays where it always is, at the end of the ``<body>``
 element; it dispatches the events which ``consent-mode-advanced.js`` turns
 into consent updates.
+
+The order matters: Google's tags read the consent state from the data layer
+when they initialize, and if no ``consent default`` is there yet they report
+the consent state as missing instead of ``denied``. Do not add ``async``,
+``defer`` or ``type="module"`` to the script tag, and do not move it below the
+GTM snippet; any of these lets GTM initialize first. The script also reads the
+``f3cc`` cookie right away and pushes a ``consent update`` for visitors who
+have accepted all cookies on an earlier visit, so GTM's ``wait_for_update``
+isn't necessary.
 
 The script sets the defaults to ``denied`` and enables
 ``ads_data_redaction``. It updates the signals to ``granted`` when the
