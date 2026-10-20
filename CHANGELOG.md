@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added Python 3.15 and Django 6.1.
+
 ## 1.8 (2026-10-20)
 
 - Fixed a crash of `f3cc.js` when the `f3cc` cookie contains a value which
