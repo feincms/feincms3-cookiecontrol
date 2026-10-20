@@ -11,6 +11,7 @@
 - Fixed `oembed()` for responses without a `provider_name`: the embed had an
   empty `data-provider` attribute, which meant that the content could never be
   shown, not even after consenting. The host name of the URL is used instead.
+- Changed `Script.clean` to also reject uppercase `<NOSCRIPT>` tags.
 
 ## 1.7.3 (2026-10-19)
 

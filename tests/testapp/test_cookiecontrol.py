@@ -75,6 +75,17 @@ class TestCookieControl:
             "Entering <noscript> tags doesn't make sense."
         ]
 
+        # HTML tags are case insensitive.
+        with pytest.raises(ValidationError) as exc_info:
+            Script(
+                name="script-name",
+                script="<script>...</script><NOSCRIPT>Please JS</NOSCRIPT>",
+            ).full_clean()
+
+        assert [m.message for m in exc_info.value.error_dict["script"]] == [
+            "Entering <noscript> tags doesn't make sense."
+        ]
+
         # Both problems are reported, not just the last one.
         with pytest.raises(ValidationError) as exc_info:
             Script(

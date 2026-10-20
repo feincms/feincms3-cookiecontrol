@@ -86,7 +86,7 @@ class Script(models.Model):
                 )
             )
 
-        if "<noscript" in self.script:
+        if "<noscript" in self.script.lower():
             errors.append(gettext("Entering <noscript> tags doesn't make sense."))
 
         if errors:
