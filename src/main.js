@@ -146,13 +146,14 @@ const onAccept = (accept) => () => {
 const injectAcceptedScripts = () => {
   if (getConsentToAll()) {
     for (const cookie of settings.cookies) {
-      let node = injectedScripts[cookie.name]
-      if (!node) {
-        injectedScripts[cookie.name] = node = crel("div")
+      // Scripts are only injected once; accepting again after using the
+      // modify button would otherwise load and run them again.
+      if (!injectedScripts[cookie.name]) {
+        const node = (injectedScripts[cookie.name] = crel("div"))
         node.dataset.name = cookie.name
         mainElement().append(node)
+        setInnerHTML(node, cookie.script)
       }
-      setInnerHTML(node, cookie.script)
     }
   }
 }

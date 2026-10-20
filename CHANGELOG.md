@@ -5,6 +5,9 @@
 - Fixed a crash of `f3cc.js` when the `f3cc` cookie contains a value which
   isn't valid percent-encoding (e.g. `%E0%A4%A`); the URIError aborted the
   script and the banner never appeared.
+- Stopped injecting and running the consented scripts again each time the
+  user accepts all cookies again after using the modify button; analytics
+  scripts were loaded and executed multiple times.
 
 ## 1.7.3 (2026-10-19)
 

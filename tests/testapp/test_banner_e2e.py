@@ -148,3 +148,23 @@ class TestBannerE2E:
         banner = page.locator(".f3cc-banner")
         banner.wait_for(state="visible", timeout=5000)
         assert errors == []
+
+    def test_scripts_are_only_injected_once(self, page, live_server):
+        """Accepting again (via the modify button) doesn't rerun scripts"""
+        Script.objects.create(
+            name="counter",
+            script="<script>window.counter = (window.counter || 0) + 1</script>",
+        )
+        errors = []
+        page.on("pageerror", lambda exc: errors.append(str(exc)))
+        self._create_test_page(page, live_server)
+
+        page.locator("a.f3cc-button.accept").first.click()
+        page.wait_for_function("() => window.counter === 1", timeout=5000)
+
+        page.locator("a.f3cc-button.modify").click()
+        page.locator("a.f3cc-button.accept").first.click()
+        page.wait_for_timeout(500)
+
+        assert page.evaluate("() => window.counter") == 1
+        assert errors == []
