@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.9 (2026-10-25)
+
 - Added Python 3.15 and Django 6.1.
 - Added `f3cc/consent-mode-advanced.js` for the "advanced" implementation of
   Google Consent Mode: GTM is loaded on every page with all consent signals
